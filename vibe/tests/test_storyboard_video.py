@@ -28,12 +28,10 @@ class VideoWorkflowTests(unittest.TestCase):
             module=SimpleNamespace(API='https://example.test',MODEL='test-model',credentials=lambda:'secret',HTTP=FakeHTTP,
                                    build_request=lambda p:{'content':[{'type':'text','text':''},{'image_url':{'url':'image'}}]},
                                    safe=lambda value,secret='':str(value).replace(secret,'[redacted]') if secret else value)
-            spec=SimpleNamespace(loader=SimpleNamespace(exec_module=lambda m:None))
             video=Videos(root);state={'serial':1,'shots':[{'id':'01','selectedBoard':1,'boards':[{'version':1,'sha256':'board'}],
                                                          'selectedPlan':1,'plans':[{'version':1,'sha256':'plan'}]}]}
             captured=[]
-            with patch('workbench.storyboard_video.importlib.util.spec_from_file_location',return_value=spec),\
-                 patch('workbench.storyboard_video.importlib.util.module_from_spec',return_value=module),\
+            with patch('workbench.storyboard_video.seedance',module),\
                  patch.object(video.boards,'get',return_value=state),\
                  patch.object(video.boards,'mutate',side_effect=lambda *args:captured.append(args)):
                 video._run(folder)

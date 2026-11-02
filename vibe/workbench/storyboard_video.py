@@ -1,12 +1,12 @@
 """Optional Seedance per-shot execution using the previously verified Cutroom POC."""
 from __future__ import annotations
-import importlib.util
 import json
 import shutil
 import threading
 import time
 import uuid
 from pathlib import Path
+from workbench import seedance
 from workbench.production import LOCK, Conflict, read, save
 from workbench.vibe_storyboard import Storyboards, digest_file
 
@@ -74,8 +74,7 @@ class Videos:
         def update(**values):
             job.update(values,updatedAt=time.time());save(folder/'job.json',job)
         try:
-            spec=importlib.util.spec_from_file_location('suojian_seedance_poc', self.root/'outputs/seedance-poc01/seedance_poc.py')
-            module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+            module = seedance
             from PIL import Image
             with Image.open(job['reference']) as im:
                 im.convert('RGB').save(folder/'input-normalized.png')

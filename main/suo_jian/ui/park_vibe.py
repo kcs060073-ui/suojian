@@ -1,6 +1,7 @@
 """Installed Park Vibe module and local worker lifecycle for the SuoJian host."""
 import importlib.util
 import json
+import os
 import re
 import subprocess
 import sys
@@ -11,9 +12,9 @@ from pathlib import Path
 from flask import jsonify, render_template, request
 
 ROOT = Path(__file__).resolve().parents[2]
-MODULE = ROOT / 'extensions' / 'park-vibe'
+MODULE = Path(os.environ.get('SUOJIAN_VIBE_ROOT', ROOT / 'extensions' / 'park-vibe'))
 ADDRESS = 'http://127.0.0.1:8796'
-CREATIVE_MODULE = Path.home() / 'Documents' / 'ChatGPT' / '溯剪终端'
+CREATIVE_MODULE = Path(os.environ.get('SUOJIAN_VIBE_ROOT', Path.home() / 'Documents' / 'ChatGPT' / '溯剪终端'))
 CREATIVE_ADDRESS = 'http://127.0.0.1:18979'
 LOCK = threading.Lock()
 

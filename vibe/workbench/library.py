@@ -16,7 +16,7 @@ from urllib.parse import quote, urlsplit
 from workbench.paths import LEGACY_MODULES
 LOCAL_MODULES = Path(__file__).resolve().parents[1]/'work/runtime/node_modules'
 SHARED = LOCAL_MODULES if all((LOCAL_MODULES/p/'package.json').exists() for p in ('remotion','@remotion/bundler','@remotion/renderer','vite','@remotion/motion-blur')) else LEGACY_MODULES
-BROWSER = LEGACY_MODULES/'.remotion/chrome-headless-shell/win64/chrome-headless-shell-win64/chrome-headless-shell.exe'
+BROWSER = SHARED/'.remotion/chrome-headless-shell/win64/chrome-headless-shell-win64/chrome-headless-shell.exe'
 REPOS = ('video-shotcraft-main', 'vibe-knowledge-film-main', 'anything2explainer-main')
 
 def uri(path: str | Path) -> str:

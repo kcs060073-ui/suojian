@@ -25,7 +25,7 @@ python scripts/sync_motiongit.py
 
 制作前若本次尚未检查，可同步一次；无网络时继续使用已经落地的包并说明检查时间。`--offline` 只重建本地清单，`--check-only` 不下载新包，`--no-images` 跳过封面。
 
-用户在 2026-10-22 最新明确授权 **允许下载并本地保存带账户 Key 的个人包**，覆盖先前的仅公开包限制。保留完整原包，用 `scripts/import_personal_motiongit.py --authorized-personal` 从 Downloads 校验并导入终端 `work/secrets/motiongit-personal` 专用库；`assets/motiongit/personal-availability.json` 只保存脱敏目录。不要显示、提取或转发 Key，不把个人包放进网页、公开输出或分享压缩包；个人包更新与公开同步分开。
+仅在当前用户拥有授权且明确要求时，才可用 `scripts/import_personal_motiongit.py --authorized-personal` 从 Downloads 校验并导入个人包到 `work/secrets/motiongit-personal` 专用库；`assets/motiongit/personal-availability.json` 只保存脱敏目录。不要显示、提取或转发 Key，不把个人包放进网页、公开输出或分享压缩包；个人包更新与公开同步分开。
 
 仅官方下载状态为 `direct-package` 的公开 URL 自动下载。保留历史包，以内容哈希标识；当前任务固定选中包的哈希。未开放或未实际导入的项目不可宣称已下载。个人包通过官网当前登录态准备下载，遵守服务排队；登录失效时请用户接管，不抓取凭据。已下载只证明本地存在与结构检查，不证明渲染可用；选定后先读包内公开 manifest/guide/README、核实依赖与素材合同，再做实际预览。
 

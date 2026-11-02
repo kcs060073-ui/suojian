@@ -1,6 +1,14 @@
 # 溯剪 SuoJian
 
-这是溯剪在 2026-11-02 的本机项目源码快照，包含主工作台、园区 Vibe 和 Cutroom 本机适配代码。
+这是溯剪的 Windows 本机源码与安装入口，包含主工作台、园区 Vibe 和 Cutroom。安装需要联网获取依赖，部分创作能力需要用户自己的服务配置和素材。
+
+## 安装和启动
+
+1. 安装 64 位 Windows 版 Python 3.11、Node.js LTS 和 FFmpeg，并确保它们在 PATH 中。
+2. 下载仓库并完整解压，双击根目录的 `安装溯剪.bat`。首次安装会联网下载 Python、Node 依赖及 Remotion 浏览器，语音处理依赖较大。
+3. 双击 `启动溯剪.bat`，在本机浏览器打开工作台。详细步骤和故障说明见 [安装说明](INSTALL.md)。
+
+安装器会在项目内建立独立依赖环境，并将已打包的 Skill 注册到本机 Codex（已有同名技能会保留）。重新打开 Codex 后可读取新技能。
 
 ## 目录
 
@@ -14,10 +22,8 @@
 
 仓库保留了项目内的代码、依赖声明、默认字体及公开组件的非视频资源；部分上游示例因版权或媒体排除原则未收录。请保留各项目自己的 LICENSE 与来源说明。
 
-## 运行与迁移
+## 使用边界
 
-**此仓库是源码备份，不是解压即运行的完整安装包。** 本项目以 Windows 本机路径、Python、Node.js、FFmpeg、语音识别模型、剪映和独立 Cutroom 为基础。实际环境还需要重新安装依赖、准备模型和素材，并按目标电脑调整路径；本机凭据需要在目标电脑重新配置。
-
-现有本机配置使用这些工作目录：`C:\Users\Tanikawa\suojian`、`C:\Users\Tanikawa\Documents\ChatGPT\溯剪终端` 和 `C:\Users\Tanikawa\CUTROOM`。更换电脑或账号时，应先调整代码和配置中的相关路径，再验证各模块；不要覆盖已有安装、数据库、素材或草稿。参考 `main/README.md`、`vibe/workbench/STORYBOARD_STUDIO.md`、`cutroom/README.md` 及各目录下的依赖文件。
+本仓库不携带 API 密钥、历史任务和个人媒体。外部模型、在线配音及 Seedance 需要单独配置对应服务，可能产生费用；本地语音模型可能需要首次下载；剪映草稿需要本机安装兼容版本的剪映。Shotcraft、Anything2Explainer、Vibe Knowledge Film 和园区制作 Skill 随源码提供；MotionGit 私人授权包及原有个人风格图片需要在新电脑单独导入。图片模型由实际使用的服务提供，仓库本身不附带可离线生成图片的模型。
 
 园区 Vibe 使用 Remotion 4.0.539，相关 npm 依赖版本记录在 `vibe/work/runtime/package.json` 与 `package-lock.json`。本机浏览器引擎和 node_modules 不在仓库中。
