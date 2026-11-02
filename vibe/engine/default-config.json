@@ -1,0 +1,271 @@
+{
+  "selectedBaseline": "realistic-halfbody",
+  "audioProfile": "selected-reference",
+  "format": "portrait",
+  "style": "fusion",
+  "background": "footage",
+  "language": "zh",
+  "narrationMode": "existing",
+  "musicGain": 1,
+  "voiceGain": 1,
+  "sfxEnabled": true,
+  "camera": "static",
+  "typography": "minimal",
+  "seed": 17,
+  "shots": [
+    {
+      "from": 0,
+      "duration": 169,
+      "label": "先问设备",
+      "baseFrom": 0,
+      "baseDuration": 90,
+      "id": "shot-1",
+      "title": "你的设备，进得来吗？",
+      "recipe": "original-0",
+      "speed": 1,
+      "sourceOffset": 0,
+      "sourceDuration": 169,
+      "enabled": true
+    },
+    {
+      "from": 169,
+      "duration": 264,
+      "label": "看懂风险",
+      "baseFrom": 90,
+      "baseDuration": 210,
+      "id": "shot-2",
+      "title": "面积够大，也可能吊不进",
+      "recipe": "original-1",
+      "speed": 1,
+      "sourceOffset": 169,
+      "sourceDuration": 264,
+      "enabled": true
+    },
+    {
+      "from": 433,
+      "duration": 239,
+      "label": "放回生产",
+      "baseFrom": 300,
+      "baseDuration": 210,
+      "id": "shot-3",
+      "title": "让工序决定楼层",
+      "recipe": "original-2",
+      "speed": 1,
+      "sourceOffset": 433,
+      "sourceDuration": 239,
+      "enabled": true
+    },
+    {
+      "from": 672,
+      "duration": 202,
+      "label": "现场核对",
+      "baseFrom": 510,
+      "baseDuration": 180,
+      "id": "shot-4",
+      "title": "能量的，现场量",
+      "recipe": "original-3",
+      "speed": 1,
+      "sourceOffset": 672,
+      "sourceDuration": 202,
+      "enabled": true
+    },
+    {
+      "from": 874,
+      "duration": 245,
+      "label": "需求对表",
+      "baseFrom": 690,
+      "baseDuration": 120,
+      "id": "shot-5",
+      "title": "带上设备，对上参数",
+      "recipe": "original-4",
+      "speed": 1,
+      "sourceOffset": 874,
+      "sourceDuration": 245,
+      "enabled": true
+    },
+    {
+      "from": 1119,
+      "duration": 200,
+      "label": "预约到访",
+      "baseFrom": 810,
+      "baseDuration": 90,
+      "id": "shot-6",
+      "title": "先问设备，再问租金",
+      "recipe": "original-5",
+      "speed": 1,
+      "sourceOffset": 1119,
+      "sourceDuration": 200,
+      "enabled": true
+    }
+  ],
+  "subtitles": [
+    {
+      "from": 5,
+      "to": 67,
+      "text": "定厂房，先别问租金——",
+      "shot": 1
+    },
+    {
+      "from": 68,
+      "to": 99,
+      "text": "先问一句：",
+      "shot": 1
+    },
+    {
+      "from": 100,
+      "to": 154,
+      "text": "你的设备，进得来吗？",
+      "shot": 1
+    },
+    {
+      "from": 174,
+      "to": 203,
+      "text": "层高不够、",
+      "shot": 2
+    },
+    {
+      "from": 204,
+      "to": 247,
+      "text": "行车吨位不够、",
+      "shot": 2
+    },
+    {
+      "from": 248,
+      "to": 290,
+      "text": "楼板承重不够——",
+      "shot": 2
+    },
+    {
+      "from": 291,
+      "to": 336,
+      "text": "看着合适的厂房，",
+      "shot": 2
+    },
+    {
+      "from": 337,
+      "to": 377,
+      "text": "设备吊不进去，",
+      "shot": 2
+    },
+    {
+      "from": 378,
+      "to": 418,
+      "text": "前面全白谈。",
+      "shot": 2
+    },
+    {
+      "from": 438,
+      "to": 509,
+      "text": "这个园区两种载体都有：",
+      "shot": 3
+    },
+    {
+      "from": 510,
+      "to": 557,
+      "text": "一楼能上行车；",
+      "shot": 3
+    },
+    {
+      "from": 558,
+      "to": 609,
+      "text": "楼上按工业楼板做，",
+      "shot": 3
+    },
+    {
+      "from": 610,
+      "to": 657,
+      "text": "装配类可以上楼。",
+      "shot": 3
+    },
+    {
+      "from": 677,
+      "to": 731,
+      "text": "层高、行车吨位、",
+      "shot": 4
+    },
+    {
+      "from": 732,
+      "to": 786,
+      "text": "楼板承重、柱距——",
+      "shot": 4
+    },
+    {
+      "from": 787,
+      "to": 823,
+      "text": "现场都能量，",
+      "shot": 4
+    },
+    {
+      "from": 824,
+      "to": 859,
+      "text": "不用听我们讲。",
+      "shot": 4
+    },
+    {
+      "from": 879,
+      "to": 922,
+      "text": "每栋楼的参数，",
+      "shot": 5
+    },
+    {
+      "from": 923,
+      "to": 995,
+      "text": "我们整理成了一张表。",
+      "shot": 5
+    },
+    {
+      "from": 996,
+      "to": 1037,
+      "text": "你的设备多重，",
+      "shot": 5
+    },
+    {
+      "from": 1038,
+      "to": 1104,
+      "text": "一查就知道放不放得下。",
+      "shot": 5
+    },
+    {
+      "from": 1124,
+      "to": 1168,
+      "text": "点下面约个时间——",
+      "shot": 6
+    },
+    {
+      "from": 1169,
+      "to": 1238,
+      "text": "把设备的重量和尺寸发我，",
+      "shot": 6
+    },
+    {
+      "from": 1239,
+      "to": 1304,
+      "text": "我告诉你哪栋楼放得下。",
+      "shot": 6
+    }
+  ],
+  "presenter": {
+    "enabled": true,
+    "placement": "side",
+    "fixedHead": false,
+    "fixedMouth": false,
+    "grounded": false
+  },
+  "chapters": [
+    {
+      "name": "生产需求",
+      "from": 0
+    },
+    {
+      "name": "现场核对",
+      "from": 672
+    }
+  ],
+  "simulation": {
+    "enabled": false,
+    "equipmentHeight": 3.6,
+    "entranceHeight": 3.2
+  },
+  "plate": false,
+  "subtitlesFollowShots": true
+}

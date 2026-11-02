@@ -1,0 +1,8 @@
+Flask>=3.0
+opencv-python>=4.8
+scenedetect>=0.6
+numpy>=1.26
+pyJianYingDraft>=0.3
+# Optional enhancements (install with: pip install -r requirements-optional.txt)
+
+yt-dlp==2026.8.19

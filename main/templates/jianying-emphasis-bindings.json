@@ -1,0 +1,7 @@
+{
+  "schema_version": "suojian-native-emphasis-bindings-1",
+  "bindings": {
+    "business-label-A": {"status": "pending", "editor_version": null, "kind": "bubble", "effect_id": null, "resource_id": null},
+    "slanted-number-B": {"status": "pending", "editor_version": null, "kind": "effect", "effect_id": null}
+  }
+}

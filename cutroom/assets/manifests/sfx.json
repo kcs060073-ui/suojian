@@ -1,0 +1,481 @@
+{
+  "category": "sfx",
+  "note": "音效库（ffmpeg 合成，CC0 级、可复现、零许可风险）。kind 标用途；default_for 全路线。",
+  "items": [
+    {
+      "id": "sfx-whoosh",
+      "name": "转场 whoosh",
+      "file": "assets/sfx/sfx-whoosh.wav",
+      "kind": "transition",
+      "duration_s": 0.6,
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "场景切换大气扫过"
+    },
+    {
+      "id": "sfx-swoosh",
+      "name": "轻扫 swoosh",
+      "file": "assets/sfx/sfx-swoosh.wav",
+      "kind": "transition",
+      "duration_s": 0.5,
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "轻量转场"
+    },
+    {
+      "id": "sfx-click",
+      "name": "UI 点击 click",
+      "file": "assets/sfx/sfx-click.wav",
+      "kind": "ui",
+      "duration_s": 0.06,
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "note": "按钮/弹窗点击"
+    },
+    {
+      "id": "sfx-ding",
+      "name": "提示音 ding",
+      "file": "assets/sfx/sfx-ding.wav",
+      "kind": "alert",
+      "duration_s": 0.5,
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "重点提示/到点"
+    },
+    {
+      "id": "sfx-pop",
+      "name": "弹出 pop",
+      "file": "assets/sfx/sfx-pop.wav",
+      "kind": "ui",
+      "duration_s": 0.14,
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "note": "标签/卡片弹出"
+    },
+    {
+      "id": "sfx-chime",
+      "name": "完成铃声 chime",
+      "file": "assets/sfx/sfx-chime.wav",
+      "kind": "alert",
+      "duration_s": 0.45,
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "C-E-G 琶音完成提示"
+    },
+    {
+      "id": "sfx-tick",
+      "name": "计时滴 tick",
+      "file": "assets/sfx/sfx-tick.wav",
+      "kind": "ui",
+      "duration_s": 0.04,
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告"
+      ],
+      "note": "倒计时滴答"
+    },
+    {
+      "id": "sfx-impact",
+      "name": "重音 impact",
+      "file": "assets/sfx/sfx-impact.wav",
+      "kind": "hit",
+      "duration_s": 0.25,
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "数据/卖点强调重音"
+    },
+    {
+      "id": "sfx-kenney-click-01",
+      "kind": "sfx",
+      "name": "轻点击 01",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-click-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "effect_kind": "ui",
+      "version": "2026-09",
+      "sha256": "59175ac17cd49a68dd736285738441287636112a84a6f7ce0d89921bda5a5360"
+    },
+    {
+      "id": "sfx-kenney-click-03",
+      "kind": "sfx",
+      "name": "轻点击 03",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-click-03.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "effect_kind": "ui",
+      "version": "2026-09",
+      "sha256": "e3e7fc7ccd9c5cfdf77bffa05aee10d4973812076c76dc889ba2b16ea434127f"
+    },
+    {
+      "id": "sfx-kenney-rollover-02",
+      "kind": "sfx",
+      "name": "轻划过",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-rollover-02.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "ui",
+      "version": "2026-09",
+      "sha256": "d0bc0fcba496d73df1da8c145e5330df75f87ab5a4f33a9b71461b006b5c338e"
+    },
+    {
+      "id": "sfx-kenney-switch-01",
+      "kind": "sfx",
+      "name": "切换提示 01",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-switch-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "transition",
+      "version": "2026-09",
+      "sha256": "efdd1d1e2904fb2d81259cd96bb80101caceae94be02baa4b5310714a6708b19"
+    },
+    {
+      "id": "sfx-kenney-switch-06",
+      "kind": "sfx",
+      "name": "切换提示 06",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-switch-06.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "transition",
+      "version": "2026-09",
+      "sha256": "34d37cbfe6785cab2f3217b613fc976ba05b869c0ce61381eafa67ee257ecc9d"
+    },
+    {
+      "id": "sfx-kenney-switch-12",
+      "kind": "sfx",
+      "name": "切换提示 12",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-ui-switch-12.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "transition",
+      "version": "2026-09",
+      "sha256": "dab0c21eacb6536724d139c27c0d60c932c87171752dc8d24d7a826694377f94"
+    },
+    {
+      "id": "sfx-kenney-confirm-01",
+      "kind": "sfx",
+      "name": "确认提示 01",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-confirm-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "alert",
+      "version": "2026-09",
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+    },
+    {
+      "id": "sfx-kenney-confirm-02",
+      "kind": "sfx",
+      "name": "确认提示 02",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-confirm-02.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "alert",
+      "version": "2026-09",
+      "sha256": "33b17a9a9a2397c62b285c52c33a907fdffb476909c99e42dde603f6a7a8b12c"
+    },
+    {
+      "id": "sfx-kenney-open-01",
+      "kind": "sfx",
+      "name": "卡片展开",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-open-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "transition",
+      "version": "2026-09",
+      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648"
+    },
+    {
+      "id": "sfx-kenney-close-01",
+      "kind": "sfx",
+      "name": "卡片收起",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-close-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "transition",
+      "version": "2026-09",
+      "sha256": "44af8249b933e0fd35ec957a638bb1a0b01f85b53fbe9674bf77bd3ca3168ef4"
+    },
+    {
+      "id": "sfx-kenney-glitch-01",
+      "kind": "sfx",
+      "name": "数字故障",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-glitch-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "effect_kind": "digital",
+      "version": "2026-09",
+      "sha256": "da78c642bbd95da2c364ed0e991ebbfc5a4c0d281165d932b5819e0dd31a39d2"
+    },
+    {
+      "id": "sfx-kenney-glass-01",
+      "kind": "sfx",
+      "name": "清脆闪现",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-glass-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "effect_kind": "highlight",
+      "version": "2026-09",
+      "sha256": "183eebee20eb0a532b0b85104d139cbf2673eb66d95c3cc733ac9ea98362e7e8"
+    },
+    {
+      "id": "sfx-kenney-drop-01",
+      "kind": "sfx",
+      "name": "信息落点",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-drop-01.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "highlight",
+      "version": "2026-09",
+      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af"
+    },
+    {
+      "id": "sfx-kenney-bell-heavy",
+      "kind": "sfx",
+      "name": "重铃强调",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-impact-bell-heavy.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "hit",
+      "version": "2026-09",
+      "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f"
+    },
+    {
+      "id": "sfx-kenney-generic-light",
+      "kind": "sfx",
+      "name": "轻量重音",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-impact-generic-light.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "effect_kind": "hit",
+      "version": "2026-09",
+      "sha256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb"
+    },
+    {
+      "id": "sfx-kenney-metal-heavy",
+      "kind": "sfx",
+      "name": "金属重音",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-impact-metal-heavy.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "effect_kind": "hit",
+      "version": "2026-09",
+      "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831"
+    },
+    {
+      "id": "sfx-kenney-wood-heavy",
+      "kind": "sfx",
+      "name": "柔和重音",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-impact-wood-heavy.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "effect_kind": "hit",
+      "version": "2026-09",
+      "sha256": "15ff82332f342c30e469215539e1cc57e11b221aa2cf7e11e811d313a9927f3d"
+    },
+    {
+      "id": "sfx-kenney-jingle-hit",
+      "kind": "sfx",
+      "name": "短促收尾",
+      "source_url": "https://kenney.nl/assets/music-jingles",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-jingle-hit-00.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "effect_kind": "jingle",
+      "version": "2026-09",
+      "sha256": "e23d8c9e971a4e34484bc834a3ec1d560811ec6f5edd5efa2c61e583c18c504a"
+    },
+    {
+      "id": "sfx-kenney-jingle-pizzi",
+      "kind": "sfx",
+      "name": "轻快收尾",
+      "source_url": "https://kenney.nl/assets/music-jingles",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-jingle-pizzi-00.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "effect_kind": "jingle",
+      "version": "2026-09",
+      "sha256": "b442ade3308a2bbda4b8c572c86f9f1071c7bdbcfb1e6f915d35c605b61bd475"
+    },
+    {
+      "id": "sfx-kenney-jingle-sax",
+      "kind": "sfx",
+      "name": "活泼收尾",
+      "source_url": "https://kenney.nl/assets/music-jingles",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/sfx/open-commercial-2026-09/kenney-jingle-sax-00.ogg",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "effect_kind": "jingle",
+      "version": "2026-09",
+      "sha256": "f87605d2a3c717e6a26e584f57d24eac44e47f5a01470dad18809e5d6c9eb618"
+    }
+  ]
+}

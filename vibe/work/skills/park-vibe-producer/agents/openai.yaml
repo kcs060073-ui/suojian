@@ -1,0 +1,6 @@
+interface:
+  display_name: "园区 Vibe 制作与本地模板库"
+  short_description: "管理 MotionGit 公开与已授权个人模板，按主题编排镜头声音并补充插图动画"
+  default_prompt: "使用 $park-vibe-producer 根据我的脚本、园区素材和选定模板制作独立预览，自动搭配动效与声音。"
+policy:
+  allow_implicit_invocation: true

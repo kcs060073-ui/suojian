@@ -1,0 +1,16 @@
+{
+  "category": "voice",
+  "provider": "火山方舟 TTS（volcano）",
+  "note": "AI 音色库。音色 ID 通过 env:TTS_VOICE_TYPE 在渲染时解析，不落到仓库明文。",
+  "items": [
+    {
+      "id": "voice-doubao-promo-001",
+      "name": "豆包促销女声（promo 默认）",
+      "engine": "volcano",
+      "voice_type_ref": "env:TTS_VOICE_TYPE",
+      "language": "zh-CN",
+      "license": "commercial-approved",
+      "note": "scripts/promo-tts.ts / tts.ts 默认音色；TTS_VOICE_TYPE 来自 .env"
+    }
+  ]
+}

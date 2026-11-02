@@ -1,0 +1,15 @@
+{
+  "files": 2388,
+  "bytes": 339340450,
+  "sections": {
+    "main": 122,
+    "vibe": 1758,
+    "cutroom": 508
+  },
+  "excluded": [
+    "history, user-uploaded media and drafts",
+    "credentials, databases, secrets, and local logs",
+    "node_modules, Python environments, model caches and executable binaries",
+    "copyright-restricted upstream demonstration examples"
+  ]
+}

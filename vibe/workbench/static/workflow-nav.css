@@ -1,0 +1,8 @@
+.workflow-switch{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid #dbe3d5;border-radius:11px;background:#f1f4ec;white-space:nowrap}
+.workflow-switch a{display:flex;align-items:center;justify-content:center;min-width:112px;min-height:40px;padding:0 16px;border-radius:8px;font-size:14px;font-weight:600;color:#607360;transition:background .16s,color .16s}
+.workflow-switch a:hover{color:#294737;background:#e5ece0}
+.workflow-switch a[aria-current="page"]{background:#fffefa;color:#294737;box-shadow:0 2px 8px #253d2712}
+.topbar .workflow-tools{display:flex;align-items:center;gap:16px}
+@media(max-width:1100px){.workflow-switch a{min-width:96px;padding:0 11px;font-size:13px}.topbar{gap:12px}}
+@media(max-width:850px){.topbar{height:auto;min-height:72px;flex-wrap:wrap;padding:12px 17px;row-gap:8px}.workflow-switch{order:2}.topbar nav{order:4;width:100%;height:38px;justify-content:center}.topbar .workflow-tools{order:3;margin-left:auto}.workflow-switch a{min-height:36px}.topbar nav button{padding:0 6px}}
+@media(max-width:550px){.topbar .brand-mark{display:grid}.topbar .brand{font-size:13px}.workflow-switch{flex:1}.workflow-switch a{flex:1;min-width:0;padding:0 8px}.topbar .workflow-tools{gap:8px}.topbar .workflow-tools .secondary{padding:8px 10px}.topbar nav{gap:20px}}

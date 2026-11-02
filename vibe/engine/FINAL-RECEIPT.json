@@ -1,0 +1,41 @@
+{
+  "status": "complete",
+  "selectedBaseline": "realistic-halfbody",
+  "audioProfile": "selected-reference",
+  "playerPath": "engine/player.js",
+  "playerSha256": "2524AF6298EE44B074841BE7A15C89032D734B76E447FE405ED08E90C091B6D4",
+  "playerBytes": 609188,
+  "defaultFrameSSIM": 0.988175,
+  "referenceAACBitstreamSha256": "ef0b3e7d1234bb5bfb94f0e5a4b213a659799d1c2282671ee27c597a8896f210",
+  "checks": {
+    "referenceAudio": "1 active reference and 9 muted alternatives",
+    "retimed": "reference auto-exits to workbench on timeline change",
+    "uploadedVideo": "original recipe bypass corrected; metadata loop verified; controls-upload-video-f90.png",
+    "title": "multiline title, fontSize, textColor; controls-title-f90.png",
+    "simulation": "original recipe bypass corrected; numeric result visible above presenter; controls-simulation-f90.png",
+    "playerBuild": "passed",
+    "uploadedImage": "original recipe bypass corrected; controls-upload-f90.png",
+    "plate": "no audio/subtitle; visual scene retained",
+    "camera": "scene artwork moves; global HUD/subtitle remain fixed; controls-camera-f90.png",
+    "changedAudio": "reference auto-exits on audio setting changes",
+    "kinetic": "per-character reveal; controls-kinetic-f10.png",
+    "typescript": "passed",
+    "defaultVisual": "SSIM 0.988175; visually checked"
+  },
+  "evidenceDirectory": "work/park-fusion/qa",
+  "limitations": [
+    "Cached separate stems do not exactly reconstruct the historical selected AAC mix.",
+    "Remotion MP4 renders re-encode audio; extracted reference m4a keeps original AAC bitstream.",
+    "Complex scene graphics and title animations remain baked in video for Jianying.",
+    "Native subtitle editor font metrics/background may differ.",
+    "Geometry simulation is illustrative height comparison only.",
+    "Custom-video metadata update may log a canceled compositor request before successful frame completion."
+  ],
+  "scope": [
+    "engine",
+    "work/park-fusion"
+  ],
+  "noSharedServiceChanges": true,
+  "noVoiceRegeneration": true,
+  "editingStopped": true
+}

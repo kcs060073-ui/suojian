@@ -1,0 +1,276 @@
+{
+  "checkedAt": "2026-11-02T03:59:18+00:00",
+  "summary": {
+    "catalogItems": 97,
+    "localTemplateCount": 1,
+    "packageCount": 2,
+    "comingSoon": 1
+  },
+  "changes": [
+    {
+      "kind": "catalog-added",
+      "template": "854836-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "554769-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "228996-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "838778-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "583549-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "178707-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "148294-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "875206-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "607598-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "126246-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "287792-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "876-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "587362-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "509099-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "643842-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "233154-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "360840-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "257987-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "517652-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "173723-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "880856-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "949192-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "803150-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "106531-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "546070-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "447390-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "808349-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "968813-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "118272-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "991091-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "685275-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "873-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "874-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "875-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "877-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "648878-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "640261-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "640432-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "404937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "380710-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "941301-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "872-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "878-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "921052-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "430770-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "581039-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "887145-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "161069-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "442505-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "319937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "362451-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "419411-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "631937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "966733-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-943-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-944-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-945-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-946-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-947-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-948-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-949-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-950-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-951-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-952-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-953-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-954-portrait"
+    }
+  ],
+  "errors": []
+}

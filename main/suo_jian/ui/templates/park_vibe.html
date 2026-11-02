@@ -1,0 +1,7 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>溯剪 · 园区 Vibe</title><link rel="icon" href="/static/suojian-icon.png"><style>
+*{box-sizing:border-box}body{margin:0;background:#f6f5f1;color:#23362e;font-family:system-ui,sans-serif;display:grid;grid-template-rows:auto 38px minmax(0,1fr);height:100dvh;overflow:hidden}.studio-global-nav{background:#171420;max-width:none!important;margin:0!important}.vibe-entry{height:38px;padding:0 24px;display:flex;align-items:center;gap:16px;font-size:12px;border-bottom:1px solid #dddcd6}.vibe-entry span{margin-right:auto}.vibe-entry a{color:inherit}iframe{display:block;width:100%;height:100%;min-height:0;border:0}.vibe-error{padding:60px;line-height:1.9}.vibe-error a{color:#285c46}
+</style></head><body>{% include '_studio_nav.html' %}
+<div class="vibe-entry"><span>园区 Vibe · {{ '旧版影片' if legacy else '创作与分镜' }}</span><a href="/motion">新版创作</a><a href="/motion?view=films">旧版影片</a><a href="/motion/legacy">旧版动画工程</a></div>
+{% if ready %}<iframe title="园区 Vibe 影片编辑工具台" src="{{ worker }}" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
+{% else %}<main class="vibe-error"><h1>园区 Vibe 暂未就绪</h1><p>工作台未能启动，或所需端口已被其他程序占用。</p><a href="/motion">重新连接</a> · <a href="/motion?view=films">打开旧版影片</a></main>{% endif %}
+</body></html>

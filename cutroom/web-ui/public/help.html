@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CUTROOM 使用手册</title>
+  <style>
+    :root { color-scheme: light dark; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: light-dark(#eef1ec, #171a17); color: light-dark(#20231f, #f1f3ee); line-height: 1.65; }
+    header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 16px; padding: 12px max(20px, calc((100% - 1180px) / 2)); border-bottom: 1px solid light-dark(#dce0d8, #3a4039); background: light-dark(#fff, #20231f); }
+    header strong { font-size: 20px; }
+    header a { margin-left: auto; color: inherit; text-decoration: none; }
+    main { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; width: min(1180px, calc(100% - 32px)); margin: 24px auto 64px; }
+    nav { position: sticky; top: 82px; align-self: start; display: grid; gap: 6px; }
+    nav a { padding: 8px 10px; border-radius: 8px; color: light-dark(#555c53, #b8beb4); text-decoration: none; }
+    nav a:hover { background: light-dark(#e4e8e1, #2a2e29); color: inherit; }
+    article { min-width: 0; }
+    section { margin-bottom: 18px; padding: 22px; border: 1px solid light-dark(#dce0d8, #3a4039); border-radius: 14px; background: light-dark(#fff, #20231f); }
+    h1 { margin: 0; font-size: 28px; }
+    h2 { margin: 0 0 10px; font-size: 22px; }
+    h3 { margin: 18px 0 6px; }
+    p, ul, ol { margin: 8px 0; }
+    code { padding: 2px 5px; border-radius: 5px; background: light-dark(#eef1ec, #2b302a); overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 9px; border-bottom: 1px solid light-dark(#e1e5de, #383d37); text-align: left; vertical-align: top; }
+    .notice { padding: 12px 14px; border-left: 4px solid #d76534; border-radius: 8px; background: light-dark(#fff2e9, #3d2b23); }
+    .ok { color: light-dark(#28775a, #69c49b); }
+    .pending { color: light-dark(#b6572e, #ef8a5f); }
+    @media (max-width: 820px) { main { grid-template-columns: 1fr; } nav { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>CUTROOM</strong>
+    <span>同事视频工作台使用手册</span>
+    <a href="/">返回工作台</a>
+  </header>
+  <main>
+    <nav aria-label="手册目录">
+      <a href="#status">当前可用范围</a>
+      <a href="#quick-start">首次使用</a>
+      <a href="#agent-mode">Agent 模式</a>
+      <a href="#models">配置模型</a>
+      <a href="#shot-assets">镜头素材</a>
+      <a href="#packaging">包装素材</a>
+      <a href="#digital">数字人流程</a>
+      <a href="#ad">广告流程</a>
+      <a href="#review">审片与发布</a>
+      <a href="#recovery">异常恢复</a>
+      <a href="#checklist">检查清单</a>
+    </nav>
+    <article>
+      <section id="status">
+        <h1>CUTROOM 使用手册</h1>
+        <p>固定入口：<code>http://127.0.0.1:8765/</code>。关闭浏览器不会取消后台任务；重新打开后从 SQLite 任务账本恢复。</p>
+        <table>
+          <thead><tr><th>路线</th><th>当前状态</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>数字人混剪</td><td class="ok">已开放</td><td>底层曾完成真实样片闭环；新版工作台仍需完成一次从创建到发布包的实操复验。</td></tr>
+            <tr><td>信息流广告混剪</td><td class="pending">已开放，待真实首片</td><td>必须先配置文案策划和配音模型，并为每句准备真实画面。</td></tr>
+            <tr><td>园区宣传片</td><td class="pending">后续开放</td><td>当前不要创建或承诺该路线。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="quick-start">
+        <h2>首次使用</h2>
+        <ol>
+          <li>打开“设置 → AI 服务连接”，先添加供应商账号。</li>
+          <li>至少配置并测试“文案策划”；制作信息流广告还必须配置“配音”。</li>
+          <li>在“镜头素材”登记本次主素材目录，需要时添加通用补充目录。</li>
+          <li>打开“包装素材”试听或预览当前可用资产。</li>
+          <li>回到“任务”，新建视频并按页面显示的当前动作逐步推进。绿色已完成步骤可点击只读回看；橙色步骤是任务真实所在阶段，尚未开始的步骤不可点击。</li>
+        </ol>
+        <p class="notice">回看历史步骤不会改变门禁、版本或后台状态。页面会显示“只读回看”和“返回当前步骤”；需要修改已锁定内容时，仍使用对应的返工入口。</p>
+      </section>
+
+      <section id="agent-mode">
+        <h2>独立模式与 Agent 模式</h2>
+        <ul>
+          <li>独立模式：CUTROOM 自己调用已配置的文案/分镜模型。</li>
+          <li>Agent 模式：当前 Codex、WorkBuddy 或豆包工作模型完成文案与分镜；CUTROOM 不调用文本模型。</li>
+          <li>两种模式：豆包 TTS、Seedance 等生产服务仍使用 CUTROOM 各自凭据。</li>
+        </ul>
+        <p>新建任务时选择规划方式。Agent 模式进入分镜阶段后会显示“等待 Agent 提交规划”，请回到当前使用的 Agent 继续；四个人工门禁仍只能在 CUTROOM 页面确认。</p>
+        <h3>WorkBuddy</h3>
+        <p>WorkBuddy 使用本地 stdio，不填写 URL 或 Authorization。安装 CUTROOM MCP 后，还要在连接器管理页找到 <code>cutroom</code>，点击“信任”并启用，再重启 WorkBuddy 或新建会话；只写入配置不会让旧会话自动获得工具。</p>
+        <h3>豆包工作</h3>
+        <p>豆包工作使用本机 HTTP。先在 CUTROOM 目录运行 <code>scripts\start-doubao-work-mcp.ps1</code> 并保持窗口开启，再在第二个 PowerShell 窗口运行 <code>scripts\show-doubao-work-mcp-config.ps1</code>。在“插件 · 技能 · 伙伴 → 新建自定义连接器”中选择 HTTP，填写 <code>http://127.0.0.1:8766/mcp</code>，并添加名称为 <code>Authorization</code> 的 Header。</p>
+        <div class="notice">Authorization 的完整值以 <code>Bearer </code> 开头，相当于本机连接密码。不要截图、分享或写入文档；若已经泄露，应删除 <code>runtime\mcp\doubao-work.token</code>、重启服务并更新连接器。</div>
+        <h3>怎样验证</h3>
+        <p>调用 <code>cutroom_get_system_status</code>。Codex、WorkBuddy、豆包工作应分别返回对应的 <code>clientId</code>；<code>mcpToolCount = 12</code> 是完整 MCP 工具数，<code>allowedTaskActionCount = 4</code> 只是一个动作工具允许启动的四种动作。旧字段 <code>agentActions</code> 也表示动作，不是工具总数。</p>
+        <p>Agent 返回的任务地址形如 <code>http://127.0.0.1:8765/#/tasks/&lt;task-id&gt;</code>，需要先保持当前工作台会话可用。关闭某个客户端的 MCP 不会删除 CUTROOM 和现有任务。</p>
+      </section>
+
+      <section id="models" data-manual-section="model-settings">
+        <h2>配置大模型</h2>
+        <h3>第一步：添加供应商账号</h3>
+        <p>填写供应商预设和自己能识别的名称。豆包 API Key用于合成、试听和连接检测，AK/SK用于自动刷新音色目录，AppID + Access Token是旧版兼容项，可以留空。保存并检测会生成极短的测试语音。所有密钥只进入 Windows 凭据管理器。</p>
+        <h3>第二步：建立三类模型配置</h3>
+        <ul>
+          <li><b>文案策划：</b>独立模式下由文案分析、分镜规划和包装推荐共用；Agent 模式不需要。</li>
+          <li><b>B-roll：</b>只有本地素材缺画面时才调用，属于可选付费能力。</li>
+          <li><b>配音：</b>信息流广告的试听和正式 TTS；数字人口播路线不调用。</li>
+        </ul>
+        <p>同一类可以保存多个模型并设置默认项。配置名称只是给人看的，例如“智谱-文案策划”；模型 ID 必须填写供应商真实提供的精确 ID。</p>
+        <h3>第三步：测试连接</h3>
+        <p>只有最近 24 小时内真实测试通过的配置才能被新任务选择。任务创建后冻结本次指定的供应商、地址、模型和音色，失败时不会静默换模型。</p>
+        <div class="notice">普通豆包配置不填写模型 ID 或音色 ID：选择配音服务版本后，从自动获取的中文音色目录中选择常用音色；新建广告时仍可为本条视频改选其他声音。</div>
+      </section>
+
+      <section id="shot-assets">
+        <h2>管理镜头素材</h2>
+        <ul>
+          <li><b>本次主素材：</b>只服务当前项目或当前视频，优先用于配片。</li>
+          <li><b>通用补充素材：</b>跨项目可复用的城市空镜、办公、交通、科技等画面。</li>
+        </ul>
+        <h3>使用前先做最小归类</h3>
+        <p>素材根目录和盘符都由同事自行选择，CUTROOM 不要求固定路径。先由人工把园区专属素材按“一个园区一个目录”分开，并把可跨项目复用的素材放入独立的通用目录；暂时分不清的素材可放入 <code>99_待整理</code>。不需要逐个重命名视频，也不必一次整理完全部旧素材。</p>
+        <p>系统负责扫描、建立索引、搜索和候选匹配，但不会自动移动、重命名或重新整理原片，也不应只依赖 AI 判断素材属于哪个园区。有版权、授权或隐私疑问的素材不要放进可用于正式任务的目录。</p>
+        <h3>登记和更新</h3>
+        <p>每个园区目录分别登记为本次主素材，通用目录登记为通用补充素材。新增视频放入正确目录后点击“检查更新”；移动硬盘盘符变化时使用“重新连接”，不要删除后重新建库。原片不会被复制进数据库，系统只保存索引、指纹、代理和时间码。</p>
+      </section>
+
+      <section id="packaging" data-manual-section="packaging-assets">
+        <h2>管理和应用包装素材</h2>
+        <p>包装素材分字幕、音色、BGM、音效、文字卡、贴纸、花字、Logo/水印八类，并按三层组织：</p>
+        <ol>
+          <li><code>assets/</code>：项目随附的核心资产。</li>
+          <li><code>asset-packs/</code>：团队共享扩展包。</li>
+          <li>个人目录：默认是 <code>assets-local/&lt;分类&gt;/inbox/</code>，也可在“设置 → 存储与缓存”选择自己的根目录，Git 忽略。</li>
+        </ol>
+        <p>每位同事可自定义个人包装素材根目录；系统会自动建立八类子目录。切换只更新指向，不搬迁或删除旧文件；目录离线时保留配置，可重新选择并连接。</p>
+        <p>设计优先级是个人 → 团队 → 核心；同名覆盖必须显示来源。在素材库点击“检查新增与更新”可只读报告新增、变化、缺失和损坏文件，但不会自动登记，也不会把未知授权文件变成可选素材；新素材仍需补齐资产 ID、来源、授权、标签和 manifest 登记。</p>
+        <p>应用顺序固定为：选择方案 → 单项试听/查看 → 必要时复制并替换或关闭可选项 → 生成真实预览 → 播放至 90% 或结束 → 确认方案 → 可选保存为个人模板 → 正式渲染。预览已过期、渲染失败或文件缺失时必须重新生成；授权不明或文件缺失的素材不能进入正式成片。</p>
+      </section>
+
+      <section id="digital" data-manual-section="video-workflows">
+        <h2>数字人混剪完整流程</h2>
+        <ol>
+          <li>新建任务，选择“数字人混剪”。</li>
+          <li>选择禅镜最终 MP4，粘贴与视频口播完全一致的最终文案。</li>
+          <li>选择文案策划模型、主素材目录和需要的通用补充目录；B-roll 模型可选。</li>
+          <li>运行创建前预检并创建任务，人工锁定文案。</li>
+          <li>系统转写时间戳、同步素材并生成 AI 分镜候选。</li>
+          <li>逐镜头采用、替换、拆分、删除或调整顺序，确认后锁定画面。</li>
+          <li>试听单项、生成并完整观看真实包装预览，确认方案后由系统渲染并自动 QA。</li>
+          <li>完整播放候选成片，确认通过后生成发布包。</li>
+        </ol>
+        <div class="notice">粗剪区直接显示任务实际采用的图片或视频，并可按镜头顺序连续播放。右侧候选先点选只做临时预览；再次点击“用所选候选替换当前镜头”并确认影响范围后才会保存。图片不显示入点/出点裁剪；任一镜头素材离线或无法读取时，系统会指出具体镜头并阻止画面锁定。</div>
+        <div class="notice">任务页的 12 步分为“准备输入、调整画面、成片检查、交付发布”四组。先看“本步要做”，需要回看时点击分组中的已完成步骤。系统处理说明、替换候选和质检通过证据都可按需展开；自动 QA 的阻断项必须先处理。</div>
+      </section>
+
+      <section id="ad" data-manual-section="video-workflows">
+        <h2>信息流广告混剪完整流程</h2>
+        <ol>
+          <li>新建任务，选择“信息流广告混剪”，填写最终广告文案、用途、时长和画幅。</li>
+          <li>选择文案策划模型和配音模型；本地画面不足时再选 B-roll 模型。</li>
+          <li>绑定主素材与通用补充目录，预检后创建并锁定文案。</li>
+          <li>系统按锁定原文逐句生成分镜和 TTS，再从任务绑定的素材库逐句配片。</li>
+          <li>检查每句话的声音、画面和节奏；任何一句没有真实素材都不能锁画面。</li>
+          <li>确认画面，生成并完整观看真实包装预览；确认方案后渲染，自动 QA 通过后完整审片。</li>
+          <li>人工确认后生成发布包。</li>
+        </ol>
+      </section>
+
+      <section id="review">
+        <h2>四个人工门禁、审片和发布包</h2>
+        <p>必须由人确认：最终文案、画面顺序、本片包装方案、完整观看后的成片。自动测试或自动 QA 都不能替代完整观看。</p>
+        <p>标准发布包包括最终 MP4、三张封面、发布文案、发布检查 JSON 和 QA 报告。当前不自动发布到平台。</p>
+      </section>
+
+      <section id="recovery">
+        <h2>中断、失败和存储</h2>
+        <ul>
+          <li>模型失败：先查看页面给出的鉴权、地址、模型或网络错误；重新测试后再发起新请求。</li>
+          <li>素材离线：使用重新连接保留原素材 ID，不要新建一套重复素材库。</li>
+          <li>任务中断：只使用页面提供的“从安全检查点继续”，付费调用结果不明时不会自动重试。</li>
+          <li>空间不足：在“设置 → 存储与缓存”先预览再确认；只清理已登记的可重建预览缓存，不删除原片、成片或数据库。</li>
+        </ul>
+      </section>
+
+      <section id="checklist">
+        <h2>新手首片检查清单</h2>
+        <ul>
+          <li>文案策划模型显示“可用”；广告任务的配音模型也显示“可用”。</li>
+          <li>数字人 MP4 与最终文案完全一致，或广告文案已经定稿。</li>
+          <li>主素材目录在线且已检查更新，每句话都有可用画面。</li>
+          <li>包装方案中的文件存在、授权状态满足使用要求。</li>
+          <li>画面锁定后，在包装阶段即可登记自摄且可商用的镜头素材，供后续任务复用；其他有授权的素材只确认用于本片。已有旧候选时，登记后重新渲染并质检。</li>
+          <li>完整播放候选片，确认字幕、声音、节奏、事实和隐私后再批准。照片停留不再按视频卡顿报警，非阻断警告仍需人工复核。</li>
+          <li>发布页显示规定文件完整后再交付。</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

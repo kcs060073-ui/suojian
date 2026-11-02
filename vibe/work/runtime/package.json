@@ -1,0 +1,29 @@
+{
+  "name": "suojian-remotion-4539-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@react-three/fiber": "9.6.1",
+    "@remotion/bundler": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "@remotion/google-fonts": "4.0.539",
+    "@remotion/media": "4.0.539",
+    "@remotion/motion-blur": "4.0.539",
+    "@remotion/player": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "@remotion/three": "4.0.539",
+    "@remotion/zod-types": "4.0.539",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "^0.185.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.539",
+    "three": "0.185.1",
+    "typescript": "~5.9.0",
+    "vite": "6.4.4",
+    "zod": "4.3.6",
+    "zustand": "5.0.15"
+  }
+}

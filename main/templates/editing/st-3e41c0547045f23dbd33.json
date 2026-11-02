@@ -1,0 +1,2378 @@
+{
+  "schema_version": "suojian-edit-template-2",
+  "name": "园区招商-横屏快切",
+  "source_job": "a89d53f9",
+  "recipe": {
+    "source": {
+      "file_name": "a89d53f9_reference_jiaxing_260924.mp4",
+      "duration": 23.289,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "video_codec": "hevc",
+      "has_audio": true,
+      "audio_codec": "aac"
+    },
+    "shots": [
+      {
+        "id": 1,
+        "start": 0.0,
+        "end": 4.567,
+        "duration": 4.567,
+        "transition_out": "hard_cut",
+        "motion": {
+          "type": "pan_left",
+          "strength": 1,
+          "confidence": 0.45
+        },
+        "beat_sync": false,
+        "confidence": 0.69
+      },
+      {
+        "id": 2,
+        "start": 4.567,
+        "end": 7.567,
+        "duration": 3.0,
+        "transition_out": "hard_cut",
+        "motion": {
+          "type": "zoom_in",
+          "strength": 0.221,
+          "confidence": 0.5
+        },
+        "beat_sync": true,
+        "confidence": 0.8
+      },
+      {
+        "id": 3,
+        "start": 7.567,
+        "end": 8.733,
+        "duration": 1.166,
+        "transition_out": "hard_cut",
+        "motion": {
+          "type": "static",
+          "strength": 0.004,
+          "confidence": 0.55
+        },
+        "beat_sync": false,
+        "confidence": 0.72
+      },
+      {
+        "id": 4,
+        "start": 8.733,
+        "end": 9.767,
+        "duration": 1.034,
+        "transition_out": "hard_cut",
+        "motion": {
+          "type": "static",
+          "strength": 0.001,
+          "confidence": 0.55
+        },
+        "beat_sync": true,
+        "confidence": 0.82
+      },
+      {
+        "id": 5,
+        "start": 9.767,
+        "end": 12.867,
+        "duration": 3.1,
+        "transition_out": "hard_cut",
+        "motion": {
+          "type": "static",
+          "strength": 0.0,
+          "confidence": 0.55
+        },
+        "beat_sync": true,
+        "confidence": 0.82
+      },
+      {
+        "id": 6,
+        "start": 12.867,
+        "end": 23.267,
+        "duration": 10.4,
+        "transition_out": "end",
+        "motion": {
+          "type": "pan_left",
+          "strength": 1,
+          "confidence": 0.45
+        },
+        "beat_sync": false,
+        "confidence": 0.69
+      }
+    ],
+    "subtitles": [
+      {
+        "id": "OCR001",
+        "start": 0.0,
+        "end": 1.483,
+        "text": "厂房租金1.2元/m",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.965,
+        "bbox": {
+          "x": 0.17578125,
+          "y": 0.45555555555555555,
+          "width": 0.6375,
+          "height": 0.1763888888888889
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR003",
+        "start": 2.2,
+        "end": 5.15,
+        "text": "北京昌平医疗器械产业园",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.2359375,
+          "y": 0.8388888888888889,
+          "width": 0.521875,
+          "height": 0.10694444444444444
+        },
+        "sample_count": 4,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR004",
+        "start": 5.133,
+        "end": 6.617,
+        "text": "高速口厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.375,
+          "y": 0.8375,
+          "width": 0.2484375,
+          "height": 0.1111111111111111
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR005",
+        "start": 6.6,
+        "end": 8.083,
+        "text": "厂房租金1.2元/m²",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.979,
+        "bbox": {
+          "x": 0.2390625,
+          "y": 0.4388888888888889,
+          "width": 0.521875,
+          "height": 0.20277777777777778
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR008",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "912685",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.2359375,
+          "y": 0.4666666666666667,
+          "width": 0.03203125,
+          "height": 0.029166666666666667
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR010",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "公交直达",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.39921875,
+          "y": 0.8388888888888889,
+          "width": 0.20234375,
+          "height": 0.10694444444444444
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR012",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "蝶桥公寓",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.998,
+        "bbox": {
+          "x": 0.18046875,
+          "y": 0.4375,
+          "width": 0.0578125,
+          "height": 0.0375
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR013",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "蝶桥公寓站",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.994,
+        "bbox": {
+          "x": 0.23984375,
+          "y": 0.44166666666666665,
+          "width": 0.05,
+          "height": 0.019444444444444445
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR020",
+        "start": 10.267,
+        "end": 13.217,
+        "text": "享超长免租期+产业扶持政策",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.19765625,
+          "y": 0.8361111111111111,
+          "width": 0.6046875,
+          "height": 0.1111111111111111
+        },
+        "sample_count": 4,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR021",
+        "start": 13.2,
+        "end": 14.683,
+        "text": "全新高标厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.35390625,
+          "y": 0.8388888888888889,
+          "width": 0.29296875,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR022",
+        "start": 14.667,
+        "end": 16.15,
+        "text": "100平起租",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.38671875,
+          "y": 0.8416666666666667,
+          "width": 0.22578125,
+          "height": 0.10555555555555556
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR023",
+        "start": 16.133,
+        "end": 17.617,
+        "text": "小面积厂房创业",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.997,
+        "bbox": {
+          "x": 0.19140625,
+          "y": 0.42083333333333334,
+          "width": 0.5734375,
+          "height": 0.15555555555555556
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR024",
+        "start": 17.6,
+        "end": 19.083,
+        "text": "大面积厂房扩产",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.991,
+        "bbox": {
+          "x": 0.1890625,
+          "y": 0.4125,
+          "width": 0.575,
+          "height": 0.17083333333333334
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR025",
+        "start": 19.067,
+        "end": 20.55,
+        "text": "都有合适的厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.33046875,
+          "y": 0.8388888888888889,
+          "width": 0.33984375,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR026",
+        "start": 20.533,
+        "end": 22.017,
+        "text": "点击下方链接",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.999,
+        "bbox": {
+          "x": 0.35625,
+          "y": 0.8375,
+          "width": 0.28828125,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR027",
+        "start": 22.0,
+        "end": 23.289,
+        "text": "获取园区详情",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.999,
+        "bbox": {
+          "x": 0.353125,
+          "y": 0.8375,
+          "width": 0.29375,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      }
+    ],
+    "audio_analysis": {
+      "speech": {
+        "usable_for_asr": true,
+        "cleanliness": 0.74,
+        "pace": 1.1,
+        "voice_profile": "混音与背景音乐会干扰性别判断，需在剪映试听确认",
+        "caveat": "用于字幕、节奏、语速和音色画像；不承诺还原干净人声。"
+      },
+      "music": {
+        "bpm": 129.2,
+        "mood": [
+          "轻快",
+          "商务",
+          "科技"
+        ],
+        "search_keywords": [
+          "商务科技",
+          "产业宣传",
+          "轻快",
+          "127-131 BPM"
+        ],
+        "ducking_under_voice": "unknown",
+        "caveat": "用于节奏、风格和配乐检索；不作为原曲指纹或纯净伴奏声明。"
+      },
+      "sfx_events": [
+        {
+          "time": 0.116,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 17.178,
+          "confidence": 0.71
+        },
+        {
+          "time": 0.232,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 7.959,
+          "confidence": 0.684
+        },
+        {
+          "time": 4.574,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "strength": 9.776,
+          "confidence": 0.78
+        },
+        {
+          "time": 7.616,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "strength": 11.147,
+          "confidence": 0.78
+        },
+        {
+          "time": 9.183,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 7.675,
+          "confidence": 0.673
+        },
+        {
+          "time": 10.043,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 8.034,
+          "confidence": 0.687
+        },
+        {
+          "time": 10.263,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 7.561,
+          "confidence": 0.669
+        },
+        {
+          "time": 11.331,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 10.543,
+          "confidence": 0.71
+        },
+        {
+          "time": 12.202,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 9.709,
+          "confidence": 0.71
+        },
+        {
+          "time": 12.771,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "strength": 10.126,
+          "confidence": 0.78
+        },
+        {
+          "time": 12.887,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "strength": 6.072,
+          "confidence": 0.732
+        },
+        {
+          "time": 13.375,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 8.393,
+          "confidence": 0.7
+        },
+        {
+          "time": 15.813,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 21.052,
+          "confidence": 0.71
+        },
+        {
+          "time": 16.521,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 8.125,
+          "confidence": 0.69
+        },
+        {
+          "time": 18.39,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 9.639,
+          "confidence": 0.71
+        },
+        {
+          "time": 18.588,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 11.107,
+          "confidence": 0.71
+        },
+        {
+          "time": 19.296,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 7.973,
+          "confidence": 0.684
+        },
+        {
+          "time": 21.211,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "strength": 11.214,
+          "confidence": 0.71
+        },
+        {
+          "time": 21.676,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 9.044,
+          "confidence": 0.71
+        },
+        {
+          "time": 23.081,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "strength": 8.477,
+          "confidence": 0.703
+        }
+      ],
+      "strategy": "检测与重建：溯剪标注事件，Cutroom/素材库匹配并重新放置相似音效。"
+    },
+    "tts_analysis": {
+      "available": true,
+      "detected": true,
+      "match_type": "nearest_category_not_exact_voice_id",
+      "recommended_voice": "待试听确认",
+      "alternative_voices": [
+        "沉稳解说",
+        "自然旁白"
+      ],
+      "speed_estimate": 1.1,
+      "pitch_hz_estimate": 151.1,
+      "voice_profile": "混音与背景音乐会干扰性别判断，需在剪映试听确认",
+      "chars_per_second": 3.91,
+      "confidence": 0.74,
+      "version_note": "剪映音色名称会随版本变化，请在当前音色库试听候选。",
+      "requires_approval": true
+    },
+    "creative_analysis": {
+      "subtitle_style": {
+        "template_label": "底部居中·粗体高对比（待人工确认）",
+        "font_size_px_estimate": {
+          "min": 41,
+          "max": 54
+        },
+        "font_family_candidates": [
+          "思源黑体 Heavy",
+          "阿里巴巴普惠体 Heavy",
+          "剪映默认黑体"
+        ],
+        "jianying_flower_text_candidates": [
+          "黄字黑边",
+          "醒目标题",
+          "综艺花字-黄色粗体"
+        ],
+        "style_description": "底部居中、粗体、高对比描边；颜色与重点词需结合画面人工确认。",
+        "caveat": "当前版本根据视频尺寸与常见短视频排版给出候选，不声称精确识别字体或剪映模板 ID。"
+      },
+      "subtitle_production": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "ratio": "16:9"
+        },
+        "safe_area": {
+          "anchor": "bottom_center",
+          "x": 0.5,
+          "y": 0.82,
+          "left": 0.08,
+          "right": 0.92,
+          "top": 0.64,
+          "bottom": 0.91,
+          "note": "避开平台底部按钮、画面人物脸部与重要产品信息。"
+        },
+        "base_style": {
+          "font_family_candidates": [
+            "思源黑体 Heavy",
+            "阿里巴巴普惠体 Heavy",
+            "剪映默认粗体"
+          ],
+          "font_weight": 900,
+          "font_size_px": 69,
+          "line_height": 1.16,
+          "letter_spacing_px": 0,
+          "max_lines": 2,
+          "recommended_chars_per_line": 15,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "color": "#111111",
+            "width_px": 6
+          },
+          "shadow": {
+            "enabled": true,
+            "color": "#000000",
+            "opacity": 0.52,
+            "offset_x": 0,
+            "offset_y": 3,
+            "blur_px": 6
+          }
+        },
+        "emphasis": {
+          "enabled": true,
+          "target": "金额、数字、地名、产品名、行动词",
+          "color": "#FFD800",
+          "secondary_color": "#F02B21",
+          "rule": "每条只突出 1–2 个信息单元，避免整句同时上色。"
+        },
+        "animation": {
+          "in": "0.16 秒轻微放大弹入（95% → 100%）",
+          "hold": "保持稳定，不做持续抖动",
+          "out": "切镜时直接替换；行动号召可在结尾 0.18 秒淡出"
+        },
+        "timing": {
+          "minimum_duration_seconds": 1.0,
+          "recommended_duration_seconds": "1.5–2.5",
+          "reading_speed": "中文 4–6 字/秒；数字和单位额外留出 0.2 秒",
+          "line_break_rule": "在语义短语处换行，不拆分价格、面积、时间和单位。"
+        },
+        "flower_text_candidates": [
+          "白字黑边·资讯字幕",
+          "黄字黑边·重点词",
+          "醒目标题·轻弹入"
+        ],
+        "confidence": 0.68,
+        "caveat": "这是按画布比例生成的可编辑制作规格；字体与剪映花字素材名仍需在当前剪映版本中试听、试排后确认。"
+      },
+      "background_music": {
+        "bpm_estimate": {
+          "min": 127,
+          "max": 131
+        },
+        "mood": [
+          "轻快",
+          "商务",
+          "科技"
+        ],
+        "search_keywords": [
+          "商务科技",
+          "产业宣传",
+          "轻快",
+          "127-131 BPM"
+        ],
+        "caveat": "这是节奏与场景的检索建议，不是原曲指纹识别结果。"
+      },
+      "cover": {
+        "selection_mode": "video_frame",
+        "recommended_timestamp": 1.86,
+        "reason": "前段建立画面，适合承载主标题",
+        "candidate_frames": [
+          {
+            "rank": 1,
+            "timestamp": 1.86,
+            "file": "cover_frame_1.jpg",
+            "reason": "前段建立画面，适合承载主标题"
+          },
+          {
+            "rank": 2,
+            "timestamp": 11.64,
+            "file": "cover_frame_2.jpg",
+            "reason": "中段主体信息候选"
+          },
+          {
+            "rank": 3,
+            "timestamp": 20.49,
+            "file": "cover_frame_3.jpg",
+            "reason": "后段行动号召候选"
+          }
+        ],
+        "headline": "从视频文案提炼 8–14 字主标题",
+        "subheadline": "将价格、地点或核心卖点作为副标题"
+      }
+    },
+    "styles": {
+      "subtitle_style_01": {
+        "font_family_candidates": [
+          "思源黑体 Heavy",
+          "阿里巴巴普惠体 Heavy",
+          "剪映默认黑体"
+        ],
+        "font_weight": 900,
+        "font_size": 48,
+        "fill": "#FFD800",
+        "stroke": {
+          "color": "#111111",
+          "width": 5
+        },
+        "shadow": {
+          "enabled": true
+        },
+        "position": {
+          "anchor": "bottom_center",
+          "x": 0.5,
+          "y": 0.66
+        },
+        "highlight": {
+          "enabled": true,
+          "color": "#F02B21"
+        },
+        "animation": {
+          "type": "pop_in"
+        },
+        "confidence": 0.55
+      }
+    },
+    "edit_slots": [
+      {
+        "slot_id": "OCR001",
+        "time": {
+          "start": 0.0,
+          "end": 1.483,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "厂房租金1.2元/m",
+          "preferred_chars": 10,
+          "max_chars": 16,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 1
+        },
+        "semantic_role": "price",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR003",
+        "time": {
+          "start": 2.2,
+          "end": 5.15,
+          "duration": 2.95
+        },
+        "subtitle": {
+          "original_text": "北京昌平医疗器械产业园",
+          "preferred_chars": 11,
+          "max_chars": 18,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 1
+        },
+        "semantic_role": "location",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR004",
+        "time": {
+          "start": 5.133,
+          "end": 6.617,
+          "duration": 1.484
+        },
+        "subtitle": {
+          "original_text": "高速口厂房",
+          "preferred_chars": 5,
+          "max_chars": 8,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 2
+        },
+        "semantic_role": "transportation",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR005",
+        "time": {
+          "start": 6.6,
+          "end": 8.083,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "厂房租金1.2元/m²",
+          "preferred_chars": 11,
+          "max_chars": 18,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 2
+        },
+        "semantic_role": "price",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR008",
+        "time": {
+          "start": 8.8,
+          "end": 10.283,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "912685",
+          "preferred_chars": 6,
+          "max_chars": 10,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 4
+        },
+        "semantic_role": "selling_point",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR010",
+        "time": {
+          "start": 8.8,
+          "end": 10.283,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "公交直达",
+          "preferred_chars": 4,
+          "max_chars": 8,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 4
+        },
+        "semantic_role": "selling_point",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR012",
+        "time": {
+          "start": 8.8,
+          "end": 10.283,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "蝶桥公寓",
+          "preferred_chars": 4,
+          "max_chars": 8,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 4
+        },
+        "semantic_role": "selling_point",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR013",
+        "time": {
+          "start": 8.8,
+          "end": 10.283,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "蝶桥公寓站",
+          "preferred_chars": 5,
+          "max_chars": 8,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 4
+        },
+        "semantic_role": "selling_point",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR020",
+        "time": {
+          "start": 10.267,
+          "end": 13.217,
+          "duration": 2.95
+        },
+        "subtitle": {
+          "original_text": "享超长免租期+产业扶持政策",
+          "preferred_chars": 13,
+          "max_chars": 21,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 5
+        },
+        "semantic_role": "price",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR021",
+        "time": {
+          "start": 13.2,
+          "end": 14.683,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "全新高标厂房",
+          "preferred_chars": 6,
+          "max_chars": 10,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "facility",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR022",
+        "time": {
+          "start": 14.667,
+          "end": 16.15,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "100平起租",
+          "preferred_chars": 6,
+          "max_chars": 10,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "area",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR023",
+        "time": {
+          "start": 16.133,
+          "end": 17.617,
+          "duration": 1.484
+        },
+        "subtitle": {
+          "original_text": "小面积厂房创业",
+          "preferred_chars": 7,
+          "max_chars": 12,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "area",
+        "rhythm": {
+          "beat_sync": true
+        }
+      },
+      {
+        "slot_id": "OCR024",
+        "time": {
+          "start": 17.6,
+          "end": 19.083,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "大面积厂房扩产",
+          "preferred_chars": 7,
+          "max_chars": 12,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "area",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR025",
+        "time": {
+          "start": 19.067,
+          "end": 20.55,
+          "duration": 1.483
+        },
+        "subtitle": {
+          "original_text": "都有合适的厂房",
+          "preferred_chars": 7,
+          "max_chars": 12,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "facility",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR026",
+        "time": {
+          "start": 20.533,
+          "end": 22.017,
+          "duration": 1.484
+        },
+        "subtitle": {
+          "original_text": "点击下方链接",
+          "preferred_chars": 6,
+          "max_chars": 10,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "selling_point",
+        "rhythm": {
+          "beat_sync": false
+        }
+      },
+      {
+        "slot_id": "OCR027",
+        "time": {
+          "start": 22.0,
+          "end": 23.289,
+          "duration": 1.289
+        },
+        "subtitle": {
+          "original_text": "获取园区详情",
+          "preferred_chars": 6,
+          "max_chars": 10,
+          "style_id": "subtitle_style_01"
+        },
+        "video": {
+          "shot_id": 6
+        },
+        "semantic_role": "cta",
+        "rhythm": {
+          "beat_sync": false
+        }
+      }
+    ],
+    "stickers": {
+      "available": true,
+      "candidates": [
+        {
+          "start": 0.0,
+          "end": 0.8,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.762,
+            "y": 0.952,
+            "width": 0.094,
+            "height": 0.048
+          },
+          "confidence": 0.354,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST01"
+        },
+        {
+          "start": 0.0,
+          "end": 0.8,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.348,
+            "y": 0.937,
+            "width": 0.033,
+            "height": 0.063
+          },
+          "confidence": 0.346,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST02"
+        },
+        {
+          "start": 0.0,
+          "end": 0.8,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.258,
+            "y": 0.889,
+            "width": 0.027,
+            "height": 0.111
+          },
+          "confidence": 0.349,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST03"
+        },
+        {
+          "start": 0.0,
+          "end": 0.8,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.944,
+            "y": 0.733,
+            "width": 0.056,
+            "height": 0.096
+          },
+          "confidence": 0.356,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST04"
+        },
+        {
+          "start": 0.0,
+          "end": 0.8,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.169,
+            "y": 0.43,
+            "width": 0.048,
+            "height": 0.056
+          },
+          "confidence": 0.348,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST05"
+        },
+        {
+          "start": 1.01,
+          "end": 1.81,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.827,
+            "y": 0.774,
+            "width": 0.05,
+            "height": 0.074
+          },
+          "confidence": 0.351,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST06"
+        },
+        {
+          "start": 2.021,
+          "end": 2.821,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.729,
+            "y": 0.748,
+            "width": 0.052,
+            "height": 0.074
+          },
+          "confidence": 0.352,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST07"
+        },
+        {
+          "start": 6.062,
+          "end": 6.862,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.317,
+            "y": 0.385,
+            "width": 0.252,
+            "height": 0.23
+          },
+          "confidence": 0.514,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST08"
+        },
+        {
+          "start": 8.083,
+          "end": 8.883,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.383,
+            "y": 0.822,
+            "width": 0.208,
+            "height": 0.107
+          },
+          "confidence": 0.407,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST09"
+        },
+        {
+          "start": 12.125,
+          "end": 12.925,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.285,
+            "y": 0.385,
+            "width": 0.344,
+            "height": 0.267
+          },
+          "confidence": 0.615,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST10"
+        },
+        {
+          "start": 16.166,
+          "end": 16.966,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.771,
+            "y": 0.459,
+            "width": 0.027,
+            "height": 0.093
+          },
+          "confidence": 0.348,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST11"
+        },
+        {
+          "start": 16.166,
+          "end": 16.966,
+          "duration": 0.8,
+          "type": "text_graphic_candidate",
+          "category": "字幕/花字候选",
+          "label": "字幕/花字候选（不是贴纸）",
+          "bbox": {
+            "x": 0.202,
+            "y": 0.459,
+            "width": 0.027,
+            "height": 0.093
+          },
+          "confidence": 0.348,
+          "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。",
+          "id": "ST12"
+        }
+      ],
+      "method": "frame_color_contour_heuristic_with_text_graphic_filter",
+      "exact_asset_names": false,
+      "caveat": "压平成片无法区分贴纸、花字与画面原生图形，也无法恢复剪映贴纸素材名称；结果仅供人工复核。"
+    },
+    "sound_effects": {
+      "available": true,
+      "events": [
+        {
+          "start": 0.116,
+          "end": 0.296,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 17.178,
+            "spectral_centroid_hz": 975.5,
+            "cut_distance_seconds": 4.451
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX01"
+        },
+        {
+          "start": 0.232,
+          "end": 0.412,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.684,
+          "features": {
+            "onset_strength": 7.959,
+            "spectral_centroid_hz": 3788.7,
+            "cut_distance_seconds": 4.335
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX02"
+        },
+        {
+          "start": 4.574,
+          "end": 4.754,
+          "duration": 0.18,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "confidence": 0.78,
+          "features": {
+            "onset_strength": 9.776,
+            "spectral_centroid_hz": 1989.9,
+            "cut_distance_seconds": 0.007
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX03"
+        },
+        {
+          "start": 7.616,
+          "end": 7.796,
+          "duration": 0.18,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "confidence": 0.78,
+          "features": {
+            "onset_strength": 11.147,
+            "spectral_centroid_hz": 1507.7,
+            "cut_distance_seconds": 0.049
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX04"
+        },
+        {
+          "start": 9.183,
+          "end": 9.363,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.673,
+          "features": {
+            "onset_strength": 7.675,
+            "spectral_centroid_hz": 4716.1,
+            "cut_distance_seconds": 0.45
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX05"
+        },
+        {
+          "start": 10.043,
+          "end": 10.223,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.687,
+          "features": {
+            "onset_strength": 8.034,
+            "spectral_centroid_hz": 4407.1,
+            "cut_distance_seconds": 0.276
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX06"
+        },
+        {
+          "start": 10.263,
+          "end": 10.443,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.669,
+          "features": {
+            "onset_strength": 7.561,
+            "spectral_centroid_hz": 3993.8,
+            "cut_distance_seconds": 0.496
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX07"
+        },
+        {
+          "start": 11.331,
+          "end": 11.511,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 10.543,
+            "spectral_centroid_hz": 4938.3,
+            "cut_distance_seconds": 1.536
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX08"
+        },
+        {
+          "start": 12.202,
+          "end": 12.382,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 9.709,
+            "spectral_centroid_hz": 2155.0,
+            "cut_distance_seconds": 0.665
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX09"
+        },
+        {
+          "start": 12.771,
+          "end": 12.951,
+          "duration": 0.18,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "confidence": 0.78,
+          "features": {
+            "onset_strength": 10.126,
+            "spectral_centroid_hz": 1160.5,
+            "cut_distance_seconds": 0.096
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX10"
+        },
+        {
+          "start": 12.887,
+          "end": 13.067,
+          "duration": 0.18,
+          "type": "transition_impact_candidate",
+          "label": "转场冲击音候选",
+          "confidence": 0.732,
+          "features": {
+            "onset_strength": 6.072,
+            "spectral_centroid_hz": 5156.6,
+            "cut_distance_seconds": 0.02
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX11"
+        },
+        {
+          "start": 13.375,
+          "end": 13.555,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.7,
+          "features": {
+            "onset_strength": 8.393,
+            "spectral_centroid_hz": 1750.7,
+            "cut_distance_seconds": 0.508
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX12"
+        },
+        {
+          "start": 15.813,
+          "end": 15.993,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 21.052,
+            "spectral_centroid_hz": 2280.3,
+            "cut_distance_seconds": 2.946
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX13"
+        },
+        {
+          "start": 16.521,
+          "end": 16.701,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.69,
+          "features": {
+            "onset_strength": 8.125,
+            "spectral_centroid_hz": 4842.7,
+            "cut_distance_seconds": 3.654
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX14"
+        },
+        {
+          "start": 18.39,
+          "end": 18.57,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 9.639,
+            "spectral_centroid_hz": 3774.9,
+            "cut_distance_seconds": 5.523
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX15"
+        },
+        {
+          "start": 18.588,
+          "end": 18.768,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 11.107,
+            "spectral_centroid_hz": 1401.6,
+            "cut_distance_seconds": 5.721
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX16"
+        },
+        {
+          "start": 19.296,
+          "end": 19.476,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.684,
+          "features": {
+            "onset_strength": 7.973,
+            "spectral_centroid_hz": 1891.2,
+            "cut_distance_seconds": 6.429
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX17"
+        },
+        {
+          "start": 21.211,
+          "end": 21.391,
+          "duration": 0.18,
+          "type": "click_prompt_candidate",
+          "label": "点击/提示音候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 11.214,
+            "spectral_centroid_hz": 3769.6,
+            "cut_distance_seconds": 8.344
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX18"
+        },
+        {
+          "start": 21.676,
+          "end": 21.856,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.71,
+          "features": {
+            "onset_strength": 9.044,
+            "spectral_centroid_hz": 1296.8,
+            "cut_distance_seconds": 8.809
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX19"
+        },
+        {
+          "start": 23.081,
+          "end": 23.261,
+          "duration": 0.18,
+          "type": "transient_effect_candidate",
+          "label": "瞬态音效候选",
+          "confidence": 0.703,
+          "features": {
+            "onset_strength": 8.477,
+            "spectral_centroid_hz": 3270.8,
+            "cut_distance_seconds": 10.214
+          },
+          "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。",
+          "id": "FX20"
+        }
+      ],
+      "method": "audio_onset_transient_heuristic",
+      "exact_asset_names": false,
+      "caveat": "成片音轨已混音，只能定位疑似音效并粗分类，无法可靠恢复剪映素材名称。"
+    },
+    "timing": {
+      "duration": 23.289,
+      "fps": 30.0
+    },
+    "onscreen_text": [
+      {
+        "id": "OCR001",
+        "start": 0.0,
+        "end": 1.483,
+        "text": "厂房租金1.2元/m",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.965,
+        "bbox": {
+          "x": 0.17578125,
+          "y": 0.45555555555555555,
+          "width": 0.6375,
+          "height": 0.1763888888888889
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR002",
+        "start": 1.467,
+        "end": 2.217,
+        "text": "广房租金1.2元/",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.965,
+        "bbox": {
+          "x": 0.18203125,
+          "y": 0.45694444444444443,
+          "width": 0.6265625,
+          "height": 0.18055555555555555
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR003",
+        "start": 2.2,
+        "end": 5.15,
+        "text": "北京昌平医疗器械产业园",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.2359375,
+          "y": 0.8388888888888889,
+          "width": 0.521875,
+          "height": 0.10694444444444444
+        },
+        "sample_count": 4,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR004",
+        "start": 5.133,
+        "end": 6.617,
+        "text": "高速口厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.375,
+          "y": 0.8375,
+          "width": 0.2484375,
+          "height": 0.1111111111111111
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR005",
+        "start": 6.6,
+        "end": 8.083,
+        "text": "厂房租金1.2元/m²",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.979,
+        "bbox": {
+          "x": 0.2390625,
+          "y": 0.4388888888888889,
+          "width": 0.521875,
+          "height": 0.20277777777777778
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR006",
+        "start": 8.067,
+        "end": 8.817,
+        "text": "OHOSMHO",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.546,
+        "bbox": {
+          "x": 0.7171875,
+          "y": 0.1638888888888889,
+          "width": 0.10234375,
+          "height": 0.06527777777777778
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR007",
+        "start": 8.067,
+        "end": 8.817,
+        "text": "高速环绕",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.39765625,
+          "y": 0.8347222222222223,
+          "width": 0.203125,
+          "height": 0.1125
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR008",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "912685",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.2359375,
+          "y": 0.4666666666666667,
+          "width": 0.03203125,
+          "height": 0.029166666666666667
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR009",
+        "start": 8.8,
+        "end": 9.55,
+        "text": "·更安心",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.988,
+        "bbox": {
+          "x": 0.9578125,
+          "y": 0.24861111111111112,
+          "width": 0.03203125,
+          "height": 0.041666666666666664
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR010",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "公交直达",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.39921875,
+          "y": 0.8388888888888889,
+          "width": 0.20234375,
+          "height": 0.10694444444444444
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR011",
+        "start": 8.8,
+        "end": 9.55,
+        "text": "公党服务热线：96196",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.84,
+        "bbox": {
+          "x": 0.2390625,
+          "y": 0.5416666666666666,
+          "width": 0.05078125,
+          "height": 0.02361111111111111
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR012",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "蝶桥公寓",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.998,
+        "bbox": {
+          "x": 0.18046875,
+          "y": 0.4375,
+          "width": 0.0578125,
+          "height": 0.0375
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR013",
+        "start": 8.8,
+        "end": 10.283,
+        "text": "蝶桥公寓站",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.994,
+        "bbox": {
+          "x": 0.23984375,
+          "y": 0.44166666666666665,
+          "width": 0.05,
+          "height": 0.019444444444444445
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR014",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "58186788 电线电缆",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.841,
+        "bbox": {
+          "x": 0.878125,
+          "y": 0.18888888888888888,
+          "width": 0.0546875,
+          "height": 0.04861111111111111
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR015",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "公交服务热线：16196",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.861,
+        "bbox": {
+          "x": 0.23984375,
+          "y": 0.5430555555555555,
+          "width": 0.05,
+          "height": 0.020833333333333332
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR016",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "北电线电缆",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.987,
+        "bbox": {
+          "x": 0.83359375,
+          "y": 0.22083333333333333,
+          "width": 0.05,
+          "height": 0.06111111111111111
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR017",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "更省钱·更安心",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.99,
+        "bbox": {
+          "x": 0.83828125,
+          "y": 0.19722222222222222,
+          "width": 0.04453125,
+          "height": 0.04861111111111111
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR018",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "津AZT",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.856,
+        "bbox": {
+          "x": 0.96875,
+          "y": 0.16944444444444445,
+          "width": 0.03046875,
+          "height": 0.025
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR019",
+        "start": 9.533,
+        "end": 10.283,
+        "text": "津成电",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.999,
+        "bbox": {
+          "x": 0.96640625,
+          "y": 0.2263888888888889,
+          "width": 0.0328125,
+          "height": 0.034722222222222224
+        },
+        "sample_count": 1
+      },
+      {
+        "id": "OCR020",
+        "start": 10.267,
+        "end": 13.217,
+        "text": "享超长免租期+产业扶持政策",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.19765625,
+          "y": 0.8361111111111111,
+          "width": 0.6046875,
+          "height": 0.1111111111111111
+        },
+        "sample_count": 4,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR021",
+        "start": 13.2,
+        "end": 14.683,
+        "text": "全新高标厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.35390625,
+          "y": 0.8388888888888889,
+          "width": 0.29296875,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR022",
+        "start": 14.667,
+        "end": 16.15,
+        "text": "100平起租",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.38671875,
+          "y": 0.8416666666666667,
+          "width": 0.22578125,
+          "height": 0.10555555555555556
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR023",
+        "start": 16.133,
+        "end": 17.617,
+        "text": "小面积厂房创业",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.997,
+        "bbox": {
+          "x": 0.19140625,
+          "y": 0.42083333333333334,
+          "width": 0.5734375,
+          "height": 0.15555555555555556
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR024",
+        "start": 17.6,
+        "end": 19.083,
+        "text": "大面积厂房扩产",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.991,
+        "bbox": {
+          "x": 0.1890625,
+          "y": 0.4125,
+          "width": 0.575,
+          "height": 0.17083333333333334
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR025",
+        "start": 19.067,
+        "end": 20.55,
+        "text": "都有合适的厂房",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 1.0,
+        "bbox": {
+          "x": 0.33046875,
+          "y": 0.8388888888888889,
+          "width": 0.33984375,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR026",
+        "start": 20.533,
+        "end": 22.017,
+        "text": "点击下方链接",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.999,
+        "bbox": {
+          "x": 0.35625,
+          "y": 0.8375,
+          "width": 0.28828125,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      },
+      {
+        "id": "OCR027",
+        "start": 22.0,
+        "end": 23.289,
+        "text": "获取园区详情",
+        "kind": "onscreen_text",
+        "source": "ocr",
+        "confidence": 0.999,
+        "bbox": {
+          "x": 0.353125,
+          "y": 0.8375,
+          "width": 0.29375,
+          "height": 0.10972222222222222
+        },
+        "sample_count": 2,
+        "style_id": "subtitle_style_01"
+      }
+    ]
+  },
+  "analysis_digest": "117ba193fd1f81f3b0e8dedd2a21a120f8bdac66c837b3c5cd4b9ad0ae62e784",
+  "cutroom_packaging_template_id": "pt-7a963a547add",
+  "limitations": [
+    "字体与运镜识别为近似；复杂装饰在剪映中以独立素材呈现。"
+  ],
+  "template_id": "st-3e41c0547045f23dbd33",
+  "created_at": "2026-10-08T06:36:15.066919+00:00",
+  "packaging_choices": {
+    "subtitle": "sub-ad-smiley-punch",
+    "brand": null,
+    "bgm": "bgm-sb-machina",
+    "sfx": "sfx-whoosh",
+    "sticker": null,
+    "title_card": null,
+    "fancy_text": null
+  },
+  "reference_policy": {
+    "emphasis": {
+      "attribute_center_y": 0.8930555555555555,
+      "attribute_template": "business-label-A",
+      "basis": "参考片中心大字/数字及面积对比的 OCR 位置；语义映射到新文案，采用用户选定的 A 标签与 B 数字字形。",
+      "enabled": true,
+      "evidence": [
+        {
+          "bbox": {
+            "height": 0.1763888888888889,
+            "width": 0.6375,
+            "x": 0.17578125,
+            "y": 0.45555555555555555
+          },
+          "confidence": 0.965,
+          "end": 1.483,
+          "start": 0.0,
+          "text": "厂房租金1.2元/m"
+        },
+        {
+          "bbox": {
+            "height": 0.18055555555555555,
+            "width": 0.6265625,
+            "x": 0.18203125,
+            "y": 0.45694444444444443
+          },
+          "confidence": 0.965,
+          "end": 2.217,
+          "start": 1.467,
+          "text": "广房租金1.2元/"
+        },
+        {
+          "bbox": {
+            "height": 0.20277777777777778,
+            "width": 0.521875,
+            "x": 0.2390625,
+            "y": 0.4388888888888889
+          },
+          "confidence": 0.979,
+          "end": 8.083,
+          "start": 6.6,
+          "text": "厂房租金1.2元/m²"
+        },
+        {
+          "bbox": {
+            "height": 0.15555555555555556,
+            "width": 0.5734375,
+            "x": 0.19140625,
+            "y": 0.42083333333333334
+          },
+          "confidence": 0.997,
+          "end": 17.617,
+          "start": 16.133,
+          "text": "小面积厂房创业"
+        },
+        {
+          "bbox": {
+            "height": 0.17083333333333334,
+            "width": 0.575,
+            "x": 0.1890625,
+            "y": 0.4125
+          },
+          "confidence": 0.991,
+          "end": 19.083,
+          "start": 17.6,
+          "text": "大面积厂房扩产"
+        }
+      ],
+      "number_center_y": 0.5402777777777777,
+      "number_template": "slanted-number-B",
+      "timing_basis": "新配音语句窗口，内部短句按停顿辅助估计，不是参考片秒数直搬。"
+    },
+    "fallback_order": [
+      "same-subject-same-motion",
+      "same-subject-similar-motion",
+      "same-subject-static",
+      "approved-available-visual"
+    ],
+    "frozen_reference": true,
+    "height": 1080,
+    "music_match": {
+      "confidence": "approximate",
+      "fade_in": 0.35,
+      "fade_out": 1.5,
+      "ranking": [
+        {
+          "duration": 35.534,
+          "features": {
+            "bass": 0.4102296249188581,
+            "bpm": 110.3,
+            "brightness": 0.22701204291856164,
+            "dynamics": 0.2173886001110077,
+            "pulse_density": 0.12839059674502712,
+            "rms": 0.1694832593202591,
+            "tempo_confidence": 0.551
+          },
+          "gain": 0.12,
+          "id": "bgm-sb-machina",
+          "loop_required": false,
+          "mood": "科技、算力、智能制造",
+          "name": "Machina · 数字科技氛围",
+          "score": 0.1572,
+          "sha256": "72f479c583fd1cb894584c51d4fb9b33200b098bd1b13195bd41d29586d9d344",
+          "source": "C:\\Users\\Tanikawa\\CUTROOM\\asset-packs\\bgm\\open-commercial-2026-09\\machina.mp3",
+          "start": 164.0,
+          "tag_matches": []
+        },
+        {
+          "duration": 35.534,
+          "features": {
+            "bass": 0.3314376093864766,
+            "bpm": null,
+            "brightness": 0.26043997350893755,
+            "dynamics": 0.4526951014995575,
+            "pulse_density": 0.0922242314647378,
+            "rms": 0.03577388450503349,
+            "tempo_confidence": 0.188
+          },
+          "gain": 0.13,
+          "id": "bgm-sb-clear-skies",
+          "loop_required": false,
+          "mood": "城市形象、园区航拍、发展愿景",
+          "name": "Clear Skies · 明朗积极",
+          "score": 0.2087,
+          "sha256": "0b71c4460054e26f3a98cfe3477f3f967b8d5e4df0da1440ccc40d2a01eb31ab",
+          "source": "C:\\Users\\Tanikawa\\CUTROOM\\asset-packs\\bgm\\open-commercial-2026-09\\clear-skies.mp3",
+          "start": 16.0,
+          "tag_matches": []
+        },
+        {
+          "duration": 35.534,
+          "features": {
+            "bass": 0.24770935385066836,
+            "bpm": 117.2,
+            "brightness": 0.34504134672690656,
+            "dynamics": 0.5409846305847168,
+            "pulse_density": 0.11301989150090416,
+            "rms": 0.09287024289369583,
+            "tempo_confidence": 0.6
+          },
+          "gain": 0.13,
+          "id": "bgm-sb-machinery-stars",
+          "loop_required": false,
+          "mood": "科技、发展、产业升级",
+          "name": "Machinery of the Stars · 科技向上",
+          "score": 0.398,
+          "sha256": "3632834cce1d31ef41ebd5d8b1dcff5508187aa797917bee524bd77bf8da1f48",
+          "source": "C:\\Users\\Tanikawa\\CUTROOM\\asset-packs\\bgm\\open-commercial-2026-09\\machinery-of-the-stars.mp3",
+          "start": 120.0,
+          "tag_matches": []
+        }
+      ],
+      "reason": "按参考片音色明暗、低频比例、节奏变化和动态匹配，并避开过静的开头；参考音频含人声，节奏为粗估。",
+      "reference_features": {
+        "bass": 0.39861775736224997,
+        "bpm": null,
+        "brightness": 0.24557523679848192,
+        "dynamics": 0.6308270692825317,
+        "pulse_density": 0.12586445366528354,
+        "rms": 0.1044432520866394,
+        "tempo_confidence": 0.051
+      },
+      "reference_sha256": "d60b899560afbe0bd23ff9f349f5f6f9172939141bf03c7535c101700054054d",
+      "selected": {
+        "duration": 35.534,
+        "features": {
+          "bass": 0.4102296249188581,
+          "bpm": 110.3,
+          "brightness": 0.22701204291856164,
+          "dynamics": 0.2173886001110077,
+          "pulse_density": 0.12839059674502712,
+          "rms": 0.1694832593202591,
+          "tempo_confidence": 0.551
+        },
+        "gain": 0.12,
+        "id": "bgm-sb-machina",
+        "loop_required": false,
+        "mood": "科技、算力、智能制造",
+        "name": "Machina · 数字科技氛围",
+        "score": 0.1572,
+        "sha256": "72f479c583fd1cb894584c51d4fb9b33200b098bd1b13195bd41d29586d9d344",
+        "source": "C:\\Users\\Tanikawa\\CUTROOM\\asset-packs\\bgm\\open-commercial-2026-09\\machina.mp3",
+        "start": 164.0,
+        "tag_matches": []
+      },
+      "version": "music-match-1"
+    },
+    "number_preset": "ft-pop",
+    "ratio": "16:9",
+    "reference_sha256": "d60b899560afbe0bd23ff9f349f5f6f9172939141bf03c7535c101700054054d",
+    "reference_source": "C:\\Users\\Tanikawa\\Documents\\Codex\\2026-09-20\\continuing-from-chatgpt-conversation-6aaf4eec-667c\\suojian\\uploads\\a89d53f9_reference_jiaxing_260924.mp4",
+    "schema": 1,
+    "shots": [
+      {
+        "beat_sync": false,
+        "confidence": 0.69,
+        "duration": 4.567,
+        "end": 4.567,
+        "id": 1,
+        "motion": {
+          "confidence": 0.542,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 1,
+          "type": "pan_right",
+          "width": 1920.0
+        },
+        "start": 0.0,
+        "transition_out": "hard_cut"
+      },
+      {
+        "beat_sync": true,
+        "confidence": 0.8,
+        "duration": 3.0,
+        "end": 7.567,
+        "id": 2,
+        "motion": {
+          "confidence": 0.554,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 0.439,
+          "type": "zoom_in",
+          "width": 1920.0
+        },
+        "start": 4.567,
+        "transition_out": "hard_cut"
+      },
+      {
+        "beat_sync": false,
+        "confidence": 0.72,
+        "duration": 1.166,
+        "end": 8.733,
+        "id": 3,
+        "motion": {
+          "confidence": 0.667,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 0.004,
+          "type": "static",
+          "width": 1920.0
+        },
+        "start": 7.567,
+        "transition_out": "hard_cut"
+      },
+      {
+        "beat_sync": true,
+        "confidence": 0.82,
+        "duration": 1.034,
+        "end": 9.767,
+        "id": 4,
+        "motion": {
+          "confidence": 0.559,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 0.006,
+          "type": "static",
+          "width": 1920.0
+        },
+        "start": 8.733,
+        "transition_out": "hard_cut"
+      },
+      {
+        "beat_sync": true,
+        "confidence": 0.82,
+        "duration": 3.1,
+        "end": 12.867,
+        "id": 5,
+        "motion": {
+          "confidence": 0.665,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 0.006,
+          "type": "static",
+          "width": 1920.0
+        },
+        "start": 9.767,
+        "transition_out": "hard_cut"
+      },
+      {
+        "beat_sync": false,
+        "confidence": 0.69,
+        "duration": 10.4,
+        "end": 23.267,
+        "id": 6,
+        "motion": {
+          "confidence": 0.504,
+          "duration": 23.266666666666666,
+          "height": 1080.0,
+          "method": "optical-flow-affine",
+          "strength": 1,
+          "type": "pan_right",
+          "width": 1920.0
+        },
+        "start": 12.867,
+        "transition_out": "end"
+      }
+    ],
+    "style_basis": "参考片常规字幕 OCR 位置与实际像素颜色；字体为已授权近似粗黑体",
+    "subtitle": {
+      "alignment": 2,
+      "bold": true,
+      "font": "5 Alimama ShuHeiTi 阿里妈妈数黑.otf",
+      "fontname_guess": "Alimama ShuHeiTi Bold",
+      "highlight_hex": "#FFE820",
+      "margin_v": 72,
+      "max_chars_per_line": 15,
+      "max_lines": 1,
+      "outline": 6,
+      "outline_hex": "#111111",
+      "primary_hex": "#FFE820",
+      "shadow": 1,
+      "shadow_hex": "#000000",
+      "size": 96
+    },
+    "width": 1920
+  },
+  "packaging_revision": "c9a5a7c67f47e0bf"
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>真人口播复刻 · 溯剪</title>
+<link rel="stylesheet" href="/static/presenter.css"></head>
+<body>{% include '_studio_nav.html' %}<main>
+<div style="margin:0 0 22px"><a id="referenceLink" href="/" style="font-size:12px;color:#aaa0bf;text-decoration:none">← 返回工作台</a></div>
+<section class="intro"><span class="eyebrow">PRESENTER STUDIO · 真人口播</span><h1>选出说过的话，拼成一个故事。</h1><p>扫描文件夹，选择同一人物的口播句子，试听并排序，再生成原声预览和剪映草稿。</p></section>
+<div class="status" role="status"><i></i><span id="status">正在读取任务…</span><progress id="progress" hidden></progress></div>
+<div class="layout"><section class="card"><div class="title"><span>01</span><h2>素材与人物</h2></div>
+<label for="folder">新人物视频所在文件夹</label><div class="input-row"><input id="folder" placeholder="例如 C:\视频素材\口播"><button id="scan">分析文件夹</button></div>
+<p class="hint">读取本机文件，不上传视频。多个出镜人物会分组；无法可靠识别的人物片段先留待核对。</p>
+<div id="inventory" class="inventory"></div><div id="groups" class="groups"></div>
+<details id="errors"><summary>未归组和不可用素材</summary><div id="errorList"></div></details>
+</section><section class="card"><div class="title"><span>02</span><h2>已识别的口播</h2></div><p class="hint">选择人物后，逐句试听并加入脚本。语音识别和断句可能有误，请核对原声及切点。</p><div id="sentenceList" class="sentence-list"><p class="hint">完成扫描并选择人物后显示句子。</p></div><video id="sourcePreview" controls playsinline hidden></video><h3>已选句子 · 按顺序拼接</h3><div id="selectedSentences" class="selected-sentences"><p class="hint">还没有选择句子。</p></div><div class="actions"><button id="buildSentencePlan" type="button">确认选句并定位片段</button></div>
+<details><summary>已有参考脚本？按原文匹配</summary>
+<label for="script">参考脚本 <small>可修正语音识别错字；每句会定位到实际口播时间</small></label>
+<textarea id="script" rows="9" placeholder="完成分析后载入参考片脚本"></textarea>
+<div class="actions"><button id="match">按脚本匹配同一人物</button><span class="hint">数字不一致的句子会保留为缺句</span></div>
+<p class="hint">严格匹配适合逐字同稿。不同措辞会列出信息点候选，经你确认后改用实际口播重匹配。系统不会替人物生成没说过的话。</p>
+</details>
+</section></div>
+<section class="card"><div class="title"><span>03</span><h2>逐句复核</h2><b id="coverage"></b></div><div id="adaptation" hidden></div><div id="matches" class="matches"><p class="hint">选择人物并匹配脚本后，在这里检查来源与切点。</p></div>
+<div class="render-actions"><label class="check"><input type="checkbox" id="partial">有缺句时，只制作已匹配片段的小样</label><button id="render">组装原声预览</button></div></section>
+<section class="card" id="delivery"><div class="title"><span>04</span><h2>审看与草稿</h2></div><div id="emptyPreview" class="empty">人物、口播、字幕确认后，在这里审看新视频。</div><video id="preview" controls playsinline hidden></video><p id="renderNote" class="hint"></p>
+<div class="actions"><a id="download" class="button secondary" hidden>下载预览视频</a><button id="draft">保存到剪映草稿列表</button><a id="archive" class="button secondary" hidden>下载草稿包</a></div><p id="draftNote" class="hint"></p>
+</section><footer>字幕按单行输出。首版先完成同一人物与原声剪辑；参考片的全部花字、图形和运镜仍需单独复核。</footer>
+</main><script src="/static/presenter.js"></script></body></html>

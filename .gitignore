@@ -1,0 +1,23 @@
+# Local runtime and user data
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/results/
+**/uploads/
+**/secrets/
+**/model_cache/
+**/runtime/node_modules/
+**/runtime/python/
+**/runtime/models/
+**/*.sqlite*
+**/*.db
+**/*.log
+**/*.mp4
+**/*.mov
+**/*.mkv

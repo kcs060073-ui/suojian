@@ -1,0 +1,50 @@
+{
+  "fps": 30,
+  "totalFrames": 1319,
+  "shots": [
+    {
+      "from": 0,
+      "duration": 169,
+      "label": "先问设备",
+      "baseFrom": 0,
+      "baseDuration": 90
+    },
+    {
+      "from": 169,
+      "duration": 264,
+      "label": "看懂风险",
+      "baseFrom": 90,
+      "baseDuration": 210
+    },
+    {
+      "from": 433,
+      "duration": 239,
+      "label": "放回生产",
+      "baseFrom": 300,
+      "baseDuration": 210
+    },
+    {
+      "from": 672,
+      "duration": 202,
+      "label": "现场核对",
+      "baseFrom": 510,
+      "baseDuration": 180
+    },
+    {
+      "from": 874,
+      "duration": 245,
+      "label": "需求对表",
+      "baseFrom": 690,
+      "baseDuration": 120
+    },
+    {
+      "from": 1119,
+      "duration": 200,
+      "label": "预约到访",
+      "baseFrom": 810,
+      "baseDuration": 90
+    }
+  ],
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+0%"
+}

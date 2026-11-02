@@ -1,0 +1,2808 @@
+{
+  "schema": "suojian.key-free-motion-library/1",
+  "checkedAt": "2026-11-02T03:59:18+00:00",
+  "source": "https://raw.githubusercontent.com/motiontemplates/all/main/catalog.json",
+  "policy": {
+    "personalPackages": false,
+    "executeDownloads": false,
+    "retainOldVersions": true
+  },
+  "items": [
+    {
+      "key": "385712-landscape",
+      "title": "酷炫科技风",
+      "summary": "金属立体字、光效与空间动效；中英横屏、中文竖屏，新增英文竖屏基础表达 B1–B4，支持人脸居中与圆形署名。",
+      "website": "https://motiongit.com/@adunext/385712",
+      "repository": "https://github.com/motiontemplates/385712",
+      "version": "0.2.7-open-beta",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://raw.githubusercontent.com/motiontemplates/385712/9dfbe7d7c6a6d4aa03f6f8e2f2285e631099faae/assets/compositions.jpg",
+      "demo": "https://motiontemplates.github.io/385712/assets/demo.mp4",
+      "download": {
+        "type": "direct-package",
+        "urls": {
+          "zh": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-zh.motion",
+          "en": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-en.motion"
+        },
+        "page": "https://motiongit.com/@adunext/385712",
+        "availability": "download-available"
+      },
+      "packages": [
+        {
+          "language": "zh",
+          "url": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-zh.motion",
+          "path": "packages/385712-landscape/zh/472a95af35f8e0c09c0f7dc2ca0992b7c9a3405c5aa8063730c347fc4e015c21.motion",
+          "sha256": "472a95af35f8e0c09c0f7dc2ca0992b7c9a3405c5aa8063730c347fc4e015c21",
+          "bytes": 17596250,
+          "downloadedAt": "2026-11-02T03:59:14+00:00",
+          "archiveChecked": true,
+          "personalMarkersFound": false,
+          "entries": 331,
+          "declared": {},
+          "renderVerified": false
+        },
+        {
+          "language": "en",
+          "url": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-en.motion",
+          "path": "packages/385712-landscape/en/533320d081c578cb824dfbc6ce9d4ae3eb1ca190d67ae7185b4a32b02e236255.motion",
+          "sha256": "533320d081c578cb824dfbc6ce9d4ae3eb1ca190d67ae7185b4a32b02e236255",
+          "bytes": 17594444,
+          "downloadedAt": "2026-11-02T03:59:18+00:00",
+          "archiveChecked": true,
+          "personalMarkersFound": false,
+          "entries": 331,
+          "declared": {},
+          "renderVerified": false
+        }
+      ],
+      "posterLocal": "posters/385712-landscape.jpg",
+      "status": "public-downloaded-unrendered"
+    },
+    {
+      "key": "385712-portrait",
+      "title": "酷炫科技风 · 中文竖屏",
+      "summary": "金属立体字、光效与空间动效；中英横屏、中文竖屏，新增英文竖屏基础表达 B1–B4，支持人脸居中与圆形署名。",
+      "website": "https://motiongit.com/@adunext/385712",
+      "repository": "https://github.com/motiontemplates/385712",
+      "version": "0.2.44-alpha.5",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/626/0.2.9-open-beta-zh-b81b4798ad6a.jpg",
+      "demo": "https://media.openaicut.com/previews/626/0.2.9-open-beta-zh-11eae4868d37.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/385712",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/385712-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "336980-landscape",
+      "title": "现代图文 · 口播讲解",
+      "summary": "用现代图文版式、文字强调和信息拆解配合口播，适合观点、证据与步骤讲解。",
+      "website": "https://motiongit.com/@adunext/template-01-integrated",
+      "repository": "https://github.com/motiontemplates/336980",
+      "version": "2.7.18-alpha.6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/605/draft-zh-7942d81ce917.jpg",
+      "demo": "https://media.openaicut.com/previews/605/draft-zh-99e0d21cfdd9.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-01-integrated",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/336980-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "314486-portrait",
+      "title": "现代图文 · 口播讲解 · 竖屏",
+      "summary": "用现代图文版式、文字强调和信息拆解配合口播，适合观点、证据与步骤讲解。",
+      "website": "https://motiongit.com/@adunext/template-01-integrated-portrait",
+      "repository": "https://github.com/motiontemplates/314486",
+      "version": "2.7.18-alpha.7",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/606/draft-zh-ceb203a3fa61.jpg",
+      "demo": "https://media.openaicut.com/previews/606/draft-zh-9086d86d6129.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-01-integrated-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/314486-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "358192-landscape",
+      "title": "纸面透视 · 口播讲解",
+      "summary": "用纸面透视、卡片层次和图文关系配合口播，适合方法拆解与结构化知识。",
+      "website": "https://motiongit.com/@adunext/template-02-expanded",
+      "repository": "https://github.com/motiontemplates/358192",
+      "version": "2.7.21-alpha.7",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/607/draft-zh-b7af2ac6dee6.jpg",
+      "demo": "https://media.openaicut.com/previews/607/draft-zh-613d68ad449f.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-02-expanded",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/358192-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "295450-portrait",
+      "title": "纸面透视 · 口播讲解 · 竖屏",
+      "summary": "用纸面透视、卡片层次和图文关系配合口播，适合方法拆解与结构化知识。",
+      "website": "https://motiongit.com/@adunext/template-02-expanded-portrait",
+      "repository": "https://github.com/motiontemplates/295450",
+      "version": "2.7.18-alpha.7",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/608/draft-zh-499f0ea3a15e.jpg",
+      "demo": "https://media.openaicut.com/previews/608/draft-zh-927e16779f16.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-02-expanded-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/295450-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "304634-landscape",
+      "title": "深色立体 · 多屏展陈",
+      "summary": "用深色立体舞台、多屏和空间层次展示口播内容，适合产品、案例与媒体素材讲解。",
+      "website": "https://motiongit.com/@adunext/template-03-native",
+      "repository": "https://github.com/motiontemplates/304634",
+      "version": "2.7.18-alpha.5",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/609/draft-zh-0b9cc00ce402.jpg",
+      "demo": "https://media.openaicut.com/previews/609/draft-zh-a33d6dc67131.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-03-native",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/304634-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "569615-portrait",
+      "title": "深色立体 · 多屏展陈 · 竖屏",
+      "summary": "用深色立体舞台、多屏和空间层次展示口播内容，适合产品、案例与媒体素材讲解。",
+      "website": "https://motiongit.com/@adunext/template-03-native-portrait",
+      "repository": "https://github.com/motiontemplates/569615",
+      "version": "2.7.18-alpha.7",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/610/draft-zh-14409c15ade1.jpg",
+      "demo": "https://media.openaicut.com/previews/610/draft-zh-3200b44b2818.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-03-native-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/569615-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "553346-landscape",
+      "title": "科技控制台 · 口播讲解",
+      "summary": "用科技控制台、紫色玻璃质感与动态信息组件配合口播，适合技术与数据说明。",
+      "website": "https://motiongit.com/@adunext/template-04-dark-console",
+      "repository": "https://github.com/motiontemplates/553346",
+      "version": "2.7.20-alpha.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/611/2.5.7-zh-8e20f0acb55c.jpg",
+      "demo": "https://media.openaicut.com/previews/611/2.5.7-zh-96b144413879.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-04-dark-console",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/553346-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "738182-portrait",
+      "title": "科技控制台 · 口播讲解 · 竖屏",
+      "summary": "用科技控制台、紫色玻璃质感与动态信息组件配合口播，适合技术与数据说明。",
+      "website": "https://motiongit.com/@adunext/template-04-dark-console-portrait",
+      "repository": "https://github.com/motiontemplates/738182",
+      "version": "2.7.18-alpha.4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/612/2.5.7-zh-3586eaac0c77.jpg",
+      "demo": "https://media.openaicut.com/previews/612/2.5.7-zh-a93efdfb29ba.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-04-dark-console-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/738182-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "960723-landscape",
+      "title": "鲜色角色 · 叙事讲解",
+      "summary": "用鲜明配色、角色素材与叙事动效配合口播，适合故事、观点和情境解释。",
+      "website": "https://motiongit.com/@adunext/template-05-native",
+      "repository": "https://github.com/motiontemplates/960723",
+      "version": "2.7.18-alpha.6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/613/draft-zh-23a19c51650d.jpg",
+      "demo": "https://media.openaicut.com/previews/613/draft-zh-9454c905098e.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-05-native",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/960723-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "293151-portrait",
+      "title": "鲜色角色 · 叙事讲解 · 竖屏",
+      "summary": "用鲜明配色、角色素材与叙事动效配合口播，适合故事、观点和情境解释。",
+      "website": "https://motiongit.com/@adunext/template-05-native-portrait",
+      "repository": "https://github.com/motiontemplates/293151",
+      "version": "2.7.18-alpha.7",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/614/draft-zh-3f92eea2b709.jpg",
+      "demo": "https://media.openaicut.com/previews/614/draft-zh-6382724d35a0.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/template-05-native-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/293151-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "762139-landscape",
+      "title": "活力海报 · 口播讲解",
+      "summary": "用高对比海报、大字、清单和图形关系配合口播，含原生动画与新增组件，横屏独立编排。",
+      "website": "https://motiongit.com/@adunext/vibrant-poster",
+      "repository": "https://github.com/motiontemplates/762139",
+      "version": "2.7.18-alpha.3",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/623/draft-zh-6b4b2398b532.jpg",
+      "demo": "https://media.openaicut.com/previews/623/draft-zh-e8e43fce1aae.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/vibrant-poster",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/762139-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "721489-portrait",
+      "title": "活力海报 · 口播讲解 · 竖屏",
+      "summary": "用高对比海报、大字、清单和图形关系配合口播，含原生动画与新增组件，竖屏独立编排。",
+      "website": "https://motiongit.com/@adunext/vibrant-poster-portrait",
+      "repository": "https://github.com/motiontemplates/721489",
+      "version": "2.7.18-alpha.5",
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/624/draft-zh-01638b2220a1.jpg",
+      "demo": "https://media.openaicut.com/previews/624/draft-zh-11cf23913cdd.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/vibrant-poster-portrait",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/721489-portrait.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "854836-landscape",
+      "title": "口播宣传动效 10 秒",
+      "summary": "10 秒横版宣传动效：用一个数字、一句大字和品牌收尾，做短视频开场或产品预告片头。",
+      "website": "https://motiongit.com/@thepandaq/kouboo-motion",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/870/1.0.0-99c20483f4b4.jpg",
+      "demo": "https://media.openaicut.com/previews/870/1.0.0-6dcf8b7863ca.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/kouboo-motion",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "554769-landscape",
+      "title": "3D 口播开场",
+      "summary": "3D 口播开场",
+      "website": "https://motiongit.com/@thepandaq/cool-3d-intro",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/871/draft-5ad5f68adb8d.jpg",
+      "demo": "https://media.openaicut.com/previews/871/draft-40ddede10a69.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/cool-3d-intro",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "228996-landscape",
+      "title": "DEEP STAGE 口播主舞台",
+      "summary": "口播主舞台动效：9:16 人物画面（CAM 01 / REC 取景标签）与主信息屏、竖向章节导航屏三层错峰入位，下三分之一人名条滑入，镜头全程缓慢横移。14 秒，适合口播正文与知识讲解。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-host-stage",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/880/1.0.0-53419c8f2925.jpg",
+      "demo": "https://media.openaicut.com/previews/880/1.0.0-2c8e89fea7a8.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-host-stage",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "838778-landscape",
+      "title": "DEEP STAGE 深境舞台完整版",
+      "summary": "46 秒整条口播包装视频模板：深色 3D 舞台开场点火 → 口播主舞台（人物画面 + 信息屏 + 章节屏）→ 产品讲解 → 案例数据 → 媒体素材墙 → 收尾锁版，一条连续镜头运动。可替换品牌、标题、人名职务、三屏文案、产品/案例文案、10 句口播字幕与主色；随包可选音效轨（纯合",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-full-video",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/885/1.0.0-10251bc4895b.jpg",
+      "demo": "https://media.openaicut.com/previews/885/1.0.0-1d0d4dc1ea23.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-full-video",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "583549-portrait",
+      "title": "Kit 2 · 口播动效包装（竖屏）",
+      "summary": "给真人出镜的口播视频套上完整动效包装：人像窗口在全屏、圆窗、卡片之间插值过渡，配 10 个段落可视化隐喻与深色药丸双语字幕（重点词橙色）。高潮锚词砸下（震屏+橙闪），片尾手写收尾。1080×1920/30fps，样例 36.5 秒，含程序化动作音效。",
+      "website": "https://motiongit.com/@chenyutao0417/kit2-koubo-wrap",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/890/1.0.0-50bebde67959.jpg",
+      "demo": "https://media.openaicut.com/previews/890/1.0.0-a07dfe35eea8.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenyutao0417/kit2-koubo-wrap",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "178707-portrait",
+      "title": "突破边界",
+      "summary": "纸面画框、破框转场与彩蛋动效。内测版，新文案适配仍在完善。",
+      "website": "https://motiongit.com/@adunext/break-boundaries",
+      "repository": "https://github.com/motiontemplates/178707",
+      "version": "0.1.1-alpha.2",
+      "width": 1440,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/896/draft-zh-72bb9b863ff8.jpg",
+      "demo": "https://media.openaicut.com/previews/896/draft-zh-995fe8c7aa31.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/break-boundaries",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "148294-landscape",
+      "title": "字符剧场",
+      "summary": "字符角色、作品墙与剧场式动画。内测版，新文案适配仍在完善。",
+      "website": "https://motiongit.com/@adunext/character-theater",
+      "repository": "https://github.com/motiontemplates/148294",
+      "version": "0.1.0-alpha8",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/897/draft-zh-2256483498a1.jpg",
+      "demo": "https://media.openaicut.com/previews/897/draft-zh-1bc9e79516df.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/character-theater",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "875206-landscape",
+      "title": "卡通讲解风",
+      "summary": "手绘卡通讲解、步骤演示与原生转场。内测版，新文案适配仍在完善。",
+      "website": "https://motiongit.com/@adunext/cartoon-explainer",
+      "repository": "https://github.com/motiontemplates/875206",
+      "version": "0.1.0-alpha8",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/898/draft-zh-2963c6828c9d.jpg",
+      "demo": "https://media.openaicut.com/previews/898/draft-zh-07d37803544c.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/cartoon-explainer",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "607598-landscape",
+      "title": "桌面口播 · Mac 窗口动效",
+      "summary": "浅色 macOS 桌面风格的真人口播模板：讲者出现在 Mac 摄像头窗口里，每句话按句型自动切换版式与动效——翻牌数字、弹出窗口、印章、荧光笔划重点、流程图、删除线、网格转场等，每种动效配有对应音效；判断句、数据句、风险句等各有专属布局。文字、数据、配色和节奏全部由参数驱动，替换",
+      "website": "https://motiongit.com/@erictan88315/desktop-talking-head",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1440,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/933/1.0.0-zh-ce294f555635.jpg",
+      "demo": "https://media.openaicut.com/previews/933/1.0.0-zh-616ff2957b13.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@erictan88315/desktop-talking-head",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "126246-landscape",
+      "title": "财经知识解说 · 50 页动效包",
+      "summary": "风格的财经/知识解说动效包：16:9 横屏，50 种动画页面，按句子类型选页、参数驱动。含数字滚动、柱状/折线/占比图表、印章、新闻卡片、打字机金句、地图路线、关系网络、时间线、对比表格、白闪转场等，每页自带音效。示例数据均为虚构。",
+      "website": "https://motiongit.com/@erictan88315/finance-explainer-50",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/955/1.0.0-zh-0e72c700e15b.jpg",
+      "demo": "https://media.openaicut.com/previews/955/1.0.0-zh-a4f8c3690cc4.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@erictan88315/finance-explainer-50",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "287792-landscape",
+      "title": "量价图表：K线突破与分时动画",
+      "summary": "量价教学图表独立组件，包含两组日K与一组分时动画。",
+      "website": "https://motiongit.com/@oubaba95128/volume-price-kline-charts",
+      "repository": "https://github.com/motiontemplates/287792",
+      "version": "1.0.0",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/869/1.0.0-zh-01708b4a2214.jpg",
+      "demo": "https://media.openaicut.com/previews/869/1.0.0-zh-d5fd83bc28a8.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@oubaba95128/volume-price-kline-charts",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "876-landscape",
+      "title": "流程与时间线 · FLOW / TIMELINE",
+      "summary": "四步创作流程（说戏→分镜→画面→成片）推进到一条时间线，四轨片段铺开、播放头扫过、统计落位；9.8 秒，适合 AIGC/创作工具的能力说明。",
+      "website": "https://motiongit.com/@thepandaq/collage-flow",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/876/1.0.0-zh-0836cb139a44.jpg",
+      "demo": "https://media.openaicut.com/previews/876/1.0.0-zh-294b6a370e6d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-flow",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "587362-landscape",
+      "title": "DEEP STAGE 案例数据",
+      "summary": "案例讲解动效：数据仪表盘推入，3 个 KPI 数字滚动，6 根柱图从底部逐根生长（最高值自动主色高亮），前后对比副屏滑入。13 秒，适合案例复盘与成果汇报。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-case-data",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/882/1.0.0-20fa9d055973.jpg",
+      "demo": "https://media.openaicut.com/previews/882/1.0.0-5df639825460.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-case-data",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "509099-landscape",
+      "title": "目标与证据 · 17类语义动效",
+      "summary": "暖灰米白与绿色的17类语义动效，适用于知识讲解、产品说明、指标比较与观点表达。",
+      "website": "https://motiongit.com/@frankye1211/product-update-story",
+      "repository": "https://github.com/motiontemplates/509099",
+      "version": "0.4.0-rc.5",
+      "width": 1280,
+      "height": 720,
+      "fps": 24.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/886/0.4.0-rc.4-5ddf2903802d.jpg",
+      "demo": "https://media.openaicut.com/previews/886/0.4.0-rc.4-7ab29961149d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@frankye1211/product-update-story",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "643842-landscape",
+      "title": "图解口播与图片展示",
+      "summary": "月白渐变风格的图解与口播模板，支持图形讲解、图片视频展示和人物卡片；新增7种同系列食物SVG与透明PNG。",
+      "website": "https://motiongit.com/@frankye1211/moonwhite-robot-unified",
+      "repository": null,
+      "version": "0.8.1-rc.1",
+      "width": 1920,
+      "height": 1080,
+      "fps": 24.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/888/0.8.0-rc.2-15b068f72745.jpg",
+      "demo": "https://media.openaicut.com/previews/888/0.8.0-rc.2-6971ec2770b7.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@frankye1211/moonwhite-robot-unified",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "233154-landscape",
+      "title": "Kit 1 · 人文纪录片知识短片",
+      "summary": "无口播、画面+字幕叙事的人文纪录片风知识短片模板：暗场开题、锚词砸出（缩放回弹+闪白+震屏）、结尾亮背景重定义。替换锚词与双语字幕即可制作新短片，1920×1080/30fps，样例 20 秒含程序化 BGM 与音效。",
+      "website": "https://motiongit.com/@chenyutao0417/kit1-doc-shortfilm",
+      "repository": "https://github.com/motiontemplates/233154",
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/889/1.0.0-d8681251c776.jpg",
+      "demo": "https://media.openaicut.com/previews/889/1.0.0-c28fac802c50.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenyutao0417/kit1-doc-shortfilm",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "360840-landscape",
+      "title": "水墨人物志 · 一个人的故事",
+      "summary": "用汉字当角色（韩、刘、萧、项…）的水墨动画，2 分 48 秒讲完一个历史人物的一生，并用心理学解释他为什么落到这个下场。改预设里的对白、成语签、地点年份、括注和场景即可换一个新人物。1920×1080 / 30fps，样例含程序化动作音效。",
+      "website": "https://motiongit.com/@chenyutao0417/ink-saga",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/892/1.0.0-zh-dbe6436265f9.jpg",
+      "demo": "https://media.openaicut.com/previews/892/1.0.0-zh-1f9aa1a124de.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenyutao0417/ink-saga",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "257987-landscape",
+      "title": "瑞士信息设计 · 知识讲解模板",
+      "summary": "用清晰网格、对象计数和比例变化讲明白“百分比在除什么”。适合分母、权重与统计比较，可由AI助手按本期文稿选择图示，支持可选真人开场。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-swiss",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/900/2.5.3-zh-a83d8415095a.jpg",
+      "demo": "https://media.openaicut.com/previews/900/2.5.3-zh-5df29820b59b.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-swiss",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "517652-landscape",
+      "title": "黏土实验台 · 知识讲解模板",
+      "summary": "把拆分、附着和搬运变成可追踪的黏土实验。适合对象变化与过程解释，由AI助手选择图标和图示，可选真人全屏开头后缩成圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-clay",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/901/2.5.3-zh-2a04b4956c40.jpg",
+      "demo": "https://media.openaicut.com/previews/901/2.5.3-zh-8f8876c01431.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-clay",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "173723-landscape",
+      "title": "粉笔黑板 · 知识讲解模板",
+      "summary": "用粉笔线条把光线、视角与遮挡条件逐步画清。适合轨道、投影和几何原因辨析，提供图标图示选择引导，可选真人开场后圆窗陪讲。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-chalkboard",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/902/2.5.3-zh-382331a3ae0a.jpg",
+      "demo": "https://media.openaicut.com/previews/902/2.5.3-zh-3d0943b9524d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-chalkboard",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "880856-landscape",
+      "title": "生长导图 · 知识讲解模板",
+      "summary": "让关系沿分支生长，让对象沿路径前进。适合层级、分流、局部放大与不同时间尺度的解释，配有图示选择引导，可选真人开场后缩圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-mindmap",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/903/2.5.3-zh-7299d5905b6d.jpg",
+      "demo": "https://media.openaicut.com/previews/903/2.5.3-zh-fe14805ea913.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-mindmap",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "949192-landscape",
+      "title": "博物馆展墙 · 知识讲解模板",
+      "summary": "以展墙与展品机制串起一段知识历程。适合日影、液位、齿轮、摆动、分频与共振的解释，由AI助手选图示，可选真人开场后圆窗陪讲。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-timeline",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/904/2.5.3-zh-309919c56a02.jpg",
+      "demo": "https://media.openaicut.com/previews/904/2.5.3-zh-12ca8272b15b.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-timeline",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "803150-landscape",
+      "title": "发光玻璃板 · 知识讲解模板",
+      "summary": "在发光线条中看见波形怎样相遇、延时怎样留下残余。适合信号叠加、相位与反馈解释，提供图标图示引导，可选真人开头后缩圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-lightboard",
+      "repository": null,
+      "version": "2.7.3",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/905/2.5.3-zh-f2c7c211a3fb.jpg",
+      "demo": "https://media.openaicut.com/previews/905/2.5.3-zh-90f1d36b5c30.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-lightboard",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "106531-landscape",
+      "title": "等距系统图 · 知识讲解模板",
+      "summary": "用等距剖切把内部结构、物质通路与能量关系分开讲清。适合换热、压缩和能量核算，提供图示选择引导，可选真人开场后缩圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-isometric",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/906/2.5.3-zh-211781250201.jpg",
+      "demo": "https://media.openaicut.com/previews/906/2.5.3-zh-f7f712d44ade.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-isometric",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "546070-landscape",
+      "title": "纸雕层叠 · 知识讲解模板",
+      "summary": "用层叠纸片看见内部、压缩与搬运。适合层序、褶皱、切面和错动的教学解释，提供图标图示选择引导，可选真人开场后缩成圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-papercut",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/907/2.5.3-zh-cf3c4dad6c15.jpg",
+      "demo": "https://media.openaicut.com/previews/907/2.5.3-zh-66b986377f2a.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-papercut",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "447390-landscape",
+      "title": "地铁线路图 · 知识讲解模板",
+      "summary": "沿着线路追踪占用、停车与队列变化。适合安全间隔、状态读数和有限服务流程的教学表达，配有图标图示引导，可选真人开头后缩圆窗。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-metro",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/908/2.5.3-zh-d0159cc738f3.jpg",
+      "demo": "https://media.openaicut.com/previews/908/2.5.3-zh-fd8d9dc5ae03.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-metro",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "808349-landscape",
+      "title": "双色孔版 · 知识讲解模板",
+      "summary": "用双色套印看清复制、增长和基数差异。适合固定增量与固定比例、谱系和指数规则的解释，提供图示选择引导，可选真人开场后圆窗陪讲。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-riso",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/909/2.5.3-zh-a00889e59aec.jpg",
+      "demo": "https://media.openaicut.com/previews/909/2.5.3-zh-15d6f65e42f3.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-riso",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "968813-landscape",
+      "title": "点阵手账 · 知识讲解模板",
+      "summary": "把步骤、关键词和修订留在同一本点阵手账里。适合方法拆解与学习回顾，提供图标图示选择引导；页面为19.95秒早期风格短样。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-sketchnote",
+      "repository": null,
+      "version": "2.7.3",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/910/2.5.3-zh-f998fa61d29d.jpg",
+      "demo": "https://media.openaicut.com/previews/910/2.5.3-zh-5ebc896f6930.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-sketchnote",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "118272-landscape",
+      "title": "彩色几何 · 知识讲解模板",
+      "summary": "用彩色边、面积与刚体拼图讲清几何等量关系。原生新稿围绕直角三角形模型，提供图示选择引导；页面为23.8667秒早期风格短样。",
+      "website": "https://motiongit.com/@adunext/knowledge-explainer-byrne",
+      "repository": null,
+      "version": "2.7.2",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/911/2.5.3-zh-8b47943f7398.jpg",
+      "demo": "https://media.openaicut.com/previews/911/2.5.3-zh-b27b76c06f66.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/knowledge-explainer-byrne",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "991091-landscape",
+      "title": "决策数据剧场 · Decision Chart Theater",
+      "summary": "黑底数据讲解剧场：台账 → 矢量图表逐元素长出并推近讲解 → 一个大数字结论 → 光圈收黑。六种镜头由参数驱动，时长随内容。这支 Demo 就是本模板渲染的（97.6 秒 / 30fps），示例数字已匿名化。",
+      "website": "https://motiongit.com/@lxguanyu/dds-decision-keynote",
+      "repository": null,
+      "version": "1.0.1",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/923/1.0.1-zh-930359a63137.jpg",
+      "demo": "https://media.openaicut.com/previews/923/1.0.1-zh-e327c33f8d30.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@lxguanyu/dds-decision-keynote",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "685275-portrait",
+      "title": "财经解读 · 竖屏信息卡",
+      "summary": "用深色科技底、数据大字卡和三条方向，把一条财经信息讲成 24 秒竖屏片",
+      "website": "https://motiongit.com/@guo-factory/finance-cards-zh",
+      "repository": null,
+      "version": "0.1.0",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30.0,
+      "orientation": "portrait",
+      "poster": "https://media.openaicut.com/covers/956/0.1.0-zh-63ece22aa719.jpg",
+      "demo": "https://media.openaicut.com/previews/956/0.1.0-zh-d59f54eed92c.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@guo-factory/finance-cards-zh",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "128610-landscape",
+      "title": "多屏拼贴 · 品牌宣传",
+      "summary": "用多屏拼贴、版面切换和品牌收尾展示产品与创作流程，适合品牌介绍和工具宣传。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-main",
+      "repository": "https://github.com/motiontemplates/128610",
+      "version": "2.6.5-alpha.1",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/585/draft-zh-c7db529e9ef8.jpg",
+      "demo": "https://media.openaicut.com/previews/585/draft-zh-78bba5fd21f6.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-main",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/128610-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "252912-landscape",
+      "title": "像素闯关 · 产品宣传",
+      "summary": "像素城市、角色闯关和复古游戏音色组成产品介绍，适合数字工具与功能说明。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-pixel",
+      "repository": "https://github.com/motiontemplates/252912",
+      "version": "2.6.6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/586/quality-zh-086e631771b2.jpg",
+      "demo": "https://media.openaicut.com/previews/586/draft-zh-b8792f9887ad.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-pixel",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/252912-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "867595-landscape",
+      "title": "明暗快切 · 产品宣传",
+      "summary": "明暗画面快速切换，结合大字和界面展示突出产品功能，适合节奏鲜明的宣传片。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-velocity",
+      "repository": "https://github.com/motiontemplates/867595",
+      "version": "2.6.6-alpha.1",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/587/quality-zh-89ff4394136c.jpg",
+      "demo": "https://media.openaicut.com/previews/587/draft-zh-89b65ccfd5ce.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-velocity",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/867595-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "670021-landscape",
+      "title": "流程演示 · 产品教程",
+      "summary": "沿着选择模板、提供内容、生成视频的流程讲解产品使用，适合工具教程和上手演示。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-user",
+      "repository": "https://github.com/motiontemplates/670021",
+      "version": "2.6.5",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/588/quality-zh-aa230abfebe6.jpg",
+      "demo": "https://media.openaicut.com/previews/588/draft-zh-ca08bac0650e.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-user",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/670021-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "452365-landscape",
+      "title": "模块拼贴 · 创作者宣传",
+      "summary": "以模块拼贴呈现内容、素材和动画的组合关系，适合创作者工具与工作方式介绍。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-creator",
+      "repository": "https://github.com/motiontemplates/452365",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/589/quality-zh-879117ad36da.jpg",
+      "demo": "https://media.openaicut.com/previews/589/draft-zh-4d806a380523.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-creator",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/452365-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "213827-landscape",
+      "title": "工程蓝图 · 产品拆解",
+      "summary": "以工程蓝图、结构示意和模块拆解展示产品组成，适合技术产品与工作流讲解。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-blueprint",
+      "repository": "https://github.com/motiontemplates/213827",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/590/quality-zh-d5509b8e4f82.jpg",
+      "demo": "https://media.openaicut.com/previews/590/draft-zh-308a5a69232f.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-blueprint",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/213827-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "667934-landscape",
+      "title": "发布会舞台 · 产品演示",
+      "summary": "以发布会舞台和大屏展示组织产品演示，适合新品介绍、功能发布与品牌展示。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-keynote",
+      "repository": "https://github.com/motiontemplates/667934",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/591/quality-zh-da4888e5e350.jpg",
+      "demo": "https://media.openaicut.com/previews/591/draft-zh-958b2690a669.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-keynote",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/667934-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "394243-landscape",
+      "title": "宣纸手卷 · 品牌叙事",
+      "summary": "沿宣纸手卷展开品牌故事，以水墨意象和卷轴转场营造东方叙事。",
+      "website": "https://motiongit.com/@motiongit/motiongit-promo-ink",
+      "repository": "https://github.com/motiontemplates/394243",
+      "version": "2.6.6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/592/quality-zh-666ac61ebd83.jpg",
+      "demo": "https://media.openaicut.com/previews/592/draft-zh-eba2e4e6f671.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@motiongit/motiongit-promo-ink",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/394243-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "873-landscape",
+      "title": "拼贴出场 · COLLAGE OPEN",
+      "summary": "8.5 秒拼贴出场：9 块创作样张依次飞入拼贴墙，主张版块落位。可换品牌名、片头编号、强调色与两行标题。",
+      "website": "https://motiongit.com/@thepandaq/collage-open",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/873/1.0.0-zh-12a46d4c356c.jpg",
+      "demo": "https://media.openaicut.com/previews/873/1.0.0-zh-6b7b749b3dc5.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-open",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "874-landscape",
+      "title": "多屏墙换版 · WALL SWAP",
+      "summary": "从面板擦除进入多屏拼贴墙，再切到「一个想法，四种看法」的分屏版面；8.6 秒展示多素材并置与版面切换。可换品牌名、片头编号、强调色与两行标题。",
+      "website": "https://motiongit.com/@thepandaq/collage-wall",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/874/1.0.0-zh-4340b94c82ff.jpg",
+      "demo": "https://media.openaicut.com/previews/874/1.0.0-zh-7831dd69bc6b.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-wall",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "875-landscape",
+      "title": "四种看法与片格 · VIEWS / STRIP",
+      "summary": "「一个想法，四种看法」分屏版面切到横滚片格，真实晚霞树影与创作样张横向滚动；8.2 秒，适合多镜头并置与作品条带展示。",
+      "website": "https://motiongit.com/@thepandaq/collage-views",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/875/1.0.0-zh-3c1d5e7cd796.jpg",
+      "demo": "https://media.openaicut.com/previews/875/1.0.0-zh-cd8ad1570460.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-views",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "877-landscape",
+      "title": "产品与品牌 · PRODUCT → BRAND",
+      "summary": "从面板擦除进入产品工作台（分镜/画布/调色/时间线同窗联动），再以墨色擦除收进棱镜标志、字标、主张与 CTA；14.4 秒，适合产品演示与品牌落版。",
+      "website": "https://motiongit.com/@thepandaq/collage-product",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/877/1.0.0-zh-a24df31e704a.jpg",
+      "demo": "https://media.openaicut.com/previews/877/1.0.0-zh-97910ee13592.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-product",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "648878-landscape",
+      "title": "DEEP STAGE 产品讲解",
+      "summary": "产品讲解动效：产品主屏推入并持续推近，3 个参数切片从 3D 空间错峰浮出、数字从 0 滚到终值，右下角人物小画中画入位。12 秒，适合产品卖点与参数讲解。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-product-focus",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/881/1.0.0-7dadaa0a595d.jpg",
+      "demo": "https://media.openaicut.com/previews/881/1.0.0-bf4d2ce8953d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-product-focus",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "640261-landscape",
+      "title": "多屏商务 · 动态图表",
+      "summary": "固定20秒横屏商务短片，以多屏重排呈现团队、比较、趋势、构成与行动。",
+      "website": "https://motiongit.com/@frankye1211/corporate-multiscreen-charts",
+      "repository": null,
+      "version": "0.1.1-candidate",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/891/0.1.1-candidate-zh-007e520a3b97.jpg",
+      "demo": "https://media.openaicut.com/previews/891/0.1.1-candidate-zh-a43ff10687ec.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@frankye1211/corporate-multiscreen-charts",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "640432-landscape",
+      "title": "双语科技歌词动效 MV",
+      "summary": "固定约194秒的双语科技歌词MV模板，包含逐字歌词、多画面拼接、科技标题和声音频谱动效。Windows、Python与FFmpeg运行；使用者须自备音频、双语歌词和41段不同视频。",
+      "website": "https://motiongit.com/@chenjunfeng5208/green-light-bilingual-tech-mv",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1280,
+      "height": 720,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/932/draft-zh-4b3f5b051ec4.jpg",
+      "demo": "https://media.openaicut.com/previews/932/draft-zh-15f86c1d3675.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/green-light-bilingual-tech-mv",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "381814-landscape",
+      "title": "半调网点 · 人像标题",
+      "summary": "三张人像化为流动的双色网点，散开后重新汇聚成标题，适合人像与主题开场。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-a-halftone",
+      "repository": "https://github.com/motiontemplates/381814",
+      "version": "2.6.6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/615/draft-zh-2de1eb992fcf.jpg",
+      "demo": "https://media.openaicut.com/previews/615/draft-zh-87b41df4a38a.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-a-halftone",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/381814-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "460349-landscape",
+      "title": "照片马赛克 · 拼图揭幕",
+      "summary": "多张照片组成主视觉，从局部照片拉远揭示完整马赛克，适合集体回忆与拼图揭幕。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-b-mosaic",
+      "repository": "https://github.com/motiontemplates/460349",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/616/draft-zh-b95e73a79f9c.jpg",
+      "demo": "https://media.openaicut.com/previews/616/draft-zh-3c3bc74e9591.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-b-mosaic",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/460349-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "907345-landscape",
+      "title": "几何拼贴 · 动态海报",
+      "summary": "将四张照片裁成几何形状，在三组包豪斯动态海报中重组，适合活动与视觉主题展示。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-c-collage",
+      "repository": "https://github.com/motiontemplates/907345",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/617/draft-zh-84c721155840.jpg",
+      "demo": "https://media.openaicut.com/previews/617/draft-zh-d014a696e0ba.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-c-collage",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/907345-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "328828-landscape",
+      "title": "笔触重绘 · 艺术照片",
+      "summary": "用三层定向笔触重绘照片，与原图对照后呈现署名标题，适合摄影与艺术展示。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-d-brushwork",
+      "repository": "https://github.com/motiontemplates/328828",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/618/draft-zh-c88f1a5a67a8.jpg",
+      "demo": "https://media.openaicut.com/previews/618/draft-zh-9a122d6aac1e.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-d-brushwork",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/328828-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "638039-landscape",
+      "title": "信号故障 · 照片转场",
+      "summary": "用像素排序、RGB 分离和扫描线改造照片，并以 CRT 关机效果收尾，适合科技视觉片段。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-e-glitch",
+      "repository": "https://github.com/motiontemplates/638039",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/619/draft-zh-b96f0b6469fe.jpg",
+      "demo": "https://media.openaicut.com/previews/619/draft-zh-567d566f31a3.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-e-glitch",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/638039-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "800829-landscape",
+      "title": "双重曝光 · 人像叠影",
+      "summary": "以风景填充人像剪影，双层画面反向漂移，标题从薄雾显现，适合诗意人像叠影。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-f-double",
+      "repository": "https://github.com/motiontemplates/800829",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/620/draft-zh-d8cadbd1b296.jpg",
+      "demo": "https://media.openaicut.com/previews/620/draft-zh-eb40eb882b43.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-f-double",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/800829-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "743702-landscape",
+      "title": "空间画廊 · 回忆相册",
+      "summary": "穿行带有文字说明的立体照片画廊，最后推进主照片并揭示全屏标题，适合回忆与作品集。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-g-gallery",
+      "repository": "https://github.com/motiontemplates/743702",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/621/draft-zh-78b8670e7b7d.jpg",
+      "demo": "https://media.openaicut.com/previews/621/draft-zh-13dffcc71ff3.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-g-gallery",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/743702-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "551805-landscape",
+      "title": "镜像万花筒 · 照片变幻",
+      "summary": "将两张照片镜像成旋转的十二分段万花筒，经扩张圆环转场再展开原图，适合视觉主题片。",
+      "website": "https://motiongit.com/@prism-studio/visual-art-h-kaleido",
+      "repository": "https://github.com/motiontemplates/551805",
+      "version": "2.6.4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/622/draft-zh-f09b29170a66.jpg",
+      "demo": "https://media.openaicut.com/previews/622/draft-zh-3a7bf4639a39.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@prism-studio/visual-art-h-kaleido",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "posterLocal": "posters/551805-landscape.jpg",
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "404937-landscape",
+      "title": "DeepSeek 鲸鱼粒子聚合",
+      "summary": "粒子从散落聚合成品牌鲸鱼 Logo，适合片头、品牌露出或章节转场。",
+      "website": "https://motiongit.com/@thepandaq/deepseek-whale-assemble",
+      "repository": "https://github.com/motiontemplates/404937",
+      "version": "1.1.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/628/1.1.0-a864a56cec62.jpg",
+      "demo": "https://media.openaicut.com/previews/628/1.1.0-e0d9c9e4a5b8.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deepseek-whale-assemble",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "380710-landscape",
+      "title": "DeepSeek 粒子形变",
+      "summary": "同一批粒子在四种三维形状间形变，适合科技感转场、概念串联或片尾。",
+      "website": "https://motiongit.com/@thepandaq/deepseek-form-morph",
+      "repository": "https://github.com/motiontemplates/380710",
+      "version": "1.1.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/629/1.1.0-72cc2b4731d0.jpg",
+      "demo": "https://media.openaicut.com/previews/629/1.1.0-0892fa4bf82d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deepseek-form-morph",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "941301-landscape",
+      "title": "DeepSeek 词语粒子",
+      "summary": "粒子按顺序拼出四个关键词，适合概念介绍、能力列表与口号式开场。",
+      "website": "https://motiongit.com/@thepandaq/deepseek-word-morph",
+      "repository": "https://github.com/motiontemplates/941301",
+      "version": "1.1.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/630/1.1.0-7cf1d6e6ddc9.jpg",
+      "demo": "https://media.openaicut.com/previews/630/1.1.0-7b16186bd6b2.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deepseek-word-morph",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "872-landscape",
+      "title": "Light Ribbon Word",
+      "summary": "光之丝带汇聚成一个词：丝带流动、粒子成字、光带扫过，再散回丝带。",
+      "website": "https://motiongit.com/@thepandaq/light-ribbon-word",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/872/1.0.0-04d5f44d203b.jpg",
+      "demo": "https://media.openaicut.com/previews/872/1.0.0-08a812711d78.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/light-ribbon-word",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "878-landscape",
+      "title": "面板擦除 · WIPE PACK",
+      "summary": "四套面板擦除过场：竖条合拢、横条下压、纸色竖条、墨色竖条；8 秒转场包，可用于场景切换与章节过渡。",
+      "website": "https://motiongit.com/@thepandaq/collage-wipe",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/878/1.0.0-zh-36c9ef9f02df.jpg",
+      "demo": "https://media.openaicut.com/previews/878/1.0.0-zh-be7dc794ab1a.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/collage-wipe",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "921052-landscape",
+      "title": "DEEP STAGE 开场点火标题",
+      "summary": "深色立体舞台开场：地平线点火、地面透视网格生长、远景屏幕墙点亮，两段主标题落下（金属渐变），最后落到副标题与角标。10 秒片头动效，可换品牌、标题、副标题与主色。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-title-ignition",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/879/1.0.0-12a34d321725.jpg",
+      "demo": "https://media.openaicut.com/previews/879/1.0.0-8e74030d1901.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-title-ignition",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "430770-landscape",
+      "title": "DEEP STAGE 媒体素材墙",
+      "summary": "媒体素材墙动效：六宫格（2×3）在 3D 空间逐张落位，每格独立纵深与旋转，落位后极缓慢浮动，镜头持续后拉。10 秒，适合素材盘点与 B-roll 讲解。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-media-wall",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/883/1.0.0-7aea9314e457.jpg",
+      "demo": "https://media.openaicut.com/previews/883/1.0.0-a30bac716f4b.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-media-wall",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "581039-landscape",
+      "title": "DEEP STAGE 收尾锁版",
+      "summary": "收尾锁版动效：屏幕退向纵深，logo 描边锁定，字标、副标、规格行与版本胶囊依次落位，一道横扫光掠过，结尾稳定呼吸。8 秒，适合片尾与版本标识。",
+      "website": "https://motiongit.com/@thepandaq/deep-stage-outro-lockup",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/884/1.0.0-1e5dc2b6dbd5.jpg",
+      "demo": "https://media.openaicut.com/previews/884/1.0.0-651f2839086d.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@thepandaq/deep-stage-outro-lockup",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "887145-landscape",
+      "title": "3D 吉祥物手把手教程",
+      "summary": "把网页或 App 的一段操作流程（注册、下单、设置等），做成 3D 小宠物带着一步步点、打字、指重点的横屏教程视频",
+      "website": "https://motiongit.com/@xkkiss12/mascot-tutorial-3d",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/895/1.0.0-zh-0c4dce4365d8.jpg",
+      "demo": "https://media.openaicut.com/previews/895/1.0.0-zh-a15d0b9cfbab.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@xkkiss12/mascot-tutorial-3d",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "161069-landscape",
+      "title": "可爱角色歌词 MV",
+      "summary": "33 秒横屏歌词 MV 完整模板（1920×1080，30fps），可替换歌词、关键词大字与手写纸条。模板默认采用程序绘制的可爱 chibi 角色。中文 Demo 使用此前完成的《碎碎念》完整成片，未重新渲染；Demo 人物沿用原片风格，与模板默认角色风格不同。音频署名：小天；抖",
+      "website": "https://motiongit.com/@chenyutao0417/cute-character-lyric-mv",
+      "repository": null,
+      "version": "1.0.1",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/920/1.0.0-zh-dc8684015557.jpg",
+      "demo": "https://media.openaicut.com/previews/920/1.0.0-zh-36be1d67dbe0.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenyutao0417/cute-character-lyric-mv",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "442505-landscape",
+      "title": "光的语法",
+      "summary": "六镜光学短片模板。冷白光谱底、七条色带像频谱仪一样呼吸、透镜光斑推移，适合讲光学、色彩与感知类知识。固定 14 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/light-grammar",
+      "repository": null,
+      "version": "1.0.5",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/934/1.0.5-zh-78b30eaca28b.jpg",
+      "demo": "https://media.openaicut.com/previews/934/1.0.5-zh-1a9201fa21d4.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/light-grammar",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "319937-landscape",
+      "title": "深海时钟",
+      "summary": "七镜深海观察日志：光在 200 米处终止、每 10 米增加一个大气压、声音传得更远。冷蓝到近黑的单色系统，适合讲深海、压强与感知边界。固定 16.7 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/deep-sea-clock",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/935/1.0.0-zh-918534c9724f.jpg",
+      "demo": "https://media.openaicut.com/previews/935/1.0.0-zh-3a4b3bfe504a.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/deep-sea-clock",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "362451-landscape",
+      "title": "城市脉搏",
+      "summary": "六镜城市夜行：天际线切片、楼体呼吸、交通流与人口曲线。暖橙高对比的城市节奏，适合讲城市、人群与流动。固定 11.3 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/city-pulse",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/936/1.0.0-zh-ca61bd1f0042.jpg",
+      "demo": "https://media.openaicut.com/previews/936/1.0.0-zh-282f4b90fdf5.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/city-pulse",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "419411-landscape",
+      "title": "种子库",
+      "summary": "五镜标本档案：恒温舱呼吸单元格、编号标本格、光照周期与异地备份。冷色极简的档案秩序，适合讲保存、备份与长期主义。固定 16 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/seed-bank",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/937/1.0.0-zh-f4642eac1228.jpg",
+      "demo": "https://media.openaicut.com/previews/937/1.0.0-zh-d4a89cf66307.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/seed-bank",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "631937-landscape",
+      "title": "火星农场",
+      "summary": "六镜等距种植图：火星表土、脉动生长格、水循环与收成预估。锈红与青绿的互补配色，适合讲太空农业与资源闭环。固定 14.2 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/mars-farm",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/938/1.0.0-zh-67765770dc26.jpg",
+      "demo": "https://media.openaicut.com/previews/938/1.0.0-zh-850d226af3d7.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/mars-farm",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "966733-landscape",
+      "title": "AI 能不能代替人工",
+      "summary": "七镜论证体短片：先提问，再讲 AI 能做什么、不能做什么、机制怎么拆、边界在哪里，最后给出结论与落版。冷灰底配橙红强调，适合讲 AI 与人的分工。固定 29.5 秒，1920x1080。",
+      "website": "https://motiongit.com/@chenjunfeng5208/code-is-video",
+      "repository": null,
+      "version": "1.0.0",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "orientation": "landscape",
+      "poster": "https://media.openaicut.com/covers/939/1.0.0-zh-009076f6851a.jpg",
+      "demo": "https://media.openaicut.com/previews/939/1.0.0-zh-c4f14f016b60.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@chenjunfeng5208/code-is-video",
+        "availability": "check-official-page"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "3d-book-landscape",
+      "title": "3D书 · 阿杜和那个影响了",
+      "summary": "以立体书页、真实照片、翻页镜头和双语字幕串联个人经历，展示可用于回忆与叙事讲解的书本舞台。Demo 使用第8版完整成片。",
+      "website": null,
+      "repository": null,
+      "version": null,
+      "width": 1920,
+      "height": 1080,
+      "fps": 60.0,
+      "orientation": "landscape",
+      "poster": "https://motiontemplates.github.io/all/assets/batch-two-3d-book.jpg",
+      "demo": "https://github.com/motiontemplates/all/releases/download/demo-batch-two-2026-10-21/3d-book-demo-6dc0bd1a0e5bc9e8.mp4",
+      "download": {
+        "type": "coming-soon",
+        "availability": "coming-soon"
+      },
+      "packages": [],
+      "posterLocal": "posters/3d-book-landscape.jpg",
+      "status": "coming-soon"
+    },
+    {
+      "key": "prelaunch-943-portrait",
+      "title": "房产 · 一镜看房",
+      "summary": "户型 · 采光 · 通勤 · 价格 四张图 主播站在户型图的客厅里，镜头拉出，整张户型图逐笔画出；之后一条连续镜头推门、进厨房、穿进每个房间实拍，再看采光剖面、通勤等时圈、挂牌价走势与议价空间。",
+      "website": "https://motiongit.com/@adunext/industry-house-one-take",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/01m_house-cover-f5d1f920b85d5f8d.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/01m_house-demo-4f74cf3b94f742ca.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-house-one-take",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-944-portrait",
+      "title": "财经 · 三笔账",
+      "summary": "收益 · 回撤 · 时间 一条行情线跑进画面、沿主播窗口描边；十年定投曲线跟着口播数字生长：收益账、回撤账（1000 种行情模拟扇形图）、时间账。",
+      "website": "https://motiongit.com/@adunext/industry-finance-three-ledgers",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/02m_finance-cover-2e70aa6e9246ced0.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/02m_finance-demo-ef26c7e5bb85c420.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-finance-three-ledgers",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-945-portrait",
+      "title": "法律 · 讨薪三步",
+      "summary": "攒证据 · 选途径 · 盯时效 以案卷照片、红章和法条划线为视觉线索，结合聊天证据、流程时间线和申请书分栏，演示普法口播的组织方式。涉及的法条与时限仍待核对，不作为法律结论。",
+      "website": "https://motiongit.com/@adunext/industry-law-wage-claim",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/03m_law-cover-1f40ac422fae1de8.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/03m_law-demo-1700935c6a63e90b.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-law-wage-claim",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-946-portrait",
+      "title": "医疗健康 · 看懂化验单",
+      "summary": "数值 · 风险 · 日常 由化验单扫描线切入主播画面，再用刻度、趋势图与饮食分区演示健康科普的可视化结构。尿酸参考范围及相关医学说法仍待核对，不作为诊断标准。",
+      "website": "https://motiongit.com/@adunext/industry-health-lab-report",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/04m_health-cover-bc05b335642eac54.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/04m_health-demo-8b584aca37a6b2cf.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-health-lab-report",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-947-portrait",
+      "title": "教育 · 三种解法",
+      "summary": "假设法 · 抬脚法 · 列方程 主播是笼子里的一个头，35 个头、94 只脚依次落下，红色问号收束；三种解法写在同一张方格草稿纸上，镜头跟着笔走，最后拉远对比。",
+      "website": "https://motiongit.com/@adunext/industry-education-three-solutions",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/05m_edu-cover-781475610ce36c93.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/05m_edu-demo-9cdf56c7553afde3.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-education-three-solutions",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-948-portrait",
+      "title": "电商带货 · 实测四项",
+      "summary": "保温 · 密封 · 材质 · 价格 条形码拉开画面，价签引出主播；通过保温曲线、密封展示、材质细节与价格走势，演示实测类带货内容的表达结构。画面与数据均为示意，不代表已完成真实商品实测。",
+      "website": "https://motiongit.com/@adunext/industry-shopping-four-tests",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/06m_shop-cover-d677d31df87fdad5.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/06m_shop-demo-720dbe6eb802f498.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-shopping-four-tests",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-949-portrait",
+      "title": "美妆护肤 · 成分表",
+      "summary": "成分表 · 浓度 · 怎么用 由成分表关键词切入主播画面，用排序、浓度刻度、皮肤屏障和使用时间表演示护肤讲解结构。烟酰胺及相关功效、浓度说法仍待核对，不作为确定结论。",
+      "website": "https://motiongit.com/@adunext/industry-beauty-ingredient-label",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/07m_beauty-cover-08188ef109e5f16d.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/07m_beauty-demo-c648791dc9fbea97.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-beauty-ingredient-label",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-950-portrait",
+      "title": "美食探店 · 值不值得排",
+      "summary": "排队 · 价格 · 味道 · 环境 自拍镜头开场，取号单打印、计时飞到 60 分钟后被撕开；顶部四项计分板逐章填满：排队计时环、账单占比、菜品特写、环境噪音。",
+      "website": "https://motiongit.com/@adunext/industry-food-worth-the-wait",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/08m_food-cover-bf2779dc7ef5b267.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/08m_food-demo-ee6b62330cc0c559.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-food-worth-the-wait",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-951-portrait",
+      "title": "汽车 · 四笔账",
+      "summary": "能源 · 保养 · 保险 · 残值 主播是仪表盘中心，指针扫过、里程滚到 20000 km，表盘一分为二（油/电）；顶部总账随每一笔实时重算，家充/快充一键切换。",
+      "website": "https://motiongit.com/@adunext/industry-cars-ownership-costs",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/09m_car-cover-d41c2279427dfdab.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/09m_car-demo-c26fd0966dd10ea9.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-cars-ownership-costs",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-952-portrait",
+      "title": "数码科技 · 换不换",
+      "summary": "性能 · 电池 · 系统 · 算账 锁屏上主播就是面容解锁画面，解锁后电池健康 78% 钉在角上；之后像真的在点「设置」一样逐页检查：屏幕使用时间、电池、系统更新、存储。",
+      "website": "https://motiongit.com/@adunext/industry-tech-upgrade-or-keep",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/10m_tech-cover-fe8f7a4f885ebaed.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/10m_tech-demo-1af9cf28b0feff78.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-tech-upgrade-or-keep",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-953-portrait",
+      "title": "职场 · 三行汇报",
+      "summary": "为什么听不懂 · 一个结构 · 三个场景 九宫格视频会议，其他人逐个关掉只剩主播，弹出「老板：所以重点是？」；一句结论 · 三个原因 · 一个请求逐字搭建，周报改前改后对比。",
+      "website": "https://motiongit.com/@adunext/industry-work-three-line-report",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/11m_work-cover-4c31a66daf1f29d1.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/11m_work-demo-b8ee1e5c0ef39a36.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-work-three-line-report",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    },
+    {
+      "key": "prelaunch-954-portrait",
+      "title": "情感 · 对话复盘",
+      "summary": "看数据 · 辨信号 · 学会问 聊天界面里回复越来越慢（2 分钟 → 47 分钟 → 3 小时），头像打开成主播画面；回复时长统计、信号天平、三个红灯、换个说法。",
+      "website": "https://motiongit.com/@adunext/industry-relationships-conversation-review",
+      "repository": null,
+      "version": null,
+      "width": 1080,
+      "height": 1920,
+      "fps": 60.0,
+      "orientation": "portrait",
+      "poster": "https://motiongit.com/media/covers/industry-v7/12m_love-cover-bc04a5a474970c74.jpg",
+      "demo": "https://media.openaicut.com/previews/industry-v7/12m_love-demo-34d2434898ca0e2f.mp4",
+      "download": {
+        "type": "official-page",
+        "url": "https://motiongit.com/@adunext/industry-relationships-conversation-review",
+        "availability": "prelaunch"
+      },
+      "packages": [],
+      "status": "personal-download-excluded"
+    }
+  ],
+  "http": {
+    "https://raw.githubusercontent.com/motiontemplates/all/main/catalog.json": {
+      "url": "https://raw.githubusercontent.com/motiontemplates/all/main/catalog.json",
+      "etag": "\"3d15dcedc32cdb4db0adb26c29bd30d415029c938e2d625fb99c66db1d64ac58\"",
+      "modified": null,
+      "checked": "2026-11-02T03:59:11+00:00",
+      "sha256": "216c483bcfc2d8aaefba5bd96c3200ad8d355a2ed9a2817765421bbb0fd9d904",
+      "bytes": 608698,
+      "changed": true
+    },
+    "https://motiontemplates.github.io/385712/downloads/kinetic-tech-zh.motion": {
+      "url": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-zh.motion",
+      "etag": "\"6ad64de6-10c7f5a\"",
+      "modified": "Mon, 19 Oct 2026 17:05:42 GMT",
+      "checked": "2026-11-02T03:59:13+00:00",
+      "sha256": "472a95af35f8e0c09c0f7dc2ca0992b7c9a3405c5aa8063730c347fc4e015c21",
+      "bytes": 17596250,
+      "changed": false
+    },
+    "https://motiontemplates.github.io/385712/downloads/kinetic-tech-en.motion": {
+      "url": "https://motiontemplates.github.io/385712/downloads/kinetic-tech-en.motion",
+      "etag": "\"6ad64de7-10c784c\"",
+      "modified": "Mon, 19 Oct 2026 17:05:43 GMT",
+      "checked": "2026-11-02T03:59:18+00:00",
+      "sha256": "533320d081c578cb824dfbc6ce9d4ae3eb1ca190d67ae7185b4a32b02e236255",
+      "bytes": 17594444,
+      "changed": true
+    },
+    "https://raw.githubusercontent.com/motiontemplates/385712/9dfbe7d7c6a6d4aa03f6f8e2f2285e631099faae/assets/compositions.jpg": {
+      "url": "https://raw.githubusercontent.com/motiontemplates/385712/9dfbe7d7c6a6d4aa03f6f8e2f2285e631099faae/assets/compositions.jpg",
+      "etag": "\"5f9d5cca0a33c6d739af9b7215db4857d6f4e1b40325f129fe91a01cbd788469\"",
+      "modified": null,
+      "checked": "2026-10-26T01:02:28+00:00",
+      "sha256": "9793cb19fc342e0a33c9835e2557b5f7219a1c729e87ac9db0b1618370149fb1",
+      "bytes": 69692,
+      "changed": false
+    },
+    "https://motiongit.com/media/covers/605/draft-zh-7942d81ce917.jpg": {
+      "url": "https://motiongit.com/media/covers/605/draft-zh-7942d81ce917.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "e9741a7cd942dafee299ea86dc6a03d6e90642b4eb88b1d7285c674f66534103",
+      "bytes": 186123,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/606/draft-zh-ceb203a3fa61.jpg": {
+      "url": "https://motiongit.com/media/covers/606/draft-zh-ceb203a3fa61.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "38dbac9d6b49515c7efcca6625733ec863ca57c4097515778b78cea3a7745cf1",
+      "bytes": 104703,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/626/0.2.9-open-beta-zh-b81b4798ad6a.jpg": {
+      "url": "https://motiongit.com/media/covers/626/0.2.9-open-beta-zh-b81b4798ad6a.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "bdaf1a3638b92d8e299ca77670ab55e3387f01124186f80c65a43b5259c9f0b9",
+      "bytes": 159552,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/607/draft-zh-b7af2ac6dee6.jpg": {
+      "url": "https://motiongit.com/media/covers/607/draft-zh-b7af2ac6dee6.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "f55de758a4af0a090f9c2e196e33cd2c588ec333da028e7d60061058046943df",
+      "bytes": 175949,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/608/draft-zh-499f0ea3a15e.jpg": {
+      "url": "https://motiongit.com/media/covers/608/draft-zh-499f0ea3a15e.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "92a88a809a3cdda1137cc3ed22cec44f1f58a4d9d1b6928cb5219acd7f6077b6",
+      "bytes": 100644,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/610/draft-zh-14409c15ade1.jpg": {
+      "url": "https://motiongit.com/media/covers/610/draft-zh-14409c15ade1.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "c8cb85e0b99afeae504bc2171dce303dd7447f91e0949fdd12906c6aeadfce64",
+      "bytes": 158824,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/609/draft-zh-0b9cc00ce402.jpg": {
+      "url": "https://motiongit.com/media/covers/609/draft-zh-0b9cc00ce402.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:29+00:00",
+      "sha256": "870709c01c66f7e528f16ebdb215f1c811bbd19296b6c59f877d3ac3af93ad81",
+      "bytes": 153038,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/611/2.5.7-zh-8e20f0acb55c.jpg": {
+      "url": "https://motiongit.com/media/covers/611/2.5.7-zh-8e20f0acb55c.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "6f73e032689ec262f28ca88bf7072aaccab07f1848b821370f4f9b4c13621063",
+      "bytes": 123203,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/612/2.5.7-zh-3586eaac0c77.jpg": {
+      "url": "https://motiongit.com/media/covers/612/2.5.7-zh-3586eaac0c77.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "da9025f3816d66773a682d923ba4e4bf16046de41abe94279f4af1eb6d601b24",
+      "bytes": 122944,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/613/draft-zh-23a19c51650d.jpg": {
+      "url": "https://motiongit.com/media/covers/613/draft-zh-23a19c51650d.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "2da59b101f0f362cbf73abbc88be1e93dfacf1b8a7c553a2906cd6007cb2898b",
+      "bytes": 142132,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/614/draft-zh-3f92eea2b709.jpg": {
+      "url": "https://motiongit.com/media/covers/614/draft-zh-3f92eea2b709.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "39d0abbec1568a918fa8640df956296569cff344f77f6d64035ed9bd80752203",
+      "bytes": 127972,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/623/draft-zh-6b4b2398b532.jpg": {
+      "url": "https://motiongit.com/media/covers/623/draft-zh-6b4b2398b532.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "b7efd8e18956733fce70eefb35d5238b4eea80bde5a01544a17212b8e1e726c4",
+      "bytes": 141923,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/624/draft-zh-01638b2220a1.jpg": {
+      "url": "https://motiongit.com/media/covers/624/draft-zh-01638b2220a1.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:31+00:00",
+      "sha256": "b15098be9b593a68e246cd7c8ce67b659297287ce160a9d59adc946f84f47bfc",
+      "bytes": 140979,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/585/draft-zh-c7db529e9ef8.jpg": {
+      "url": "https://motiongit.com/media/covers/585/draft-zh-c7db529e9ef8.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "c0efaa5fed6f2ab3db9862df99accb84de3242bf0146a32965b6d59ffdb1e09f",
+      "bytes": 54797,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/586/quality-zh-086e631771b2.jpg": {
+      "url": "https://motiongit.com/media/covers/586/quality-zh-086e631771b2.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:30+00:00",
+      "sha256": "34c1f55f75c8ab87a9a1029751056928c2222b9dc54dd6e1995008c9a0837a6e",
+      "bytes": 159756,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/587/quality-zh-89ff4394136c.jpg": {
+      "url": "https://motiongit.com/media/covers/587/quality-zh-89ff4394136c.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:31+00:00",
+      "sha256": "985e178b41ff347b2c5af432434b4ad1c3daa470724e84f66000095cee478307",
+      "bytes": 129822,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/588/quality-zh-aa230abfebe6.jpg": {
+      "url": "https://motiongit.com/media/covers/588/quality-zh-aa230abfebe6.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:31+00:00",
+      "sha256": "4aa304f30f449518b5194983752fd5b6088a03540687d4ab7239913e6cd71073",
+      "bytes": 198402,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/589/quality-zh-879117ad36da.jpg": {
+      "url": "https://motiongit.com/media/covers/589/quality-zh-879117ad36da.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:31+00:00",
+      "sha256": "18b3beb36f19ebdb0195bcb5e37eb6d789db489d5791de2840c460b3bf1d2688",
+      "bytes": 119519,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/590/quality-zh-d5509b8e4f82.jpg": {
+      "url": "https://motiongit.com/media/covers/590/quality-zh-d5509b8e4f82.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:31+00:00",
+      "sha256": "b0bead716555cf965470dc2430a3055a4b59748c861869a6e9bc5d424a6bea63",
+      "bytes": 246737,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/591/quality-zh-da4888e5e350.jpg": {
+      "url": "https://motiongit.com/media/covers/591/quality-zh-da4888e5e350.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "53595fe95b5032a148b7aba6d8b7adffc9901b445dcc89a6d459f1abf251d9ba",
+      "bytes": 170476,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/592/quality-zh-666ac61ebd83.jpg": {
+      "url": "https://motiongit.com/media/covers/592/quality-zh-666ac61ebd83.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "0f2b79fcc5e9be6818483a8e67ee6f29c52fb248f01d5d5fa8942c5b22d822b2",
+      "bytes": 375770,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/615/draft-zh-2de1eb992fcf.jpg": {
+      "url": "https://motiongit.com/media/covers/615/draft-zh-2de1eb992fcf.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "a69ef996aa9ec5b8bc56bc8586d2daf95c934231965969964e88178d9ddfa999",
+      "bytes": 646355,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/616/draft-zh-b95e73a79f9c.jpg": {
+      "url": "https://motiongit.com/media/covers/616/draft-zh-b95e73a79f9c.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "867f7f1ec1347adfbdae8f3df9ef46c5700a6eeda4df6d49d1004e9f1667ebf0",
+      "bytes": 470908,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/617/draft-zh-84c721155840.jpg": {
+      "url": "https://motiongit.com/media/covers/617/draft-zh-84c721155840.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "108d7e577604cb1571ca62d301fe8e9f8065214baba578b39f7e86f9d80c29e1",
+      "bytes": 258849,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/618/draft-zh-c88f1a5a67a8.jpg": {
+      "url": "https://motiongit.com/media/covers/618/draft-zh-c88f1a5a67a8.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:32+00:00",
+      "sha256": "fd5a35365ff1d78e8b440eacad120a3f54dd7b3537e0ef50f702d3bf588a84ba",
+      "bytes": 325151,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/619/draft-zh-b96f0b6469fe.jpg": {
+      "url": "https://motiongit.com/media/covers/619/draft-zh-b96f0b6469fe.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "30bb905323cca4270043d500b5291c09800e3b82df2f03b9df45687a536bbf59",
+      "bytes": 595458,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/620/draft-zh-d8cadbd1b296.jpg": {
+      "url": "https://motiongit.com/media/covers/620/draft-zh-d8cadbd1b296.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "ec3240c332d6f92e18341abb65c1285e59d879cce51bc186eb9f6d1f5a9e6a7e",
+      "bytes": 147492,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/621/draft-zh-78b8670e7b7d.jpg": {
+      "url": "https://motiongit.com/media/covers/621/draft-zh-78b8670e7b7d.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "9ca53c451114c6ea0aa747fc9332502d1f4e849fa1167155f864857d273a9f28",
+      "bytes": 208692,
+      "changed": true
+    },
+    "https://motiontemplates.github.io/all/assets/batch-two-ascii-theatre.jpg": {
+      "url": "https://motiontemplates.github.io/all/assets/batch-two-ascii-theatre.jpg",
+      "etag": "\"6ade40b4-108d6\"",
+      "modified": "Sun, 25 Oct 2026 17:47:32 GMT",
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "c8598bbdfc8cae1a565f0699adda9e6f910afa120bc78aa7b444efeddc0abf04",
+      "bytes": 67798,
+      "changed": false
+    },
+    "https://motiontemplates.github.io/all/assets/batch-two-3d-book.jpg": {
+      "url": "https://motiontemplates.github.io/all/assets/batch-two-3d-book.jpg",
+      "etag": "\"6ade40b4-1de12\"",
+      "modified": "Sun, 25 Oct 2026 17:47:32 GMT",
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "50fb90dc91985ca6ebacf33865d81c776b0a739de7a94f7ea2b23b7b5bf9ca74",
+      "bytes": 122386,
+      "changed": false
+    },
+    "https://motiongit.com/media/covers/622/draft-zh-f09b29170a66.jpg": {
+      "url": "https://motiongit.com/media/covers/622/draft-zh-f09b29170a66.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "161d22f62dc71db5df8b4bd51bbe92f0c8f346ba9c68c7707fb1fd88664029d9",
+      "bytes": 522894,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/593/quality-zh-0dace1aa2dd9.jpg": {
+      "url": "https://motiongit.com/media/covers/593/quality-zh-0dace1aa2dd9.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "32484fd3fd92aabcded651280bf0bf3e9a676df36145ea7fa2b9f0d821f48917",
+      "bytes": 155128,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/594/quality-zh-e7f0d509cf79.jpg": {
+      "url": "https://motiongit.com/media/covers/594/quality-zh-e7f0d509cf79.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:33+00:00",
+      "sha256": "e9c91186039831e1a8e1371c6c82edf9b1f32ac5b45195daa3e26c154faa3e30",
+      "bytes": 225726,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/595/quality-zh-b1bdd8e5fb07.jpg": {
+      "url": "https://motiongit.com/media/covers/595/quality-zh-b1bdd8e5fb07.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:34+00:00",
+      "sha256": "107348ae09220d45c44115d4edee00f099c117ed69bb8ff89167a977383877af",
+      "bytes": 174548,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/596/quality-zh-fcef4bd1b24e.jpg": {
+      "url": "https://motiongit.com/media/covers/596/quality-zh-fcef4bd1b24e.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:34+00:00",
+      "sha256": "8a220852b79a131fdc90ddb488c9e3097f0be4404f434d9fcfcdfb0611bea024",
+      "bytes": 163965,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/598/quality-zh-57b8a67e8d76.jpg": {
+      "url": "https://motiongit.com/media/covers/598/quality-zh-57b8a67e8d76.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:34+00:00",
+      "sha256": "87c5ce557e68a69de55ec1c8a549486e49893283e8c8337121eda783da60795f",
+      "bytes": 260576,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/597/quality-zh-d17d42115ebd.jpg": {
+      "url": "https://motiongit.com/media/covers/597/quality-zh-d17d42115ebd.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:34+00:00",
+      "sha256": "106035036e490544ce8112df8ab6a171e55be64dda49606af7720b0ff6db2aca",
+      "bytes": 191505,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/600/quality-zh-f9fac59c7e94.jpg": {
+      "url": "https://motiongit.com/media/covers/600/quality-zh-f9fac59c7e94.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:34+00:00",
+      "sha256": "9062430fc85fda439322c372e2d0a16fc9f045e7d138dc68d51b1904b180b968",
+      "bytes": 126449,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/603/quality-zh-9c9eda7804fd.jpg": {
+      "url": "https://motiongit.com/media/covers/603/quality-zh-9c9eda7804fd.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:35+00:00",
+      "sha256": "91f45b75ecfe52883869dcee7e7d056ef60cf3cff05a2c3155ee6df4f6a3ac44",
+      "bytes": 117474,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/601/quality-zh-81ef8aa9c887.jpg": {
+      "url": "https://motiongit.com/media/covers/601/quality-zh-81ef8aa9c887.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:35+00:00",
+      "sha256": "7496161baedfd04f761d69c0b472cb5517e56d66cc5528c6dfaa768547581da4",
+      "bytes": 315405,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/599/quality-zh-1580f89ea24e.jpg": {
+      "url": "https://motiongit.com/media/covers/599/quality-zh-1580f89ea24e.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:35+00:00",
+      "sha256": "aab3a038b500a79291041f4ffdf3383f263349d7d5385f79f648d30c0ef10b5f",
+      "bytes": 381443,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/602/quality-zh-14ec2d740d7e.jpg": {
+      "url": "https://motiongit.com/media/covers/602/quality-zh-14ec2d740d7e.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:35+00:00",
+      "sha256": "c46dfb0461337f1de14787f8363dda3edeeabf8a91366e56731b4ce05287cb4f",
+      "bytes": 475059,
+      "changed": true
+    },
+    "https://motiongit.com/media/covers/604/quality-zh-7a5fb8923fb6.jpg": {
+      "url": "https://motiongit.com/media/covers/604/quality-zh-7a5fb8923fb6.jpg",
+      "etag": null,
+      "modified": null,
+      "checked": "2026-10-26T01:02:35+00:00",
+      "sha256": "903927dcabed96933aa9e7879c8b71f8ca36e8444d0e4c06661b10aef465ef93",
+      "bytes": 218252,
+      "changed": true
+    }
+  },
+  "changes": [
+    {
+      "kind": "catalog-added",
+      "template": "854836-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "554769-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "228996-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "838778-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "583549-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "178707-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "148294-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "875206-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "607598-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "126246-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "287792-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "876-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "587362-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "509099-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "643842-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "233154-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "360840-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "257987-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "517652-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "173723-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "880856-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "949192-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "803150-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "106531-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "546070-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "447390-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "808349-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "968813-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "118272-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "991091-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "685275-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "873-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "874-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "875-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "877-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "648878-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "640261-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "640432-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "404937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "380710-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "941301-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "872-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "878-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "921052-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "430770-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "581039-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "887145-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "161069-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "442505-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "319937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "362451-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "419411-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "631937-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "966733-landscape"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-943-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-944-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-945-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-946-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-947-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-948-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-949-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-950-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-951-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-952-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-953-portrait"
+    },
+    {
+      "kind": "catalog-added",
+      "template": "prelaunch-954-portrait"
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "catalogItems": 97,
+    "localTemplateCount": 1,
+    "packageCount": 2,
+    "comingSoon": 1
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "category": "sticker",
+  "note": "贴纸库（PIL 生成透明 PNG，零许可风险）。图标 6 + 招商文字贴 6；default_for 全路线。",
+  "items": [
+    {
+      "id": "stk-arrow-up",
+      "name": "向上箭头",
+      "file": "assets/stickers/stk-arrow-up.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "橘色向上箭头，指示/强调"
+    },
+    {
+      "id": "stk-check",
+      "name": "对勾圆",
+      "file": "assets/stickers/stk-check.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "绿底白对勾，通过/优势"
+    },
+    {
+      "id": "stk-star",
+      "name": "五角星",
+      "file": "assets/stickers/stk-star.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "金色星，推荐/亮点"
+    },
+    {
+      "id": "stk-pin",
+      "name": "定位 pin",
+      "file": "assets/stickers/stk-pin.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "note": "红色定位，区位/选址"
+    },
+    {
+      "id": "stk-fire",
+      "name": "火焰",
+      "file": "assets/stickers/stk-fire.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "note": "橙红火焰，火热/抢手"
+    },
+    {
+      "id": "stk-shield",
+      "name": "盾牌对勾",
+      "file": "assets/stickers/stk-shield.png",
+      "kind": "icon",
+      "license": "commercial-approved",
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "note": "蓝盾白对勾，资质/保障"
+    },
+    {
+      "id": "stk-text-招商",
+      "name": "文字贴·招商",
+      "file": "assets/stickers/stk-text-招商.png",
+      "kind": "text",
+      "label": "招商",
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "红底白字圆角标签"
+    },
+    {
+      "id": "stk-text-福利",
+      "name": "文字贴·福利",
+      "file": "assets/stickers/stk-text-福利.png",
+      "kind": "text",
+      "label": "福利",
+      "license": "commercial-approved",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "橙底白字"
+    },
+    {
+      "id": "stk-text-限免",
+      "name": "文字贴·限免",
+      "file": "assets/stickers/stk-text-限免.png",
+      "kind": "text",
+      "label": "限免",
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "note": "金底白字"
+    },
+    {
+      "id": "stk-text-火爆",
+      "name": "文字贴·火爆",
+      "file": "assets/stickers/stk-text-火爆.png",
+      "kind": "text",
+      "label": "火爆",
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "note": "红橙底白字"
+    },
+    {
+      "id": "stk-text-认证",
+      "name": "文字贴·认证",
+      "file": "assets/stickers/stk-text-认证.png",
+      "kind": "text",
+      "label": "认证",
+      "license": "commercial-approved",
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "note": "蓝底白字"
+    },
+    {
+      "id": "stk-text-立即咨询",
+      "name": "文字贴·立即咨询",
+      "file": "assets/stickers/stk-text-立即咨询.png",
+      "kind": "text",
+      "label": "立即咨询",
+      "license": "commercial-approved",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪",
+        "园区宣传"
+      ],
+      "note": "绿底白字行动号召"
+    },
+    {
+      "id": "stk-kenney-target",
+      "kind": "sticker",
+      "name": "目标",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-target.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "目标、招商指标",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "afd40325569fa91bfc690856dc4c70901bbd7c2e27dedc9fe3847258c61bbc81"
+    },
+    {
+      "id": "stk-kenney-trophy",
+      "kind": "sticker",
+      "name": "成果奖杯",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-trophy.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "成绩、领先",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "9525a3a01eb4ffddbb1c6dd9444ffa20876d18843d7ddd44e6c80d28744e8714"
+    },
+    {
+      "id": "stk-kenney-warning",
+      "kind": "sticker",
+      "name": "风险提示",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-warning.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "风险、注意",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "dcd64b5bbf8073c222581e7da1ce74ad29d64762345ff5825300b823b3fba8f5"
+    },
+    {
+      "id": "stk-kenney-information",
+      "kind": "sticker",
+      "name": "信息说明",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-information.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "说明、政策",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "dc6909b9d262528156a8afd6247696d0ea39ff533a722ca8d3432c5957544e05"
+    },
+    {
+      "id": "stk-kenney-checkmark",
+      "kind": "sticker",
+      "name": "完成对勾",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-checkmark.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "完成、优势",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "00e3025322ddb4948598b7fb8d385762073de7b2b534d2cfd44372072608a92a"
+    },
+    {
+      "id": "stk-kenney-star",
+      "kind": "sticker",
+      "name": "亮点星标",
+      "source_url": "https://kenney.nl/assets/game-icons",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-star.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "亮点、推荐",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "8e10578b82d6d46aff27a9939f4c1adccd1be6dc93c8302c9e28d281e126aae2"
+    },
+    {
+      "id": "stk-kenney-flag",
+      "kind": "sticker",
+      "name": "目标旗帜",
+      "source_url": "https://kenney.nl/assets/game-icons-expansion",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-flag.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "目标、落地",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "48b198079f28e6623252e63242f5359957d18564d6b3dbca5d4e2ed1424191ed"
+    },
+    {
+      "id": "stk-kenney-coin",
+      "kind": "sticker",
+      "name": "资金金币",
+      "source_url": "https://kenney.nl/assets/game-icons-expansion",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-coin.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "投资、补贴",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "26a414d7d8d68c12fb185be699e5dcfa68e842d9a5494bc828d13a497a7f464c"
+    },
+    {
+      "id": "stk-kenney-cpu",
+      "kind": "sticker",
+      "name": "算力芯片",
+      "source_url": "https://kenney.nl/assets/game-icons-expansion",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-cpu.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "note": "算力、科技",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "6df5dac162cea72d04bfbf5b458cb9f10ccfc06422a8040df567bb1a4bfc3af9"
+    },
+    {
+      "id": "stk-kenney-cloud-upload",
+      "kind": "sticker",
+      "name": "云端数据",
+      "source_url": "https://kenney.nl/assets/game-icons-expansion",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-cloud-upload.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "note": "数据、平台",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "1175f1a034bc6e23ead061b6e97b2d3d255fb35d61bf5df01a150f0fcc23feae"
+    },
+    {
+      "id": "stk-kenney-car",
+      "kind": "sticker",
+      "name": "交通汽车",
+      "source_url": "https://kenney.nl/assets/game-icons-expansion",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-car.png",
+      "attribution_required": false,
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "note": "交通、区位",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "57f257dbc04344a7c5c2aceef0d53f3912a8d9474c9e61503fe08ff66118a714"
+    },
+    {
+      "id": "stk-kenney-idea",
+      "kind": "sticker",
+      "name": "创意灯泡",
+      "source_url": "https://kenney.nl/assets/emotes-pack",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-idea.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "创新、方案",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "0acfe35b80dbb5df5d243c75c179e51fd37386acb151e54ed8ff8866751a7b6b"
+    },
+    {
+      "id": "stk-kenney-cash",
+      "kind": "sticker",
+      "name": "资金提示",
+      "source_url": "https://kenney.nl/assets/emotes-pack",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-cash.png",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "note": "优惠、补贴",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "72b5e7d6aab31552c5b40ba941caf22aac1248399e8e83ace23529dd305f6aaf"
+    },
+    {
+      "id": "stk-kenney-stars",
+      "kind": "sticker",
+      "name": "多重亮点",
+      "source_url": "https://kenney.nl/assets/emotes-pack",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-stars.png",
+      "attribution_required": false,
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "note": "亮点、成果",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "cd5dd47528be06d110e6646e8622b680cb15d490c2e5b6be857b622a742c1ba9"
+    },
+    {
+      "id": "stk-kenney-alert",
+      "kind": "sticker",
+      "name": "重点提醒",
+      "source_url": "https://kenney.nl/assets/emotes-pack",
+      "source_license": "CC0-1.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/stickers/open-commercial-2026-09/kenney-alert.png",
+      "attribution_required": false,
+      "default_for": [
+        "信息流广告"
+      ],
+      "note": "注意、限时",
+      "sticker_kind": "icon",
+      "version": "2026-09",
+      "sha256": "bebdf06bb1c38cab54a4531f78651c61d531ae02c8fd464644eb87862c296b3b"
+    }
+  ]
+}

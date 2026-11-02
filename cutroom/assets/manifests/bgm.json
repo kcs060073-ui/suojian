@@ -1,0 +1,107 @@
+{
+  "category": "bgm",
+  "note": "背景音乐库；基线响度待样片用 loudnorm 校准（设计契约暂定 -19dB）。",
+  "items": [
+    {
+      "id": "bgm-sb-machinery-stars",
+      "kind": "bgm",
+      "name": "Machinery of the Stars · 科技向上",
+      "source_url": "https://www.scottbuckley.com.au/library/machinery-of-the-stars/",
+      "source_license": "CC-BY-4.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/bgm/open-commercial-2026-09/machinery-of-the-stars.mp3",
+      "attribution_required": true,
+      "attribution": "'Machinery of the Stars' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "default_gain": 0.13,
+      "mood": "科技、发展、产业升级",
+      "version": "2026-09",
+      "sha256": "3632834cce1d31ef41ebd5d8b1dcff5508187aa797917bee524bd77bf8da1f48"
+    },
+    {
+      "id": "bgm-sb-computations",
+      "kind": "bgm",
+      "name": "Computations · 克制科技氛围",
+      "source_url": "https://www.scottbuckley.com.au/library/computations/",
+      "source_license": "CC-BY-4.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/bgm/open-commercial-2026-09/computations-no-cello.mp3",
+      "attribution_required": true,
+      "attribution": "'Computations in a Snowstorm' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传"
+      ],
+      "default_gain": 0.11,
+      "mood": "算力、数据、产业研究",
+      "version": "2026-09",
+      "sha256": "678dabce348ecd305ee4c998b258275acd1f4731a858083d11535467207bc5e0"
+    },
+    {
+      "id": "bgm-sb-inbound",
+      "kind": "bgm",
+      "name": "Inbound · 稳步昂扬",
+      "source_url": "https://www.scottbuckley.com.au/library/inbound/",
+      "source_license": "CC-BY-4.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/bgm/open-commercial-2026-09/inbound.mp3",
+      "attribution_required": true,
+      "attribution": "'Inbound' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传"
+      ],
+      "default_gain": 0.12,
+      "mood": "招商成果、城市发展",
+      "version": "2026-09",
+      "sha256": "2ad877eea4a85c02dd4f43fc36de4596ed8409e172d826ca8f29d05057aa1c83"
+    },
+    {
+      "id": "bgm-sb-machina",
+      "kind": "bgm",
+      "name": "Machina · 数字科技氛围",
+      "source_url": "https://www.scottbuckley.com.au/library/machina/",
+      "source_license": "CC-BY-4.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/bgm/open-commercial-2026-09/machina.mp3",
+      "attribution_required": true,
+      "attribution": "'Machina' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "default_gain": 0.12,
+      "mood": "科技、算力、智能制造",
+      "version": "2026-09",
+      "sha256": "72f479c583fd1cb894584c51d4fb9b33200b098bd1b13195bd41d29586d9d344"
+    },
+    {
+      "id": "bgm-sb-clear-skies",
+      "kind": "bgm",
+      "name": "Clear Skies · 明朗积极",
+      "source_url": "https://www.scottbuckley.com.au/library/clear-skies/",
+      "source_license": "CC-BY-4.0",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "file": "asset-packs/bgm/open-commercial-2026-09/clear-skies.mp3",
+      "attribution_required": true,
+      "attribution": "'Clear Skies' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au",
+      "default_for": [
+        "园区宣传",
+        "信息流广告"
+      ],
+      "default_gain": 0.13,
+      "mood": "城市形象、园区航拍、发展愿景",
+      "version": "2026-09",
+      "sha256": "0b71c4460054e26f3a98cfe3477f3f967b8d5e4df0da1440ccc40d2a01eb31ab"
+    }
+  ]
+}

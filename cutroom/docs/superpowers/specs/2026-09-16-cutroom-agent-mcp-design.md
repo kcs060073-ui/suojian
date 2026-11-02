@@ -1,0 +1,248 @@
+# CUTROOM Agent MCP 接入设计
+
+日期：2026-09-16
+
+状态：设计已由 Peter 确认通过；实施计划编制中
+
+适用范围：CUTROOM `v0.9.0-beta.4` 之后的 Codex Desktop 本地 Agent 接入。首版只验收 Codex Desktop，同时保持标准 MCP 接口，方便后续适配其他 Agent。
+
+## 1. 背景与目标
+
+CUTROOM 当前既有完整的独立产品入口，也有 CLI、工作台业务 API、SQLite 主账本、持久任务队列、模型配置、人工门禁和 FFmpeg 渲染链路。现有文案规划与分镜规划仍由 `scripts/plan-brief.ts`、`scripts/plan-ad.ts` 等脚本直接调用火山方舟或其他 OpenAI 兼容接口，因此需要在 CUTROOM 中保存相应模型配置和凭据。
+
+本设计新增一个可关闭的本地 MCP 接入层，使 Peter 可以只在 Codex Desktop 左侧对话中说明任务，由当前 Agent 模型完成文案分析、重点词、分镜和素材决策，再通过 MCP 把结构化结果写回 CUTROOM。CUTROOM 继续负责素材、任务、状态、人工确认、配音、AI 视频生成、FFmpeg 渲染、质检和发布包。
+
+最终使用体验：
+
+1. Peter 在 Codex 左侧对话中下达视频制作任务。
+2. Agent 通过 MCP 创建或继续 CUTROOM 任务。
+3. Agent 当前模型完成文本推理，不要求 CUTROOM 为这些步骤配置大模型 API Key。
+4. CUTROOM 右侧浏览器页显示任务、人工门禁、进度、质检和成片。
+5. 豆包 TTS、Seedance 等外部生产服务继续使用 CUTROOM 中各自的凭据。
+
+## 2. 核心原则
+
+### 2.1 新增能力，不替换现有产品
+
+- 现有 CUTROOM 网页、模型配置、CLI、任务队列、开机自启和独立运行能力全部保留。
+- MCP 是可选外挂入口。关闭或卸载 MCP 后，CUTROOM 必须像当前版本一样独立运行。
+- 历史任务不强制迁移，自动按现有 CUTROOM 模式解释。
+- 现有模型配置、连接检测、音色选择、任务冻结和凭据管理不降级。
+
+### 2.2 两种任务模式明确隔离
+
+每个任务创建时冻结一种编排模式：
+
+- `standalone`：现有 CUTROOM 模式。文案与分镜继续使用 CUTROOM 自己配置的模型，行为与当前版本一致。
+- `agent`：Agent 模式。文案分析、重点词、分镜和相关文本决策由当前 Agent 模型生成；CUTROOM 不为这些步骤调用大模型 API。
+
+模式不得在后台自动切换。需要切换时必须由用户显式发起，并生成新的输入依赖快照；已确认的历史产物不得被静默覆盖。
+
+### 2.3 MCP 与 CLI 是并列适配器
+
+MCP 和 CLI 共用 `media_catalog` 业务层、SQLite 主账本、任务队列和门禁。正式架构不让 MCP 依赖解析 CLI 文本，也不维护第二套任务状态。
+
+现有 CLI 继续承担开发、测试、批处理和故障排查；Agent 日常控制默认使用 MCP。
+
+## 3. 明确不做
+
+首版不实施：
+
+- 远程 HTTP MCP、多用户服务或中心服务器。
+- 用 Agent 替代豆包 TTS、Seedance 或其他外部媒体生成服务。
+- 让 CUTROOM 主动反向调用当前聊天中的 Agent。
+- 让 MCP 读取或修改模型凭据。
+- 让 Agent 自动批准文案锁定、画面锁定、包装确认或完整审片。
+- 任意命令执行、任意文件读取、直接 SQLite 写入或原始素材删除。
+- 因 Agent 不可用而自动回退到 CUTROOM 大模型。
+- 为了 MCP 重写现有 Web UI 或 FFmpeg 渲染引擎。
+
+## 4. 总体架构
+
+新增三部分，均复用现有 CUTROOM 核心：
+
+1. **MCP Server**：本地 `stdio` 服务，负责工具发现、参数校验、结果裁剪和错误映射。
+2. **Agent Gateway**：位于 `media_catalog` 内的业务门面，负责权限白名单、任务模式检查、规划上下文读取、Agent 产物提交和任务动作调用。
+3. **Agent Artifact Store**：在 SQLite 中保存 Agent 产物版本、摘要、来源、状态和依赖指纹，不把聊天全文写入数据库。
+
+现有 WorkbenchAPI、CLI 和 MCP 都调用同一业务层。MCP 不通过浏览器自动化控制 CUTROOM，也不复刻 WorkbenchAPI 的业务逻辑。
+
+## 5. 任务模式与数据兼容
+
+### 5.1 数据库变化
+
+采用只增不改的迁移：
+
+- 为任务增加 `orchestration_mode`，允许值为 `standalone`、`agent`，默认值为 `standalone`。
+- 新增 Agent 产物表，至少保存：`artifact_id`、`task_id`、`artifact_type`、`schema_version`、`content_json`、`content_digest`、`input_digest`、`source_agent`、`source_model_label`、`status`、`created_at`、`confirmed_at`。
+- 不在表中保存 Agent 隐藏推理、完整聊天、API Key、Token、Cookie 或用户凭据。
+- 迁移失败必须事务回滚；旧数据库迁移后原任务计数和现有业务数据保持一致。
+
+### 5.2 模型能力绑定
+
+`standalone` 任务继续沿用当前模型 Profile 和任务级冻结逻辑。
+
+`agent` 任务在创建预检时：
+
+- 文案、通用文本、分镜和仅用于规划的包装推理，不要求 CUTROOM 模型 Profile。
+- TTS、Seedance 或其他真实外部生成能力，仍按任务需求检查并冻结对应 Profile。
+- 本地 FFmpeg、ffprobe、faster-whisper、SQLite、素材搜索和缓存处理不要求模型凭据。
+
+现有模型配置页面和数据结构不为 Agent 模式删除或改名。
+
+## 6. Agent 规划产物流
+
+Agent 模式不调用现有大模型规划脚本。处理顺序为：
+
+1. MCP 返回经过裁剪的任务上下文，包括文案、素材摘要、可用代理或缩略图引用、当前阶段、门禁状态和允许的下一步。
+2. Agent 当前模型在 Codex 会话中完成文案分析、重点词、金句、分镜和素材需求。
+3. Agent 调用 MCP 提交结构化产物。
+4. Agent Gateway 校验任务归属、任务模式、输入指纹、JSON Schema、枚举、字段长度、素材引用和当前阶段。
+5. 校验通过后保存不可变版本，并通过共享的规划落地服务生成现有下游需要的 canonical brief、scene cards 或兼容导出物。
+6. 工作流只在可信产物写入成功后推进；校验失败不改变当前阶段。
+
+现有 `recommend_storyboard` 路径需要抽取“模型生成”和“规划结果落地”之间的公共边界：
+
+- `standalone` 路径继续运行现有模型脚本，随后调用公共落地服务。
+- `agent` 路径接收 MCP 提交的结构化结果，直接调用同一公共落地服务。
+
+因此两种模式从 canonical 规划产物之后共享完全相同的粗剪、画面锁定、包装、渲染、质检和发布链路。
+
+## 7. MCP 工具面
+
+首版只暴露完成真实闭环所需的粗粒度工具。
+
+### 7.1 查询类
+
+- `cutroom_get_system_status`：服务、数据库、任务队列和可用能力摘要；不返回凭据。
+- `cutroom_list_tasks`：有限分页的任务摘要。
+- `cutroom_get_task`：任务模式、阶段、门禁、当前作业和结果摘要。
+- `cutroom_get_agent_context`：返回当前规划阶段所需的最小上下文和输入指纹。
+- `cutroom_get_job`：查询作业进度、退出状态和有界错误摘要。
+- `cutroom_get_result_links`：返回任务页、成片、质检和发布包的安全本地路径或相对路由。
+
+### 7.2 写入与执行类
+
+- `cutroom_preflight_task`：只读预检，不创建任务。
+- `cutroom_create_task`：只允许创建 `agent` 模式任务；沿用现有数字人/广告路线预检。
+- `cutroom_submit_planning_artifact`：提交版本化结构产物，不接受任意文件内容或 SQL。
+- `cutroom_start_task_action`：从固定动作枚举启动现有任务队列动作，不接受任意命令。
+- `cutroom_cancel_job`：请求取消可取消作业。
+- `cutroom_resume_job`：只恢复现有任务队列允许恢复的作业。
+
+首版不暴露模型配置、凭据写入、门禁批准、素材删除或任意文件写入工具。
+
+## 8. 人工门禁
+
+四道人工作业门禁保持原定义：
+
+1. 文案锁定。
+2. 画面锁定。
+3. 包装方案确认。
+4. 完整审片。
+
+MCP 可以读取门禁状态和返回待确认原因，但不能代表用户批准。到达门禁时：
+
+- 作业返回 `awaiting_human_confirmation`。
+- Agent 告知 Peter 需要确认的具体内容。
+- Codex 右侧浏览器打开现有 CUTROOM 对应任务页面。
+- 用户在 CUTROOM UI 中完成确认。
+- Agent 重新读取状态后继续。
+
+MCP 不新增隐藏审批通道，也不把自然语言中的“看起来可以”自动转换为数据库批准记录。
+
+## 9. Codex 右侧工作区
+
+Peter 仍在左侧对话下达指令。右侧工作区承担查看和人工操作：
+
+- 浏览器：打开本机 CUTROOM 任务页、设置页、质检和成片预览。
+- 文件：打开任务产物、质检报告和发布包文件。
+- 终端与审查：只用于开发和排错，不作为普通使用入口。
+
+MCP 返回安全的本地相对路由和文件路径，由 Codex 使用自身的页面打开能力展示。不得把 CUTROOM 启动密钥、会话 Cookie 或其他认证秘密放进 MCP 模型可见结果。
+
+如果右侧浏览器尚未建立 CUTROOM 会话，继续使用现有本机启动和认证流程；首版不通过降低 Workbench 安全校验来换取自动打开。
+
+## 10. 故障与恢复
+
+### 10.1 Agent 或 MCP 不可用
+
+- 任务保持当前阶段，已保存产物和后台作业状态不丢失。
+- 未完成的 Agent 规划步骤显示明确等待原因。
+- 不自动回退到 CUTROOM 模型，不产生意外模型 API 费用。
+- 用户可以恢复 Agent，或者显式创建/切换到新的 `standalone` 规划版本。
+
+### 10.2 Agent 产物无效
+
+- 返回稳定错误码、用户可理解说明和允许修正的字段列表。
+- 不写入 canonical 产物，不推进工作流，不覆盖已确认版本。
+- 相同 `task_id + input_digest + content_digest` 的重复提交保持幂等。
+
+### 10.3 外部服务或本地执行失败
+
+- TTS、Seedance、FFmpeg、素材离线、磁盘不足等继续沿用现有任务队列和错误恢复规则。
+- MCP 只返回有界错误摘要、`retryable` 和允许的下一步，不返回完整日志或凭据。
+- 付费动作必须来自明确的任务动作，不能因查询状态或恢复 MCP 连接自动触发。
+
+## 11. 安全边界
+
+- MCP 首版只使用本地 `stdio`，不监听公网或局域网端口。
+- 数据库路径、项目根目录和允许访问的任务目录由服务器启动配置固定，调用参数不能任意覆盖。
+- 所有工具使用严格输入 Schema、长度限制、枚举和任务归属校验。
+- 原片保持只读；MCP 不提供删除、移动或重命名原片的能力。
+- 凭据继续由 Windows 凭据管理器和现有 CUTROOM 配置层持有。
+- MCP 响应、日志、测试快照和错误信息执行敏感字段过滤。
+- Agent 提交内容按不可信输入处理，不能携带命令、路径穿越或可执行脚本进入运行层。
+
+## 12. 安装、启动与回滚
+
+- MCP Server 使用独立启动入口和固定版本依赖，不改变 `启动CUTROOM.bat` 和 `workbench/start-local.ps1` 的默认行为。
+- Codex MCP 配置作为显式可选安装步骤，不随 CUTROOM 普通安装自动启用。
+- 普通 CUTROOM 安装包在没有 MCP 配置时继续通过现有验收。
+- 禁用 Codex MCP 配置即可停止 Agent 接入；不需要回滚数据库或卸载 CUTROOM。
+- 数据库新增字段和表允许保留，不影响 `standalone` 任务读取。
+
+## 13. 测试与验收
+
+### 13.1 自动化测试
+
+必须覆盖：
+
+- 数据库迁移对历史任务的默认值和数据保持。
+- `standalone` 预检、模型绑定、任务创建和执行路径零行为回归。
+- `agent` 任务跳过文本规划模型绑定，但保留 TTS/Seedance 所需绑定。
+- MCP 工具发现、输入 Schema、结构化成功结果和稳定错误结果。
+- Agent 规划上下文裁剪、输入指纹、Schema 校验、幂等提交和版本保存。
+- 非 Agent 任务拒绝 Agent 产物提交。
+- 四道人工作业门禁不可由 MCP 绕过。
+- 任意路径、任意命令、数据库直接写入和凭据字段被拒绝或过滤。
+- Agent/MCP 中断后任务和作业可以恢复。
+- 现有 Python、TypeScript、Web/UI 和发布专项回归测试继续通过。
+
+### 13.2 真实验收
+
+至少完成：
+
+1. 不启动 MCP，使用现有 CUTROOM 独立完成一条现有回归流程。
+2. Codex Desktop 发现本地 CUTROOM MCP 工具。
+3. 在 CUTROOM 未配置文案/分镜大模型 API Key 的条件下创建 Agent 模式任务。
+4. Agent 当前模型生成并提交规划产物，确认没有调用 `plan-brief.ts`、`plan-ad.ts` 或文本模型 Provider。
+5. CUTROOM 执行后续任务队列并在四道门禁处正确暂停。
+6. 右侧工作区打开对应任务页面、质检结果和成片。
+7. 中断 Codex/MCP 后重连并继续任务。
+8. 关闭 MCP 后再次验证 CUTROOM 独立模式可用。
+
+真实验收期间不得擅自触发未经 Peter 确认的付费 TTS 或 Seedance 调用。可以使用已有素材、已生成音频或受控替身验证非付费路径。
+
+## 14. 完成定义
+
+只有同时满足以下条件才可宣布“CUTROOM 已支持 Agent 模式”：
+
+- MCP 工具能被 Codex Desktop 真实发现和调用。
+- Agent 模式在没有文本规划模型 API Key 时完成一条真实规划链路。
+- CUTROOM 独立模式及现有模型配置、任务执行、人工门禁无回归。
+- Agent 模式不自动回退、不泄露凭据、不绕过门禁。
+- 右侧工作区可以查看对应 CUTROOM 页面和结果。
+- 自动化回归与真实验收均有证据文档。
+
+仅有 MCP Server 能启动、工具列表能显示或单元测试通过，不等于本设计完成。

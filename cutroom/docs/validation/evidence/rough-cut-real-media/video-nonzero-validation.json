@@ -1,0 +1,28 @@
+{
+  "generated_source": {
+    "codec": "h264",
+    "width": 180,
+    "height": 320,
+    "duration_seconds": 5
+  },
+  "browser_seek": {
+    "browser": "Codex in-app browser",
+    "current_time_seconds": 1.5,
+    "duration_seconds": 5,
+    "ready_state": 4,
+    "video_width": 180,
+    "video_height": 320
+  },
+  "decoded_lock_frame": {
+    "source_time_seconds": 1.5,
+    "result": "non-empty PNG frame"
+  },
+  "nonzero_trim": {
+    "source_start_seconds": 1.5,
+    "source_end_seconds": 3.5,
+    "output_codec": "h264",
+    "output_width": 180,
+    "output_height": 320,
+    "output_duration_seconds": 1.96
+  }
+}

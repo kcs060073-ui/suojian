@@ -1,0 +1,7 @@
+librosa>=0.10
+openai-whisper>=20231117
+pytesseract>=0.3.10
+funasr>=1.4.9
+rapidocr>=3.0
+onnxruntime>=1.18
+audio-separator[cpu]>=0.44

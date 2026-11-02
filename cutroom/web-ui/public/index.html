@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>CUTROOM · 同事视频工作台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">跳到主要内容</a>
+  <div id="cutroom-workbench">
+    <section class="app" aria-label="CUTROOM 同事视频工作台">
+      <header class="top">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">
+            <svg class="icon" data-icon="scissors" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="6" r="3"></circle>
+              <path d="M8.12 8.12 12 12"></path>
+              <path d="M20 4 8.12 15.88"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <path d="M14.8 14.8 20 20"></path>
+            </svg>
+          </span>
+          CUTROOM
+        </div>
+        <div class="crumb" id="crumb">任务中心</div>
+        <div class="system" id="service-status"><span class="dot"></span><span>正在连接本机工作流</span></div>
+        <div class="heavy-status" id="heavy-status" aria-label="重任务状态" aria-live="polite" aria-atomic="true">重任务 · 检查中</div>
+        <a class="manual-link" data-open-manual href="/help.html" target="_blank" rel="noopener">使用手册</a>
+        <div class="theme" aria-label="外观主题">
+          <button type="button" data-theme="system" aria-pressed="true" aria-label="跟随系统" title="跟随系统">◐</button>
+          <button type="button" data-theme="light" aria-pressed="false" aria-label="明亮主题" title="明亮">☀</button>
+          <button type="button" data-theme="dark" aria-pressed="false" aria-label="暗色主题" title="暗色">☾</button>
+        </div>
+      </header>
+
+      <div class="shell">
+        <nav class="rail" aria-label="一级导航">
+          <button class="topicon rail-toggle" type="button" data-toggle-rail aria-expanded="true" aria-label="显示或隐藏主导航">
+            <svg class="icon" data-icon="panel-left-close" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+              <path d="M9 3v18"></path>
+              <path d="m16 15-3-3 3-3"></path>
+            </svg>
+          </button>
+          <button class="nav" type="button" data-page="tasks" aria-current="page" aria-label="任务">
+            <svg class="icon" data-icon="list-todo" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 5h8"></path>
+              <path d="M13 12h8"></path>
+              <path d="M13 19h8"></path>
+              <path d="m3 17 2 2 4-4"></path>
+              <rect x="3" y="4" width="6" height="6" rx="1"></rect>
+            </svg>
+            <span class="nav-label">任务</span>
+          </button>
+          <button class="nav" type="button" data-page="library" aria-label="镜头素材">
+            <svg class="icon" data-icon="clapperboard" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12.296 3.464 3.02 3.956"></path>
+              <path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z"></path>
+              <path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <path d="m6.18 5.276 3.1 3.899"></path>
+            </svg>
+            <span class="nav-label">镜头素材</span>
+          </button>
+          <button class="nav" type="button" data-page="packlib" aria-label="包装素材">
+            <svg class="icon" data-icon="package" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path>
+              <path d="M12 22V12"></path>
+              <polyline points="3.29 7 12 12 20.71 7"></polyline>
+              <path d="m7.5 4.27 9 5.15"></path>
+            </svg>
+            <span class="nav-label">包装素材</span>
+          </button>
+          <button class="nav" type="button" data-page="settings" aria-label="设置">
+            <svg class="icon" data-icon="settings" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span class="nav-label">设置</span>
+          </button>
+        </nav>
+
+        <aside class="taskboard" aria-label="当前模块导航">
+          <section data-context="tasks">
+            <div class="taskboard-head">
+              <div><h2>任务</h2><span>快速导航</span></div>
+              <button class="mini" type="button" data-create-task aria-label="新建任务">＋</button>
+            </div>
+            <div id="quick-task-list" aria-live="polite">
+              <div class="task-label">正在读取任务</div>
+            </div>
+          </section>
+          <section data-context="library" hidden>
+            <div class="taskboard-head"><div><h2>镜头素材</h2><span>内容画面分类</span></div></div>
+            <div class="task-label">素材目录</div>
+            <button class="context-item selected" type="button"><b>全部镜头</b><span>由本地目录账本读取</span></button>
+            <button class="context-item" type="button"><b>本次主素材</b><span>按任务分别指定</span></button>
+            <button class="context-item" type="button"><b>通用补充素材</b><span>可自动补充，也可指定</span></button>
+          </section>
+          <section data-context="packlib" hidden>
+            <div class="taskboard-head"><div><h2>包装素材</h2><span>样式与声音分类</span></div></div>
+            <div class="task-label">资产分类</div>
+            <button class="context-item selected" type="button" data-packaging-filter="all"><b>全部包装素材</b><span>字幕、声音与视觉元素</span></button>
+            <button class="context-item" type="button" data-packaging-filter="subtitle"><b>字幕与字体</b><span>字体和字幕样式</span></button>
+            <button class="context-item" type="button" data-packaging-filter="voice"><b>配音与音色</b><span>由配音模型与音色 ID 提供</span></button>
+            <button class="context-item" type="button" data-packaging-filter="audio"><b>BGM 与音效</b><span>音乐、提示和转场声音</span></button>
+            <button class="context-item" type="button" data-packaging-filter="visual"><b>视觉包装</b><span>文字卡、贴纸与花字</span></button>
+            <button class="context-item" type="button" data-packaging-filter="brand"><b>Logo 与水印</b><span>品牌固定元素</span></button>
+          </section>
+          <section data-context="settings" hidden>
+            <div class="taskboard-head"><div><h2>设置</h2><span>本机应用配置</span></div></div>
+            <div class="task-label">设置分类</div>
+            <button class="context-item selected" type="button" data-settings-section="ai"><b>AI 服务连接</b><span>三类模型统一配置</span></button>
+            <button class="context-item" type="button" data-settings-section="storage"><b>存储与缓存</b><span>目录、空间和安全清理</span></button>
+          </section>
+        </aside>
+
+        <main class="content" id="workspace" tabindex="-1">
+          <section class="page" data-view="tasks" aria-labelledby="tasks-title">
+            <div class="head page-header">
+              <div>
+                <h1 id="tasks-title">任务中心</h1>
+                <p>只显示需要你处理的节点；自动步骤在后台继续。</p>
+              </div>
+              <div class="tasks-actions page-actions">
+                <div class="view-switch" aria-label="任务中心展示方式">
+                  <button type="button" data-task-view="board" aria-pressed="true">看板</button>
+                  <button type="button" data-task-view="list" aria-pressed="false">列表</button>
+                </div>
+                <button class="btn primary" type="button" data-create-task>＋ 新建视频</button>
+              </div>
+            </div>
+
+            <div class="task-filters" aria-label="筛选任务">
+              <label><span>搜索任务</span><input class="field" id="task-search" type="search" placeholder="输入任务名称或编号"></label>
+              <label><span>视频路线</span><select class="field" id="task-route-filter"><option value="">全部路线</option><option value="digital_human">数字人混剪</option><option value="ad_mix">信息流广告混剪</option></select></label>
+              <label><span>运行状态</span><select class="field" id="task-status-filter"><option value="">全部状态</option><option value="awaiting_user">等待我处理</option><option value="running">自动处理中</option><option value="queued">排队中</option><option value="paused">已暂停</option><option value="blocked">已阻塞</option><option value="failed">处理失败</option><option value="completed">已完成</option></select></label>
+              <label><span>排序</span><select class="field" id="task-sort"><option value="updated_desc">最近更新</option><option value="updated_asc">最早更新</option><option value="title_asc">按名称</option></select></label>
+              <button class="btn" id="task-filter-reset" type="button">清除筛选</button>
+            </div>
+            <div class="task-filter-empty" id="task-filter-empty" role="status" hidden></div>
+
+            <div class="kanban" id="task-board" aria-live="polite"></div>
+            <div class="listview" id="task-list-view" hidden>
+              <table>
+                <thead><tr><th>任务</th><th>路线</th><th>当前阶段</th><th>运行状态</th><th>下一步</th><th>更新时间</th><th></th></tr></thead>
+                <tbody id="task-list-body"></tbody>
+              </table>
+            </div>
+
+            <div class="overview">
+              <div class="card">
+                <h3>今天的生产状态</h3>
+                <div class="quick" id="task-metrics"></div>
+              </div>
+              <div class="card guard-card">
+                <span class="iconbox" aria-hidden="true">✓</span>
+                <div><h3>工作流门禁由系统核验</h3><p>未确认的任务无法越过下一阶段。</p></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="page" data-view="task-detail" aria-labelledby="task-title" hidden>
+            <div class="head page-header">
+              <div>
+                <button class="back-link" type="button" data-back-tasks>← 返回任务中心</button>
+                <p class="eyebrow" id="task-route">数字人混剪</p>
+                <h1 id="task-title">任务</h1>
+                <p id="task-summary">正在读取任务状态。</p>
+                <details class="task-meta"><summary>本任务设置</summary><p id="task-models">正在读取配置。</p></details>
+              </div>
+              <div class="task-header-badges">
+                <span class="mode-badge" id="task-orchestration-mode">CUTROOM 自己规划</span>
+                <span class="run-badge status-badge" id="task-run-status">读取中</span>
+              </div>
+            </div>
+            <div class="fullflow" id="task-workflow" aria-label="完整任务流程"></div>
+            <section class="stage-focus" id="stage-focus" aria-labelledby="task-step-title">
+              <div class="stage-focus-main">
+                <span class="stage-focus-index" id="task-step-index">当前步骤</span>
+                <h2 id="task-step-title">正在读取步骤</h2>
+                <p id="task-step-instruction">正在读取本步说明。</p>
+              </div>
+              <div class="stage-focus-aside">
+                <span class="section-kicker" id="task-step-action-label">现在要做</span>
+                <b id="task-next-action">正在读取</b>
+                <small id="task-step-outcome">完成后系统进入下一步。</small>
+              </div>
+            </section>
+            <section class="stage-workspace" id="stage-workspace" aria-live="polite">
+              <div class="workspace-primary" id="workspace-primary">
+                <div class="empty-state"><span class="empty-mark">…</span><h2>正在读取阶段工作区</h2></div>
+              </div>
+              <aside class="workspace-inspector" id="workspace-inspector">
+                <span class="section-kicker">当前对象</span>
+                <p>选择一个镜头或包装方案后在这里调整。</p>
+              </aside>
+            </section>
+            <div class="impact-modal" id="impact-modal" role="dialog" aria-modal="true" aria-labelledby="impact-title" hidden>
+              <div class="impact-dialog">
+                <span class="section-kicker">应用前确认</span>
+                <h2 id="impact-title">这次调整会影响什么</h2>
+                <div id="impact-details"></div>
+                <div class="row-actions">
+                  <button class="btn" type="button" data-cancel-impact>取消</button>
+                  <button class="btn primary" type="button" data-confirm-impact>确认应用</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="page" data-view="create" aria-labelledby="create-title" hidden>
+            <div class="head page-header">
+              <div><h1 id="create-title">新建视频任务</h1><p>先选择视频类型，再按顺序提供本次真实输入；未创建内容会自动保存在本机。</p></div>
+              <button class="btn" type="button" data-back-tasks>取消</button>
+            </div>
+            <div class="new-steps" aria-label="创建步骤">
+              <span class="new-step current">1 选择类型</span>
+              <span class="new-step">2 填写输入</span>
+              <span class="new-step">3 环境预检</span>
+              <span class="new-step">4 创建任务</span>
+            </div>
+            <form id="create-form">
+              <fieldset class="field-section">
+                <legend>1 · 本次要做哪种视频</legend>
+                <div class="routes" id="route-options"></div>
+              </fieldset>
+              <div class="formgrid">
+                <label data-route-digital>2 · 数字人子类型
+                  <select class="field" name="subtype" id="create-subtype"></select>
+                </label>
+                <label>任务名称
+                  <input class="field" name="title" autocomplete="off" placeholder="例如：新疆数字人 v2">
+                </label>
+                <label>规划方式
+                  <select class="field" name="orchestration_mode" id="orchestration-mode">
+                    <option value="standalone">CUTROOM 自己规划</option>
+                    <option value="agent">当前 Agent 规划</option>
+                  </select>
+                </label>
+                <label data-planning-profile>文案策划模型
+                  <select class="field" name="planning_profile_id" id="planning-profile"></select>
+                </label>
+                <label data-route-ad hidden>配音服务
+                  <select class="field" name="tts_profile_id" id="tts-profile"></select>
+                </label>
+                <label class="wide-field" data-route-ad hidden>本条视频音色
+                  <span class="voice-picker-row">
+                    <select class="field" name="tts_voice_id" id="tts-voice" required></select>
+                    <button class="btn" type="button" data-test-task-voice disabled>试听</button>
+                  </span>
+                  <small class="field-help" id="tts-voice-detail">先选择配音服务，再选择本条视频使用的声音。</small>
+                  <audio id="tts-voice-preview" class="voice-preview-audio" controls hidden></audio>
+                </label>
+                <label>B-roll 画面生成模型（可选）
+                  <select class="field" name="broll_profile_id" id="broll-profile"></select>
+                </label>
+                <label class="wide-field" data-route-digital>3 · 禅镜最终 MP4
+                  <span class="picker-row">
+                    <input class="field" name="digital_human_mp4" readonly placeholder="请选择已经由禅镜生成的最终 MP4">
+                    <button class="btn" type="button" data-pick-video>选择视频</button>
+                  </span>
+                </label>
+                <label class="wide-field"><span data-script-title>4 · 禅镜实际使用的最终口播文案</span>
+                  <textarea class="field script-field" name="final_script" rows="6" placeholder="粘贴与数字人口播完全一致的最终文案"></textarea>
+                </label>
+                <label data-route-ad hidden>3 · 视频画幅
+                  <select class="field" name="aspect_ratio">
+                    <option value="9:16">9:16 竖屏</option>
+                    <option value="16:9">16:9 横屏</option>
+                  </select>
+                </label>
+                <label data-route-ad hidden>4 · 配音方式
+                  <select class="field" name="voice_mode">
+                    <option value="ai_tts">AI 配音（使用设置中的 TTS）</option>
+                  </select>
+                </label>                <label>5 · 本次主素材目录
+                  <select class="field" name="primary_library_id" id="primary-library"></select>
+                </label>
+                <fieldset class="generic-field">
+                  <legend>6 · 通用补充素材（可选）</legend>
+                  <div id="generic-library-options" class="check-options"></div>
+                  <label class="inline-check"><input type="checkbox" name="include_default_generic" checked> 素材不足时自动使用默认通用目录</label>
+                </fieldset>
+                <label>7 · 视频用途
+                  <input class="field" name="purpose" autocomplete="off" placeholder="例如：视频号招商传播">
+                </label>
+                <label>目标时长（秒）
+                  <input class="field" name="target_duration_seconds" type="number" min="1" step="1" placeholder="例如：90">
+                </label>
+              </div>
+              <div class="notice">系统只会读取本次主素材目录，并按你的选择补充通用素材；不会自动混入其他园区专属素材。</div>
+              <div class="row-actions">
+                <button class="btn primary" type="submit" data-run-preflight>继续：检查环境 →</button>
+              </div>
+            </form>
+            <section id="preflight-panel" hidden>
+              <div class="head subhead">
+                <div><h2>创建前预检</h2><p>只检查当前视频路线实际会用到的输入、目录、工具和模型。</p></div>
+                <button class="btn" type="button" data-edit-create>返回修改</button>
+              </div>
+              <div class="preflight" id="preflight-results"></div>
+              <div class="preflight-meta" id="preflight-meta"></div>
+              <div class="preflight-details" id="preflight-cost-scope"></div>
+              <div class="preflight-details" id="preflight-confirmations"></div>
+              <div class="preflight-details" id="preflight-notices"></div>
+              <div class="row-actions">
+                <button class="btn primary" type="button" data-create-confirm>创建并开始自动处理</button>
+              </div>
+            </section>
+          </section>
+
+          <section class="page" data-view="library" aria-labelledby="library-title" hidden>
+            <div class="head page-header">
+              <div><h1 id="library-title">镜头素材库</h1><p>管理视频画面、图片和原始声音；本机与移动硬盘共用同一目录账本。</p></div>
+              <button class="btn primary" type="button" data-check-all-libraries>检查新增与更新</button>
+            </div>
+            <div class="librarybar">
+              <input class="field" id="library-search" placeholder="搜索目录名称或位置">
+              <button class="btn" type="button" data-show-library-form>添加素材目录</button>
+            </div>
+            <form class="inline-panel" id="library-form" hidden>
+              <label>目录名称<input class="field" name="name" placeholder="例如：新疆园区实拍"></label>
+              <label>用途<select class="field" name="purpose"><option value="task_specific">本次主素材目录</option><option value="generic">通用补充目录</option></select></label>
+              <label class="wide-field">本机或移动硬盘目录<span class="picker-row"><input class="field" name="mountPath" readonly><button class="btn" type="button" data-pick-directory>选择目录</button></span></label>
+              <label class="inline-check"><input type="checkbox" name="isDefaultGeneric"> 设为默认通用补充目录</label>
+              <div class="row-actions"><button class="btn" type="button" data-cancel-library>取消</button><button class="btn primary" type="submit">登记目录</button></div>
+            </form>
+            <div class="library-groups" id="library-groups"></div>
+            <section class="material-index section-card" aria-labelledby="material-index-title">
+              <div class="section-heading material-index-heading">
+                <div>
+                  <h2 id="material-index-title">素材索引</h2>
+                  <p id="material-index-scope">读取已登记镜头素材，可按任务范围、目录和可用状态查找。</p>
+                </div>
+                <span class="count-badge" id="material-index-count" role="status" aria-live="polite">正在读取素材索引…</span>
+              </div>
+              <div class="material-filters" role="search" aria-label="筛选镜头素材">
+                <label class="material-search-field">搜索素材
+                  <input class="field" id="material-search" type="search" placeholder="搜索文件名、素材 ID 或目录" autocomplete="off">
+                </label>
+                <label>素材类型
+                  <select class="field" id="material-kind-filter">
+                    <option value="">全部类型</option>
+                    <option value="video">视频</option>
+                    <option value="image">图片</option>
+                    <option value="audio">音频</option>
+                    <option value="other">其他</option>
+                  </select>
+                </label>
+                <label>素材目录
+                  <select class="field" id="material-library-filter"><option value="">全部镜头目录</option></select>
+                </label>
+                <label>可用状态
+                  <select class="field" id="material-availability-filter">
+                    <option value="">全部状态</option>
+                    <option value="available">可用</option>
+                    <option value="offline">目录离线</option>
+                    <option value="missing">文件缺失</option>
+                  </select>
+                </label>
+                <label>授权状态
+                  <select class="field" id="material-authorization-filter">
+                    <option value="">全部授权状态</option>
+                    <option value="approved">授权已核验</option>
+                    <option value="review_required">授权待核验</option>
+                    <option value="unknown">授权状态未知</option>
+                  </select>
+                </label>
+                <button class="btn" id="material-filter-reset" type="button">清除筛选</button>
+              </div>
+              <div class="material-results" id="material-index-results" aria-live="polite" aria-busy="true">
+                <div class="empty-inline">正在读取镜头素材…</div>
+              </div>
+              <nav class="material-pagination" aria-label="素材索引分页">
+                <button class="btn" type="button" data-material-previous disabled>上一页</button>
+                <span id="material-page-label">暂无结果</span>
+                <button class="btn" type="button" data-material-next disabled>下一页</button>
+              </nav>
+            </section>
+          </section>
+
+          <section class="page" data-view="packlib" aria-labelledby="packlib-title" hidden>
+            <div class="head page-header">
+              <div><h1 id="packlib-title">包装素材库</h1><p>长期管理字幕、音色、BGM、文字卡、贴纸、花字与 Logo / 水印；这里不是某条视频的包装方案。</p></div>
+            </div>
+            <div class="packaging-browser">
+              <div class="packaging-grid" id="packaging-catalog"></div>
+              <aside class="packaging-detail" id="packaging-detail" aria-live="polite" hidden></aside>
+            </div>
+            <section class="asset-source-guide section-card">
+              <div><h2>素材目录与推荐来源</h2><p>核心素材、团队扩展包和个人本地素材分层保存；下载文件先放入个人本地素材目录，核验授权后再登记。</p></div>
+              <div class="source-links">
+                <a href="https://kenney.nl/assets/category:Audio" target="_blank" rel="noopener">Kenney · CC0 音效</a>
+                <a href="https://github.com/google/material-design-icons" target="_blank" rel="noopener">Material Icons · Apache 2.0</a>
+                <a href="https://opengameart.org/content/cc0-sound-effects" target="_blank" rel="noopener">OpenGameArt · 仅选 CC0</a>
+                <a href="https://github.com/adobe-fonts/source-han-serif" target="_blank" rel="noopener">思源宋体 · OFL 1.1</a>
+              </div>
+            </section>
+          </section>
+
+          <section class="page" data-view="settings" aria-labelledby="settings-title" hidden>
+            <div class="head page-header">
+              <div><h1 id="settings-title">设置 · AI 服务连接</h1><p>只需配置文案策划、B-roll 和配音三类模型；密钥只保存到 Windows 凭据管理器。</p></div>
+              <span class="safe-badge status-badge success">数据库和页面都不保存密钥明文</span>
+            </div>
+            <section class="settings-account-panel section-card" id="settings-provider-accounts">
+              <div>
+                <h2>供应商账号</h2>
+                <p id="provider-form-help">像 CC Switch 一样直接填写 API Key 和请求地址；一个账号可供多个模型配置复用。</p>
+              </div>
+              <form id="provider-account-form" class="settings-account-form" aria-describedby="provider-form-help">
+                <select class="field" name="preset" aria-label="供应商类型" required>
+                  <option value="openai_compatible">OpenAI 兼容</option>
+                  <option value="volcengine_ark">火山方舟文本</option>
+                  <option value="volcengine_seedance">火山方舟视频生成</option>
+                  <option value="doubao_tts">豆包 TTS</option>
+                  <option value="new_api">New API（高级兼容）</option>
+                </select>
+                <input class="field" name="name" aria-label="供应商名称" placeholder="供应商名称，例如：火山方舟" required>
+                <input class="field" name="note" aria-label="备注" placeholder="备注（可选）">
+                <label class="provider-field wide-field" data-provider-generic>API 请求地址
+                  <input class="field" name="baseUrl" placeholder="例如：https://api.example.com/v1" required>
+                </label>
+                <label class="provider-field" data-provider-generic>默认模型（可选）
+                  <input class="field" data-provider-model name="defaultModel" placeholder="例如：glm-5.3">
+                </label>
+                <input class="field conditional-provider-field" data-provider-channel name="channelId" aria-label="New API 固定渠道 ID" inputmode="numeric" placeholder="New API 固定渠道 ID（可选）" hidden>
+                <p class="provider-tts-guide conditional-provider-field" data-provider-tts hidden>API Key 用于合成、试听和连接检测；AK/SK 用于自动获取音色目录。保存并检测会生成一段很短的测试语音。</p>
+                <label class="conditional-provider-field" data-provider-tts hidden>豆包 API Key
+                  <input class="field" name="ttsApiKey" type="password" autocomplete="new-password" placeholder="API Key 管理页面创建的 API Key">
+                </label>
+                <label class="conditional-provider-field" data-provider-tts hidden>Access Key ID（音色目录）
+                  <input class="field" name="accessKeyId" autocomplete="off" placeholder="火山引擎 Access Key ID（可稍后补充）">
+                </label>
+                <label class="conditional-provider-field" data-provider-tts hidden>Secret Access Key（音色目录）
+                  <input class="field" name="secretAccessKey" type="password" autocomplete="new-password" placeholder="火山引擎 Secret Access Key（可稍后补充）">
+                </label>
+                <details class="legacy-tts-credentials conditional-provider-field" data-provider-tts-legacy hidden>
+                  <summary>旧版兼容设置</summary>
+                  <p>仅旧版豆包控制台账号需要填写；已保存的值留空会保持不变。</p>
+                  <label>豆包 AppID（可选）
+                    <input class="field" name="appId" autocomplete="off" placeholder="豆包语音 AppID">
+                  </label>
+                  <label>Access Token（可选）
+                    <input class="field" name="secret" type="password" autocomplete="new-password" placeholder="旧版 Access Token">
+                  </label>
+                </details>
+                <label class="provider-main-secret" data-provider-generic><span data-provider-secret-label>API Key / Access Token</span>
+                  <input class="field" name="genericSecret" type="password" autocomplete="new-password" placeholder="API Key / Access Token" required>
+                </label>
+                <label class="conditional-provider-field" data-provider-tts hidden>配音服务版本
+                  <select class="field" name="ttsResourceId" data-tts-required="true">
+                    <option value="seed-tts-1.0">豆包语音合成 1.0</option>
+                    <option value="seed-tts-2.0">豆包语音合成 2.0</option>
+                  </select>
+                </label>
+                <button class="btn primary provider-submit" type="submit">添加供应商</button>
+              </form>
+              <div id="provider-account-list" class="provider-account-list"></div>
+            </section>
+            <div class="service-list" id="settings-capabilities"></div>
+          </section>
+
+          <section class="page" data-view="settings-storage" aria-labelledby="storage-title" hidden>
+            <div class="head page-header">
+              <div><h1 id="storage-title">设置 · 存储与缓存</h1><p>查看本机目录与磁盘空间；只清理可重新生成的预览缓存。</p></div>
+              <span class="safe-badge status-badge success">不会删除原片、成片或数据库</span>
+            </div>
+            <div id="storage-summary" class="storage-summary" aria-live="polite"></div>
+            <section class="settings-account-panel section-card">
+              <div><h2>个人包装素材位置</h2><p>可由每位同事选择自己的本地目录；系统会在其中建立八类素材子目录。</p></div>
+              <div class="personal-packaging-location">
+                <div class="personal-packaging-copy">
+                  <div><b id="personal-packaging-location">默认位置</b><em id="personal-packaging-status" class="available">当前可用</em></div>
+                  <code id="personal-packaging-path"></code>
+                  <span>切换只会更新目录指向，不会搬迁或删除原目录中的文件。</span>
+                </div>
+                <button class="btn" type="button" data-pick-personal-packaging>选择目录</button>
+              </div>
+            </section>
+            <section class="settings-account-panel section-card">
+              <div><h2>目录分层</h2><p>核心素材、团队扩展包和个人素材保持独立，避免覆盖与授权混用。</p></div>
+              <div id="storage-directories" class="storage-directories"></div>
+            </section>
+            <section class="settings-account-panel">
+              <div><h2>预览缓存清理</h2><p>先计算将释放的空间，确认后才执行。</p></div>
+              <div class="cache-actions">
+                <button class="btn" type="button" data-preview-cache-cleanup>预览清理结果</button>
+                <button class="btn danger" type="button" data-confirm-cache-cleanup disabled>确认清理缓存</button>
+              </div>
+              <div id="cache-clean-preview" class="cache-clean-preview" hidden></div>
+            </section>
+          </section>
+        </main>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+    </section>
+  </div>
+  <script type="module" src="/app.mjs"></script>
+</body>
+</html>

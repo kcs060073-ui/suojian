@@ -1,0 +1,200 @@
+{
+  "category": "fancy_text",
+  "note": "花字预设（金句高亮/数据飘字/标题花字）。fill=渐变色停；stroke=描边色；glow=发光色(null=无)；entrance=入场动画。font=文件名，fontname_guess=libass 内部族名。",
+  "items": [
+    {
+      "id": "ft-gold",
+      "name": "金边立体",
+      "font": "5 Alimama ShuHeiTi 阿里妈妈数黑.otf",
+      "fontname_guess": "Alimama ShuHeiTi Bold",
+      "fill": [
+        "#FFE08A",
+        "#D4AF37"
+      ],
+      "stroke_hex": "#8A5A00",
+      "glow": null,
+      "shadow": true,
+      "entrance": "scale",
+      "default_for": [
+        "数字人混剪",
+        "信息流广告"
+      ],
+      "license": "commercial-approved",
+      "note": "金句/卖点高亮；双色渐变 + 深金描边"
+    },
+    {
+      "id": "ft-neon",
+      "name": "霓虹发光",
+      "font": "字体传奇特战体-免费商用.ttf",
+      "fontname_guess": "字体传奇特战体",
+      "fill": [
+        "#7DF9FF"
+      ],
+      "stroke_hex": "#00E5FF",
+      "glow": "#00E5FF",
+      "shadow": true,
+      "entrance": "fade",
+      "default_for": [
+        "信息流广告"
+      ],
+      "license": "commercial-approved",
+      "note": "科技/年轻化；青色发光描边"
+    },
+    {
+      "id": "ft-red-paper",
+      "name": "剪纸红（圆角底）",
+      "font": "优设标题圆.otf",
+      "fontname_guess": "优设标题圆",
+      "fill": [
+        "#FFFFFF"
+      ],
+      "stroke_hex": "#C0392B",
+      "bg_hex": "#C0392B",
+      "glow": null,
+      "shadow": false,
+      "entrance": "pop",
+      "default_for": [
+        "园区宣传"
+      ],
+      "license": "commercial-approved",
+      "note": "政策/园区标签；红底白字圆角"
+    },
+    {
+      "id": "ft-pop",
+      "name": "弹入（暖金）",
+      "font": "猴尊宋体.ttf",
+      "fontname_guess": "猴尊宋体",
+      "fill": [
+        "#FFD24D"
+      ],
+      "stroke_hex": "#B5651D",
+      "glow": null,
+      "shadow": true,
+      "entrance": "bounce",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "license": "commercial-approved",
+      "note": "数据飘字/强调；弹性入场"
+    },
+    {
+      "id": "ft-badge",
+      "name": "认证徽章（蓝）",
+      "font": "猫啃网风雅宋.ttf",
+      "fontname_guess": "猫啃网风雅宋",
+      "fill": [
+        "#FFFFFF"
+      ],
+      "stroke_hex": "#2563EB",
+      "bg_hex": "#2563EB",
+      "glow": null,
+      "shadow": false,
+      "entrance": "fade",
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "license": "commercial-approved",
+      "note": "资质/认证角标；蓝底白字"
+    },
+    {
+      "id": "ft-gradient",
+      "name": "渐变撞色",
+      "font": "优设标题圆.otf",
+      "fontname_guess": "优设标题圆",
+      "fill": [
+        "#FF6B6B",
+        "#4ECDC4"
+      ],
+      "stroke_hex": "#2D3142",
+      "glow": null,
+      "shadow": true,
+      "entrance": "slide",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "license": "commercial-approved",
+      "note": "通用标题；红→青渐变 + 深色描边"
+    },
+    {
+      "id": "ft-smiley-orange",
+      "kind": "fancy_text",
+      "name": "笑脸体·橙红弹入",
+      "source_url": "https://github.com/atelier-anchor/smiley-sans",
+      "source_license": "OFL-1.1",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "font": "SmileySans-Oblique.otf",
+      "fontname_guess": "Smiley Sans Oblique",
+      "fill": [
+        "#FFD166",
+        "#FF7A3D"
+      ],
+      "stroke_hex": "#6F2200",
+      "glow": "#FFB347",
+      "shadow": true,
+      "entrance": "scale",
+      "default_for": [
+        "信息流广告",
+        "数字人混剪"
+      ],
+      "attribution_required": false,
+      "version": "2026-09"
+    },
+    {
+      "id": "ft-tech-blue",
+      "kind": "fancy_text",
+      "name": "科技蓝·轻发光",
+      "source_url": "https://github.com/adobe-fonts/source-han-serif",
+      "source_license": "OFL-1.1",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "font": "SourceHanSerifSC-Heavy.otf",
+      "fontname_guess": "Source Han Serif SC Heavy",
+      "fill": [
+        "#D8F4FF",
+        "#42B8FF"
+      ],
+      "stroke_hex": "#0B3D66",
+      "glow": "#42B8FF",
+      "shadow": true,
+      "entrance": "slide",
+      "default_for": [
+        "数字人混剪",
+        "园区宣传",
+        "信息流广告"
+      ],
+      "attribution_required": false,
+      "version": "2026-09"
+    },
+    {
+      "id": "ft-policy-red",
+      "kind": "fancy_text",
+      "name": "政策红·重点强调",
+      "source_url": "https://github.com/adobe-fonts/source-han-serif",
+      "source_license": "OFL-1.1",
+      "license": "commercial-approved",
+      "downloaded_at": "2026-09-10T18:00:00+08:00",
+      "font": "SourceHanSerifSC-Heavy.otf",
+      "fontname_guess": "Source Han Serif SC Heavy",
+      "fill": [
+        "#FFF4E8",
+        "#FFB266"
+      ],
+      "stroke_hex": "#B52418",
+      "glow": null,
+      "shadow": true,
+      "entrance": "scale",
+      "default_for": [
+        "园区宣传",
+        "数字人混剪"
+      ],
+      "attribution_required": false,
+      "version": "2026-09"
+    }
+  ]
+}
