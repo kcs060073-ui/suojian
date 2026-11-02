@@ -2,7 +2,7 @@
 
 ## 安装前
 
-使用 64 位 Windows，先安装 Python 3.11（包括 Python Launcher）、Node.js LTS 和 FFmpeg，并让 `py`、`node`、`npm`、`ffmpeg`、`ffprobe` 能在终端运行。安装依赖需要网络和足够磁盘空间；语音处理包可能很大。安装前先完整解压项目，不要在压缩包中直接运行。
+使用 64 位 Windows，先安装 Python 3.11（包括 Python Launcher）、Node.js LTS 和 FFmpeg，并让 `py`、`node`、`npm`、`ffmpeg`、`ffprobe` 能在终端运行。安装依赖需要网络和足够磁盘空间；语音处理包可能很大。安装前先完整解压项目，不要在压缩包中直接运行。建议解压到 `C:\suojian` 这类较短路径，模板文件层级较深；使用 Git 克隆时可执行 `git -c core.longpaths=true clone https://github.com/kcs060073-ui/suojian.git C:\suojian`。
 
 双击 `安装溯剪.bat`，再双击 `启动溯剪.bat`。启动时保持主工作台窗口开启，访问 http://127.0.0.1:8788/ 。默认还会在本机启动 Cutroom，园区 Vibe 按需启动；如端口已被占用，请先检查原有服务，安装器不会强行结束它们。
 
@@ -17,6 +17,7 @@
 - Cutroom 的在线模型、配音服务和音色需要在本机重新配置账户和密钥。分镜 Seedance 视频需要有效的火山方舟配置：可设置本机 `ARK_API_KEY`，或设置 `SUOJIAN_SEEDANCE_PROFILE_ID` 以读取本机 Cutroom 的对应配置；按实际服务设置 `SUOJIAN_SEEDANCE_MODEL`。不要把密钥提交到仓库。请求仅在用户选择启动时提交，可能收费。
 - 现有 MotionGit 个人授权包不在公开仓库；需使用本人的有效授权单独导入。仓库中的目录不等于所有模板均已下载或能商业使用。
 - 部分旧实验依赖历史示例、Hypit 工程或外部素材，不属于已确认能在新机器自动恢复的路径。生成结果和剪映编辑性仍需逐项实测。
+- 当前 Remotion 4.0.539 运行时保留原项目的 Zod 4.3.6，安装时会提示推荐 4.5.4；简单测试片已能渲染，但部分复杂模板的兼容性尚未完整验证。
 
 ## 遇到问题
 

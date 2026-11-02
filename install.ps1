@@ -31,6 +31,9 @@ try {
             Run-Step $python @('-m','pip','install','-r',(Join-Path $directory 'requirements-optional.txt'))
         }
     }
+    $mainPython = Join-Path $root 'main\.venv\Scripts\python.exe'
+    Run-Step $mainPython @('-m','pip','install','-r',(Join-Path $root 'vibe\work\vendor\vibe-knowledge-film-main\requirements.txt'))
+    Run-Step $mainPython @('-m','playwright','install','chromium')
 
     foreach ($directory in @((Join-Path $root 'cutroom'),(Join-Path $root 'vibe\work\runtime'))) {
         Push-Location $directory
