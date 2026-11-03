@@ -422,7 +422,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json_response(importlib.import_module('workbench.library').native_tools(VENDOR, ROOT))
             if path == '/baseline.mp4':
                 return self.serve_file(BASELINE, head)
-            for prefix, root in [('/engine/', ROOT/'engine'), ('/media/', PROJECT/'public'), ('/vendor/', VENDOR), ('/native/canvas/', ROOT/'work/native/canvas'), ('/files/', ROOT), ('/outputs/', OUTPUTS), ('/static/', ROOT/'workbench/static')]:
+            for prefix, root in [('/engine/', ROOT/'engine'), ('/media/', PROJECT/'public'), ('/vendor/', VENDOR), ('/native/canvas/', ROOT/'work/native/canvas'), ('/native/shotcraft/', ROOT/'work/native/shotcraft'), ('/files/', ROOT), ('/outputs/', OUTPUTS), ('/static/', ROOT/'workbench/static')]:
                 if path.startswith(prefix):
                     if prefix == '/files/' and not path[len(prefix):].startswith(('outputs/', 'work/')):
                         return self.send_error(403)
@@ -473,6 +473,11 @@ class Handler(BaseHTTPRequestHandler):
                         remaining -= len(chunk)
                 return self.json_response({'path': str(dest), 'url': '/media/uploads/'+dest.name, 'asset': 'uploads/'+dest.name, 'name': filename})
             data = self.read_json()
+            if path == '/api/production/import-script':
+                mod = importlib.import_module('workbench.script_import')
+                if data.get('url'):
+                    return self.json_response(mod.fetch_script(data['url']))
+                return self.json_response({'script': mod.extract_html(str(data.get('html') or ''))})
             if path == '/api/production/visual-styles':
                 return self.json_response(importlib.import_module('workbench.visual_styles').StyleLibrary(ROOT).create(data),201)
             match = re.fullmatch(r'/api/production/visual-styles/(style-[0-9a-f]{12}|handdrawn-realistic-v1)/(archive|restore)', path)

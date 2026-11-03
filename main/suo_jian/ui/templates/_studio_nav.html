@@ -4,7 +4,8 @@
   <nav aria-label="制作方向">
     <a href="/?studio=feed" {% if request.args.get('studio') == 'feed' or request.args.get('job') and request.path == '/' %}aria-current="page"{% endif %}>园区信息流</a>
     <a href="/presenter" {% if request.path == '/presenter' or request.args.get('studio') == 'presenter' %}aria-current="page"{% endif %}>真人口播</a>
-    <a href="/motion" {% if request.path == '/motion' %}aria-current="page"{% endif %}>园区 Vibe</a>
+    <a href="/motion" {% if request.path == '/motion' %}aria-current="page"{% endif %}>VibeCraft</a>
+    <a href="/settings/models" {% if request.path == '/settings/models' %}aria-current="page"{% endif %}>模型与 API</a>
   </nav>
   <span class="studio-local"><i></i>本机工作台</span>
 </header>

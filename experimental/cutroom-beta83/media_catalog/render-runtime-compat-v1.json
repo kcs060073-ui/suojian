@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "python": "3.11",
+  "baseline": "r25 compiled runtime, independently audited 2026-10-15",
+  "policy": "Exact loader and whole-module semantic identity. Only approved delivery-function extraction differs. No filename exemptions. Unknown changes require new rendering/review.",
+  "modules": [
+    {
+      "module": "media_catalog/audio_mix_policy.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "de2db7b6ffaae77b070dbea4fdaf36934b471dffb8963246fe2e52c343405d39",
+        "size_bytes": 1050
+      },
+      "semantic_sha256": [
+        "b4121be219ba13d23e9b056fc04f9db2c627faad2e9cd28c5a527714b7c2dfc0"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/ad_actions.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "1755c0c7d1888d4f6db36cca7ae938f02913fcc73fb1cc21aa92039d581b80f9",
+        "size_bytes": 104734
+      },
+      "semantic_sha256": [
+        "082d130d9dacfd8bb8eccc05b253f30689bbec2cd69c88e33d4618fcc8391c89",
+        "e6f2101eebc2acbd74592f024df88668af60a0d58547261119990c89513b06ac"
+      ],
+      "review": "delivery-function-extracted-only"
+    },
+    {
+      "module": "media_catalog/render_recipe.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "f43cdaf63379b634ee28ca7a5b7334983d1a1ee7155038253b2b180aebf1ff55",
+        "size_bytes": 19338
+      },
+      "semantic_sha256": [
+        "4b4a57288f4261ae76417d8c7a371f6084b2c6e0f3e637cc1970eb0a1f487d73"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/rough_cut.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "dc789b2525729d91072fc22799ed6f7975a55be135bd0c7324ff2c2021ed7fdd",
+        "size_bytes": 70298
+      },
+      "semantic_sha256": [
+        "04c05762b2e84c48cd487c565f3b9bedd9771a2c58cc94ae3574180cb49061d0"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/timeline_contract.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "e4164597599e1aede478252e36360caf4334df81c84712279140fcc863e26724",
+        "size_bytes": 9210
+      },
+      "semantic_sha256": [
+        "9068b25788f10ec6456b2ce89d0fd58b973d911e2dda9890a3e3fa2396dc3740"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/packaging_layers.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "f5b50c13e1c56c4b3f2127a69fdc164173bcb9c0d2062d2f6de2111d4f4692a3",
+        "size_bytes": 18227
+      },
+      "semantic_sha256": [
+        "bcd9e28464b05ae7ed3487d7b4a0d7a305b990fffd3d6b3cffb4db09739170f1"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/packaging_layout.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "d339a43270d9ed675b555aa1fbe373b4f34bd6806055cfe05b8a3ad6b179d68b",
+        "size_bytes": 18625
+      },
+      "semantic_sha256": [
+        "ecbf44dadf9470b27b1d442f629ab7046ee662d224161a83a331802538af3ad3"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "scripts/gen-fancy-text.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "sha256": "11910ee1194b4444be45e428345a18259564f13330ee16dee0bf9db546715380",
+        "size_bytes": 12274
+      },
+      "semantic_sha256": [
+        "658442f695dad008f029e6ebaeae54bb14be583c9bb4c05909b75403362ca94d"
+      ],
+      "review": "identical-whole-module"
+    },
+    {
+      "module": "media_catalog/render_mix_adapter.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 83502,
+        "sha256": "00163bde6f3cea52e91c2d87b12d68aa98309c70cf7bb28a9aa721cdd97f93b0"
+      },
+      "semantic_sha256": [
+        "4dbe2fa7deecf27d25aa578556861a072aaf2bf803510cf900193405f5ef458a"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    },
+    {
+      "module": "media_catalog/digital_render_profile.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 9674,
+        "sha256": "7acb89016d9cccb733469dfd75d71260660140f308c539c5b4f2cf332b7b0600"
+      },
+      "semantic_sha256": [
+        "ace853109766a2bf288f0f5b24eb829d35e08085b6210144f10c8e77cb12f3f3"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    },
+    {
+      "module": "media_catalog/digital_render_recipe.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 16010,
+        "sha256": "3c8aca8b7de0c9538a916f7028fc5aab0229907aa087ac686b1e402fca1c60a0"
+      },
+      "semantic_sha256": [
+        "3956aee7c7deeb505012e6d081cea71d33c28a8a74bb1ddbace24c94544a400e"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    },
+    {
+      "module": "media_catalog/source_windows.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 2664,
+        "sha256": "a53de09f1deb661527c0cf3dc25b274a3ad9e142ed14dc8fd4e02132c9a8b13b"
+      },
+      "semantic_sha256": [
+        "5bfba8dc8d4abfda272cb436adef47a8b41241c119262b075cfad00493e715b8"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    },
+    {
+      "module": "media_catalog/subtitles.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 27386,
+        "sha256": "f2c3b3459edd1a40c1cbe619993462a5d52a885cd2ccd3c3061bf3fdd28ad2ac"
+      },
+      "semantic_sha256": [
+        "728e18ab5cb875adf570095e8efb3ebee2552ace146ee6aaf5c120998b77d83a"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    },
+    {
+      "module": "media_catalog/speech_alignment.py",
+      "loader_sha256": "4c3ee3eebf05d3a299de176ef6a449f6bd48125e7e6478b5c9d358743af37c11",
+      "legacy_identity": {
+        "size_bytes": 17702,
+        "sha256": "5b11fc722cf7d8e73eb474cf442cde9f5b4ad83e01e08229def10a139201b894"
+      },
+      "semantic_sha256": [
+        "782cd31db451f9c670bc183dfb3bb8f24be5b804282de4c24014d2dc5890160b"
+      ],
+      "review": "identical-whole-module; LF/CRLF source hash and marshal constant ordering are nonsemantic"
+    }
+  ],
+  "data_files": [
+    {
+      "description": "Exact ES2022 type-library declaration; compiler target and emitted runtime remain ES2020. Reviewed 2026-10-16.",
+      "content_sha256": [
+        "fb7d911e1419a30ee8b4c62eeb54a0c3735f2485a414702549c245e310fab3ac",
+        "9dd0206810a83d69f634085c51a3d8921a483e1d40bd665c1bfeeb8be9f5ae0e"
+      ],
+      "legacy_identity": {
+        "sha256": "7978733c7a78226a2297f4dba72b70ab02decf9e9c4c0ac5942c324d403d4aae",
+        "size_bytes": 430
+      }
+    }
+  ]
+}

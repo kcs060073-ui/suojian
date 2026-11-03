@@ -1,0 +1,38 @@
+{
+  "name": "digital-human-mix",
+  "version": "0.9.0-beta.83",
+  "description": "数字人混剪自动化流水线（FFmpeg + Claude Code）",
+  "private": true,
+  "scripts": {
+    "build-storyboard": "ts-node scripts/build-storyboard.ts",
+    "batch": "ts-node scripts/batch-render.ts",
+    "mix": "ts-node scripts/render-mix.ts",
+    "plan": "ts-node scripts/plan-brief.ts",
+    "plan-ad": "ts-node scripts/plan-ad.ts",
+    "tts": "ts-node scripts/tts.ts",
+    "compile-ad": "ts-node scripts/compile-ad.ts",
+    "render-ad": "ts-node scripts/render-ad.ts",
+    "compile": "ts-node scripts/compile-plan.ts",
+    "fetch-broll": "ts-node scripts/fetch-broll.ts",
+    "gen-broll": "ts-node scripts/generate-broll.ts",
+    "promo-tts": "ts-node scripts/promo-tts.ts",
+    "promo": "ts-node scripts/render-promo.ts",
+    "ad": "ts-node scripts/ad-once.ts",
+    "test:ts": "node --test --test-concurrency=1 -r ts-node/register tests/*.test.ts",
+    "test:web": "node scripts/test-web.mjs",
+    "build:release": "python scripts/build_public_release.py",
+    "test:backend": "python scripts/test_backend.py"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.5",
+    "esbuild": "0.28.2",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.2",
+    "openai": "^6.43.0",
+    "opencc-js": "1.4.1",
+    "zod": "^4.4.3"
+  }
+}

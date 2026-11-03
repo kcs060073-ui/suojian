@@ -71,6 +71,24 @@ class CutroomUpgradeTests(unittest.TestCase):
                     call_local_adapter(root, "create", {})
                 invoke.assert_not_called()
 
+    def test_new_source_checkout_never_bypasses_review_gates(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); self.fixture(root, schema=97)
+            (root / 'package.json').write_text(json.dumps({'version':'0.9.0-beta.83'}), encoding='utf-8')
+            (root / 'media_catalog/reference_editing.py').write_text('', encoding='utf-8')
+            info = installation_info(root)
+            self.assertEqual(info['distribution'], 'source')
+            self.assertFalse(info['legacy_automatic_supported'])
+            self.assertTrue(info['reference_extension_source_present'])
+            self.assertFalse(info['reference_extension_available'])
+            with patch('suo_jian.integrations.cutroom.client.subprocess.run') as invoke:
+                with self.assertRaisesRegex(ValueError, '工作台'):
+                    call_local_adapter(root, 'create', {})
+                invoke.assert_not_called()
+            arguments = mcp_arguments(root, 'http://127.0.0.1:18884')
+            self.assertIn('--db', arguments)
+            self.assertIn('http://127.0.0.1:18884', arguments)
+
     def test_existing_execution_uses_original_installation_after_default_switch(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); old = root / "old"; new = root / "new"; result = root / "result"; result.mkdir()

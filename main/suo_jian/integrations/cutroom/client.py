@@ -74,12 +74,12 @@ def call_readonly_mcp(project_root: str | Path, tool: str, arguments: dict | Non
 
 def call_local_adapter(project_root: str | Path, operation: str, arguments: dict | None = None) -> dict:
     """Compatibility layer, not an invented MCP tool. Secrets stay in Cutroom."""
-    if operation not in {"catalog", "create", "preflight", "probe_tts", "inspect", "lock_brief", "sync_preview", "context",
+    if operation not in {"model_settings", "catalog", "create", "preflight", "probe_tts", "inspect", "lock_brief", "sync_preview", "context",
                          "submit", "start", "job", "lock_picture", "packaging", "save_packaging", "packaging_options", "repackage", "reference_bind"}:
         raise ValueError("未开放的 Cutroom 适配操作。")
     root = Path(project_root).resolve()
     info = require_existing_database(root)
-    if info["distribution"] != "source" and operation in {"create", "probe_tts", "lock_brief", "lock_picture", "packaging", "repackage", "reference_bind", "save_packaging"}:
+    if not info["legacy_automatic_supported"] and operation in {"create", "probe_tts", "lock_brief", "lock_picture", "packaging", "repackage", "reference_bind", "save_packaging"}:
         raise ValueError("新版 Cutroom 的文案、画面和包装确认请在其工作台完成；旧自动确认或参考扩展未经过新版验收，已停止本次操作。")
     executable = root / ".venv" / "Scripts" / "python.exe"
     if not executable.is_file():
@@ -96,6 +96,6 @@ def call_local_adapter(project_root: str | Path, operation: str, arguments: dict
         raise RuntimeError(value.get("bridge_error", "Cutroom 操作失败。"))
     if operation == "catalog":
         value["adapter"] = {"version": info["version"], "distribution": info["distribution"],
-                            "automatic_pipeline_supported": info["distribution"] == "source",
+                            "automatic_pipeline_supported": info["legacy_automatic_supported"],
                             "reference_extension_available": info["reference_extension_available"]}
     return value

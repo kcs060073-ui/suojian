@@ -1,0 +1,1009 @@
+"""Build a fixed, review-ready release package without uploading it."""
+
+import json
+import hashlib
+import math
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import uuid
+from PIL import Image, UnidentifiedImageError
+
+from .tools import default_ffprobe_search_roots, find_ffmpeg
+from .candidate_versions import resolve_candidate_media
+from .content_review import (
+    get_content_review, get_content_review_issue_decisions,
+    get_content_review_takeover,
+)
+from .editable_delivery import build_delivery_manifest
+from .publish_staging import PublishStaging
+from .publish_integrity import PACKAGE_FILES, manifest_files as _manifest_files, inspect_package, record_manifest
+from .reviews import matching_approval
+from .snapshots import file_content_signature, latest_review_candidate
+
+
+DELIVER_ROOT = Path(__file__).resolve().parents[1] / "deliverables" / "publish"
+
+# 起步合规清单：广告法绝对化用语 + 招商/财税高风险表述
+SENSITIVE_WORDS = [
+    "最", "第一", "国家级", "顶级", "唯一", "绝对", "100%", "百分百",
+    " guaranteed", "包过", "保过", "稳赚", "零风险", "国家级园区",
+    "最强", "首选", "极致", "极致性价比", "全网最低",
+]
+
+_COVER_CHOICES = {"candidate-1", "candidate-2", "candidate-3", "external", "pending"}
+_DELIVERY_TYPES = {"standard", "editable"}
+
+
+def validate_delivery_root(value: str | Path) -> Path:
+    """Resolve a user-selected existing folder without creating it implicitly."""
+    raw = Path(value).expanduser()
+    if not raw.is_absolute():
+        raise ValueError("DELIVERY_ROOT_INVALID: 交付目录必须是本机绝对路径")
+    try:
+        root = raw.resolve(strict=True)
+    except OSError as error:
+        raise ValueError("DELIVERY_ROOT_UNAVAILABLE: 所选交付目录当前不可访问") from error
+    if not root.is_dir():
+        raise ValueError("DELIVERY_ROOT_UNAVAILABLE: 所选交付目录不是文件夹")
+    if root == Path(root.anchor):
+        raise ValueError("DELIVERY_ROOT_INVALID: 请在磁盘根目录下选择具体文件夹")
+    return root
+
+
+def resolve_delivery_root(value: str | Path | None) -> Path:
+    """Allow the product-owned default to be created by the export worker."""
+    default = DELIVER_ROOT.resolve()
+    if value is None:
+        return default
+    raw = Path(value).expanduser()
+    if raw.is_absolute() and raw.resolve() == default and not raw.exists():
+        return default
+    return validate_delivery_root(value)
+
+
+def check_sensitive(text: str) -> list[str]:
+    if not text:
+        return []
+    hits = []
+    low = text.lower()
+    for word in SENSITIVE_WORDS:
+        if word.lower() in low:
+            hits.append(word.strip())
+    return hits
+
+
+def _safe_component(value: str, label: str) -> str:
+    if (
+        not value or value in (".", "..") or len(value) > 80
+        or any(ch in value for ch in "/\\:\0\r\n")
+        or not re.fullmatch(r"[\w\-.\u4e00-\u9fff]+", value)
+    ):
+        raise ValueError(f"INVALID_{label.upper()}: 非法路径名称：{value!r}")
+    return value
+
+
+def _same_path(left, right) -> bool:
+    if not left or not right:
+        return False
+    return Path(left).resolve() == Path(right).resolve()
+
+
+def _run_hook(name: str) -> None:
+    hook = globals().get(name)
+    if hook is not None:
+        hook()
+
+
+def _validate_release_inputs(
+    db,
+    task_id: str,
+    video_path: str | Path | None,
+    qa_report: dict | None,
+    candidate_id: str | None = None,
+) -> tuple[Path, float, dict, dict]:
+    """Load release authority from SQLite; caller data supplies only report_id."""
+    if video_path is None:
+        raise ValueError("VIDEO_PATH_REQUIRED: 完整发布包必须绑定候选成片")
+    video = Path(video_path).resolve()
+    if not video.is_file():
+        raise ValueError(f"VIDEO_NOT_FOUND: 候选成片不存在：{video}")
+    if not isinstance(qa_report, dict) or not qa_report.get("report_id"):
+        raise ValueError("QA_REPORT_REQUIRED: 完整发布包必须提供 QA report_id")
+
+    requested_report_id = qa_report["report_id"]
+    row = db.connection.execute(
+        """
+        SELECT report_id, task_id, video_path, status, issue_count,
+               blocking_count, report_json
+        FROM qa_reports
+        WHERE task_id=? AND report_id=?
+        """,
+        (task_id, requested_report_id),
+    ).fetchone()
+    if row is None:
+        raise ValueError("QA_REPORT_NOT_FOUND: SQLite 中不存在当前任务的 QA 报告")
+    if row["status"] != "passed" or row["blocking_count"] != 0:
+        raise ValueError("QA_NOT_PASSED: SQLite QA 必须 passed 且零阻断")
+    if not _same_path(row["video_path"], video):
+        raise ValueError("QA_VIDEO_MISMATCH: SQLite QA 未绑定当前候选成片")
+
+    try:
+        stored_report = json.loads(row["report_json"])
+    except (TypeError, json.JSONDecodeError) as error:
+        raise ValueError("QA_REPORT_INVALID: SQLite report_json 非法") from error
+    if (
+        not isinstance(stored_report, dict)
+        or stored_report.get("report_id") != row["report_id"]
+        or stored_report.get("task_id") != row["task_id"]
+        or stored_report.get("status") != row["status"]
+        or stored_report.get("blocking_count") != row["blocking_count"]
+        or not _same_path(stored_report.get("video_path"), row["video_path"])
+    ):
+        raise ValueError("QA_REPORT_INVALID: SQLite QA 列与 report_json 身份不一致")
+
+    raw_duration = (stored_report.get("video_spec") or {}).get("duration")
+    try:
+        duration = float(raw_duration)
+    except (TypeError, ValueError):
+        duration = math.nan
+    if not math.isfinite(duration) or duration <= 0:
+        raise ValueError("QA_DURATION_INVALID: SQLite QA 缺少有效成片时长")
+
+    candidate = latest_review_candidate(db, task_id)
+    if candidate is None or candidate.get("producer") not in {"assemble-v1", "assemble-ad-v1"}:
+        raise ValueError(
+            "TRUSTED_CANDIDATE_REQUIRED: 缺少可信审片候选"
+        )
+    if not candidate.get("candidate_id"):
+        raise ValueError("TRUSTED_CANDIDATE_REQUIRED: 当前成片缺少候选版本身份")
+    if candidate_id is not None and candidate.get("candidate_id") != candidate_id:
+        raise ValueError("CANDIDATE_BINDING_CHANGED: 发布请求绑定的候选已变化")
+    try:
+        trusted_video = resolve_candidate_media(db, task_id, candidate["candidate_id"])
+    except (KeyError, RuntimeError) as error:
+        raise ValueError("CANDIDATE_VIDEO_CHANGED: 候选成片路径或内容已变化") from error
+    if trusted_video != video:
+        raise ValueError("QA_VIDEO_MISMATCH: 发布路径不是登记的候选成片")
+    if candidate.get("qa_report_id") != row["report_id"]:
+        raise ValueError("QA_CANDIDATE_MISMATCH: QA 报告不是当前可信候选")
+    if (
+        not _same_path(candidate.get("output_path"), video)
+        or not _same_path(candidate.get("qa_output_path"), video)
+    ):
+        raise ValueError("QA_VIDEO_MISMATCH: 可信候选未绑定当前成片")
+
+    current_signature = file_content_signature(video)
+    if (
+        not isinstance(candidate.get("output_signature"), dict)
+        or candidate.get("qa_output_signature") != candidate.get("output_signature")
+        or current_signature != candidate.get("output_signature")
+    ):
+        raise ValueError("CANDIDATE_VIDEO_CHANGED: 审片后成片内容已变化")
+
+    # This validator also runs under the final publish write lock, after copying.
+    # A human issue received since approval must block both first export and retry.
+    if db.connection.execute(
+        "SELECT 1 FROM review_issues WHERE task_id=? AND candidate_id=? "
+        "AND status='open' LIMIT 1", (task_id, candidate["candidate_id"]),
+    ).fetchone() is not None:
+        raise ValueError("REVIEW_ISSUES_OPEN: 请先处理或撤回本版审片问题")
+    approval = matching_approval(
+        db,
+        task_id,
+        candidate["qa_snapshot_id"],
+        row["report_id"],
+    )
+    if approval is None or approval["decision"] != "approved":
+        raise ValueError(
+            "REVIEW_APPROVAL_REQUIRED: 缺少与当前 snapshot + QA 匹配的批准记录"
+        )
+
+    return video, duration, stored_report, candidate
+
+
+def _extract_cover(ffmpeg: Path, video: Path, timestamp: float, target: Path) -> None:
+    command = [
+        str(ffmpeg),
+        "-v", "error",
+        "-ss", f"{timestamp:.3f}",
+        "-i", str(video),
+        "-frames:v", "1",
+        "-q:v", "2",
+        "-an",
+        "-sn",
+        str(target),
+    ]
+    try:
+        completed = subprocess.run(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=60,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise RuntimeError(f"COVER_EXTRACTION_FAILED: {target.name}: {error}") from error
+    if completed.returncode != 0 or not target.is_file() or target.stat().st_size == 0:
+        detail = (completed.stderr or b"").decode("utf-8", "ignore")[-500:]
+        raise RuntimeError(
+            f"COVER_EXTRACTION_FAILED: {target.name}: "
+            f"ffmpeg code={completed.returncode} {detail}"
+        )
+
+
+def _write_exclusive(path: Path, content: str) -> None:
+    with path.open("x", encoding="utf-8", newline="\n") as target:
+        target.write(content)
+
+
+def validate_external_cover(path_value: str | Path | None) -> tuple[Path, dict]:
+    if path_value is None:
+        raise ValueError("EXTERNAL_COVER_REQUIRED: 外部封面模式必须选择图片")
+    path = Path(path_value).resolve()
+    if not path.is_file() or path.stat().st_size == 0:
+        raise ValueError(f"EXTERNAL_COVER_INVALID: 外部封面不存在或为空：{path}")
+    suffix = path.suffix.lower()
+    with path.open("rb") as source:
+        header = source.read(16)
+    valid = (
+        (suffix in {".jpg", ".jpeg"} and header.startswith(b"\xff\xd8\xff"))
+        or (suffix == ".png" and header.startswith(b"\x89PNG\r\n\x1a\n"))
+        or (suffix == ".webp" and header[:4] == b"RIFF" and header[8:12] == b"WEBP")
+    )
+    if not valid:
+        raise ValueError("EXTERNAL_COVER_INVALID: 仅支持内容有效的 JPG、PNG 或 WebP 图片")
+    expected_format = "JPEG" if suffix in {".jpg", ".jpeg"} else suffix[1:].upper()
+    try:
+        with Image.open(path) as image:
+            if image.format != expected_format:
+                raise ValueError("图片格式与扩展名不一致")
+            image.verify()
+    except (OSError, SyntaxError, UnidentifiedImageError, ValueError) as error:
+        raise ValueError("EXTERNAL_COVER_INVALID: 封面图片已损坏或格式不匹配") from error
+    return path, file_content_signature(path)
+
+
+def _file_size_or_none(path: Path) -> int | None:
+    try:
+        return path.stat().st_size
+    except OSError:
+        return None
+
+
+def _file_signature_matches(path: Path, expected: object) -> bool:
+    if not isinstance(expected, dict):
+        return False
+    try:
+        return file_content_signature(path) == expected
+    except OSError:
+        return False
+
+
+def _package_files_from_check(package_dir: Path) -> tuple[str, ...]:
+    check_path = package_dir / "publish-check.json"
+    try:
+        check = json.loads(check_path.read_text(encoding="utf-8"))
+        return _manifest_files(check) if isinstance(check, dict) else ()
+    except (OSError, ValueError, TypeError, RuntimeError):
+        return ()
+
+
+def _qa_markdown(qa_report: dict) -> str:
+    lines = [
+        "# QA 报告",
+        "",
+        f"- report_id：{qa_report['report_id']}",
+        f"- 状态：{qa_report['status']}",
+        f"- 阻断项：{qa_report.get('blocking_count', 0)}",
+        f"- 成片：{qa_report.get('video_path', '')}",
+        "",
+        "## 检查明细",
+        "",
+    ]
+    for issue in qa_report.get("issues", []):
+        mark = "通过" if issue.get("ok") is True else issue.get("severity", "异常")
+        lines.append(
+            f"- [{mark}] {issue.get('check', 'unknown')}：{issue.get('detail', '')}"
+        )
+    return "\n".join(lines) + "\n"
+
+
+def _publish_markdown(
+    task_id: str,
+    platform: str | None,
+    title: str | None,
+    description: str | None,
+    tags: list[str],
+) -> str:
+    heading = f"{title or task_id} · 发布文案" if platform in (None, "通用") else f"{title or task_id} · {platform} 发布文案"
+    return (
+        f"# {heading}\n\n"
+        f"- 标题：{title or ''}\n"
+        f"- 标签：{', '.join(tags)}\n\n"
+        f"## 简介\n\n{description or ''}\n"
+    )
+
+
+def build_publish_package(
+    db,
+    task_id: str,
+    platform: str | None = None,
+    title: str | None = None,
+    description: str | None = None,
+    tags: list[str] | None = None,
+    cover_path: str | None = None,
+    *,
+    cover_choice: str = "candidate-1",
+    external_cover_path: str | Path | None = None,
+    expected_external_cover_signature: str | None = None,
+    delivery_type: str = "standard",
+    component_overrides: dict | None = None,
+    trusted_roots: list[str | Path] | None = None,
+    video_path: str | Path | None = None,
+    qa_report: dict | None = None,
+    candidate_id: str | None = None,
+    output_root: str | Path | None = None,
+    retry_key: str | None = None,
+) -> dict:
+    """Create a candidate-bound standard or editable delivery package."""
+    if db.connection.in_transaction:
+        raise ValueError(
+            "ACTIVE_TRANSACTION_UNSUPPORTED: 发布门禁不支持调用方持有活动事务"
+        )
+    if external_cover_path is None and cover_path is not None:
+        external_cover_path = cover_path
+        if cover_choice == "candidate-1":
+            cover_choice = "external"
+    if cover_choice not in _COVER_CHOICES:
+        raise ValueError(f"COVER_CHOICE_INVALID: 不支持的封面模式：{cover_choice}")
+    if delivery_type not in _DELIVERY_TYPES:
+        raise ValueError(f"DELIVERY_TYPE_INVALID: 不支持的交付类型：{delivery_type}")
+    external_cover = None
+    external_signature = None
+    if cover_choice == "external":
+        external_cover, external_signature = validate_external_cover(external_cover_path)
+        if (expected_external_cover_signature is not None
+                and external_signature["sha256"] != expected_external_cover_signature):
+            raise ValueError("EXTERNAL_COVER_CHANGED: 封面图片与选择时预览的不一致，请重新选择")
+    elif external_cover_path is not None:
+        raise ValueError("EXTERNAL_COVER_UNUSED: 只有 external 封面模式可提交外部图片")
+    elif expected_external_cover_signature is not None:
+        raise ValueError("EXTERNAL_COVER_UNUSED: 只有 external 封面模式可提交图片指纹")
+    override_request = {}
+    for name, raw_path in sorted((component_overrides or {}).items()):
+        path = Path(raw_path).resolve()
+        if not path.is_file():
+            raise ValueError(f"EDITABLE_COMPONENT_UNTRUSTED: 组件不存在：{path}")
+        override_request[name] = {
+            "path": str(path),
+            "signature": file_content_signature(path),
+        }
+    safe_task = _safe_component(task_id, "task")
+    safe_platform = None if platform is None else _safe_component(platform, "platform")
+    video, duration, qa_report, candidate = _validate_release_inputs(
+        db, task_id, video_path, qa_report, candidate_id
+    )
+    approval = matching_approval(
+        db, task_id, candidate["qa_snapshot_id"], qa_report["report_id"],
+    )
+    content_review = get_content_review(db, task_id, candidate["candidate_id"])
+    takeover = None if content_review is None else get_content_review_takeover(
+        db, task_id, candidate["candidate_id"], content_review["run_id"],
+    )
+    content_review_manifest = {"status": "not_run"} if content_review is None else {
+        key: content_review[key] for key in (
+            "run_id", "status", "executor", "prompt_version", "model_version",
+            "qa_snapshot_id", "qa_report_id", "video_sha256",
+            "coverage_refs", "uncovered", "issues", "unknowns",
+            "conclusion", "error_reason", "created_at", "updated_at",
+        )
+    }
+    if content_review is not None:
+        content_review_manifest["issue_decisions"] = get_content_review_issue_decisions(
+            db, task_id, content_review["run_id"],
+        )
+    if takeover is not None:
+        content_review_manifest["takeover"] = {
+            key: takeover[key] for key in (
+                "takeover_id", "run_id", "watch_session_id", "review_status",
+                "acknowledged_by", "created_at",
+            )
+        }
+
+    hits = check_sensitive(title or "") + check_sensitive(description or "")
+    status = "blocked" if hits else "cleared"
+    tag_list = tags or []
+    request = {
+        "task_id": task_id, "title": title,
+        "description": description, "tags": tag_list,
+        "cover_choice": cover_choice,
+        "external_cover": None if external_cover is None else {
+            "path": str(external_cover), "signature": external_signature,
+        },
+        "delivery_type": delivery_type,
+        "component_overrides": override_request,
+        "qa_snapshot_id": candidate["qa_snapshot_id"],
+        "qa_report_id": qa_report["report_id"],
+        "candidate_id": candidate["candidate_id"],
+        "video_signature": file_content_signature(video),
+        "review_approval_id": approval["approval_id"],
+        "content_review": content_review_manifest,
+    }
+    if delivery_type == "editable":
+        from .editable_delivery import EDITABLE_EXPORT_VERSION
+        request["editable_export_version"] = EDITABLE_EXPORT_VERSION
+    if safe_platform is not None:
+        request["platform"] = safe_platform
+    root = resolve_delivery_root(output_root)
+    if root != DELIVER_ROOT.resolve():
+        request["output_root"] = str(root)
+    input_digest = hashlib.sha256(json.dumps(request, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+    records = db.connection.execute(
+        "SELECT * FROM publish_records WHERE task_id=? ORDER BY rowid DESC", (task_id,)
+    ).fetchall()
+    for record_index, record in enumerate(records):
+        if (
+            record["candidate_id"] != candidate["candidate_id"]
+            or record["package_status"] != "current"
+        ):
+            continue
+        package_dir = Path(record["cover_path"]).resolve().parent
+        check_path = package_dir / "publish-check.json"
+        if not check_path.is_file():
+            continue
+        try:
+            check = json.loads(check_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(check, dict) or check.get("input_digest") != input_digest:
+            continue
+        inspection = inspect_package(db, record, package_dir)
+        if inspection["missing_files"] or inspection["changed_files"]:
+            # Preserve the old version; repairs are a new immutable delivery.
+            continue
+        manifest_files = tuple(inspection["files"])
+        _run_hook("_before_publish_finalize_hook")
+        with db.transaction(immediate=True) as connection:
+            _locked_video, _locked_duration, locked_qa_report, locked_candidate = _validate_release_inputs(
+                db, task_id, video_path, qa_report, candidate_id,
+            )
+            locked_record = connection.execute(
+                "SELECT * FROM publish_records WHERE record_id=? AND task_id=?",
+                (record["record_id"], task_id),
+            ).fetchone()
+            if locked_record is None or dict(locked_record) != dict(record):
+                raise RuntimeError("PUBLISH_PACKAGE_BINDING_CHANGED: 发布包账本记录已变化")
+            inspected = inspect_package(db, locked_record, package_dir)
+            if inspected["missing_files"] or inspected["changed_files"]:
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 发布包在复用前发生变化")
+            if (check.get("qa_report_id") != locked_qa_report["report_id"]
+                    or check.get("review_approval_id") != approval["approval_id"]):
+                raise RuntimeError("PUBLISH_PACKAGE_BINDING_CHANGED: 发布包检查与批准身份不一致")
+            record_manifest(connection, check, file_content_signature(check_path))
+            return {
+                "record_id": record["record_id"], "task_id": task_id,
+                **({"platform": safe_platform} if safe_platform is not None else {}),
+                "title": title, "description": description,
+                "tags": tag_list, "cover_path": record["cover_path"],
+                "cover_choice": cover_choice, "delivery_type": delivery_type,
+                "sensitive_hits": check["sensitive_hits"], "status": record["status"],
+                "package_dir": str(package_dir),
+                "files": [str(package_dir / name) for name in manifest_files],
+                "qa_report_id": locked_qa_report["report_id"], "reused": True,
+                "candidate_id": locked_candidate["candidate_id"],
+                "candidate_label": locked_candidate["version_label"],
+                "package_status": record["package_status"],
+                "delivery_version": len(records) - record_index,
+            }
+    version = len(records) + 1
+    out_dir = root / (safe_task if version == 1 else f"{safe_task}-v{version}")
+    if out_dir.parent != root:
+        raise ValueError("INVALID_TASK: 发布目录越界")
+    if out_dir.exists() or out_dir.is_symlink():
+        # A process may stop after the atomic rename but before SQLite commits.
+        # Recover only the exact completed package; never replace an existing folder.
+        check_path = out_dir / "publish-check.json"
+        try:
+            orphan_check = json.loads(check_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, TypeError) as error:
+            raise FileExistsError(
+                f"发布包目标已存在且未绑定当前请求：{out_dir}"
+            ) from error
+        if not isinstance(orphan_check, dict) or orphan_check.get("input_digest") != input_digest:
+            raise FileExistsError(f"发布包目标已存在且未绑定当前请求：{out_dir}")
+        with db.transaction(immediate=True) as connection:
+            current_records = connection.execute(
+                "SELECT record_id FROM publish_records WHERE task_id=? ORDER BY rowid DESC",
+                (task_id,),
+            ).fetchall()
+            if [row["record_id"] for row in current_records] != [
+                row["record_id"] for row in records
+            ]:
+                raise RuntimeError("PUBLISH_PACKAGE_BINDING_CHANGED: 发布包账本已变化")
+            locked_video, _locked_duration, locked_qa_report, locked_candidate = _validate_release_inputs(
+                db, task_id, video_path, qa_report, candidate_id,
+            )
+            locked_approval = matching_approval(
+                db, task_id, locked_candidate["qa_snapshot_id"], locked_qa_report["report_id"],
+            )
+            try:
+                check = json.loads(check_path.read_text(encoding="utf-8"))
+                if not isinstance(check, dict):
+                    raise ValueError("交付清单不是对象")
+                manifest_files = _manifest_files(check)
+            except (OSError, ValueError, TypeError) as error:
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 待恢复交付清单已损坏") from error
+            expected_cover = {
+                "candidate-1": "cover-01.jpg",
+                "candidate-2": "cover-02.jpg",
+                "candidate-3": "cover-03.jpg",
+                "pending": "cover-pending.json",
+                "external": f"cover-external{external_cover.suffix.lower()}" if external_cover else None,
+            }[cover_choice]
+            cover = check.get("cover") or {}
+            signatures = check.get("file_signatures")
+            if (
+                out_dir.is_symlink() or out_dir.resolve().parent != root
+                or check_path.is_symlink()
+                or not set(PACKAGE_FILES).issubset(manifest_files)
+                or expected_cover not in manifest_files
+                or not re.fullmatch(r"pub-[a-f0-9]{12}", str(check.get("record_id") or ""))
+                or check.get("delivery_version") != version
+                or check.get("input_digest") != input_digest
+                or check.get("task_id") != task_id
+                or check.get("candidate_id") != locked_candidate["candidate_id"]
+                or check.get("qa_report_id") != locked_qa_report["report_id"]
+                or check.get("review_approval_id") != locked_approval["approval_id"]
+                or check.get("status") != status
+                or check.get("sensitive_hits") != hits
+                or check.get("tags") != tag_list
+                or check.get("platform") != (safe_platform if safe_platform not in (None, "通用") else None)
+                or check.get("delivery_type") != delivery_type
+                or not isinstance(cover, dict) or cover.get("choice") != cover_choice
+                or cover.get("path") != expected_cover
+                or not isinstance(signatures, dict)
+                or any(
+                    not (out_dir / name).is_file() or (out_dir / name).is_symlink()
+                    or signatures.get(name) != file_content_signature(out_dir / name)
+                    for name in manifest_files if name != "publish-check.json"
+                )
+                or file_content_signature(out_dir / "video-final.mp4") != file_content_signature(locked_video)
+            ):
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 待恢复交付包内容已变化")
+            connection.execute(
+                """UPDATE publish_records SET package_status='expired'
+                WHERE task_id=? AND candidate_id=? AND package_status='current'""",
+                (task_id, locked_candidate["candidate_id"]),
+            )
+            connection.execute(
+                """INSERT INTO publish_records
+                  (record_id, task_id, platform, title, description, tags, cover_path,
+                   sensitive_hits, status, candidate_id, package_status)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'current')""",
+                (check["record_id"], task_id, safe_platform, title, description,
+                 json.dumps(tag_list, ensure_ascii=False), str(out_dir / expected_cover),
+                 json.dumps(hits, ensure_ascii=False), status, locked_candidate["candidate_id"]),
+            )
+            record_manifest(connection, check, file_content_signature(check_path))
+            connection.execute(
+                """UPDATE candidate_versions SET status='published', updated_at=datetime('now')
+                WHERE task_id=? AND candidate_id=?""",
+                (task_id, locked_candidate["candidate_id"]),
+            )
+        return {
+            "record_id": check["record_id"], "task_id": task_id,
+            **({"platform": safe_platform} if safe_platform is not None else {}),
+            "title": title, "description": description, "tags": tag_list,
+            "cover_path": str(out_dir / expected_cover),
+            "cover_choice": cover_choice, "delivery_type": delivery_type,
+            "sensitive_hits": hits, "status": status,
+            "package_dir": str(out_dir),
+            "files": [str(out_dir / name) for name in manifest_files],
+            "qa_report_id": locked_qa_report["report_id"],
+            "candidate_id": locked_candidate["candidate_id"],
+            "candidate_label": locked_candidate["version_label"],
+            "package_status": "current", "delivery_version": version,
+            "reused": True,
+        }
+
+    if root == DELIVER_ROOT.resolve():
+        root.mkdir(parents=True, exist_ok=True)
+    elif not root.is_dir():
+        raise ValueError("DELIVERY_ROOT_UNAVAILABLE: 所选交付目录已离线")
+    try:
+        free_bytes = shutil.disk_usage(root).free
+    except OSError as error:
+        raise ValueError("DELIVERY_ROOT_UNAVAILABLE: 无法检查交付目录空间") from error
+    # An ordinary export still needs room for the whole package. A retry may
+    # reuse only files verified against its durable job checkpoint.
+    if retry_key is None:
+        remaining_bytes = video.stat().st_size
+        remaining_bytes += external_cover.stat().st_size if external_cover else 0
+        remaining_bytes += sum(Path(value["path"]).stat().st_size for value in override_request.values())
+        required_bytes = remaining_bytes + max(64 * 1024 * 1024, remaining_bytes // 20)
+        if free_bytes < required_bytes:
+            raise RuntimeError("DELIVERY_SPACE_INSUFFICIENT: 交付目录剩余空间不足")
+    stage = PublishStaging(root, safe_task, input_digest, version, retry_key)
+    if retry_key is not None:
+        remaining_bytes = 0 if stage.file_valid("video-final.mp4") else video.stat().st_size
+        if external_cover:
+            cover_name = f"cover-external{external_cover.suffix.lower()}"
+            remaining_bytes += 0 if stage.file_valid(cover_name) else external_cover.stat().st_size
+        remaining_bytes += sum(Path(value["path"]).stat().st_size for value in override_request.values())
+        required_bytes = remaining_bytes + max(64 * 1024 * 1024, remaining_bytes // 20)
+        if free_bytes < required_bytes:
+            raise RuntimeError("DELIVERY_SPACE_INSUFFICIENT: 交付目录剩余空间不足")
+    staging = stage.path
+    record_id = stage.record_id
+    moved = False
+    try:
+        if not stage.file_valid("video-final.mp4"):
+            (staging / "video-final.mp4").unlink(missing_ok=True)
+            shutil.copyfile(video, staging / "video-final.mp4")
+            stage.record_file("video-final.mp4")
+        ffmpeg = find_ffmpeg(
+            os.environ, search_roots=default_ffprobe_search_roots(os.environ)
+        )
+        for index, fraction in enumerate((0.15, 0.50, 0.85), start=1):
+            name = f"cover-{index:02d}.jpg"
+            if not stage.file_valid(name):
+                (staging / name).unlink(missing_ok=True)
+                _extract_cover(ffmpeg, video, duration * fraction, staging / name)
+                stage.record_file(name)
+
+        selected_name = {
+            "candidate-1": "cover-01.jpg",
+            "candidate-2": "cover-02.jpg",
+            "candidate-3": "cover-03.jpg",
+        }.get(cover_choice)
+        cover_manifest = {"choice": cover_choice}
+        if selected_name is not None:
+            cover_manifest.update({"mode": "candidate", "path": selected_name})
+        elif cover_choice == "external":
+            selected_name = f"cover-external{external_cover.suffix.lower()}"
+            if not stage.file_valid(selected_name):
+                (staging / selected_name).unlink(missing_ok=True)
+                shutil.copyfile(external_cover, staging / selected_name)
+                if file_content_signature(staging / selected_name) != external_signature:
+                    raise ValueError("EXTERNAL_COVER_CHANGED: 封面图片在复制时发生变化，请重新选择")
+                stage.record_file(selected_name)
+            cover_manifest.update({
+                "mode": "external", "path": selected_name,
+                "source_path": str(external_cover),
+                "source_signature": external_signature,
+            })
+        else:
+            selected_name = "cover-pending.json"
+            if not stage.file_valid(selected_name):
+                (staging / selected_name).unlink(missing_ok=True)
+                _write_exclusive(
+                    staging / selected_name,
+                    json.dumps({
+                        "status": "pending",
+                        "message": "封面尚未确定，发布前必须补选封面。",
+                    }, ensure_ascii=False, indent=2) + "\n",
+                )
+                stage.record_file(selected_name)
+            cover_manifest.update({"mode": "pending", "path": selected_name})
+
+        core_names = {
+            "video-final.mp4", "cover-01.jpg", "cover-02.jpg", "cover-03.jpg", selected_name,
+        }
+        actual_files = stage.valid_tail()
+        if actual_files is None:
+            editable_files = stage.valid_group("editable") if delivery_type == "editable" else None
+            kept_components = stage.valid_component_files() if delivery_type == "editable" else set()
+            stage.clear_tail(core_names | set(editable_files or []) | kept_components)
+            if delivery_type == "editable" and editable_files is None:
+                def copy_verified(source: Path, target: Path) -> None:
+                    if stage.file_valid(target.name) and (
+                        file_content_signature(target) == file_content_signature(source)
+                    ):
+                        return
+                    target.unlink(missing_ok=True)
+                    shutil.copyfile(source, target)
+                    stage.record_file(target.name)
+
+                build_delivery_manifest(
+                    staging,
+                    candidate,
+                    trusted_roots or [video.parent],
+                    component_overrides=component_overrides,
+                    copy_verified=copy_verified,
+                )
+                editable_files = [
+                    path.name for path in staging.iterdir()
+                    if path.is_file() and path.name not in core_names
+                ]
+                stage.record_group("editable", editable_files)
+
+            _write_exclusive(
+                staging / "publish-copy.md",
+                _publish_markdown(task_id, safe_platform, title, description, tag_list),
+            )
+            _write_exclusive(staging / "qa-report.md", _qa_markdown(qa_report))
+            actual_files = list(PACKAGE_FILES)
+            if selected_name not in actual_files:
+                actual_files.insert(actual_files.index("publish-check.json"), selected_name)
+            if delivery_type == "editable":
+                for path in sorted(staging.iterdir(), key=lambda item: item.name):
+                    if path.is_file() and path.name not in actual_files:
+                        actual_files.insert(actual_files.index("publish-check.json"), path.name)
+
+            package_check = {
+                "record_id": record_id,
+                "delivery_version": version,
+                "input_digest": input_digest,
+                "task_id": task_id,
+                "status": status,
+                "qa_report_id": qa_report["report_id"],
+                "review_approval_id": approval["approval_id"],
+                "content_review": content_review_manifest,
+                "candidate_id": candidate["candidate_id"],
+                "candidate_label": candidate["version_label"],
+                "qa_video_path": qa_report["video_path"],
+                "sensitive_hits": hits,
+                "tags": tag_list,
+                "cover": cover_manifest,
+                "delivery_type": delivery_type,
+                "files": actual_files,
+            }
+            if safe_platform not in (None, "通用"):
+                package_check["platform"] = safe_platform
+            package_check["file_signatures"] = {
+                name: file_content_signature(staging / name)
+                for name in actual_files if name != "publish-check.json"
+            }
+            _write_exclusive(
+                staging / "publish-check.json",
+                json.dumps(package_check, ensure_ascii=False, indent=2) + "\n",
+            )
+
+            stage.record_tail(actual_files)
+        else:
+            try:
+                package_check = json.loads((staging / "publish-check.json").read_text("utf-8"))
+                if not isinstance(package_check, dict):
+                    raise ValueError("交付清单不是对象")
+                listed_files = _manifest_files(package_check)
+            except (OSError, ValueError, TypeError) as error:
+                raise RuntimeError("DELIVERY_STAGE_CHANGED: 暂存交付清单已损坏") from error
+            if (
+                not isinstance(package_check, dict)
+                or package_check.get("record_id") != record_id
+                or package_check.get("input_digest") != input_digest
+                or package_check.get("delivery_version") != version
+                or package_check.get("task_id") != task_id
+                or package_check.get("candidate_id") != candidate["candidate_id"]
+                or package_check.get("qa_report_id") != qa_report["report_id"]
+                or package_check.get("review_approval_id") != approval["approval_id"]
+                or package_check.get("delivery_type") != delivery_type
+                or (package_check.get("cover") or {}).get("path") != selected_name
+                or not set(PACKAGE_FILES).issubset(actual_files)
+                or selected_name not in actual_files
+                or listed_files != tuple(actual_files)
+            ):
+                raise RuntimeError("DELIVERY_STAGE_CHANGED: 暂存交付包身份已变化")
+
+        _run_hook("_before_publish_finalize_hook")
+        connection = db.connection
+        transaction_started = False
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            transaction_started = True
+            locked_video, _locked_duration, locked_qa_report, locked_candidate = _validate_release_inputs(
+                db, task_id, video_path, qa_report, candidate_id,
+            )
+            if locked_candidate["candidate_id"] != candidate["candidate_id"]:
+                raise ValueError("CANDIDATE_BINDING_CHANGED: 发布期间当前候选已变化")
+            try:
+                staged_check = json.loads((staging / "publish-check.json").read_text("utf-8"))
+            except (OSError, ValueError) as error:
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 暂存交付清单无法读取") from error
+            if staged_check != package_check or _manifest_files(staged_check) != tuple(actual_files):
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 暂存交付清单已变化")
+            staged_signatures = staged_check.get("file_signatures")
+            if not isinstance(staged_signatures, dict) or any(
+                not _file_signature_matches(staging / name, staged_signatures.get(name))
+                for name in actual_files if name != "publish-check.json"
+            ):
+                raise RuntimeError("PUBLISH_PACKAGE_CHANGED: 暂存交付文件已变化")
+            staged_signature = file_content_signature(staging / "video-final.mp4")
+            if staged_signature != file_content_signature(locked_video):
+                raise ValueError(
+                    "CANDIDATE_VIDEO_CHANGED: 暂存发布包与当前可信候选成片不一致"
+                )
+            if out_dir.exists() or out_dir.is_symlink():
+                raise FileExistsError(f"发布包目标已存在：{out_dir}")
+            os.rename(staging, out_dir)
+            moved = True
+            connection.execute(
+                """UPDATE publish_records SET package_status='expired'
+                WHERE task_id=? AND candidate_id=? AND package_status='current'""",
+                (task_id, candidate["candidate_id"]),
+            )
+            connection.execute(
+                """
+                INSERT INTO publish_records
+                  (record_id, task_id, platform, title, description, tags, cover_path,
+                   sensitive_hits, status, candidate_id, package_status)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'current')
+                """,
+                (
+                    record_id,
+                    task_id,
+                    safe_platform,
+                    title,
+                    description,
+                    json.dumps(tag_list, ensure_ascii=False),
+                    str(out_dir / selected_name),
+                    json.dumps(hits, ensure_ascii=False),
+                    status,
+                    candidate["candidate_id"],
+                ),
+            )
+            record_manifest(connection, package_check, file_content_signature(out_dir / "publish-check.json"))
+            connection.execute(
+                """UPDATE candidate_versions
+                SET status='published', updated_at=datetime('now')
+                WHERE task_id=? AND candidate_id=?""",
+                (task_id, candidate["candidate_id"]),
+            )
+            connection.commit()
+            video = locked_video
+            qa_report = locked_qa_report
+        except BaseException:
+            if transaction_started:
+                connection.rollback()
+            raise
+    except BaseException:
+        if moved:
+            if stage.persistent:
+                try:
+                    os.rename(out_dir, staging)
+                except OSError:
+                    # The complete orphan can be reconciled on the next retry.
+                    pass
+            else:
+                shutil.rmtree(out_dir, ignore_errors=True)
+        elif not stage.persistent:
+            shutil.rmtree(staging, ignore_errors=True)
+        raise
+
+    stage.finish()
+    return {
+        "record_id": record_id,
+        "task_id": task_id,
+        **({"platform": safe_platform} if safe_platform is not None else {}),
+        "title": title,
+        "description": description,
+        "tags": tag_list,
+        "cover_path": str(out_dir / selected_name),
+        "cover_choice": cover_choice,
+        "delivery_type": delivery_type,
+        "sensitive_hits": hits,
+        "status": status,
+        "package_dir": str(out_dir),
+        "files": [str(out_dir / name) for name in actual_files],
+        "qa_report_id": qa_report["report_id"],
+        "candidate_id": candidate["candidate_id"],
+        "candidate_label": candidate["version_label"],
+        "package_status": "current",
+        "delivery_version": version,
+        "reused": False,
+    }
+
+
+def list_publish(db, task_id: str) -> list[dict]:
+    result = []
+    current = latest_review_candidate(db, task_id)
+    current_candidate_id = None if current is None else current.get("candidate_id")
+    current_approval = (
+        matching_approval(db, task_id, current["qa_snapshot_id"], current["qa_report_id"])
+        if current is not None and current.get("qa_snapshot_id") and current.get("qa_report_id")
+        else None
+    )
+    rows = db.connection.execute(
+        """SELECT p.record_id,p.task_id,p.platform,p.status,p.title,p.description,p.cover_path,p.created_at,
+                  p.candidate_id,p.package_status,c.version_no
+        FROM publish_records AS p
+        LEFT JOIN candidate_versions AS c ON c.candidate_id=p.candidate_id
+        WHERE p.task_id=? ORDER BY p.created_at DESC,p.rowid DESC""",
+        (task_id,),
+    ).fetchall()
+    for index, row in enumerate(rows):
+        item = dict(row)
+        cover_path = item.pop("cover_path", None)
+        package_dir = (
+            Path(cover_path).resolve().parent
+            if isinstance(cover_path, str) and cover_path
+            else None
+        )
+        inspection = inspect_package(db, item, package_dir)
+        check = inspection["check"]
+        files = [] if package_dir is None else [str(package_dir / name) for name in inspection["files"]]
+        missing_files = inspection["missing_files"]
+        changed_files = inspection["changed_files"]
+        cover = check.get("cover") if isinstance(check.get("cover"), dict) else {}
+        cover_signature = cover.get("source_signature") if isinstance(cover.get("source_signature"), dict) else {}
+        item.update({
+            "delivery_version": len(rows) - index,
+            "candidate_label": (
+                None if item.pop("version_no", None) is None
+                else f"candidate-v{row['version_no']}"
+            ),
+            "is_current": bool(
+                item.get("package_status") == "current"
+                and item.get("candidate_id") == current_candidate_id
+                and current_approval is not None
+                and current_approval["decision"] == "approved"
+            ),
+            "package_dir": None if package_dir is None else str(package_dir),
+            "files": files,
+            "missing_files": missing_files,
+            "changed_files": changed_files,
+            "cover_path": cover_path,
+            "cover_choice": cover.get("choice"),
+            "cover_signature": cover_signature.get("sha256"),
+            "delivery_type": check.get("delivery_type"),
+            "tags": check.get("tags") or [],
+            "package_complete": bool(files) and not missing_files and not changed_files,
+            "manifest_registered": inspection["manifest_registered"],
+        })
+        result.append(item)
+    return result
+
+
+def registered_delivery_directory(db, task_id: str, record_id: str) -> Path:
+    """Return only a complete folder registered for this task and package."""
+    package = next((item for item in list_publish(db, task_id)
+                    if item["record_id"] == record_id), None)
+    if package is None:
+        raise KeyError("DELIVERY_PACKAGE_NOT_FOUND: 未找到本任务交付包")
+    if not package["package_complete"] or not package["package_dir"]:
+        affected = package["missing_files"] + package["changed_files"]
+        detail = "、".join(affected) if affected else "交付清单"
+        raise RuntimeError(f"DELIVERY_PACKAGE_INCOMPLETE: {detail} 缺失或变化，不能打开目录")
+    folder = Path(package["package_dir"]).resolve()
+    try:
+        check = json.loads((folder / "publish-check.json").read_text("utf-8"))
+    except (OSError, ValueError, TypeError) as error:
+        raise RuntimeError("DELIVERY_PACKAGE_INCOMPLETE: 交付清单无法读取") from error
+    if check.get("record_id") != record_id or check.get("task_id") != task_id:
+        raise RuntimeError("DELIVERY_PACKAGE_BINDING_CHANGED: 交付目录与账本身份不符")
+    try:
+        manifest_files = _manifest_files(check)
+        signatures = check.get("file_signatures")
+        if not isinstance(signatures, dict) or (folder / "publish-check.json").is_symlink():
+            raise RuntimeError("DELIVERY_PACKAGE_CHANGED: 交付清单签名缺失或已变化")
+        for name in manifest_files:
+            if name == "publish-check.json":
+                continue
+            path = folder / name
+            if path.is_symlink() or not path.is_file() or signatures.get(name) != file_content_signature(path):
+                raise RuntimeError(f"DELIVERY_PACKAGE_CHANGED: {name} 已变化，请重新导出")
+    except OSError as error:
+        raise RuntimeError("DELIVERY_PACKAGE_CHANGED: 交付文件读取失败，请重新导出") from error
+    return folder
+
+
+def registered_delivery_cover(db, task_id: str, record_id: str) -> Path:
+    """Resolve an image inside a complete registered package for local preview."""
+    folder = registered_delivery_directory(db, task_id, record_id)
+    row = db.connection.execute(
+        "SELECT cover_path FROM publish_records WHERE task_id=? AND record_id=?",
+        (task_id, record_id),
+    ).fetchone()
+    if row is None or not row["cover_path"]:
+        raise RuntimeError("DELIVERY_COVER_UNAVAILABLE: 此交付包没有可预览封面")
+    cover = Path(row["cover_path"]).resolve()
+    if cover.parent != folder:
+        raise RuntimeError("DELIVERY_COVER_UNAVAILABLE: 封面路径已脱离交付包")
+    try:
+        validate_external_cover(cover)
+    except (OSError, ValueError) as error:
+        raise RuntimeError("DELIVERY_COVER_UNAVAILABLE: 封面图片已失效") from error
+    return cover

@@ -16,7 +16,7 @@ from urllib.parse import quote, urlsplit
 from workbench.paths import LEGACY_MODULES
 LOCAL_MODULES = Path(__file__).resolve().parents[1]/'work/runtime/node_modules'
 SHARED = LOCAL_MODULES if all((LOCAL_MODULES/p/'package.json').exists() for p in ('remotion','@remotion/bundler','@remotion/renderer','vite','@remotion/motion-blur')) else LEGACY_MODULES
-BROWSER = SHARED/'.remotion/chrome-headless-shell/win64/chrome-headless-shell-win64/chrome-headless-shell.exe'
+BROWSER = LEGACY_MODULES/'.remotion/chrome-headless-shell/win64/chrome-headless-shell-win64/chrome-headless-shell.exe'
 REPOS = ('video-shotcraft-main', 'vibe-knowledge-film-main', 'anything2explainer-main')
 
 def uri(path: str | Path) -> str:
@@ -55,6 +55,15 @@ def _imports(files):
 def discover(vendor) -> dict:
     vendor = Path(vendor).resolve()
     repo = vendor / REPOS[0]
+    bundled = Path(__file__).resolve().parents[1] / 'work/native/shotcraft'
+    if not (repo / 'gallery/api/library.json').is_file():
+        repo = bundled.resolve()
+    if not (repo / 'gallery/api/library.json').is_file():
+        raise FileNotFoundError('Shotcraft 模板目录缺失：请检查 work/native/shotcraft/gallery/api/library.json')
+    def shot_uri(file):
+        if repo == bundled.resolve():
+            return '/native/shotcraft/' + quote(file.relative_to(repo).as_posix(), safe='/')
+        return uri(file.relative_to(vendor))
     library = json.loads((repo / 'gallery/api/library.json').read_text(encoding='utf-8-sig'))
     packages = _packages(SHARED)
     recipes = []
@@ -66,7 +75,7 @@ def discover(vendor) -> dict:
         demo_files = sorted(demo_dir.rglob('*.tsx')) if demo_dir.is_dir() else ([demo_dir] if demo_dir.is_file() else [])
         dependencies = _imports(demo_files)
         missing = [name for name in dependencies if not (SHARED / name / 'package.json').exists()]
-        demos = [uri(f.relative_to(vendor)) for f in demo_files]
+        demos = [shot_uri(f) for f in demo_files]
         styles = []
         for style in card.get('styles', []):
             media = style.get('media', {})
@@ -74,16 +83,16 @@ def discover(vendor) -> dict:
             poster = repo / 'gallery/media/poster' / (style['key']+'.jpg')
             styles.append({'id': style['key'], 'name': style.get('label', style['key']),
                            'description': style.get('description', ''),
-                           'preview': uri(media_path.relative_to(vendor)) if media_path.is_file() else None,
+                           'preview': shot_uri(media_path) if media_path.is_file() else None,
                            'remotePreview': 'https://vincentwei1021.github.io/video-shotcraft/media/'+quote(style['key'])+'.mp4',
-                           'poster':uri(poster.relative_to(vendor)) if poster.is_file() else None,
+                           'poster':shot_uri(poster) if poster.is_file() else None,
                            'previewStatus':'local' if media_path.is_file() else 'local_missing_remote_unverified',
                            'available': media_path.is_file(), 'mediaType': media.get('type', 'mp4')})
         recipes.append({'id': card['name'], 'name': card['name'], 'category': card.get('category', 'other'),
                         'description': card.get('summary', ''), 'use': card.get('use', ''),
                         'duration': card.get('duration', ''), 'energy': card.get('energy', ''),
                         'intention': card.get('intention', ''), 'tags': card.get('tags', []),
-                        'reference': uri(reference.relative_to(vendor)), 'demo': demos,
+                        'reference': shot_uri(reference), 'demo': demos,
                         'preview': next((s['preview'] for s in styles if s['preview']), None),
                         'styles': styles, 'sourceAvailable': bool(demo_files),
                         'poster':next((s['poster'] for s in styles if s['poster']),None),
@@ -93,22 +102,18 @@ def discover(vendor) -> dict:
                         'note': '应用会保留准确demo源码；额外依赖缺失的镜头需在原生工作台补齐后渲染。'})
     audio_root = repo / 'assets/audio'
     attribution = (audio_root / 'ATTRIBUTION.md').read_text(encoding='utf-8')
-    legacy_sfx = audio_root / 'ATTRIBUTION-legacy-sfx.md'
-    legacy_attribution = legacy_sfx.read_text(encoding='utf-8') if legacy_sfx.is_file() else None
     audio = []
     for f in sorted(audio_root.rglob('*')):
         if f.suffix.lower() not in ('.mp3', '.wav', '.ogg', '.m4a', '.flac'): continue
         rel = f.relative_to(audio_root)
-        source = legacy_sfx if rel.parts[0] == 'sfx' and legacy_attribution is not None else audio_root / 'ATTRIBUTION.md'
-        text = legacy_attribution if source == legacy_sfx else attribution
-        lines = [line for line in text.splitlines() if f.name in line]
+        lines = [line for line in attribution.splitlines() if f.name in line]
         evidence = '\n'.join(lines)
         uncertain = not lines or any(x in evidence for x in ('无法反查', '待考', '须确认'))
         audio.append({'id': rel.as_posix(), 'name': f.stem, 'kind': 'bgm' if rel.parts[0] == 'bgm' else 'sfx',
                       'category': rel.parts[1] if rel.parts[0] == 'sfx' and len(rel.parts)>2 else 'bgm',
-                      'preview': uri(f.relative_to(vendor)), 'bytes': f.stat().st_size,
+                      'preview': shot_uri(f), 'bytes': f.stat().st_size,
                       'available': True, 'licenseStatus': 'needs_review' if uncertain else 'recorded',
-                      'attribution': evidence, 'source': uri(source.relative_to(vendor))})
+                      'attribution': evidence, 'source': shot_uri(audio_root/'ATTRIBUTION.md')})
     licenses = []
     for repo_name in REPOS:
         for f in sorted((vendor/repo_name).rglob('*')):
@@ -166,9 +171,7 @@ def native_tools(vendor, root) -> dict:
     explainer = native/'explainer'
     _copy(vendor/REPOS[2]/'template', explainer)
     if SHARED.exists(): _junction(explainer/'node_modules', SHARED)
-    version_file = vendor/REPOS[0]/'.suojian-upstream.json'
-    version = json.loads(version_file.read_text(encoding='utf-8')).get('commit', '') if version_file.is_file() else ''
-    shot = native/('shotcraft-'+version[:12] if re.fullmatch(r'[0-9a-f]{40}', version) else 'shotcraft')
+    shot = native/'shotcraft'
     _copy(vendor/REPOS[0], shot)
     wb = shot/'workbench'
     if SHARED.exists(): _junction(wb/'node_modules', SHARED)

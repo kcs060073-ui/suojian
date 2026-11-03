@@ -87,6 +87,23 @@ def public_tts_profiles(db):
 
 
 def dispatch(root, db, op, args):
+    if op == 'model_settings':
+        from workbench.api import ApiError, WorkbenchAPI
+        method = args.get('method')
+        path = args.get('path', '')
+        permitted = (
+            method == 'GET' and path == '/api/settings/model-profiles'
+            or method == 'GET' and re.fullmatch(r'/api/settings/provider-accounts/[A-Za-z0-9_.-]+/voices', path)
+            or method == 'POST' and path in ('/api/settings/provider-accounts', '/api/settings/model-profiles')
+            or method == 'POST' and re.fullmatch(r'/api/settings/model-profiles/[A-Za-z0-9_.-]+/default', path)
+            or method == 'POST' and re.fullmatch(r'/api/settings/provider-accounts/[A-Za-z0-9_.-]+/voices/refresh', path)
+        )
+        if not permitted:
+            raise ValueError('不支持此模型设置操作')
+        try:
+            return WorkbenchAPI(db, root).dispatch(method, path, args.get('body') or {}).payload
+        except ApiError as exc:
+            return {'settingsError': exc.message}
     from media_catalog.agent_gateway import AgentGateway
     from media_catalog import packaging_plan as packaging
     gateway = AgentGateway(db, project_root=root)

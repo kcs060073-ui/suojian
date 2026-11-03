@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const list=document.getElementById('recentProjects'), search=document.getElementById('projectSearch'), more=document.getElementById('moreProjects');
-  const names={feed:'园区信息流复刻',presenter:'真人口播复刻',vibe:'园区 Vibe'};
+  const names={feed:'园区信息流复刻',presenter:'真人口播复刻',vibe:'VibeCraft'};
   const shapes={feed:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5m8-5v5m-9 5h5m-5 3h9"/>',presenter:'<circle cx="12" cy="8" r="3"/><path d="M5 20v-3a7 7 0 0 1 14 0v3M3 3h3M3 3v3m18-3h-3m3 0v3"/>',vibe:'<path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z"/>'};
   let projects=[],filter='all',limit=6;
   const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

@@ -55,10 +55,16 @@ def plan_storyboard(script: str, materials: list[dict], ratio: str, recipe: dict
     shots = recipe.get("shots") or []
     for index, text in enumerate(semantic_split(script, target_chars=10 if shots else 14, max_chars=15 if shots else 24)):
         terms = [word for triggers, words in groups if any(t in text for t in triggers) for word in words]
+        shot = shots[index % len(shots)] if shots else {}
+        wanted = shot.get('motion', 'unknown')
+        if isinstance(wanted, dict):
+            wanted = wanted.get('type', 'unknown')
         def score(m):
+            from suo_jian.analyzer.motion_planning import motion_match
             path = m["relativePath"]
-            return (sum(6 for term in terms if term in path) + len(set(text) & set(Path(path).stem))
-                    - used.get(m["assetId"], 0) * 10)
+            content = sum(6 for term in terms if term in path) + len(set(text) & set(Path(path).stem))
+            motion = motion_match(wanted, m.get('motion') or {})[0]
+            return (content, motion, -used.get(m['assetId'], 0))
         asset = max(candidates, key=score)
         used[asset["assetId"]] = used.get(asset["assetId"], 0) + 1
         shot = shots[index % len(shots)] if shots else {}

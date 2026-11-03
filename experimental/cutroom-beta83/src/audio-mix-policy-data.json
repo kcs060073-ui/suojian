@@ -1,0 +1,8 @@
+{
+  "version": "full-track-v2",
+  "sampleRate": 48000,
+  "bitrate": "128k",
+  "voiceFilter": "highpass=f=80,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,aformat=channel_layouts=stereo",
+  "duckFilter": "sidechaincompress=threshold=0.01:ratio=6:attack=15:release=300:mix=0.65",
+  "limiterFilter": "alimiter=limit=0.8:level=0:latency=1"
+}

@@ -6,6 +6,7 @@ import tempfile
 import threading
 import time
 import unittest
+from unittest.mock import patch
 from workbench.director import Director,ProviderError,apply_operations,context_for_model,digest,provider_call,seal,SCHEMA
 from workbench.server import validate_config
 
@@ -105,6 +106,23 @@ class DirectorTest(unittest.TestCase):
         one=self.wait_job(one['id']);self.assertEqual(one['status'],'completed')
         with self.assertRaisesRegex(ValueError,'工程已变化'):self.d.apply(one['planId'])
         self.assertEqual(self.wait_job(two['id'])['status'],'cancelled')
+    def test_shared_model_is_used_without_rewriting_legacy_settings(self):
+        self.settings()
+        before = self.d.secret_path.read_bytes()
+        shared = {'id':'shared-p','name':'共享模型','provider':'test','base_url':'https://example.test/v1',
+                  'protocol':'chat','model':'shared-model','key':'shared-secret','enabled':True}
+        calls=[]
+        def transport(url,key,body,timeout):
+            calls.append((url,key,body['model']))
+            return {'choices':[{'message':{'content':json.dumps(reply())},'finish_reason':'stop'}]}
+        self.d.transport=transport
+        with patch('workbench.shared_models.planning_profile',return_value=shared):
+            job=self.wait_job(self.d.enqueue({'instruction':'检查画面'})['id'])
+        self.assertEqual(job['status'],'completed')
+        self.assertEqual(calls,[('https://example.test/v1/chat/completions','shared-secret','shared-model')])
+        self.assertEqual(self.d.secret_path.read_bytes(),before)
+        self.assertNotIn('shared-secret',json.dumps(job))
+
     def test_key_roundtrip_and_url_validation(self):
         s=seal('test-key-not-an-api-secret');self.assertEqual(seal(s,True),'test-key-not-an-api-secret')
         data=self.settings()

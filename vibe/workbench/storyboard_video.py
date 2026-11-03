@@ -83,8 +83,8 @@ class Videos:
             body['duration']=job['duration']
             redacted=json.loads(json.dumps(body));redacted['content'][1]['image_url']['url']='[image omitted]'
             save(folder/'request.redacted.json', {'endpoint':module.API,'body':redacted})
-            token=module.credentials();transport=module.HTTP(token)
-            update(status='submitting',model=module.MODEL)
+            token=module.credentials(body['model']);transport=module.HTTP(token)
+            update(status='submitting',model=body['model'])
             result,request_id=transport.request('POST','',body)
             provider_id=result.get('id')
             if not isinstance(provider_id,str) or not provider_id or not all(c.isalnum() or c in '_-' for c in provider_id):

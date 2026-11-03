@@ -439,7 +439,13 @@ class Director:
         instruction=text(data.get('instruction','').strip(),40000); role=data.get('role','edit')
         if not instruction: raise ValueError('请输入一句修改要求或剧本')
         if role not in ROLES: raise ValueError('任务类型不支持')
-        settings=self.settings(False); route=[data['profile_id']] if data.get('profile_id') else settings['routes'][role]
+        settings=self.settings(False)
+        from workbench.shared_models import planning_profile
+        shared = planning_profile(self.root) if not data.get('profile_id') else None
+        if shared:
+            shared['secret'] = seal(shared.pop('key'))
+            settings['profiles'].append(shared)
+        route=[data['profile_id']] if data.get('profile_id') else ([shared['id']] if shared else settings['routes'][role])
         if not settings['allowFallback']: route=route[:1]
         if not route: raise ValueError('请先在API调度设置为此任务选择一个模型')
         if any(not any(p['id']==pid and p['enabled'] and p['secret'] and p['model'] for p in settings['profiles']) for pid in route): raise ValueError('调度配置中存在未填写密钥、模型或未启用的接口')

@@ -17,8 +17,17 @@ def installation_info(root: Path) -> dict:
     value = {"version": data.get("version"), "distribution": data.get("distribution", "source"),
              "database_path": str(database), "database_exists": database.is_file(),
              "schema_version": None, "expected_schema_version": max(migrations, default=None),
-             "reference_extension_available": (root / "media_catalog" / "reference_editing.py").is_file(),
+             "reference_extension_source_present": (root / "media_catalog" / "reference_editing.py").is_file(),
              "mcp_verified": False}
+    # Source checkouts can be newer too: packaging format alone does not prove
+    # the beta.8 delegated workflow is compatible with later review gates.
+    value["legacy_automatic_supported"] = bool(
+        value["version"] == "0.9.0-beta.8" and value["distribution"] == "source"
+        and value["reference_extension_source_present"]
+    )
+    # Having a copied module does not establish that the newer render recipe
+    # executes it; only the existing beta.8 integration is known to do so.
+    value["reference_extension_available"] = value["legacy_automatic_supported"]
     if database.is_file():
         try:
             with closing(sqlite3.connect(database.as_uri() + "?mode=ro", uri=True)) as db:
@@ -49,7 +58,8 @@ def mcp_arguments(root: Path, origin: str | None = None) -> list[str]:
             or parsed.username or parsed.password or parsed.path not in {"", "/"} or parsed.query or parsed.fragment):
         raise ValueError("Cutroom 工作台地址必须是本机 HTTP 来源。")
     arguments = [str(root / "scripts" / "cutroom_mcp.py"), "--client", "codex"]
-    if not (root / "release-manifest.json").is_file():
+    info = installation_info(root)
+    if info["version"] == "0.9.0-beta.8" and info["distribution"] == "source":
         if origin.rstrip("/") != "http://127.0.0.1:8765":
             raise ValueError("旧版 Cutroom 不支持自定义工作台地址绑定，请使用对应版本的默认地址。")
         return arguments

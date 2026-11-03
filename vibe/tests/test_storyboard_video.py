@@ -25,8 +25,8 @@ class VideoWorkflowTests(unittest.TestCase):
                     return ({'id':'provider-1'} if method=='POST' else {'status':'succeeded','content':{'video_url':'https://example.test/video'}}), 'request-1'
                 def download(self,url,target):
                     target.write_bytes(b'mock');return {'sha256':'fake-output'}
-            module=SimpleNamespace(API='https://example.test',MODEL='test-model',credentials=lambda:'secret',HTTP=FakeHTTP,
-                                   build_request=lambda p:{'content':[{'type':'text','text':''},{'image_url':{'url':'image'}}]},
+            module=SimpleNamespace(API='https://example.test',MODEL='test-model',credentials=lambda model:'secret',HTTP=FakeHTTP,
+                                   build_request=lambda p:{'model':'test-model','content':[{'type':'text','text':''},{'image_url':{'url':'image'}}]},
                                    safe=lambda value,secret='':str(value).replace(secret,'[redacted]') if secret else value)
             video=Videos(root);state={'serial':1,'shots':[{'id':'01','selectedBoard':1,'boards':[{'version':1,'sha256':'board'}],
                                                          'selectedPlan':1,'plans':[{'version':1,'sha256':'plan'}]}]}
