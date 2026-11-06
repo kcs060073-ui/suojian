@@ -1,5 +1,13 @@
 ﻿$ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
+. (Join-Path $root 'setup-tools.ps1')
+if (-not (Test-SuoJianProjectReady $root)) {
+    Write-Host '正在检查并安装缺少的运行环境，首次使用可能需要较长时间。' -ForegroundColor Cyan
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'install.ps1')
+    if ($LASTEXITCODE -ne 0) { throw '环境准备未完成，请查看上方提示并重新启动。' }
+    Refresh-SuoJianPath
+    if (-not (Test-SuoJianProjectReady $root)) { throw '环境安装完成后仍未通过检查，请关闭窗口后重新启动。' }
+}
 $main = Join-Path $root 'main'
 $cutroom = Join-Path $root 'cutroom'
 $env:SUOJIAN_ROOT = $main

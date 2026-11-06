@@ -1,6 +1,7 @@
 ﻿param([switch]$CoreOnly)
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
+. (Join-Path $root 'setup-tools.ps1')
 
 function Run-Step([string]$program, [string[]]$arguments) {
     & $program @arguments
@@ -8,20 +9,16 @@ function Run-Step([string]$program, [string[]]$arguments) {
 }
 
 try {
-    foreach ($name in @('py.exe','node.exe','npm.cmd','ffmpeg.exe','ffprobe.exe')) {
-        if (-not (Get-Command $name -ErrorAction SilentlyContinue)) {
-            throw "找不到 $name。请先安装 Python 3.11、Node.js LTS 和 FFmpeg，并重新打开终端。"
-        }
-    }
-    & py.exe -3.11 -c "import sys; assert sys.version_info[:2] == (3, 11)"
-    if ($LASTEXITCODE -ne 0) { throw '请先安装 Python 3.11。' }
+    $bootstrapPython = Ensure-SuoJianSystemTools $root
 
     foreach ($part in @('main','cutroom')) {
         $directory = Join-Path $root $part
         $python = Join-Path $directory '.venv\Scripts\python.exe'
         if (-not (Test-Path -LiteralPath $python)) {
-            Run-Step 'py.exe' @('-3.11','-m','venv',(Join-Path $directory '.venv'))
+            Run-Step $bootstrapPython.Exe (@($bootstrapPython.Args) + @('-m','venv',(Join-Path $directory '.venv')))
         }
+        & $python -c 'import sys; sys.exit(0 if sys.version_info[:2] == (3, 11) and sys.maxsize > 2**32 else 1)'
+        if ($LASTEXITCODE -ne 0) { throw "$directory 的 Python 环境不可用。请保留该目录并检查后重试。" }
         Write-Host "安装 $part 的 Python 依赖..."
         Run-Step $python @('-m','pip','install','-r',(Join-Path $directory 'requirements.txt'))
         if ($part -eq 'cutroom') {
@@ -37,7 +34,23 @@ try {
 
     foreach ($directory in @((Join-Path $root 'cutroom'),(Join-Path $root 'vibe\work\runtime'))) {
         Push-Location $directory
-        try { Run-Step 'npm.cmd' @('ci','--no-audit','--no-fund') } finally { Pop-Location }
+        try {
+            $ready = $false
+            if (Test-Path -LiteralPath (Join-Path $directory 'node_modules')) {
+                try {
+                    & npm.cmd ls --depth=0 --omit=optional *> $null
+                    $ready = $LASTEXITCODE -eq 0
+                } catch { $ready = $false }
+            }
+            if ($ready) { Write-Host "[已就绪] $directory 的 Node 依赖" }
+            elseif (Test-Path -LiteralPath (Join-Path $directory 'node_modules')) {
+                Write-Host "[修复] $directory 的 Node 依赖"
+                Run-Step 'npm.cmd' @('install','--no-save','--no-package-lock','--no-audit','--no-fund','--legacy-peer-deps')
+            } else {
+                Write-Host "[安装] $directory 的 Node 依赖"
+                Run-Step 'npm.cmd' @('ci','--no-audit','--no-fund','--legacy-peer-deps')
+            }
+        } finally { Pop-Location }
     }
     $modules = Join-Path $root 'vibe\work\runtime\node_modules'
     $fusionModules = Join-Path $root 'vibe\work\park-fusion\node_modules'

@@ -43,23 +43,7 @@
 
 ### 1. 准备环境
 
-请使用 **64 位 Windows**，提前安装并配置到 PATH：
-
-- Python **3.11**，包含 Python Launcher（`py`）。
-- Node.js LTS 和 npm。
-- FFmpeg 和 ffprobe。
-
-在新打开的 PowerShell 中检查：
-
-```powershell
-py -3.11 --version
-node --version
-npm --version
-ffmpeg -version
-ffprobe -version
-```
-
-首次安装需联网下载依赖与浏览器组件，语音相关依赖体积较大，请预留足够的磁盘空间。需要剪映草稿功能时，还应在本机安装兼容的剪映专业版。
+请使用 **64 位 Windows**。安装器会检测 Python 3.11、Node.js、npm 和 FFmpeg，已有的可用版本直接复用，缺少时使用 Windows 软件包管理器 winget 安装。首次安装需联网下载依赖与浏览器组件，语音相关依赖体积较大，请预留足够的磁盘空间。需要剪映草稿功能时，还应在本机安装兼容的剪映专业版。
 
 ### 2. 下载项目
 
@@ -74,6 +58,8 @@ git -c core.longpaths=true clone https://github.com/kcs060073-ui/suojian.git C:\
 1. 双击项目根目录的 **`安装溯剪.bat`**，等待安装完成。
 2. 双击 **`启动溯剪.bat`**，在本机浏览器打开 [http://127.0.0.1:8788/](http://127.0.0.1:8788/)。
 3. 使用期间保持主工作台窗口开启；关闭窗口会停止主工作台。
+
+也可直接双击启动：发现运行环境缺失时会先执行安装。若电脑没有 winget，请先安装或更新 Windows 的“应用安装程序”，详见安装指南。
 
 安装器会在项目内创建独立的 Python 环境、安装 Node 依赖和浏览器组件，并将项目中四个 Skill 登记到当前用户的 Codex；如果已有同名 Skill，会保留原版本。重新打开 Codex 后可刷新技能列表。项目移动位置后，需要重新安装以更新目录链接。
 
