@@ -329,6 +329,16 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json_response(importlib.import_module('workbench.production').templates(ROOT))
             if path == '/api/production/visual-styles/status':
                 return self.json_response({'library':True,'version':2})
+            match = re.fullmatch(r'/api/production/visual-styles/(style-[0-9a-f]{12})/export', path)
+            if match:
+                content=importlib.import_module('workbench.style_transfer').export_style(ROOT,match[1])
+                self.send_response(200)
+                self.send_header('Content-Type','application/zip')
+                self.send_header('Content-Disposition','attachment; filename="suojian-style.zip"')
+                self.send_header('Content-Length',str(len(content)))
+                self.end_headers()
+                if not head: self.wfile.write(content)
+                return
             if path == '/api/production/visual-styles/archived':
                 mod=importlib.import_module('workbench.visual_styles');lib=mod.StyleLibrary(ROOT)
                 return self.json_response(([mod.default_style(ROOT)] if lib.builtin_archived() else [])+lib.list(archived=True))
@@ -472,6 +482,10 @@ class Handler(BaseHTTPRequestHandler):
                         f.write(chunk)
                         remaining -= len(chunk)
                 return self.json_response({'path': str(dest), 'url': '/media/uploads/'+dest.name, 'asset': 'uploads/'+dest.name, 'name': filename})
+            if path == '/api/production/visual-styles/import':
+                length=int(self.headers.get('Content-Length',0))
+                if not 0 < length <= 200*1024*1024: raise ValueError('请选择 200 MB 以内的模板压缩包')
+                return self.json_response(importlib.import_module('workbench.style_transfer').import_style(ROOT,self.rfile.read(length)),201)
             data = self.read_json()
             if path == '/api/production/import-script':
                 mod = importlib.import_module('workbench.script_import')

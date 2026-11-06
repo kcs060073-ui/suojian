@@ -47,6 +47,15 @@ class StyleLibrary:
         number=version or meta['latest']
         style=read(folder/f'v{number:03d}'/'style.json')
         if not style: raise ValueError('风格版本不存在')
+        # References belong to this version directory; rebuild local paths after moving a library.
+        from pathlib import Path
+        from urllib.parse import unquote, urlsplit
+        for ref in style.get('references', []):
+            filename=Path(unquote(urlsplit(ref.get('url', '')).path)).name
+            if not filename: filename=Path(ref['file']).name
+            local=folder/f'v{number:03d}'/filename
+            ref['file']=str(local)
+            ref['url']='/files/'+local.relative_to(self.root).as_posix()
         return style
 
     def list(self, archived=False):
