@@ -1,0 +1,23 @@
+{
+  "schema": "suojian.visual-style/1",
+  "style_id": "shared-handdrawn",
+  "name": "手绘写实分镜",
+  "description": "浅灰白纸张，黑灰细线手绘，低饱和灰蓝建筑与浅绿植被；人物比例自然，空间透视清晰，商业分镜质感。",
+  "version": 1,
+  "references": [
+    {
+      "file": "01.png",
+      "sha256": "e00721f14fd6d1a20304839060c603d3d0350f2ab0294beed173154e9d586c58",
+      "name": "01.png"
+    },
+    {
+      "file": "02.png",
+      "sha256": "8e7500f534f13dbabf975eab570562dbab88fdbbaa07f4f07ac83282ea0724af",
+      "name": "02.png"
+    }
+  ],
+  "createdAt": 1793955239.2492561,
+  "source": null,
+  "sourceShots": [],
+  "acceptance": "项目共享风格参考；实际使用效果需审看"
+}

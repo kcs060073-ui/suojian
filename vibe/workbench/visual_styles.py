@@ -39,6 +39,18 @@ class StyleLibrary:
     def get(self, style_id, version=None):
         import re
         from workbench.production import read
+        if re.fullmatch(r'shared-[a-z0-9][a-z0-9-]{0,39}', style_id):
+            folder=self.root/'work/shared-styles'/style_id[7:]
+            meta=read(folder/'index.json')
+            if not meta: raise ValueError('公共风格模板不存在')
+            number=version or meta['latest']
+            style=read(folder/f'v{number:03d}'/'style.json')
+            if not style: raise ValueError('公共风格版本不存在')
+            for ref in style.get('references', []):
+                path=folder/f'v{number:03d}'/ref['file']
+                ref['file']=str(path)
+                ref['url']='/files/'+path.relative_to(self.root).as_posix()
+            return style
         if not re.fullmatch(r'style-[0-9a-f]{12}', style_id):
             raise ValueError('风格编号无效')
         folder=self.base/style_id
@@ -66,6 +78,12 @@ class StyleLibrary:
                 meta=read(folder/'index.json')
                 if meta and bool(meta.get('archived')) == archived:
                     rows.append(self.get(folder.name))
+        if not archived:
+            shared=self.root/'work/shared-styles'
+            if shared.exists():
+                for folder in shared.iterdir():
+                    if folder.is_dir() and (folder/'index.json').is_file():
+                        rows.append(self.get('shared-'+folder.name))
         return sorted(rows,key=lambda x:x['createdAt'],reverse=True)
 
     def builtin_archived(self):

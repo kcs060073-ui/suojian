@@ -1,4 +1,5 @@
 import io
+import importlib.util
 import json
 import shutil
 import tempfile
@@ -8,6 +9,7 @@ from zipfile import ZipFile
 
 from workbench.style_transfer import export_style, import_style
 from workbench.visual_styles import StyleLibrary
+from workbench.production import Store
 
 
 class StyleTransferTests(unittest.TestCase):
@@ -53,6 +55,37 @@ class StyleTransferTests(unittest.TestCase):
                 archive.writestr('../evil.png', b'bad')
             with self.assertRaises(ValueError):
                 import_style(Path(directory), data.getvalue())
+
+    def test_shared_style_is_available_in_new_checkout_and_keeps_old_task_snapshot(self):
+        script = Path(__file__).resolve().parents[1] / 'scripts' / 'update_shared_style.py'
+        spec = importlib.util.spec_from_file_location('update_shared_style', script)
+        updater = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(updater)
+        with tempfile.TemporaryDirectory() as source_dir, tempfile.TemporaryDirectory() as project_dir:
+            source, project = Path(source_dir), Path(project_dir)
+            (source / 'outputs').mkdir()
+            image = source / 'outputs' / 'art.png'
+            image.write_bytes(b'\x89PNG\r\n\x1a\nfirst')
+            library = StyleLibrary(source)
+            original = library.create({'name': '公共手绘', 'description': '灰蓝线稿', 'images': [str(image)]})
+            package = source / 'package.zip'
+            package.write_bytes(export_style(source, original['style_id']))
+            updater.update_shared_style(project, 'handdrawn', package)
+            shared = StyleLibrary(project).get('shared-handdrawn')
+            self.assertEqual(shared['version'], 1)
+            self.assertEqual(StyleLibrary(project).list()[0]['style_id'], 'shared-handdrawn')
+            self.assertTrue(Path(shared['references'][0]['file']).is_file())
+            store = Store(project)
+            task = store.create({'title': '测试', 'script': '脚本', 'creativeRoute': 'storyboard',
+                                 'materials': [], 'visualStyleKey': 'shared-handdrawn'})
+            image.write_bytes(b'\x89PNG\r\n\x1a\nsecond')
+            updated = library.revise(original['style_id'], {'expectedVersion': 1, 'images': [str(image)]})
+            package.write_bytes(export_style(source, updated['style_id']))
+            updater.update_shared_style(project, 'handdrawn', package)
+            self.assertEqual(StyleLibrary(project).get('shared-handdrawn')['version'], 2)
+            snapshot = store.get(task['id'])['input']['visualStyle']
+            self.assertEqual(snapshot['version'], 1)
+            self.assertTrue(Path(snapshot['references'][0]['file']).is_file())
 
 
 if __name__ == '__main__':
