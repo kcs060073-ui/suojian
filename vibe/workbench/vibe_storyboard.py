@@ -34,7 +34,8 @@ def image_prompt(art, shot):
         '动画预留空间：'+pick('motionSpace'),
         '负面约束：'+pick('negative'),
         '口播（仅供理解，不要让模型凭空生成字幕）：'+pick('voiceover','narration','text'),
-        '计划标题（复杂中文、数字和界面请留白，后续程序化叠加）：'+pick('onscreenText','title'),
+        '画面辅助文字（融入构图并保证准确；不得添加底部说明白框）：'+pick('onscreenText','title'),
+        '本镜指定实景参考：'+str(shot.get('sceneReference') or '本镜无需实景参考；不可擅自重复已用两次的图片'),
         '前后镜衔接：'+pick('transition'),
         '待核实与业务约束：'+pick('pending','facts'),
         '保持竖屏安全区和主体完整，保留动画所需空间；不要编造企业、数据、合作关系或真实配套；避免无关装饰。',
@@ -78,11 +79,19 @@ class Storyboards:
             if not isinstance(art,str) or not art.strip() or len(art)>15000:raise ValueError('需要全片美术说明')
             if not isinstance(shots,list) or not 1<=len(shots)<=30:raise ValueError('镜头数量无效')
             seen=set();rows=[];last=0.0
-            for s in shots:
+            scene=task['input'].get('referenceGroups',{}).get('scene',[])
+            unique=[]; signatures=set()
+            for ref in scene:
+                f=Path(ref)
+                if not f.is_file():raise ValueError('实景参考图片不存在，请重新导入：'+f.name)
+                key=digest_file(f)
+                if key not in signatures:signatures.add(key);unique.append(str(f))
+            for idx,s in enumerate(shots):
                 ident=s.get('id','');start=float(s.get('start',-1));end=float(s.get('end',-1))
                 if not SHOT_ID.fullmatch(ident) or ident in seen or start<last or end<=start or end>600:raise ValueError('镜头编号或时间无效')
                 seen.add(ident);last=end
-                rows.append({'id':ident,'start':start,'end':end,'description':copy.deepcopy(s),
+                reference=unique[idx % len(unique)] if unique and idx < len(unique)*2 else None
+                rows.append({'id':ident,'start':start,'end':end,'description':copy.deepcopy(s),'sceneReference':reference,
                              'boards':[],'selectedBoard':None,'plans':[],'selectedPlan':None,'clips':[],'selectedClip':None})
             state={'schema':'suojian.vibe-storyboard/1','taskId':identifier,'revision':task['revision'],
                    'inputHash':task['inputHash'],'serial':1,'artDirection':art,'shots':rows,'events':[]}

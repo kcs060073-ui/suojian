@@ -358,6 +358,13 @@ class Handler(BaseHTTPRequestHandler):
             match = re.fullmatch(r'/api/production/tasks/(V\d{8}-[a-f0-9]{8})/storyboard', path)
             if match:
                 return self.json_response(importlib.import_module('workbench.vibe_storyboard').Storyboards(ROOT).get(match[1]))
+            match = re.fullmatch(r'/api/production/tasks/(V\d{8}-[a-f0-9]{8})/storyboard/export/(overview|zip)', path)
+            if match:
+                data,ctype,name=importlib.import_module('workbench.storyboard_export').export_storyboard(ROOT,match[1],match[2])
+                self.send_response(200); self.send_header('Content-Type',ctype); self.send_header('Content-Length',str(len(data)))
+                self.send_header('Content-Disposition',f'attachment; filename="{name}"'); self.send_header('Cache-Control','no-store'); self.end_headers()
+                if not head:self.wfile.write(data)
+                return
             match = re.fullmatch(r'/api/production/tasks/(V\d{8}-[a-f0-9]{8})/storyboard/prompt/([A-Za-z0-9_-]{1,48})', path)
             if match:
                 mod=importlib.import_module('workbench.vibe_storyboard'); state=mod.Storyboards(ROOT).get(match[1])
