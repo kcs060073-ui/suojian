@@ -14,7 +14,7 @@
  for(const [selector,group] of [['#uploads','scene'],['#references','other']]){$(selector).onchange=e=>{addImages(e.target.files,group);e.target.value=''}}
  document.querySelectorAll('[data-drop]').forEach(zone=>{for(const name of ['dragenter','dragover'])zone.addEventListener(name,e=>{e.preventDefault();zone.classList.add('dragging')});zone.addEventListener('dragleave',e=>{if(!zone.contains(e.relatedTarget))zone.classList.remove('dragging')});zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('dragging');addImages(e.dataTransfer.files,zone.dataset.drop)})});
  let styles=[],styleImages=[],supportsArchive=false;
- $('#styleDialog .muted').insertAdjacentHTML('afterend','<label class="secondary upload-button">从其他电脑导入模板包<input id="stylePackage" type="file" accept=".zip,application/zip" hidden></label>');
+ $('#styleDialog .dialog-head').insertAdjacentHTML('afterend','<label class="secondary upload-button">从其他电脑导入模板包<input id="stylePackage" type="file" accept=".zip,application/zip" hidden></label>');
  $('#stylePackage').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>200*1024*1024)throw Error('模板包不能超过 200 MB');$('#styleMessage').textContent='正在导入模板…';const r=await fetch('/api/production/visual-styles/import',{method:'POST',headers:{'Content-Type':'application/zip'},body:file});const data=await r.json();if(!r.ok)throw Error(data.error||'导入失败');await refreshStyles();$('#style').value=data.style_id;$('#styleMessage').textContent='模板和参考图已导入并选用。'}catch(error){$('#styleMessage').textContent=error.message}finally{e.target.value=''}};
  function styleFigure(ref,alt,latest=false){const u=esc(ref.url),label=esc(alt);return `<div class="style-figure" tabindex="0" aria-label="${label}，悬停或聚焦可放大"><img src="${u}" alt="${label}">${latest?'<span class="latest-tag">最新参考</span>':''}<div class="style-zoom" aria-hidden="true"><img src="${u}" alt=""></div></div>`}
  async function refreshStyles(){
@@ -70,4 +70,6 @@
  $('#closeTask').onclick=()=>$('#taskDialog').close();$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText($('#handoff').value);$('#taskStatus').textContent='已复制，粘贴到当前对话即可。'}catch{$('#handoff').select();$('#taskStatus').textContent='请手动复制已选中的启动指令。'}};
  window.addEventListener('suojian-styles-changed',()=>refreshStyles().catch(()=>{}));
  refresh().catch(e=>$('#tasks').textContent=e.message);refreshStyles().catch(()=>{});
+ const requestedTask=new URLSearchParams(location.search).get('task');
+ if(requestedTask&&/^V\d{8}-[a-f0-9]{8}$/.test(requestedTask))openTask(requestedTask).then(()=>{if(new URLSearchParams(location.search).get('review')==='1')$('#openStoryboard').click()});
 })();

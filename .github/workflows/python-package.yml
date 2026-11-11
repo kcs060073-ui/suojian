@@ -1,40 +1,40 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
-name: Python package
+name: Reference workbench checks
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.9", "3.10", "3.11"]
-
+  reference-workbench:
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install main dependencies
+        run: python -m pip install -r main/requirements.txt
+      - name: Test offline analysis adapters
+        working-directory: main
+        env:
+          PYTHONUTF8: '1'
+        run: python -m unittest tests.test_production_methods tests.test_speech_text_policy tests.test_video_link tests.test_platform_video tests.test_segmented_video
+      - name: Check workbench JavaScript
+        shell: pwsh
+        run: |
+          $files = @('workbench.js','workspace.js','unified.js','analysis-preview.js','production-methods.js','timeline-navigation.js')
+          foreach ($name in $files) {
+            node --check "main/suo_jian/ui/static/$name"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Test Windows setup detection without installation
+        shell: powershell
+        run: .\tests\test-setup-tools.ps1

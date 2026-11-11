@@ -69,6 +69,18 @@ class VideoLinkTests(unittest.TestCase):
                     with self.assertRaises(ValueError):download_video('https://example.com/video',target)
                 self.assertFalse(target.exists())
 
+    def test_full_range_response_is_supported_and_partial_range_is_rejected(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target=Path(folder)/'video.mp4'
+            probe=SimpleNamespace(returncode=0,stdout=json.dumps({'streams':[{'codec_type':'video','width':64,'height':64}]}))
+            for content_range,valid in [('bytes 0-4/5',True),('bytes 1-4/5',False),('bytes 0-2/5',False)]:
+                response=Response(b'video',status=206,headers={'Content-Length':'5','Content-Range':content_range})
+                with patch('suo_jian.ui.video_link.open_public',return_value=(Mock(),response)),patch('suo_jian.ui.video_link.subprocess.run',return_value=probe):
+                    if valid:download_video('https://cdn.example/video.mp4',target,headers={'Range':'bytes=0-'})
+                    else:
+                        with self.assertRaises(ValueError):download_video('https://cdn.example/video.mp4',target)
+                self.assertEqual(target.read_bytes(),b'video')
+
     def test_link_route_starts_same_analysis_worker_and_rejects_cross_site(self):
         from suo_jian.ui import app as module
         client=module.app.test_client()

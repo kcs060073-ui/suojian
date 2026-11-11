@@ -1,0 +1,10 @@
+# Windows Python 3.11 offline analyzer environment, isolated from main/.venv.
+# Core packages validated with upstream commit 3522250b4d3e667610a175c0f188ac3d725b41cd.
+numpy==2.4.6
+opencv-python-headless==4.14.0.94
+pillow==13.0.0
+PyYAML==6.0.3
+onnxruntime==1.31.1
+flatbuffers==25.12.19
+packaging==26.3
+protobuf==7.36.2

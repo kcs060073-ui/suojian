@@ -5,16 +5,41 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 import time
 import urllib.request
 import zlib
 from pathlib import Path
 from urllib.parse import urlsplit,urlunsplit,urljoin,parse_qs
 
-from .video_link import validate_url,open_public,download_video,MAX_BYTES
+from .video_link import validate_url,open_public,download_video,MAX_BYTES,VideoPageLink
+from .segmented_video import BoundedStream, DownloadBudget, download_segments
 
-PLATFORMS={"douyin.com":"抖音","iesdouyin.com":"抖音","xiaohongshu.com":"小红书","xhslink.com":"小红书","bilibili.com":"哔哩哔哩","b23.tv":"哔哩哔哩"}
+PLATFORMS={"douyin.com":"抖音","iesdouyin.com":"抖音","xiaohongshu.com":"小红书","xhslink.com":"小红书","bilibili.com":"哔哩哔哩","b23.tv":"哔哩哔哩","xinpianchang.com":"新片场"}
 META_LIMIT=5*1024*1024
+VERIFIED_PAGES=Path(__file__).resolve().parents[2]/'work'/'verified-video-pages'
+
+
+def verified_xpc_info(url,extractor):
+    """Use public media identifiers recorded after an interactive page verification."""
+    match=re.fullmatch(r'/a(\d+)/?',urlsplit(url).path)
+    if not match:return None
+    path=VERIFIED_PAGES/('xpc-'+match[1]+'.json')
+    if not path.is_file():return None
+    try:
+        hint=json.loads(path.read_text(encoding='utf-8'))
+        if hint['article_id']!=match[1] or time.time()-hint['verified_at']>86400:return None
+        if not re.fullmatch(r'[A-Za-z0-9]{8,64}',hint['media_id']):return None
+        if not re.fullmatch(r'[A-Za-z0-9]{8,64}',hint['app_key']):return None
+    except (ValueError,KeyError,TypeError):return None
+    endpoint='https://mod-api.xinpianchang.com/mod/api/v2/media/'+hint['media_id']+'?appKey='+hint['app_key']
+    with extractor.urlopen(endpoint) as response:data=json.loads(response.read())['data']
+    formats=[{'url':f['url'],'ext':'mp4','width':f.get('width'),'height':f.get('height'),
+              'filesize':f.get('filesize'),'http_headers':{'Range':'bytes=0-','Referer':url}}
+             for f in data.get('resource',{}).get('progressive',[]) if f.get('url')]
+    if not formats:return None
+    return extractor.process_ie_result({'id':match[1],'title':data.get('title') or hint.get('title') or match[1],
+                                         'formats':formats},download=False)
 
 
 def extract_input_url(text):
@@ -55,7 +80,7 @@ class QuietLogger:
     def error(self,*args,**kwargs):pass
 
 
-def make_extractor():
+def make_extractor(budget=None):
     try:
         import yt_dlp
         from yt_dlp.networking import Request,Response
@@ -66,6 +91,8 @@ def make_extractor():
     class PublicYoutubeDL(yt_dlp.YoutubeDL):
         def __init__(self,*args,**kwargs):
             super().__init__(*args,**kwargs);self.deadline=time.monotonic()+120;self.network_error=None
+            self.access_status=None;self.browser_verification=False
+            if budget:self.deadline=budget.deadline
 
         def urlopen(self,request):
             if isinstance(request,str):request=Request(request)
@@ -76,6 +103,7 @@ def make_extractor():
             body=request.data
             headers={**self.params.get('http_headers',{}),**dict(request.headers)}
             for _ in range(6):
+                if budget:budget.check()
                 if time.monotonic()>self.deadline:raise TransportError('Share-page extraction timed out')
                 cookie_request=urllib.request.Request(url,headers=headers,method=method,data=body)
                 self.cookiejar.add_cookie_header(cookie_request)
@@ -84,6 +112,12 @@ def make_extractor():
                     self.network_error=str(error)
                     raise TransportError('Public video website unavailable') from error
                 try:
+                    if budget and response.status in {200,206}:
+                        wrapped=Response(BoundedStream(connection,response,budget),url,
+                                         dict(response.getheaders()),status=response.status)
+                        self.cookiejar.extract_cookies(wrapped,cookie_request)
+                        connection=None
+                        return wrapped
                     raw=response.read(META_LIMIT+1)
                     if len(raw)>META_LIMIT:raise TransportError('Share-page response too large')
                     response_headers=dict(response.getheaders())
@@ -107,32 +141,56 @@ def make_extractor():
                     if len(raw)>META_LIMIT:raise TransportError('Share-page response too large')
                     response_headers={k:v for k,v in response_headers.items() if k.lower() not in {'content-encoding','content-length'}}
                     wrapped=Response(io.BytesIO(raw),url,response_headers,status=response.status)
-                    if response.status>=400:raise HTTPError(wrapped)
+                    if response.status>=400:
+                        self.access_status=response.status
+                        self.browser_verification=any(marker in raw.lower() for marker in
+                            (b'_jsc_ch_conf',b'captcha',b'challenge-platform'))
+                        raise HTTPError(wrapped)
                     return wrapped
-                finally:connection.close()
+                finally:
+                    if connection:connection.close()
             raise TransportError('Too many share-page redirects')
 
     return PublicYoutubeDL({'quiet':True,'no_warnings':True,'logger':QuietLogger(),'noplaylist':True,'playlist_items':'1',
         'format':'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best','skip_download':True,
-        'socket_timeout':15,'retries':1,'extractor_retries':1,'cachedir':False,'proxy':'','js_runtimes':{},'remote_components':[]})
+        'socket_timeout':15,'retries':1,'fragment_retries':1,'skip_unavailable_fragments':False,
+        'concurrent_fragment_downloads':1,'continuedl':False,'hls_prefer_native':True,
+        'extractor_retries':1,'cachedir':False,'proxy':'','js_runtimes':{},'remote_components':[]})
 
 
 def extract_platform_info(url):
-    name=platform_name(url)
-    if not name:raise ValueError("此网站的分享页尚未接入，请使用视频直链或本地文件。")
+    name=platform_name(url) or '视频页面'
     try:
         with make_extractor() as extractor:
+            if name=='新片场':
+                verified=verified_xpc_info(url,extractor)
+                if verified:return verified
             host=urlsplit(url).hostname
             if host in {'v.douyin.com','b23.tv','xhslink.com'} or (host and host.endswith('.xhslink.com')):
                 response=extractor.urlopen(url)
                 url=response.url;response.close()
-            if platform_name(url)!=name:raise ValueError("分享链接没有跳转到对应的视频平台。")
+            if name!='视频页面' and platform_name(url)!=name:raise ValueError("分享链接没有跳转到对应的视频平台。")
             info=extractor.extract_info(canonical_url(url),download=False)
+            # Generic HLS URLs are often marked live before the media playlist is read.
+            if isinstance(info,dict) and info.get('is_live') and info.get('extractor_key')=='Generic':
+                selected=info.get('requested_formats') or [info]
+                if all(f.get('protocol') in {'m3u8','m3u8_native'} for f in selected):
+                    for fmt in selected:
+                        with extractor.urlopen(fmt['url']) as playlist:
+                            if b'#EXT-X-ENDLIST' not in playlist.read(META_LIMIT+1):
+                                break
+                    else:
+                        info['is_live']=False
+                        for fmt in selected:fmt['is_live']=False
     except ValueError:
         raise
     except Exception as error:
         if 'extractor' in locals() and extractor.network_error:
             raise ValueError("本机网络未能访问"+name+"："+extractor.network_error) from error
+        if 'extractor' in locals() and extractor.browser_verification:
+            raise ValueError(name+'返回了浏览器安全验证页。请在浏览器打开原链接完成验证；也可将网站下载的视频拖入。') from error
+        if 'extractor' in locals() and extractor.access_status in {401,403}:
+            raise ValueError(name+'拒绝了自动读取请求（HTTP '+str(extractor.access_status)+'）。网页可下载时，可先下载视频后拖入。') from error
         if 'fresh cookies' in str(error).lower():
             raise ValueError(name+"要求有效的浏览器会话，当前匿名导入未成功。本工具暂不接入浏览器登录状态；请将视频下载到本机后拖入。") from error
         raise ValueError(name+"分享页暂时无法解析，可能需要登录／验证或页面已变化。请打开原链接检查，或将视频下载后拖入。") from error
@@ -144,20 +202,28 @@ def extract_platform_info(url):
 def import_video_link(url,destination,progress=None,stage=None):
     url=extract_input_url(url)
     name=platform_name(url)
-    if not name:return download_video(url,destination,progress)
-    if stage:stage("正在解析"+name+"分享页")
+    if not name and urlsplit(url).path.lower().endswith(('.mp4','.mov','.mkv','.webm')):
+        return download_video(url,destination,progress)
+    if not name and not urlsplit(url).path.lower().endswith(('.m3u8','.mpd')):
+        try:return download_video(url,destination,progress)
+        except VideoPageLink:
+            pass
+    if stage:stage("正在读取"+(name or '视频链接'))
     info=extract_platform_info(url)
     formats=info.get('requested_formats') or [info]
     if not formats or len(formats)>2 or any(not x.get('url') for x in formats):
         raise ValueError("分享内容没有可下载的视频，请确认不是图文笔记、直播或合集。")
-    if any(x.get('protocol') not in {None,'http','https'} for x in formats):
-        raise ValueError("此视频使用分段播放格式，当前分享导入尚未支持，请上传本地视频。")
+    if any(x.get('protocol') not in {None,'http','https','m3u8','m3u8_native','http_dash_segments'} for x in formats):
+        raise ValueError("此视频播放格式暂时无法读取，请上传本地视频。")
     destination=Path(destination)
-    if stage:stage("分享页已解析，正在下载"+name+"视频")
-    if len(formats)==1:
+    if stage:stage("链接已读取，正在下载视频")
+    segmented=any(x.get('protocol') in {'m3u8','m3u8_native','http_dash_segments'} for x in formats)
+    if len(formats)==1 and not segmented:
         return download_video(formats[0]['url'],destination,progress,headers=formats[0].get('http_headers') or info.get('http_headers'))
-    work=destination.parent/'.incoming'/(destination.stem+'-tracks')
-    work.mkdir(parents=True,exist_ok=True)
+    incoming=destination.parent/'.incoming'
+    incoming.mkdir(parents=True,exist_ok=True)
+    temporary=tempfile.TemporaryDirectory(prefix=destination.stem+'-',dir=incoming)
+    work=Path(temporary.name)
     files=[];combined=work/'combined.mp4';spent=0
     try:
         for index,fmt in enumerate(formats):
@@ -165,19 +231,40 @@ def import_video_link(url,destination,progress=None,stage=None):
             path=work/(f'track-{index}'+('.m4a' if kind=='audio' else '.mp4'))
             def track_progress(size,total):
                 if progress:progress(spent+size,None)
-            download_video(fmt['url'],path,track_progress,max_bytes=MAX_BYTES-spent,
-                           headers=fmt.get('http_headers') or info.get('http_headers'),media_kind=kind)
-            files.append((path,kind));spent+=path.stat().st_size
+            headers=fmt.get('http_headers') or info.get('http_headers')
+            if fmt.get('protocol') in {'m3u8','m3u8_native','http_dash_segments'}:
+                if stage:stage('正在下载视频分段（'+str(index+1)+' / '+str(len(formats))+' 轨）')
+                budget=DownloadBudget(MAX_BYTES-spent,track_progress)
+                try:
+                    with make_extractor(budget) as extractor:
+                        extractor.params['http_headers']={**extractor.params.get('http_headers',{}),**(headers or {})}
+                        download_segments(extractor,fmt,path,headers)
+                except Exception as error:
+                    raise ValueError(budget.error or '视频分段读取失败，请检查链接是否过期或需要登录。') from error
+                # Include manifest bytes and retry traffic in the shared download limit.
+                downloaded_size=max(budget.size,path.stat().st_size)
+            else:
+                download_video(fmt['url'],path,track_progress,max_bytes=MAX_BYTES-spent,
+                               headers=headers,media_kind=kind)
+                downloaded_size=path.stat().st_size
+            files.append((path,kind));spent+=downloaded_size
         video=next((p for p,k in files if k=='video'),None);audio=next((p for p,k in files if k=='audio'),None)
-        if not video or not audio:raise ValueError("该视频的音画轨道不完整，请改为上传本地视频。")
+        if not video or (len(formats)>1 and not audio):raise ValueError("该视频的音画轨道不完整，请改为上传本地视频。")
         if stage:stage("视频已下载，正在合并音画轨道")
-        subprocess.run(['ffmpeg','-v','error','-y','-i',str(video),'-i',str(audio),'-map','0:v:0','-map','1:a:0','-c','copy','-shortest','-movflags','+faststart',str(combined)],capture_output=True,check=True,timeout=120)
+        inputs=['-protocol_whitelist','file,pipe','-i',str(video)]
+        mapping=['-map','0:v:0','-map','0:a?']
+        if audio:
+            inputs+=['-protocol_whitelist','file,pipe','-i',str(audio)]
+            mapping=['-map','0:v:0','-map','1:a:0']
+        subprocess.run(['ffmpeg','-v','error','-y',*inputs,*mapping,'-c','copy','-shortest','-movflags','+faststart',str(combined)],capture_output=True,check=True,timeout=120)
         if combined.stat().st_size>MAX_BYTES:raise ValueError("合并后视频超过 1 GB，请上传较小的视频。")
+        probe=subprocess.run(['ffprobe','-v','error','-protocol_whitelist','file,pipe','-show_entries','stream=codec_type,width,height','-of','json',str(combined)],capture_output=True,text=True,encoding='utf-8',check=True,timeout=45)
+        streams=json.loads(probe.stdout).get('streams',[])
+        if not any(s.get('codec_type')=='video' and s.get('width',0)>0 and s.get('height',0)>0 for s in streams):
+            raise ValueError('下载结果没有可读取的视频画面。')
         combined.replace(destination)
         return destination
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired,OSError) as error:
         raise ValueError("分享视频音画合并失败，请改为上传本地视频。") from error
     finally:
-        for path,_ in files:
-            if path.exists():path.unlink()
-        if combined.exists():combined.unlink()
+        temporary.cleanup()

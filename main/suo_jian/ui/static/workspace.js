@@ -2,10 +2,10 @@
   "use strict";
   const escape = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const steps = [
-    ["studio-reference", "原视频与剪辑分轨", "观看参考片 · 检查时间轴"],
+    ["studio-reference", "原片与时间线", "观看参考片 · 检查时间轴"],
     ["studio-subtitles", "字幕分析", "逐条字幕 · 字体与模板"],
-    ["studio-recognition", "配音与画面文字识别", "声音画像 · 文案与 OCR"],
-    ["studio-cutroom", "溯剪 × Cutroom", "新脚本 · 素材与配音配置"],
+    ["studio-recognition", "口播与字幕核对", "声音画像 · 文案与 OCR"],
+    ["studio-cutroom", "制作新视频", "新脚本 · 素材与配音配置"],
     ["studio-delivery", "预览与剪映草稿", "审看效果 · 保存可编辑工程"]
   ];
   const stepIcons = [
@@ -27,13 +27,13 @@
       const section = document.createElement("section");
       section.id = id; section.className = "sj-section sj-card studio-chapter";
       section.dataset.chapter = number;
-      section.innerHTML = `<div class="studio-section-head"><span class="studio-step">${number}</span><div><small>${escape(note)}</small><h2>${escape(title)}</h2></div></div>`;
+      section.innerHTML = `<div class="studio-section-head"><span class="studio-step">${number}</span><div>${note ? `<small>${escape(note)}</small>` : ""}<h2>${escape(title)}</h2></div></div>`;
       return section;
     };
     // Move the original nodes, retaining the player, seek and audio listeners.
-    const reference = chapter("studio-reference", "01", "原视频与剪辑草稿分轨", "参考分析 · 并非已生成的新草稿");
-    const subtitles = chapter("studio-subtitles", "02", "字幕分析", "逐条文字与制作规格");
-    const recognition = chapter("studio-recognition", "03", "配音与画面文字识别", "语音转写与画面文字分开核对");
+    const reference = chapter("studio-reference", "01", "原片与时间线", "");
+    const subtitles = chapter("studio-subtitles", "02", "字幕分析", "");
+    const recognition = chapter("studio-recognition", "03", "口播与字幕核对", "");
     [".video-stage", ".video-tools", ".summary-strip", ".timeline-wrap", ".stem-panel"].forEach(selector => {
       const element = main.querySelector(selector); if (element) reference.append(element);
     });
@@ -47,7 +47,7 @@
     if (transcript) {
       const captions = transcript.querySelector(".transcript-lines");
       if (captions && captions.querySelector("summary")?.textContent.includes("逐条字幕")) subtitles.append(captions);
-      else subtitles.insertAdjacentHTML("beforeend", '<p class="muted studio-caption-empty">暂未识别到逐条字幕。可在下方核对配音和画面文字；不会把画面标牌直接当成字幕。</p>');
+      else subtitles.insertAdjacentHTML("beforeend", '<p class="muted studio-caption-empty">暂未识别到逐条字幕。</p>');
       recognition.append(voiceGrid, transcript);
     }
     // Remove only the now-empty creative wrapper, not any analysis content.
@@ -61,7 +61,6 @@
     const flow = main.querySelector(".unified-flow");
     if (flow) main.insertBefore(reference, flow); else main.prepend(reference);
     reference.after(subtitles, recognition);
-    if (bootstrap.job && bootstrap.apiBase) recognition.insertAdjacentHTML("beforeend", `<a class="sj-cta studio-offline-link" href="/presenter?job=${encodeURIComponent(bootstrap.job)}">真人口播复刻 → 选人物素材 · 按脚本组装原声视频</a>`);
     if (!flow) {
       const offline = chapter("studio-cutroom", "04", "溯剪 × Cutroom", "离线报告仅用于查看分析");
       offline.insertAdjacentHTML("beforeend", '<p class="muted">在本机工作台中配置新脚本、园区素材和配音；离线报告不会直接调用 API 或生成工程。</p><a class="sj-cta studio-offline-link" href="http://127.0.0.1:8788/">打开本机工作台</a>');
@@ -71,12 +70,14 @@
     }
     const header = root.querySelector(".sj-head");
     if (header) {
-      header.querySelector("h1").innerHTML = '参考视频分析 <small>工作台</small>';
+      header.querySelector("h1").innerHTML = '参考视频分析';
       header.querySelector(".sj-brand .muted").textContent = title;
     }
+    const makeButton=reference.querySelector('#openWizard');
+    if(makeButton)makeButton.textContent='制作新视频';
     const sidebar = document.createElement("aside");
     sidebar.className = "studio-sidebar"; sidebar.setAttribute("aria-label", "工作台侧边导航");
-    sidebar.innerHTML = `<div class="studio-sidebar-brand"><img src="${escape(bootstrap.iconUrl || "preview_assets/suojian-icon.png")}" alt="溯剪图标"><div><b>溯剪 <span>SuoJian</span></b><small>视频剪法工作台</small></div><button class="studio-fold" type="button" aria-label="收起侧边导航" aria-expanded="true">‹</button></div><a class="studio-new" href="/" aria-label="返回制作首页"><span>⌂</span><b>返回制作首页</b></a><div class="studio-nav-label">快速导航 <span>五步工作流</span></div><nav class="studio-nav" aria-label="分析步骤">${steps.map(([id, label, hint], i) => `<a href="#${id}" data-step="${id}" ${i === 0 ? 'aria-current="step"' : ""}>${stepMarker(i)}<div><b>${label}</b><small>${hint}</small></div></a>`).join("")}</nav><div class="studio-tasks-heading"><b>最近任务</b><span data-task-count>本机记录</span></div><label class="studio-search"><span>⌕</span><input type="search" aria-label="搜索历史任务" placeholder="搜索任务或视频名称"></label><div class="studio-task-list" aria-live="polite"><p class="muted">正在读取本机任务…</p></div><div class="studio-sidebar-foot"><i></i><span>本机工作台 · 8788</span></div>`;
+    sidebar.innerHTML = `<div class="studio-sidebar-brand"><img src="${escape(bootstrap.iconUrl || "preview_assets/suojian-icon.png")}" alt="溯剪图标"><div><b>溯剪 <span>SuoJian</span></b></div><button class="studio-fold" type="button" aria-label="收起侧边导航" aria-expanded="true">‹</button></div><a class="studio-new" href="/" aria-label="返回制作首页"><span>⌂</span><b>返回制作首页</b></a><div class="studio-nav-label">制作步骤</div><nav class="studio-nav" aria-label="分析步骤">${steps.map(([id, label], i) => `<a href="#${id}" data-step="${id}" ${i === 0 ? 'aria-current="step"' : ""}>${stepMarker(i)}<div><b>${label}</b></div></a>`).join("")}</nav><div class="studio-tasks-heading"><b>最近任务</b><span data-task-count>本机记录</span></div><label class="studio-search"><span>⌕</span><input type="search" aria-label="搜索历史任务" placeholder="搜索任务或视频名称"></label><div class="studio-task-list" aria-live="polite"><p class="muted">正在读取本机任务…</p></div>`;
     const tasksSection = document.createElement("details");
     tasksSection.className = "studio-tasks";
     const tasksHeading = sidebar.querySelector(".studio-tasks-heading");
@@ -93,7 +94,7 @@
     bench.prepend(sidebar);
     if (!bootstrap.apiBase) sidebar.querySelector(".studio-new").href = "http://127.0.0.1:8788/";
     sidebar.querySelectorAll("[data-step]").forEach((link, index) => {
-      link.setAttribute("aria-label", `${String(index + 1).padStart(2,"0")} ${steps[index][1]} ${steps[index][2]}`);
+      link.setAttribute("aria-label", `${String(index + 1).padStart(2,"0")} ${steps[index][1]}`);
       link.title = steps[index][1];
     });
     let compact = false;
@@ -101,7 +102,7 @@
     function setCompact() {
       bench.classList.toggle("sidebar-compact", compact);
       const button = sidebar.querySelector(".studio-fold");
-      button.textContent = compact ? "›" : "‹";
+      button.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg><span class="studio-fold-label">${compact ? "展开侧栏" : "收起侧栏"}</span><span class="studio-fold-chevron" aria-hidden="true">${compact ? "›" : "‹"}</span>`;
       button.setAttribute("aria-label", compact ? "展开侧边导航" : "收起侧边导航");
       button.setAttribute("aria-expanded", String(!compact));
     }
@@ -126,11 +127,11 @@
         const response = await fetch(`${bootstrap.apiBase || "/api"}/workbench/tasks`);
         if (!response.ok) throw Error("历史任务暂时不可用");
         tasks = (await response.json()).tasks || []; paintTasks();
-      } catch (_) { sidebar.querySelector(".studio-task-list").innerHTML = '<p class="muted">暂时无法读取历史任务，当前分析不受影响。</p>'; }
+      } catch (_) { sidebar.querySelector(".studio-task-list").innerHTML = '<p class="muted">历史任务读取失败</p>'; }
       taskTimer = setTimeout(loadTasks, 15000);
     }
     if (bootstrap.job && bootstrap.apiBase) loadTasks();
-    else sidebar.querySelector(".studio-task-list").innerHTML = '<p class="muted">离线预览页；本机工作台中可查看历史任务。</p>';
+    else sidebar.querySelector(".studio-task-list").innerHTML = '<p class="muted">离线模式</p>';
     function highlightStep() {
       scheduled = false;
       let active = steps[0][0];

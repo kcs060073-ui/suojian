@@ -1,0 +1,69 @@
+/* Shared visual language for VibeCraft, storyboards and advanced production. */
+.vibe-studio-v2{--bg:#f1f2f3;--paper:#fff;--ink:#2a2e36;--muted:#666970;--line:#dadce0;--accent:#3c4250;--soft:#e7e9ed;font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;color:var(--ink);background:var(--bg);color-scheme:light}
+.vibe-studio-v2 h1{font-family:'Microsoft YaHei',sans-serif;font-size:28px;font-weight:600;letter-spacing:-.6px;line-height:1.5}
+.vibe-studio-v2 h2{font-size:18px;font-weight:600}.vibe-studio-v2 h3{font-size:15px}
+.vibe-studio-v2 .topbar,.vibe-studio-v2 .top{background:#fff;border-bottom:1px solid var(--line);min-height:76px;padding-left:32px;padding-right:32px;backdrop-filter:none}
+.vibe-studio-v2 .brand small{letter-spacing:0;color:#6f737b}
+.embedded-workspace .vibe-studio-v2 .topbar>.brand{display:none}.embedded-workspace .vibe-studio-v2 .topbar{height:60px;min-height:60px;padding-top:8px;padding-bottom:8px;position:sticky}.embedded-workspace .vibe-studio-v2 .topbar .workflow-switch{margin-right:auto}
+.vibe-studio-v2 .task-routing{border:1px solid #d7dae0;background:#f5f6f7;border-radius:8px;padding:8px 16px;margin:16px 0 24px}.vibe-studio-v2 .task-routing>summary{display:flex;align-items:center;gap:12px;min-height:40px;font-size:12px;color:#4e5563;cursor:pointer}.vibe-studio-v2 .task-routing>summary::before{content:'＋';font-size:16px}.vibe-studio-v2 .task-routing[open]>summary::before{content:'−'}.vibe-studio-v2 .task-routing>summary span{margin-left:auto;color:#777b84;font-size:11px}.vibe-studio-v2 .task-routing>label{margin-top:16px}.vibe-studio-v2 .task-aside{position:sticky;top:100px}
+.vibe-studio-v2 .workflow-switch{background:#eaecef;border-color:#d4d6dc;border-radius:8px}.vibe-studio-v2 .workflow-switch a{border-radius:6px;min-height:38px;color:#626771;font-size:13px}.vibe-studio-v2 .workflow-switch a[aria-current]{background:#fff;color:#3d4451;box-shadow:0 1px 3px #34394410}
+.vibe-studio-v2 .topbar nav button{font-size:13px;min-height:40px;color:#686c76}.vibe-studio-v2 .topbar nav button.active{color:#3d424e;border-color:#575e6d}
+.vibe-studio-v2 main{max-width:1480px;padding:32px 32px 64px}
+.vibe-studio-v2 .eyebrow{font-size:10px;color:#6c7079;letter-spacing:1.2px}.vibe-studio-v2 .muted{font-size:13px;color:#666b74}
+.vibe-studio-v2 :is(.panel,.form-panel,.tool-card,.inspector){background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:none}
+.vibe-studio-v2 :is(.form-panel,.tool-card){padding:28px}.vibe-studio-v2 .hint{font-size:12px;color:#70747d;line-height:1.85}
+.vibe-studio-v2 :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){background:#fafbfc;color:#393d46;border-color:#d2d4da;border-radius:7px;font-size:13px;padding:11px 12px;max-width:100%;min-width:0}
+.vibe-studio-v2 :is(input,textarea,select):focus{border-color:#707786;outline:2px solid #70778620}
+.vibe-studio-v2 label{font-size:13px;color:#4f545e}
+.vibe-studio-v2 :is(.primary,.secondary,.quiet){border-radius:7px;min-height:40px;font-size:12px;font-weight:500;box-shadow:none}.vibe-studio-v2 .primary{background:#3c4250;color:#fff}.vibe-studio-v2 .primary:hover{background:#313743}.vibe-studio-v2 .secondary,.vibe-studio-v2 .quiet{background:#fff;border:1px solid #c8ccd4;color:#474f5f}.vibe-studio-v2 .secondary:hover,.vibe-studio-v2 .quiet:hover{background:#eceef1}
+.vibe-studio-v2 :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid #525b6d;outline-offset:3px}
+.vibe-studio-v2 .task-layout{grid-template-columns:minmax(0,1fr) 320px;gap:24px}
+.vibe-studio-v2 .aside-note{background:#2e333d;color:#edeff2;border-radius:10px;padding:26px}.vibe-studio-v2 .aside-note h2{font-family:'Microsoft YaHei',sans-serif;color:#edeff2;font-size:22px;line-height:1.6}.vibe-studio-v2 .aside-note .eyebrow,.vibe-studio-v2 .aside-note p{color:#c0c4cc}.vibe-studio-v2 .aside-note .example{color:#cdd0d7;border-color:#ffffff26}
+.vibe-studio-v2 .task-card{background:#fff;border-color:#d8dbe0;padding:20px;border-radius:9px}.vibe-studio-v2 .task-card h3{font-size:14px;line-height:1.7}.vibe-studio-v2 .task-code{font-size:10px;color:#767b85;letter-spacing:0}
+.vibe-studio-v2 .badge{color:#575e6d;background:#e6e8ed;font-size:11px}.vibe-studio-v2 .badge.failed{background:#f6eae0;color:#9a6843}.vibe-studio-v2 .badge.waiting{background:#f1eddd;color:#8c7840}
+.vibe-studio-v2 .template-choice,.vibe-studio-v2 .automatic-note{background:#edeef1;border-color:#d1d5dd;border-radius:8px}.vibe-studio-v2 .automatic-note p{color:#656b77}.vibe-studio-v2 .segments{background:#e9ebef}.vibe-studio-v2 .segments input:checked+span{box-shadow:0 1px 3px #30354110;color:#434a59}
+.vibe-studio-v2 .players video{background:#25282f;border-radius:10px}.vibe-studio-v2 .film-card{background:#fff;border-color:#d4d7de;border-radius:9px}.vibe-studio-v2 .film-card.selected{border-color:#788090;box-shadow:0 0 0 2px #78809018}.vibe-studio-v2 .film-thumb{background:#dddfe5;color:#717886}
+.vibe-studio-v2 .template-card{border-color:#d2d5dc;border-radius:8px}.vibe-studio-v2 .empty{color:#6a707c;background:#f6f7f8;border-color:#caced7;border-radius:8px}.vibe-studio-v2 .notice.error{background:#faf0e8;border-color:#ebd8c7;color:#936d48}
+.vibe-studio-v2 dialog{border-color:#ced2da;background:#f8f9fa;color:#363b46;border-radius:12px;box-shadow:0 20px 80px #272c3540}.vibe-studio-v2 dialog::backdrop{background:#2a2e3570;backdrop-filter:blur(4px)}
+/* Advanced editor retains its functional rail and track colours. */
+.vibe-studio-v2 .shell{grid-template-columns:204px minmax(0,1fr)}.vibe-studio-v2 .shell>main{width:100%;max-width:none;padding:28px 32px 56px}.vibe-studio-v2 .rail{height:calc(100vh - 76px);top:76px;background:#e9ebef;border-color:#d3d6dd;padding:24px 12px}.vibe-studio-v2 .rail-label{color:#787c85;letter-spacing:1px}.vibe-studio-v2 #navigation button{color:#5c6270;min-height:44px;border-radius:7px;font-size:12px}.vibe-studio-v2 #navigation button.active{background:#fff;color:#3c4350;border:1px solid #c1c6d1}.vibe-studio-v2 #navigation button span{color:#60697b}
+.vibe-studio-v2 .editor{grid-template-columns:minmax(0,1fr) 304px;gap:24px}.vibe-studio-v2 .stage{background:#272a31;border-radius:10px;min-height:320px;background-image:none}.vibe-studio-v2 .stage-caption{color:#9ea3ad}.vibe-studio-v2 .inspector-tabs button{font-size:12px;min-height:44px}.vibe-studio-v2 .inspector-tabs button.selected{box-shadow:inset 0 -2px #677084;color:#444b5b}.vibe-studio-v2 .tool-grid{gap:24px}.vibe-studio-v2 .tool-card h2{margin-bottom:20px}.vibe-studio-v2 .tool-card>p{font-size:13px;color:#676c77}
+@media(max-width:1100px){.vibe-studio-v2 .topbar,.vibe-studio-v2 .top{padding-left:24px;padding-right:24px}.vibe-studio-v2 main,.vibe-studio-v2 .shell>main{padding:24px}.vibe-studio-v2 .task-layout{grid-template-columns:minmax(0,1fr) 280px}.vibe-studio-v2 .shell{grid-template-columns:176px minmax(0,1fr)}.vibe-studio-v2 .editor{grid-template-columns:1fr}.vibe-studio-v2 .inspector{max-width:none}.vibe-studio-v2 .tool-grid{gap:16px}}
+@media(max-width:850px){.vibe-studio-v2 .task-layout{grid-template-columns:1fr}.vibe-studio-v2 .shell{grid-template-columns:1fr}.vibe-studio-v2 .rail{position:static;height:auto;padding:12px;border-right:0;border-bottom:1px solid #d0d4db}.vibe-studio-v2 #navigation{flex-direction:row;overflow:auto;gap:6px}.vibe-studio-v2 #navigation button{white-space:nowrap;flex:none}.vibe-studio-v2 .rail-label,.vibe-studio-v2 .rail-bottom{display:none}.vibe-studio-v2 .top{flex-wrap:wrap;gap:12px;height:auto;padding:16px}.vibe-studio-v2 .project-name{max-width:100%;flex:1;min-width:160px}.vibe-studio-v2 .top-actions{flex-wrap:wrap;gap:8px}.vibe-studio-v2 .tool-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.vibe-studio-v2 .topbar{padding:12px 16px}.vibe-studio-v2 main,.vibe-studio-v2 .shell>main{padding:24px 16px 40px}.vibe-studio-v2 h1{font-size:25px}.vibe-studio-v2 .form-panel,.vibe-studio-v2 .tool-card{padding:20px}.vibe-studio-v2 :is(.primary,.secondary,.quiet){min-height:44px}.vibe-studio-v2 .top-actions{width:100%}.vibe-studio-v2 .top-actions .primary{min-width:0}.vibe-studio-v2 .project-name input{width:100%}.vibe-studio-v2 .page-heading{gap:12px}.vibe-studio-v2 .page-heading .pill{display:none}.vibe-studio-v2 .stage-toolbar{flex-wrap:wrap}.vibe-studio-v2 .stage{min-height:320px}.vibe-studio-v2 .two{grid-template-columns:1fr}.vibe-studio-v2 .players.comparing{grid-template-columns:1fr}.vibe-studio-v2 .film-grid{grid-template-columns:1fr}.vibe-studio-v2 .topbar nav{overflow:auto;justify-content:flex-start;gap:20px}.vibe-studio-v2 .topbar nav button{flex:none;white-space:nowrap}.vibe-studio-v2 .topbar .brand{font-size:14px}.vibe-studio-v2 .brand small{display:none}}
+@media(max-width:850px){.vibe-studio-v2 .shell{grid-template-columns:minmax(0,1fr)}.vibe-studio-v2 .rail{min-width:0;max-width:100%}.vibe-studio-v2 #navigation{min-width:0;max-width:100%}}
+@media(max-width:850px){.vibe-studio-v2 .task-aside{position:static}.embedded-workspace .vibe-studio-v2 .topbar{height:auto}}
+@media(max-width:600px){.vibe-studio-v2 .editor-film-picker{padding:12px}.vibe-studio-v2 .editor-film-picker label{display:block;min-width:0;width:100%}.vibe-studio-v2 .editor-film-picker select{min-width:0;max-width:100%;width:100%}.vibe-studio-v2 .editor-film-picker .hint{font-size:11px}.vibe-studio-v2 .director-intro{max-width:100%;overflow-wrap:anywhere}}
+.media-compatibility{position:absolute;z-index:8;left:24px;right:24px;top:24px;padding:20px;border:1px solid #a4a8b1;border-radius:8px;background:#f0f1f4eF;color:#3a3f4b;box-shadow:0 6px 24px #171a2030}.media-compatibility strong{font-size:14px}.media-compatibility p{font-size:12px;color:#5d626c;margin:8px 0;line-height:1.8}.media-compatibility a{display:inline-block;font-size:12px;color:#3c4250;text-decoration:underline;padding:8px 0}
+@media(prefers-reduced-motion:reduce){.vibe-studio-v2 *{transition:none!important;animation:none!important}}
+
+
+body.suojian-app,body.vibe-studio-v2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --sj-ink: #1d2026; --ink: #1d2026; --sj-bg: #f6f7fa; --bg: #f6f7fa;
+  --sj-radius: 16px; --sj-accent: #145fc3; --accent: #145fc3;
+  background: radial-gradient(ellipse at 7% 2%, #e5edf8, transparent 48%),
+              radial-gradient(ellipse at 96% 20%, #eeeaf5, transparent 43%), #f6f7fa !important;
+  background-attachment: fixed !important;
+}
+.suojian-app .studio-global-nav,.vibe-studio-v2 .topbar,.vibe-studio-v2 .top {
+  background: #fffffff5; border-bottom: 1px solid #29304716;
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .suojian-app .studio-global-nav,.vibe-studio-v2 .topbar,.vibe-studio-v2 .top {
+    background: #ffffffb8; -webkit-backdrop-filter: saturate(125%) blur(20px);
+    backdrop-filter: saturate(125%) blur(20px);
+  }
+}
+.suojian-app :is(.card,.recent-section,.mode-card,.sj-card),.vibe-studio-v2 :is(.panel,.form-panel,.tool-card,.inspector,.task-card) {
+  border: 1px solid #ffffffdb; border-radius: 16px; background: #ffffffdc;
+  box-shadow: 0 1px 3px #2738540d, 0 10px 34px -20px #27385438;
+}
+.suojian-app .studio-global-nav nav a[aria-current],.vibe-studio-v2 .workflow-switch a[aria-current] {
+  color: #124c99; background: #e6effb; border-radius: 9px;
+}
+.vibe-studio-v2 .primary {background:#145fc3}
+.vibe-studio-v2 .primary:hover,.suojian-app .sj-cta:not(.secondary):not(.danger):hover {background:#104fa5}
+@media (prefers-reduced-transparency: reduce) {
+  .suojian-app .studio-global-nav,.vibe-studio-v2 .topbar,.vibe-studio-v2 .top {background:white;backdrop-filter:none}
+}

@@ -102,11 +102,15 @@ def discover(vendor) -> dict:
                         'note': '应用会保留准确demo源码；额外依赖缺失的镜头需在原生工作台补齐后渲染。'})
     audio_root = repo / 'assets/audio'
     attribution = (audio_root / 'ATTRIBUTION.md').read_text(encoding='utf-8')
+    legacy_sfx = audio_root / 'ATTRIBUTION-legacy-sfx.md'
+    legacy_attribution = legacy_sfx.read_text(encoding='utf-8') if legacy_sfx.is_file() else None
     audio = []
     for f in sorted(audio_root.rglob('*')):
         if f.suffix.lower() not in ('.mp3', '.wav', '.ogg', '.m4a', '.flac'): continue
         rel = f.relative_to(audio_root)
-        lines = [line for line in attribution.splitlines() if f.name in line]
+        source = legacy_sfx if rel.parts[0] == 'sfx' and legacy_attribution is not None else audio_root / 'ATTRIBUTION.md'
+        text = legacy_attribution if source == legacy_sfx else attribution
+        lines = [line for line in text.splitlines() if f.name in line]
         evidence = '\n'.join(lines)
         uncertain = not lines or any(x in evidence for x in ('无法反查', '待考', '须确认'))
         audio.append({'id': rel.as_posix(), 'name': f.stem, 'kind': 'bgm' if rel.parts[0] == 'bgm' else 'sfx',
@@ -171,7 +175,9 @@ def native_tools(vendor, root) -> dict:
     explainer = native/'explainer'
     _copy(vendor/REPOS[2]/'template', explainer)
     if SHARED.exists(): _junction(explainer/'node_modules', SHARED)
-    shot = native/'shotcraft'
+    version_file = vendor/REPOS[0]/'.suojian-upstream.json'
+    version = json.loads(version_file.read_text(encoding='utf-8')).get('commit', '') if version_file.is_file() else ''
+    shot = native/('shotcraft-'+version[:12] if re.fullmatch(r'[0-9a-f]{40}', version) else 'shotcraft')
     _copy(vendor/REPOS[0], shot)
     wb = shot/'workbench'
     if SHARED.exists(): _junction(wb/'node_modules', SHARED)

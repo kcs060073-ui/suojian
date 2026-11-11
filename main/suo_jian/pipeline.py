@@ -6,6 +6,7 @@ from suo_jian.blueprint import build_blueprint, save_blueprint
 from suo_jian.fusion import build_shots
 from suo_jian.jianying import export_draft_skeleton
 from suo_jian.ui.preview import write_preview
+from suo_jian.analyzer.speech_text_policy import usable_speech, matching_captions, caption_probe_times
 
 
 class AnalysisCheckpoints:
@@ -60,10 +61,26 @@ def analyze(video_path, output_dir, with_subtitles=False, with_stems=False, prog
     report(27, "分析节奏与画面运动")
     beats, note = checkpoints.stage("beats", lambda: analyze_beats(video))
     if note: notes.append(note)
-    report(38, "分别识别配音与画面文字")
-    speech_transcript, note = checkpoints.stage("speech", lambda: transcribe_if_available(video, output) if with_subtitles else ([], "语音转写未启用。"))
+    report(38, "识别人声与口播")
+    raw_speech, note = checkpoints.stage("speech_v2", lambda: transcribe_if_available(video, output) if with_subtitles else ([], "语音转写未启用。"))
     if note: notes.append(note)
-    ocr_subtitles, ocr_note = checkpoints.stage("ocr", lambda: detect_hard_subtitles(video, metadata["duration"], output))
+    speech_transcript = usable_speech(raw_speech)
+    ocr_subtitles, ocr_note = [], None
+    text_analysis = {'policy':'speech-and-captions-v1','status':'skipped','reason':'未检测到可靠人声'}
+    if speech_transcript:
+        report(43, "检查口播字幕")
+        probe, probe_note = checkpoints.stage('caption_probe_v1', lambda: detect_hard_subtitles(
+            video, metadata['duration'], output,
+            sample_times=caption_probe_times(speech_transcript, metadata['duration'])))
+        if matching_captions(probe, speech_transcript):
+            report(45, '用字幕核对口播脚本')
+            detected, ocr_note = checkpoints.stage('ocr_speech_captions_v1', lambda: detect_hard_subtitles(
+                video, metadata['duration'], output,
+                progress=lambda fraction:report(round(45+11*fraction,1),'字幕核对 '+str(round(100*fraction))+'%')))
+            ocr_subtitles = matching_captions(detected, speech_transcript)
+            text_analysis.update(status='completed',reason='人声与字幕匹配，已核对脚本')
+        else:
+            text_analysis['reason'] = probe_note or '有口播，未发现匹配的字幕候选'
     if ocr_note: notes.append(ocr_note)
     # Preserve all detected text, but only treat lower-screen, repeatedly visible
     # OCR as subtitle candidates. This avoids turning signs and title cards into
@@ -120,6 +137,7 @@ def analyze(video_path, output_dir, with_subtitles=False, with_stems=False, prog
                                 speech_transcript=speech_transcript,
                                 subtitle_conflicts=subtitle_conflicts,
                                 onscreen_text=ocr_subtitles)
+    blueprint['text_analysis'] = text_analysis
     blueprint_path = save_blueprint(blueprint, output / "edit_blueprint.json")
     skeleton_path, note = export_draft_skeleton(blueprint, output / "jianying")
     blueprint["warnings"].append(note)

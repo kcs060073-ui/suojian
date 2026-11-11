@@ -8,25 +8,25 @@
     entry.textContent = "制作新视频／保存草稿";
     const panel = document.createElement("div");
     panel.className = "unified-flow";
-    panel.innerHTML = `<section class="sj-section sj-card unified-panel studio-chapter" id="studio-cutroom" data-chapter="04"><div class="studio-section-head"><span class="studio-step">04</span><div><small>执行配置</small><h2>制作配置</h2></div><span class="unified-badge">剪法 → 新视频</span></div>
-      <p class="muted">在这里完成配置和生成，不用跳转逐步确认。预览用于审看，草稿保留独立镜头、字幕和声音。</p>
+    panel.innerHTML = `<section class="sj-section sj-card unified-panel studio-chapter" id="studio-cutroom" data-chapter="04"><div class="studio-section-head"><span class="studio-step">04</span><div><h2>制作配置</h2></div></div>
+
       <div class="unified-grid"><label>剪法模板<select data-field="template"></select></label><label>本次模板名称<input data-field="name" maxlength="80" placeholder="例如：园区快切 · 高对比字幕"></label></div>
       <div class="unified-actions"><button class="sj-cta secondary" data-action="save-template">将本次分析保存为剪法模板</button><button class="sj-cta secondary" data-action="save-packaging">保存当前包装为模板</button></div>
-      <label class="unified-script-label">新视频完整脚本<textarea data-field="script" rows="6" placeholder="输入您的完整文案；不会强塞进参考视频的固定时长，实际时间由生成后的配音决定。"></textarea></label>
+      <label class="unified-script-label">新视频完整脚本<textarea data-field="script" rows="6" placeholder="输入脚本"></textarea></label>
       <div class="unified-grid"><label>园区素材库<select data-field="library"></select></label><label>配音配置<select data-field="tts"></select></label></div>
       <div class="unified-grid"><label>搜索配音音色<input data-field="voice-search" type="search" placeholder="搜索音色名称、性别、语言或风格" autocomplete="off"></label><label>本次配音音色<select data-field="voice" aria-describedby="voice-catalog-note"></select></label></div>
       <p class="unified-note" id="voice-catalog-note" data-view="voice-note" role="status"></p>
       <div class="unified-consents"><label><input type="checkbox" data-field="rights">我有权使用所选素材</label><label><input type="checkbox" data-field="delegate">委托自动选镜、锁定画面及选择包装；最后由我审看</label><label><input type="checkbox" data-field="cost">同意本次配音及必要的连接检测，可能产生费用</label></div>
-      <p class="unified-note">当前自动选镜依据素材文件名；剪法模板并不等于精确还原所有花字。API 密钥保存在本机安全凭据中，不返回网页。</p>
+
       <div class="unified-actions"><button class="sj-cta" data-action="generate">生成试听预览</button><button class="sj-cta secondary" data-action="adopt">读取已有预览（不重新配音）</button><button class="sj-cta secondary" data-action="resume" hidden>恢复后台任务</button></div>
       <div class="unified-state" role="status" aria-live="polite"><b data-view="phase">准备就绪</b><p data-view="message"></p><div class="unified-steps"><span>创建任务</span><span>脚本与分镜</span><span>配音与包装</span><span>渲染与质检</span></div></div>
-      </section><section class="sj-section sj-card unified-panel studio-chapter studio-delivery" id="studio-delivery" data-chapter="05"><div class="studio-section-head"><span class="studio-step">05</span><div><small>审看与交付</small><h2>预览与剪映草稿生成</h2></div><span class="unified-badge">可编辑工程</span></div><p class="muted">先检查生成效果，再保存独立图层的剪映草稿。预览视频本身不是可编辑工程。</p><div data-view="empty" class="studio-preview-empty"><span>▷</span><b>新视频将在这里出现</b><p>在上方配置脚本和素材，点击“生成试听预览”。</p></div><div data-view="result" hidden><video data-view="preview" controls preload="metadata" aria-label="生成视频预览"></video><div data-view="editability"></div><ul data-view="issues"></ul><details><summary>还原范围与已知差异</summary><ul data-view="limits"></ul></details><div class="studio-export-area"><label class="unified-check"><input type="checkbox" data-field="ack">我了解上方质检提示和还原差异，保存草稿后继续检查</label><label>花字导出方式<select data-field="editable-emphasis"><option value="layered">可编辑花字＋独立装饰＋原生动画（推荐）</option><option value="appearance">保留原花字图片外观</option><option value="text">转为可改字文字（标签、渐变等装饰简化）</option></select></label><p class="unified-note">分层版可改文字和数字，底板独立，入场动画写入剪映；数字采用同色系大号斜体，图片渐变不保留；改字后需检查底板宽度。原生花字模板将按剪映版本验证后接入。</p><button class="sj-cta" data-action="export">保存可编辑剪映草稿</button><p data-view="export-result"></p></div></div></section>`;
+      </section><section class="sj-section sj-card unified-panel studio-chapter studio-delivery" id="studio-delivery" data-chapter="05"><div class="studio-section-head"><span class="studio-step">05</span><div><h2>预览与剪映草稿生成</h2></div></div><div data-view="empty" class="studio-preview-empty"><span>▷</span><b>暂无预览</b></div><div data-view="result" hidden><video data-view="preview" controls preload="metadata" aria-label="生成视频预览"></video><div data-view="editability"></div><ul data-view="issues"></ul><details><summary>还原范围与已知差异</summary><ul data-view="limits"></ul></details><div class="studio-export-area"><label class="unified-check"><input type="checkbox" data-field="ack">我了解上方质检提示和还原差异，保存草稿后继续检查</label><label>花字导出方式<select data-field="editable-emphasis"><option value="layered">可编辑花字＋独立装饰＋原生动画（推荐）</option><option value="appearance">保留原花字图片外观</option><option value="text">转为可改字文字（标签、渐变等装饰简化）</option></select></label><button class="sj-cta" data-action="export">保存可编辑剪映草稿</button><p data-view="export-result"></p></div></div></section>`;
     const main = root.querySelector(".sj-main");
     const packagingPanel = document.createElement("div");
     packagingPanel.className = "studio-packaging-editor";
-    packagingPanel.innerHTML = `<h3>调整预览包装</h3><p class="unified-note">可修改字幕、边框和声音包装。更新当前预览会复用现有镜头与配音；选镜和切点需在剪映草稿中进一步调整。</p>
+    packagingPanel.innerHTML = `<h3>调整预览包装</h3>
       <div class="unified-grid"><label>基础字幕模板<select data-packaging="subtitle"></select></label><label>画面边框／水印<select data-packaging="brand"></select></label></div>
-      <label class="unified-check"><input type="checkbox" data-field="auto-bgm" checked>新视频自动匹配参考音乐（已保存模板或手动选曲优先）</label><p class="unified-note" data-view="music-note"></p><details><summary>音乐、音效与图形包装</summary><div class="unified-grid"><label>背景音乐<select data-packaging="bgm"></select></label><label>音效<select data-packaging="sfx"></select></label><label>贴纸<select data-packaging="sticker"></select></label><label>标题卡<select data-packaging="title_card"></select></label><label>花字<select data-packaging="fancy_text"></select></label></div></details>
+      <label class="unified-check"><input type="checkbox" data-field="auto-bgm" checked>自动匹配背景音乐</label><p class="unified-note" data-view="music-note"></p><details><summary>音乐、音效与图形包装</summary><div class="unified-grid"><label>背景音乐<select data-packaging="bgm"></select></label><label>音效<select data-packaging="sfx"></select></label><label>贴纸<select data-packaging="sticker"></select></label><label>标题卡<select data-packaging="title_card"></select></label><label>花字<select data-packaging="fancy_text"></select></label></div></details>
       <div class="unified-actions"><button class="sj-cta secondary" data-action="reference-packaging">去掉边框，字幕贴近参考片</button><button class="sj-cta secondary" data-action="match-reference">按参考片匹配字幕与镜头</button><button class="sj-cta secondary" data-action="match-bgm">自动匹配参考片 BGM</button><button class="sj-cta" data-action="repackage" disabled>更新当前预览（复用配音）</button></div><p class="unified-note" data-view="packaging-note" role="status">正在读取包装选项…</p>`;
     panel.querySelector("#studio-delivery").insertBefore(packagingPanel, panel.querySelector('[data-view="empty"]'));
     main.append(panel);
@@ -48,7 +48,7 @@
       const candidates = (packagingCatalog.subtitle || []).filter(row => row.primary_hex === "#FFFFFF" && row.outline_hex);
       const preferred = candidates.find(row => row.fontname_guess?.includes("Smiley")) || candidates[0];
       if (preferred) packagingField("subtitle").value = preferred.id;
-      view("packaging-note").textContent = "已选择无边框、白字深色描边字幕。点击更新预览后生效；字体与原片仍会有差异。";
+      view("packaging-note").textContent = "包装已修改，待更新预览";
     }
     function applyTemplate() {
       const template = templates.find(row => row.template_id === field("template").value);
@@ -58,16 +58,16 @@
       if (template.packaging_choices) {
         for (const slot of packagingSlots) packagingField(slot).value = template.packaging_choices[slot] || "";
         field("auto-bgm").checked = false;
-        view("packaging-note").textContent = "已带入所选模板的包装配置；新视频将复用其字幕、重点花字与镜头规则。下方播放器仍是已生成版本。";
+        view("packaging-note").textContent = "";
       } else {
-        view("packaging-note").textContent = "此模板尚未保存完整包装规则；生成时采用模板已有组合和参考分析。可先同步当前包装来升级模板。";
+        view("packaging-note").textContent = "模板包装未配置";
       }
     }
     function showPackagingNote() {
       const subtitle = state.reference_match?.policy?.subtitle;
       view("packaging-note").textContent = subtitle ?
-        `当前实际字幕：参考片同色 ${subtitle.primary_hex}，单行、深色描边，位置跟随参考片；数字沿用同色系。上方显示基础模板，参考匹配会覆盖其字体、颜色和位置。${state.emphasis_report?.length ? ` 已映射 ${state.emphasis_report.length} 处重点：属性用 A 标签、数字用 B 花字，位置参考原片。` : ""}` :
-        packagingName ? `当前包装：${packagingName}。修改后点击更新；旧版预览会保留，不会重新配音。` : "所选包装会用于下一次新视频生成。";
+        `字幕 ${subtitle.primary_hex}${state.emphasis_report?.length ? ` · ${state.emphasis_report.length} 处重点` : ""}` :
+        packagingName ? `当前包装：${packagingName}` : "";
     }
     async function loadPackaging() {
       const value = await api(`/packaging/${job}`);
@@ -106,10 +106,9 @@
       options(field("voice"), matches, "voiceId", "displayName", query ? "选择搜索结果中的音色" : "选择本次配音音色");
       field("voice").value = matches.some(row => row.voiceId === selectedVoice) ? selectedVoice : "";
       field("voice").disabled = !matches.length;
-      const date = profile?.voiceCatalog?.lastSuccessAt;
       view("voice-note").textContent = !profile ? "请先选择配音配置。" : !voices.length ?
         "当前服务暂无可用音色，请在 Cutroom 更新音色目录。" :
-        `已载入当前服务的 ${voices.length} 个可选音色${query ? `，匹配 ${matches.length} 个` : ""}。${date ? `目录更新于 ${new Date(date).toLocaleDateString("zh-CN")}。` : ""}选择音色不会触发配音费用。`;
+        query && !matches.length ? "没有匹配音色" : "";
     }
     function selectProfile() {
       const profile = ttsProfiles.find(row => row.profileId === field("tts").value);
@@ -136,7 +135,7 @@
     function display(value) {
       state = value;
       const music = value.music_match;
-      view("music-note").textContent = music ? `当前 BGM：${music.selected.name}，从 ${music.selected.start.toFixed(1)} 秒起播，结尾淡出 ${music.fade_out} 秒。${music.reason}` : "自动匹配比较参考片节奏与音色，并选择适合视频时长的片段；原片含人声，匹配为粗估。";
+      view("music-note").textContent = music ? `背景音乐：${music.selected.name} · ${music.selected.start.toFixed(1)} 秒起 · 淡出 ${music.fade_out} 秒` : "";
       const badge = root.querySelector("#draftStatus");
       if (badge) badge.textContent = ({running:"正在生成",waiting_worker:"等待后台执行",ready:"等待审看",qa_blocked:"预览有质检提示",exported:"草稿已保存",failed:"生成中断",needs_check:"需要核对"})[value.status] || "等待生成配置";
       const busy = ["running", "waiting_worker"].includes(value.status);
@@ -149,11 +148,11 @@
       button("match-bgm").disabled = busy || !value.has_preview || !packagingReady;
       packagingSlots.forEach(slot => { packagingField(slot).disabled = busy || !packagingReady; });
       button("resume").hidden = !["failed", "running", "waiting_worker"].includes(value.status);
-      view("phase").textContent = value.phase || "配置模板与脚本，开始制作";
+      view("phase").textContent = value.phase || "准备就绪";
       if (Date.now() >= noticeUntil) {
         if (value.error) view("message").textContent = value.error;
-        else if (busy) view("message").textContent = value.mode === "repackage" ? "正在复用原有配音更新包装，下方暂时显示上一版预览。" : value.queue_position ? `排队位置：${value.queue_position}。可关闭页面，任务记录会保留。` : "后台正在处理；进度按真实阶段显示，不估算剩余时间。";
-        else if (value.has_preview) view("message").textContent = "预览已就绪。没有替您标记人工审片或批准发布。";
+        else if (busy) view("message").textContent = value.mode === "repackage" ? "正在更新包装" : value.queue_position ? `排队第 ${value.queue_position} 位` : "正在处理";
+        else if (value.has_preview) view("message").textContent = "待审看";
       }
       panel.classList.toggle("is-running", busy);
       view("result").hidden = !value.has_preview;
@@ -174,7 +173,7 @@
         }
         view("limits").innerHTML = (value.limitations || []).map(text => `<li>${escape(text)}</li>`).join("");
       }
-      view("export-result").textContent = value.draft_path ? `已保存：${value.draft_path}。请回到剪映草稿列表检查；本次未代替您在剪映中验收。` : "";
+      view("export-result").textContent = value.draft_path ? `已保存：${value.draft_path}` : "";
       if (!busy && value.packaging_revision && value.packaging_revision !== lastPackagingRevision) {
         lastPackagingRevision = value.packaging_revision;
         loadPackaging().catch(error => message(error.message));

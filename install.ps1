@@ -62,6 +62,7 @@ try {
     $skillRoot = Join-Path $env:USERPROFILE '.codex\skills'
     New-Item -ItemType Directory -Force -Path $skillRoot | Out-Null
     $skills = [ordered]@{
+        'rea-video' = 'vibe\work\skills\rea-video'
         'park-vibe-producer' = 'vibe\work\skills\park-vibe-producer'
         'video-shotcraft' = 'vibe\work\vendor\video-shotcraft-main'
         'vibe-knowledge-film' = 'vibe\work\vendor\vibe-knowledge-film-main'

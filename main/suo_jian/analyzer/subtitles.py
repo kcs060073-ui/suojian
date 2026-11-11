@@ -12,10 +12,18 @@ def _normalized(text: str) -> str:
     return re.sub(r"[^\w\u4e00-\u9fff]", "", text or "").lower()
 
 
+def _speech_event(text):
+    tags = {tag.lower() for tag in re.findall(r'<\|([^|]+)\|>', text)}
+    if 'speech' in tags:return 'speech'
+    if tags & {'nospeech', 'bgm', 'music'}:return 'non_speech'
+    return None
+
+
 def _normalize_asr_segments(raw: list[dict], *, milliseconds: bool = False) -> list[dict]:
     segments = []
     for item in raw:
         text = str(item.get("text") or item.get("sentence") or "").strip()
+        event = _speech_event(text)
         # FunASR models such as SenseVoice prefix transcript text with task,
         # language, and emotion tags (for example, <|zh|><|NEUTRAL|>).
         text = re.sub(r"<\|[^|]*\|>", "", text).strip()
@@ -29,7 +37,8 @@ def _normalize_asr_segments(raw: list[dict], *, milliseconds: bool = False) -> l
         except (TypeError, ValueError):
             continue
         segments.append({"start": round(max(0, start), 3), "end": round(max(start, end), 3),
-                         "text": text, "source": "asr", "confidence": item.get("confidence")})
+                         "text": text, "source": "asr", "confidence": item.get("confidence"),
+                         "speech_event": event, "no_speech_prob": item.get('no_speech_prob')})
     return segments
 
 
@@ -76,8 +85,10 @@ def _transcribe_funasr(video: Path, output_dir: Path | None) -> list[dict]:
         info = first.get("sentence_info") or first.get("segments") or []
         if info:
             return _normalize_asr_segments(info, milliseconds=True)
-        text = re.sub(r"<\|[^|]*\|>", "", str(first.get("text") or "")).strip()
-        return [{"start": 0.0, "end": 0.0, "text": text, "source": "asr", "confidence": None}] if text else []
+        raw = str(first.get("text") or "")
+        text = re.sub(r"<\|[^|]*\|>", "", raw).strip()
+        return [{"start": 0.0, "end": 0.0, "text": text, "source": "asr", "confidence": None,
+                 "speech_event": _speech_event(raw)}] if text else []
     finally:
         temp_context.cleanup()
 
@@ -200,7 +211,8 @@ def _merge_ocr_observations(observations: list[dict], duration: float) -> list[d
             for index, item in enumerate(clusters, start=1)]
 
 
-def detect_hard_subtitles(video: Path, duration: float, output_dir: Path | None = None) -> tuple[list[dict], str | None]:
+def detect_hard_subtitles(video: Path, duration: float, output_dir: Path | None = None,
+                          *, sample_times=None, progress=None) -> tuple[list[dict], str | None]:
     """Read visible text from sampled frames; prefer RapidOCR, retain Tesseract fallback."""
     try:
         import cv2
@@ -232,16 +244,20 @@ def detect_hard_subtitles(video: Path, duration: float, output_dir: Path | None 
         total_frames = min(int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or round(duration * fps)),
                            max(1, round(duration * fps)))
         frame_step = max(1, round(fps * interval))
-        frame_index = 0
-        while frame_index < total_frames:
+        frame_indices = range(total_frames) if sample_times is None else sorted({max(0,min(total_frames-1,round(t*fps))) for t in sample_times})
+        processed = 0
+        for frame_index in frame_indices:
+            if sample_times is not None:cap.set(cv2.CAP_PROP_POS_FRAMES,frame_index)
             ok, frame = cap.read()
             if not ok:
                 break
             timestamp = frame_index / fps
-            frame_index += 1
-            if (frame_index - 1) % frame_step:
+            if sample_times is None and frame_index % frame_step:
                 continue
             if ok:
+                processed += 1
+                if progress and (processed % 8 == 0 or frame_index + frame_step >= total_frames):
+                    progress(min(1.0, (frame_index + frame_step) / max(1,total_frames)))
                 height, width = frame.shape[:2]
                 scale = min(1.0, 1280 / max(width, height))
                 if scale < 1:

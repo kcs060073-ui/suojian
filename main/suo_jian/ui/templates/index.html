@@ -1,21 +1,21 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>溯剪 · 相似剪映草稿工作台</title><link rel="stylesheet" href="{{ url_for('static', filename='workbench.css') }}"></head><body>{% include '_studio_nav.html' %}
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>溯剪 · 相似剪映草稿工作台</title><link rel="stylesheet" href="{{ url_for('static', filename='workbench.css') }}"></head><body class="suojian-app page-feed">{% include '_studio_nav.html' %}
 <main class="landing" id="uploadShell">
   <div class="landing-grid"></div><div class="landing-orb orb-one"></div><div class="landing-orb orb-two"></div>
   <section class="upload-shell">
     <div class="brand-core"><div class="hero-glow"></div><img class="upload-logo" src="{{ url_for('static', filename='suojian-icon.png') }}" alt="溯剪图标"></div>
-    <div class="hero-copy"><h1>溯剪 <span>SuoJian</span></h1><p>{{ '真人口播复刻 · 先解析参考片' if request.args.get('studio') == 'presenter' else '园区信息流复刻 · 从参考片开始' }}</p><small>{{ '解析完成后，进入人物素材与原声组装工作台' if request.args.get('studio') == 'presenter' else '提取剪辑结构与字幕包装，再用你的文案与素材制作' }}</small></div>
-    <div class="upload-card" id="drop" role="button" tabindex="0" aria-label="选择参考视频"><input id="file" type="file" accept="video/*" hidden><span class="upload-mark">＋</span><b>拖入参考视频</b><strong>或点击选择本地文件</strong><label class="pick-file" for="file">选择本地视频</label><div class="muted" id="pick">支持 MP4 / MOV · 全程本地处理，不上传云端</div></div>
-    <div class="video-link-import"><span>或使用视频链接</span><label for="videoLink">视频链接／分享文案</label><textarea id="videoLink" rows="3" placeholder="粘贴抖音、小红书、哔哩哔哩链接，或整段分享文案" autocomplete="off"></textarea><small>视频直链可直接导入；抖音、小红书、哔哩哔哩分享页解析为试用，可能受登录或验证限制。暂不接入浏览器登录状态；导入失败时请下载视频后拖入。最多 1 GB。</small></div>
+    <div class="hero-copy"><h1>导入参考视频</h1></div>
+    <div class="upload-card" id="drop" role="button" tabindex="0" aria-label="选择参考视频"><input id="file" type="file" accept="video/*" hidden><span class="upload-mark">＋</span><b>拖入参考视频</b><label class="pick-file" for="file">选择本地视频</label><div class="muted" id="pick">支持 MP4 / MOV · 全程本地处理，不上传云端</div></div>
+    <div class="video-link-import"><label for="videoLink">视频链接／分享文案</label><textarea id="videoLink" rows="3" placeholder="粘贴视频网址或分享文案" autocomplete="off"></textarea><small>最大 1 GB · 支持直链与可解析的视频网页</small></div>
     <button class="sj-cta upload-start" type="button" id="start" disabled>开始解析参考视频 <span>→</span></button>
-    <a href="/" class="upload-home-link" style="margin:18px 0;color:#b9b0c9;text-decoration:none;font-size:13px">← 返回制作首页，切换方向</a><div class="capability-tags"><span>本地分析</span><span>字幕解析</span><span>剪辑结构识别</span><span>剪映草稿生成</span></div>
+
     <div class="rewind-analysis-card hidden" id="filmProgress"><div class="rewind-header"><b class="rewind-status" id="filmLabel">正在回溯剪辑逻辑...</b><span class="rewind-percent" id="filmPercent">0%</span></div><div class="rewind-film-stage"><div class="rewind-film-window"><div class="rewind-film" id="filmFill"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><em></em></div></div><div class="rewind-reel" id="filmReel"><i></i><i></i><i></i></div></div><div class="rewind-footer"><span id="rewindDescription">读取视频结构与时间轴</span></div><small>本地处理 · 视频不会上传云端</small></div>
     <div class="status" id="status"></div>
   </section>
 </main>
 <div id="workbench"></div><script src="{{ url_for('static', filename='unified.js') }}"></script><script src="{{ url_for('static', filename='workspace.js') }}"></script><script src="{{ url_for('static', filename='workbench.js') }}"></script><script>
 const file=document.getElementById("file"),drop=document.getElementById("drop"),start=document.getElementById("start"),status=document.getElementById("status"),pick=document.getElementById("pick");const videoLink=document.getElementById("videoLink");let selected,analysisBusy=false;const targetStudio=new URLSearchParams(location.search).get("studio");
-function setFile(value){if(!value||analysisBusy)return;selected=value;videoLink.value="";pick.textContent=`已选择：${value.name}（${(value.size/1048576).toFixed(1)} MB）`;status.textContent="文件已就绪，点击“开始解析参考视频”。";start.disabled=!selected&&!videoLink.value.trim()}
-videoLink.oninput=()=>{if(analysisBusy)return;if(videoLink.value.trim()){selected=undefined;file.value="";pick.textContent="当前使用视频链接，也可重新选择本地文件。"}start.disabled=!selected&&!videoLink.value.trim();};
+function setFile(value){if(!value||analysisBusy)return;selected=value;videoLink.value="";pick.textContent=`已选择：${value.name}（${(value.size/1048576).toFixed(1)} MB）`;status.textContent="";start.disabled=!selected&&!videoLink.value.trim()}
+videoLink.oninput=()=>{if(analysisBusy)return;if(videoLink.value.trim()){selected=undefined;file.value="";pick.textContent="MP4 / MOV"}start.disabled=!selected&&!videoLink.value.trim();};
 videoLink.onkeydown=e=>{if(e.key==="Enter"&&!start.disabled){e.preventDefault();start.click();}};
 function receiveDrop(e){const candidate=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(candidate){e.preventDefault();setFile(candidate)}}
 file.addEventListener("click",e=>e.stopPropagation());file.addEventListener("change",e=>setFile(e.target.files&&e.target.files[0]));drop.addEventListener("click",e=>{if(!e.target.closest(".pick-file"))file.click()});drop.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click()}});["dragenter","dragover"].forEach(name=>drop.addEventListener(name,e=>{e.preventDefault();e.stopPropagation();drop.classList.add("over")}));["dragleave"].forEach(name=>drop.addEventListener(name,e=>{e.preventDefault();e.stopPropagation();drop.classList.remove("over")}));drop.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();drop.classList.remove("over");receiveDrop(e)});["dragover","drop"].forEach(name=>window.addEventListener(name,e=>e.preventDefault()));document.addEventListener("drop",receiveDrop,true);
@@ -35,7 +35,7 @@ async function resumeAnalysis(job){
     if(state.status==="completed"){
       analysisBusy=false;videoLink.disabled=false;file.disabled=false;setProgress(100,"分析完成");localStorage.removeItem("suojian_active_job");
       if(targetStudio==="presenter"){location.assign(`/presenter?job=${job}`);return;}
-      await new Promise(resolve=>setTimeout(resolve,350));document.getElementById("uploadShell").classList.add("hidden");document.querySelector(".studio-global-nav").hidden=true;
+      await new Promise(resolve=>setTimeout(resolve,350));document.getElementById("uploadShell").classList.add("hidden");document.querySelector(".sj-skip").href="#workbench";
       renderSuoJianWorkbench(document.getElementById("workbench"),{blueprint:state.blueprint,draftBlueprint:state.draft_blueprint,videoUrl:state.video_url,jsonUrl:state.json_url,stemUrls:state.stem_urls,sourceAudioUrl:state.source_audio_url,job,apiBase:"/api",iconUrl:"/static/suojian-icon.png"});return;
     }
     await new Promise(resolve=>setTimeout(resolve,800));

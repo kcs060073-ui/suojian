@@ -2,6 +2,7 @@
 import http.client
 import ipaddress
 import json
+import re
 import socket
 import ssl
 import subprocess
@@ -10,16 +11,17 @@ from pathlib import Path
 from urllib.parse import urlsplit, urljoin, urlunsplit, urlencode
 
 MAX_BYTES = 1024*1024*1024
+
+
+class VideoPageLink(ValueError):
+    """The URL is a webpage or manifest and needs extraction before downloading."""
+
+
 _DNS_CACHE = {}
-_PLATFORM_DNS_SUFFIXES = ('douyin.com','iesdouyin.com','amemv.com','snssdk.com','douyinvod.com',
-    'douyincdn.com','bytecdn.cn','byteimg.com','bytedance.com','xiaohongshu.com','xhslink.com',
-    'xhscdn.com','redcdn.net','bilibili.com','b23.tv','bilivideo.com','bilivideo.cn','hdslb.com')
 
 
 def real_platform_addresses(host):
     """Resolve proxy Fake-IP names to public IPs without relaxing private-IP checks."""
-    if not any(host==domain or host.endswith('.'+domain) for domain in _PLATFORM_DNS_SUFFIXES):
-        raise ValueError('该网站使用代理虚拟地址，目前无法导入；请上传本地视频。')
     cached=_DNS_CACHE.get(host)
     if cached and cached[0]>time.monotonic():return cached[1]
     for address,resolver,path in [('223.5.5.5','dns.alidns.com','/resolve'),('1.1.1.1','cloudflare-dns.com','/dns-query')]:
@@ -130,12 +132,17 @@ def download_video(url,destination,progress=None,*,max_bytes=MAX_BYTES,headers=N
             break
         else:raise ValueError("链接跳转次数过多，请使用视频文件的下载地址。")
         if response.status in {401,403}:
-            raise ValueError("该链接需要登录或没有下载权限，请上传本地视频。")
-        if response.status != 200:
+            raise ValueError(f"网站拒绝了这次视频读取（HTTP {response.status}），可能需要浏览器验证或下载授权。")
+        if response.status not in {200,206}:
             raise ValueError(f"视频下载未成功（网站返回 {response.status}），请检查链接是否过期。")
+        if response.status==206:
+            content_range=response.getheader('Content-Range') or ''
+            match=re.fullmatch(r'bytes 0-(\d+)/(\d+)',content_range)
+            if not match or int(match[1])+1!=int(match[2]):
+                raise ValueError('网站只返回了部分视频，请使用完整下载地址。')
         media_type=(response.getheader("Content-Type") or "").split(";")[0].strip().lower()
         if media_type in {"text/html","application/xhtml+xml","application/vnd.apple.mpegurl","application/x-mpegurl"}:
-            raise ValueError("这是分享网页或播放列表，暂不支持直接解析；请使用视频文件下载地址，或上传本地视频。")
+            raise VideoPageLink("这是视频网页或播放列表，需要先读取视频地址。")
         length=response.getheader("Content-Length")
         try:total=int(length) if length is not None else None
         except ValueError:raise ValueError("网站返回了无效的视频文件大小。")

@@ -7,6 +7,13 @@
 !**/.env.example
 **/node_modules/
 **/.venv/
+**/.rea-venv/
+**/.separator-venv/
+**/work/method-analysis/
+**/work/presenter-workspaces/
+**/work/production-traces/
+**/work/verified-video-pages/
+**/work/director/
 **/__pycache__/
 **/results/
 **/uploads/
@@ -21,3 +28,6 @@
 **/*.mp4
 **/*.mov
 **/*.mkv
+**/*.wav
+**/*.mp3
+**/*.m4a

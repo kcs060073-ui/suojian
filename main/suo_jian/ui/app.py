@@ -27,6 +27,8 @@ JIAN_YING_PROJECTS = Path(os.environ.get("LOCALAPPDATA", "")) / "JianyingPro" / 
 UPLOADS.mkdir(exist_ok=True); RESULTS.mkdir(exist_ok=True)
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024 * 1024
+from suo_jian.ui.production_methods import register_production_methods
+register_production_methods(app, ROOT)
 from suo_jian.ui.native_motion import register_native_motion
 register_native_motion(app)
 from suo_jian.ui.motion_explainer import bp as motion_explainer_bp
