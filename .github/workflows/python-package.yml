@@ -33,7 +33,7 @@ jobs:
         working-directory: main
         env:
           PYTHONUTF8: '1'
-        run: python -m unittest tests.test_production_methods tests.test_speech_text_policy tests.test_video_link tests.test_platform_video tests.test_segmented_video
+        run: python -m unittest tests.test_production_methods tests.test_speech_text_policy tests.test_video_link tests.test_platform_video tests.test_platform_pages tests.test_segmented_video
       - name: Check workbench JavaScript
         shell: pwsh
         run: |
