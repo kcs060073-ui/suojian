@@ -43,7 +43,7 @@ def register_startup(runtime, *, backend=None) -> None:
 def verify_local(project_root: Path, db_path: Path, port: int, *, backend=None,
                  maintenance_read_only=False, session_secret_path=None) -> str:
     if not isinstance(port, int) or isinstance(port, bool) or not 1 <= port <= 65535:
-        raise LocalLaunchError("CUTROOM 启动端口无效。")
+        raise LocalLaunchError("剪辑工作台 启动端口无效。")
     reference = startup_reference(project_root, db_path, port,
                                   maintenance_read_only=maintenance_read_only)
     try:
@@ -59,7 +59,7 @@ def verify_local(project_root: Path, db_path: Path, port: int, *, backend=None,
         if len(secret) != SESSION_SECRET_BYTES:
             raise ValueError("session secret invalid")
     except (OSError, ValueError, RuntimeError) as error:
-        raise LocalLaunchError("CUTROOM 尚未准备好，请稍后重试启动；仍失败时请联系维护同事。") from error
+        raise LocalLaunchError("剪辑工作台 尚未准备好，请稍后重试启动；仍失败时请联系维护同事。") from error
     nonce = secrets.token_hex(32)
     request = Request(f"http://127.0.0.1:{port}/auth/local-ready?nonce={nonce}",
                       headers={"Accept": "application/json"})
@@ -77,7 +77,7 @@ def verify_local(project_root: Path, db_path: Path, port: int, *, backend=None,
                 or not hmac.compare_digest(value["proof"], expected)):
             raise ValueError("installation mismatch")
     except (HTTPError, URLError, OSError, ValueError, TypeError) as error:
-        raise LocalLaunchError("CUTROOM 服务未准备好，或端口被其他程序占用；未打开其他程序，请联系维护同事。") from error
+        raise LocalLaunchError("剪辑工作台 服务未准备好，或端口被其他程序占用；未打开其他程序，请联系维护同事。") from error
     return f"http://127.0.0.1:{port}/auth/bootstrap?key={quote(key, safe='')}"
 
 
@@ -96,12 +96,12 @@ def open_local(project_root: Path, db_path: Path, port: int, *, backend=None,
                        maintenance_read_only=maintenance_read_only,
                        session_secret_path=session_secret_path)
     if browser_open(url) is False:
-        raise LocalLaunchError("无法打开默认浏览器，请设置默认浏览器后重新启动 CUTROOM。")
+        raise LocalLaunchError("无法打开默认浏览器，请设置默认浏览器后重新启动 剪辑工作台。")
 
 
 def main(argv=None) -> int:
     root = Path(__file__).resolve().parents[1]
-    parser = argparse.ArgumentParser(description="安全打开本机 CUTROOM")
+    parser = argparse.ArgumentParser(description="安全打开本机 剪辑工作台")
     parser.add_argument("--db", type=Path, default=root / "runtime/workbench/catalog.sqlite")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--open", action="store_true")

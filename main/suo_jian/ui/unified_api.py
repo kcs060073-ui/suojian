@@ -179,7 +179,7 @@ def register_unified_routes(app, workspace: Path, reference_for):
         task = runner.call("inspect")
         plans = [p for p in task["plans"] if p["status"] == "confirmed"]
         if not plans:
-            raise ValueError("请先生成一次预览，才能保存实际采用的 Cutroom 包装组合。")
+            raise ValueError("请先生成一次预览，才能保存实际采用的 剪辑工作台 包装组合。")
         candidates = task.get("candidates") or []
         candidate = next((c for c in candidates if c.get("candidate_id") == runner.state.get("candidate_id")), None)
         if candidate is None:

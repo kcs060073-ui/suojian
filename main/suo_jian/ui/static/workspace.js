@@ -62,8 +62,8 @@
     if (flow) main.insertBefore(reference, flow); else main.prepend(reference);
     reference.after(subtitles, recognition);
     if (!flow) {
-      const offline = chapter("studio-cutroom", "04", "溯剪 × Cutroom", "离线报告仅用于查看分析");
-      offline.insertAdjacentHTML("beforeend", '<p class="muted">在本机工作台中配置新脚本、园区素材和配音；离线报告不会直接调用 API 或生成工程。</p><a class="sj-cta studio-offline-link" href="http://127.0.0.1:8788/">打开本机工作台</a>');
+      const offline = chapter("studio-cutroom", "04", "溯剪制作流程", "离线报告仅用于查看分析");
+      offline.insertAdjacentHTML("beforeend", '<p class="muted">在本机工作台中配置新脚本、项目素材和配音；离线报告不会直接调用 API 或生成工程。</p><a class="sj-cta studio-offline-link" href="http://127.0.0.1:8788/">打开本机工作台</a>');
       const delivery = chapter("studio-delivery", "05", "预览与剪映草稿生成", "需要本机执行服务");
       delivery.insertAdjacentHTML("beforeend", '<p class="muted">生成预览与保存剪映草稿，请在本机工作台完成。</p>');
       main.append(offline, delivery);

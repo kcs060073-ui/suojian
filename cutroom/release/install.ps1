@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 
 function Write-Stage([string]$Message) {
-    Write-Host "`n[CUTROOM] $Message" -ForegroundColor Cyan
+    Write-Host "`n[SuoJian] $Message" -ForegroundColor Cyan
 }
 
 function Refresh-ProcessPath {
@@ -65,16 +65,16 @@ function Resolve-Python311 {
 
 try {
     if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT) {
-        throw "CUTROOM Beta 安装器仅支持 64 位 Windows。"
+        throw "SuoJian Beta 安装器仅支持 64 位 Windows。"
     }
     if (-not [Environment]::Is64BitOperatingSystem) {
-        throw "CUTROOM Beta 安装器仅支持 64 位 Windows。"
+        throw "SuoJian Beta 安装器仅支持 64 位 Windows。"
     }
     if ($PSVersionTable.PSVersion -lt [Version]"5.1") {
         throw "需要 PowerShell 5.1 或更高版本。"
     }
 
-    # Keep dependency staging inside the extracted CUTROOM directory. Shared
+    # Keep dependency staging inside the extracted SuoJian directory. Shared
     # system temp folders can be cleaned by Windows or endpoint security during
     # the long first install, which leaves pip referring to vanished wheels.
     $installTemp = Join-Path $projectRoot "runtime\install-temp"
@@ -107,7 +107,7 @@ try {
     Set-Location -LiteralPath $projectRoot
     $venvPython = Join-Path $projectRoot ".venv\Scripts\python.exe"
     if (-not (Test-Path -LiteralPath $venvPython -PathType Leaf)) {
-        Write-Stage "创建 CUTROOM 专用 Python 环境"
+        Write-Stage "创建 SuoJian 专用 Python 环境"
         & $python -m venv (Join-Path $projectRoot ".venv")
         Assert-LastExitCode "创建 Python 环境"
     }
@@ -146,7 +146,7 @@ try {
     Assert-LastExitCode "ffprobe 自检"
 
     Write-Host "`n安装完成。以后双击‘启动CUTROOM.bat’即可使用。" -ForegroundColor Green
-    Write-Host "如需让 Codex 控制 CUTROOM，可选安装 MCP 依赖后先预览注册：" -ForegroundColor Yellow
+    Write-Host "如需让 Codex 控制 SuoJian，可选安装 MCP 依赖后先预览注册：" -ForegroundColor Yellow
     Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File scripts\install-codex-mcp.ps1 -DryRun"
     Write-Host "普通安装不会自动注册 MCP，也不会修改 Codex 配置。"
     exit 0

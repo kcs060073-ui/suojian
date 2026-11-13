@@ -1,19 +1,19 @@
-# 园区素材极简检查表实施计划
+# 项目素材极简检查表实施计划
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 生成一份供普通业务人员本地维护的单工作表 Excel，同时检查园区点位是否拍全、素材是否已整理可用。
+**Goal:** 生成一份供普通业务人员本地维护的单工作表 Excel，同时检查项目点位是否拍全、素材是否已整理可用。
 
-**Architecture:** 使用 `@oai/artifact-tool` 创建一张 `园区素材检查表`。顶部是公式驱动的四项汇总，下面是 8 字段明细表；要求等级和两段状态使用下拉选项，状态使用条件颜色。最终工作簿保存到项目 `outputs/20260810-093912-codex-5ff8/`，构建脚本仅放在本次会话的可写临时目录。
+**Architecture:** 使用 `@oai/artifact-tool` 创建一张 `项目素材检查表`。顶部是公式驱动的四项汇总，下面是 8 字段明细表；要求等级和两段状态使用下拉选项，状态使用条件颜色。最终工作簿保存到项目 `outputs/20260810-093912-codex-5ff8/`，构建脚本仅放在本次会话的可写临时目录。
 
 **Tech Stack:** bundled Node.js、`@oai/artifact-tool` 2.8.6+、Excel `.xlsx`
 
 ## Global Constraints
 
 - 设计事实源：`docs/superpowers/specs/2026-08-10-park-material-checklist-design.md`。
-- 工作簿只能有一张业务工作表：`园区素材检查表`。
+- 工作簿只能有一张业务工作表：`项目素材检查表`。
 - 明细只能有 8 个字段：一级分类、点位/场景、要求等级、最低要求、拍摄状态、入库状态、素材位置、缺口/备注。
-- 一级分类：园区形象、公共环境、产业空间、基础设施、交通区位、可组织场景。
+- 一级分类：项目形象、公共环境、产业空间、基础设施、交通区位、可组织场景。
 - 要求等级：基础必备、有则必备、特色可选。
 - 拍摄状态：未拍、部分完成、已拍全、不适用。
 - 入库状态：未整理、整理中、已整理可用、不适用。
@@ -30,7 +30,7 @@
 
 **Interfaces:**
 - Consumes: 设计说明第 4、7 节的字段与点位目录。
-- Produces: `园区素材检查表` 工作表以及 A8:H58 左右的明细区域，确切末行由点位数量决定。
+- Produces: `项目素材检查表` 工作表以及 A8:H58 左右的明细区域，确切末行由点位数量决定。
 
 - [ ] **Step 1: 创建会话级依赖 Junction**
 
@@ -51,19 +51,19 @@ import fs from "node:fs/promises";
 import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
 const workbook = Workbook.create();
-const sheet = workbook.worksheets.add("园区素材检查表");
+const sheet = workbook.worksheets.add("项目素材检查表");
 sheet.showGridLines = false;
 
 // rows 的每一项严格对应 8 个字段；点位内容逐条复制自设计说明第 7 节。
 const rows = [
-  ["园区形象", "园区门头全貌", "基础必备", "门头远景、近景各1段", "未拍", "未整理", "", ""],
-  ["园区形象", "园区名称、LOGO、门牌", "基础必备", "清晰特写视频1段，照片1张", "未拍", "未整理", "", ""],
+  ["项目形象", "项目门头全貌", "基础必备", "门头远景、近景各1段", "未拍", "未整理", "", ""],
+  ["项目形象", "项目名称、LOGO、门牌", "基础必备", "清晰特写视频1段，照片1张", "未拍", "未整理", "", ""],
 ];
 
 const outputDir = "E:/我的AI项目/视频自动化剪辑/outputs/20260810-093912-codex-5ff8";
 await fs.mkdir(outputDir, { recursive: true });
 const output = await SpreadsheetFile.exportXlsx(workbook);
-await output.save(`${outputDir}/园区素材检查表.xlsx`);
+await output.save(`${outputDir}/项目素材检查表.xlsx`);
 ```
 
 Expected: `rows` 最终包含设计说明第 7 节全部点位，且每行恰好 8 个值。
@@ -74,7 +74,7 @@ Expected: `rows` 最终包含设计说明第 7 节全部点位，且每行恰好
 
 ```js
 sheet.getRange("A1:H1").merge();
-sheet.getRange("A1").values = [["园区本地素材库检查表"]];
+sheet.getRange("A1").values = [["项目本地素材库检查表"]];
 sheet.getRange("A2:H2").merge();
 sheet.getRange("A2").values = [["一张表完成拍摄验收与入库验收；基础必备项必须拍全并整理可用。"]];
 sheet.getRange("A7:H7").values = [["一级分类", "点位/场景", "要求等级", "最低要求", "拍摄状态", "入库状态", "素材位置", "缺口/备注"]];
@@ -176,7 +176,7 @@ Expected: exit code 0，最终工作簿覆盖输出文件。
 ```js
 const inspect = await workbook.inspect({
   kind: "table",
-  range: `园区素材检查表!A1:H${endRow}`,
+  range: `项目素材检查表!A1:H${endRow}`,
   include: "values,formulas",
   tableMaxRows: 20,
   tableMaxCols: 8,
@@ -204,7 +204,7 @@ Expected: 0 个公式错误。
 
 ```js
 const preview = await workbook.render({
-  sheetName: "园区素材检查表",
+  sheetName: "项目素材检查表",
   autoCrop: "all",
   scale: 1,
   format: "png",

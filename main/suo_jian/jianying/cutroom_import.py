@@ -1,7 +1,7 @@
-"""Convert a completed Cutroom editable delivery into a Jianying draft.
+"""Convert a completed 剪辑工作台 editable delivery into a Jianying draft.
 
 The published video or base video is a single editable clip. Audio stems and
-subtitle text are separate tracks when Cutroom actually delivered them.
+subtitle text are separate tracks when 剪辑工作台 actually delivered them.
 Effects baked into video cannot be reconstructed as native Jianying effects.
 """
 
@@ -20,7 +20,7 @@ def _component_file(package: Path, components: dict, name: str) -> Path | None:
         return None
     candidate = (package / item["path"]).resolve()
     if package.resolve() not in candidate.parents or not candidate.is_file():
-        raise ValueError(f"Cutroom 交付文件无效：{name}")
+        raise ValueError(f"剪辑工作台 交付文件无效：{name}")
     return candidate
 
 
@@ -69,7 +69,7 @@ def build_from_cutroom_delivery(package_dir: str | Path, reference: dict,
     manifest_path = package / "delivery-manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("schema") != "cutroom.editable-delivery/v1":
-        raise ValueError("Cutroom 交付包格式不受支持。")
+        raise ValueError("剪辑工作台 交付包格式不受支持。")
     components = manifest.get("components") or {}
     video = _component_file(package, components, "base_video")
     video_kind = "base_video"
@@ -77,7 +77,7 @@ def build_from_cutroom_delivery(package_dir: str | Path, reference: dict,
         video = _component_file(package, components, "final_video")
         video_kind = "final_video"
     if video is None:
-        raise ValueError("Cutroom 交付包缺少可用视频。")
+        raise ValueError("剪辑工作台 交付包缺少可用视频。")
 
     material = draft.VideoMaterial(str(video), video.name)
     audio_sources = [(key, label, _component_file(package, components, key)) for key, label in (
@@ -92,7 +92,7 @@ def build_from_cutroom_delivery(package_dir: str | Path, reference: dict,
     output = target_root / draft_name
     duration = material.duration / 1_000_000
     time_range = draft.trange("0s", f"{duration:.3f}s")
-    video_track = script.append_track(draft.TrackSpec(draft.TrackType.video, "Cutroom-视频"))
+    video_track = script.append_track(draft.TrackSpec(draft.TrackType.video, "剪辑工作台-视频"))
     script.add_segment(draft.VideoSegment(material, time_range,
                                          source_timerange=time_range,
                                          volume=0.0 if has_stems else 1.0), video_track)
@@ -101,8 +101,8 @@ def build_from_cutroom_delivery(package_dir: str | Path, reference: dict,
     for key, label, path in audio_sources:
         if path is None:
             continue
-        audio = draft.AudioMaterial(str(path), f"Cutroom-{label}")
-        track = script.append_track(draft.TrackSpec(draft.TrackType.audio, f"Cutroom-{label}"))
+        audio = draft.AudioMaterial(str(path), f"剪辑工作台-{label}")
+        track = script.append_track(draft.TrackSpec(draft.TrackType.audio, f"剪辑工作台-{label}"))
         length = min(duration, audio.duration / 1_000_000)
         span = draft.trange("0s", f"{length:.3f}s")
         script.add_segment(draft.AudioSegment(audio, span, source_timerange=span), track)
@@ -115,7 +115,7 @@ def build_from_cutroom_delivery(package_dir: str | Path, reference: dict,
     }) if cues else 0
     script.save()
     report = {
-        "generator": "溯剪 × Cutroom", "cutroom_package": str(package),
+        "generator": "溯剪 × 剪辑工作台", "cutroom_package": str(package),
         "video_source": video_kind, "editable_video_clips": 1,
         "editable_audio_tracks": audio_tracks, "editable_subtitles": subtitle_count,
         "baked_effects_remain_editable": False,

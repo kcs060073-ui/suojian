@@ -259,14 +259,14 @@ def cutroom_capabilities():
 
 @app.post("/api/cutroom/preflight/<job>")
 def cutroom_preflight(job):
-    """Read-only Cutroom validation. Never creates a task or starts a paid job."""
+    """Read-only 剪辑工作台 validation. Never creates a task or starts a paid job."""
     try:
         reference, _, result_dir = _reference_for(job)
         payload = request.get_json(silent=True) or {}
         draft = _validated_preview_draft(result_dir, payload.get("draft_blueprint"))
         audit = inspect_local_workbench(os.environ.get("SUOJIAN_CUTROOM_ROOT"))
         if not audit.get("mcp_source_available"):
-            return jsonify(error="本机 Cutroom 尚未部署 Agent MCP。"), 503
+            return jsonify(error="本机 剪辑工作台 尚未部署 Agent MCP。"), 503
         task_request = make_ad_task_request(
             draft, title=payload.get("title", f"溯剪-{job}"),
             purpose=payload.get("purpose", "参考视频风格复刻"),
@@ -289,14 +289,14 @@ def cutroom_create(job):
         reference, _, result_dir = _reference_for(job)
         payload = request.get_json(silent=True) or {}
         if payload.get("confirm_create") is not True:
-            return jsonify(error="请先确认创建 Cutroom 任务。"), 400
+            return jsonify(error="请先确认创建 剪辑工作台 任务。"), 400
         draft = _validated_preview_draft(result_dir, payload.get("draft_blueprint"))
         binding_path = result_dir / "cutroom_binding.json"
         if binding_path.is_file():
-            return jsonify(error="该溯剪方案已提交 Cutroom，请先查看原任务，避免重复创建。"), 409
+            return jsonify(error="该溯剪方案已提交 剪辑工作台，请先查看原任务，避免重复创建。"), 409
         audit = inspect_local_workbench(os.environ.get("SUOJIAN_CUTROOM_ROOT"))
         if not audit.get("mcp_source_available"):
-            return jsonify(error="Cutroom Agent MCP 尚未就绪。"), 503
+            return jsonify(error="剪辑工作台 Agent MCP 尚未就绪。"), 503
         task_request = make_ad_task_request(
             draft, title=payload.get("title", f"溯剪-{job}"),
             purpose=payload.get("purpose", "参考视频风格复刻"),
@@ -308,10 +308,10 @@ def cutroom_create(job):
         root = audit["project_path"]
         preflight = call_readonly_mcp(root, "cutroom_preflight_task", {"request": task_request})
         if not preflight.get("ok") or preflight.get("data", {}).get("blocking"):
-            return jsonify(error="Cutroom 创建前检查未通过。", preflight=preflight), 409
+            return jsonify(error="剪辑工作台 创建前检查未通过。", preflight=preflight), 409
         created = call_cutroom_mcp(root, "cutroom_create_task", {"request": task_request})
         if not created.get("ok"):
-            return jsonify(error="Cutroom 未能创建任务。", result=created), 502
+            return jsonify(error="剪辑工作台 未能创建任务。", result=created), 502
         task_id = created["data"]["taskId"]
         binding = {"schema_version": "suojian-cutroom-binding-1", "task_id": task_id,
                    "library_id": task_request["primary_library_id"],
@@ -321,7 +321,7 @@ def cutroom_create(job):
         links = call_readonly_mcp(root, "cutroom_get_result_links", {"task_id": task_id})
         return jsonify(binding=binding, task=created.get("data"),
                        task_url=(links.get("data") or {}).get("taskUrl"),
-                       message="Cutroom 任务已创建；请在 Cutroom 确认文案并继续生成预览。尚未调用付费模型。")
+                       message="剪辑工作台 任务已创建；请在 剪辑工作台 确认文案并继续生成预览。尚未调用付费模型。")
     except Exception as exc:
         return jsonify(error=str(exc)), 400
 
@@ -332,11 +332,11 @@ def cutroom_extend(job):
     try:
         payload = request.get_json(silent=True) or {}
         if payload.get("confirm_extend") is not True:
-            return jsonify(error="请先确认延长视频并创建新版 Cutroom 任务。"), 400
+            return jsonify(error="请先确认延长视频并创建新版 剪辑工作台 任务。"), 400
         reference, _, result_dir = _reference_for(job)
         binding_path = result_dir / "cutroom_binding.json"
         if not binding_path.is_file():
-            return jsonify(error="尚无可延长的 Cutroom 任务。"), 404
+            return jsonify(error="尚无可延长的 剪辑工作台 任务。"), 404
         previous = json.loads(binding_path.read_text(encoding="utf-8"))
         old_task = call_readonly_mcp(previous["cutroom_root"], "cutroom_get_task",
                                      {"task_id": previous["task_id"]})
@@ -352,7 +352,7 @@ def cutroom_extend(job):
         root = audit["project_path"]
         task_request = make_ad_task_request(
             extended, title=payload.get("title", f"溯剪-嘉兴平湖新仓智谷天地-{target:g}秒"),
-            purpose=payload.get("purpose", "信息流园区招商"),
+            purpose=payload.get("purpose", "信息流项目招商"),
             primary_library_id=previous["library_id"],
             aspect_ratio=previous["aspect_ratio"],
         )
@@ -361,7 +361,7 @@ def cutroom_extend(job):
             return jsonify(error="新版任务预检未通过。", preflight=preflight), 409
         created = call_cutroom_mcp(root, "cutroom_create_task", {"request": task_request})
         if not created.get("ok"):
-            return jsonify(error="Cutroom 未能创建新版任务。", result=created), 502
+            return jsonify(error="剪辑工作台 未能创建新版任务。", result=created), 502
         task_id = created["data"]["taskId"]
         (result_dir / "draft_blueprint_original.json").write_text(
             json.dumps(original, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -372,7 +372,7 @@ def cutroom_extend(job):
         links = call_readonly_mcp(root, "cutroom_get_result_links", {"task_id": task_id})
         return jsonify(binding=updated, draft_blueprint=extended,
                        task_url=(links.get("data") or {}).get("taskUrl"),
-                       message="已创建延长版任务；仍需在 Cutroom 核对并锁定文案，未启动付费生成。")
+                       message="已创建延长版任务；仍需在 剪辑工作台 核对并锁定文案，未启动付费生成。")
     except Exception as exc:
         return jsonify(error=str(exc)), 400
 
@@ -382,7 +382,7 @@ def cutroom_task(job):
     try:
         binding_path = RESULTS / _safe_job(job) / "cutroom_binding.json"
         if not binding_path.is_file():
-            return jsonify(error="此方案尚未提交 Cutroom。"), 404
+            return jsonify(error="此方案尚未提交 剪辑工作台。"), 404
         binding = json.loads(binding_path.read_text(encoding="utf-8"))
         root = binding["cutroom_root"]
         task_id = binding["task_id"]
@@ -395,10 +395,10 @@ def cutroom_task(job):
 
 @app.post("/api/cutroom/submit-plan/<job>")
 def cutroom_submit_plan(job):
-    """Submit a reviewed SuoJian storyboard only after Cutroom gates allow it."""
+    """Submit a reviewed SuoJian storyboard only after 剪辑工作台 gates allow it."""
     try:
         if (request.get_json(silent=True) or {}).get("confirm_submit") is not True:
-            return jsonify(error="请确认向 Cutroom 提交溯剪分镜。"), 400
+            return jsonify(error="请确认向 剪辑工作台 提交溯剪分镜。"), 400
         result_dir = RESULTS / _safe_job(job)
         binding_path = result_dir / "cutroom_binding.json"
         binding = json.loads(binding_path.read_text(encoding="utf-8"))
@@ -406,7 +406,7 @@ def cutroom_submit_plan(job):
         root, task_id = binding["cutroom_root"], binding["task_id"]
         context = call_readonly_mcp(root, "cutroom_get_agent_context", {"task_id": task_id})
         if not context.get("ok"):
-            return jsonify(error="Cutroom 尚未允许提交分镜；请先锁定文案并同步素材。",
+            return jsonify(error="剪辑工作台 尚未允许提交分镜；请先锁定文案并同步素材。",
                            result=context), 409
         data = context["data"]
         guidance_path = result_dir / "storyboard_guidance.json"
@@ -421,28 +421,28 @@ def cutroom_submit_plan(job):
             "source_model_label": "SuoJian slot mapper",
         })
         if not result.get("ok"):
-            return jsonify(error="Cutroom 拒绝了分镜方案。", result=result), 409
+            return jsonify(error="剪辑工作台 拒绝了分镜方案。", result=result), 409
         binding.update(status="storyboard_submitted")
         binding_path.write_text(json.dumps(binding, ensure_ascii=False, indent=2), encoding="utf-8")
-        return jsonify(result=result, message="溯剪分镜已提交 Cutroom。请在 Cutroom 审核并确认后续 TTS 费用与预览生成。")
+        return jsonify(result=result, message="溯剪分镜已提交 剪辑工作台。请在 剪辑工作台 审核并确认后续 TTS 费用与预览生成。")
     except Exception as exc:
         return jsonify(error=str(exc)), 400
 
 
 @app.post("/api/cutroom/import/<job>")
 def cutroom_import(job):
-    """Import a reviewed Cutroom editable package after explicit user approval."""
+    """Import a reviewed 剪辑工作台 editable package after explicit user approval."""
     try:
         if (request.get_json(silent=True) or {}).get("confirm_import") is not True:
-            return jsonify(error="请先确认 Cutroom 预览并同意生成剪映草稿。"), 400
+            return jsonify(error="请先确认 剪辑工作台 预览并同意生成剪映草稿。"), 400
         reference, _, result_dir = _reference_for(job)
         binding_path = result_dir / "cutroom_binding.json"
         if not binding_path.is_file():
-            return jsonify(error="此方案还没有 Cutroom 任务。"), 404
+            return jsonify(error="此方案还没有 剪辑工作台 任务。"), 404
         binding = json.loads(binding_path.read_text(encoding="utf-8"))
         task_id = binding["task_id"]
         if not re.fullmatch(r"task_[0-9a-f]{32}", task_id):
-            raise ValueError("Cutroom 任务编号无效。")
+            raise ValueError("剪辑工作台 任务编号无效。")
         package_root = Path(binding["cutroom_root"]).resolve() / "out"
         candidates = sorted(
             (p for p in package_root.glob(f"{task_id}*")
@@ -450,14 +450,14 @@ def cutroom_import(job):
             key=lambda p: p.stat().st_mtime, reverse=True,
         )
         if not candidates:
-            return jsonify(error="Cutroom 尚未生成可编辑交付包。请先完成预览、人工确认和发布包生成。"), 409
+            return jsonify(error="剪辑工作台 尚未生成可编辑交付包。请先完成预览、人工确认和发布包生成。"), 409
         package = candidates[0]
         check_path = package / "publish-check.json"
         if not check_path.is_file() or json.loads(check_path.read_text(encoding="utf-8")).get("task_id") != task_id:
-            raise ValueError("Cutroom 发布包与当前任务不匹配。")
+            raise ValueError("剪辑工作台 发布包与当前任务不匹配。")
         draft = json.loads((result_dir / "draft_blueprint.json").read_text(encoding="utf-8"))
         draft_root = JIAN_YING_PROJECTS if JIAN_YING_PROJECTS.is_dir() else result_dir / "jianying_draft"
-        draft_name = f"溯剪-Cutroom-{job}"
+        draft_name = f"溯剪-剪辑工作台-{job}"
         output, report = build_from_cutroom_delivery(package, reference, draft, draft_root, draft_name)
         archive = shutil.make_archive(str(result_dir / "cutroom_jianying_draft"), "zip",
                                       root_dir=output.parent, base_dir=output.name)
@@ -466,7 +466,7 @@ def cutroom_import(job):
         binding_path.write_text(json.dumps(binding, ensure_ascii=False, indent=2), encoding="utf-8")
         return jsonify(status="completed", report=report, output=str(output),
                        archive_url=f"/api/cutroom/archive/{job}",
-                       message="Cutroom 交付包已转换为剪映草稿。请在剪映中打开检查轨道。")
+                       message="剪辑工作台 交付包已转换为剪映草稿。请在剪映中打开检查轨道。")
     except Exception as exc:
         return jsonify(error=str(exc)), 400
 
@@ -490,7 +490,7 @@ def cutroom_prepare(job):
         (result_dir / "cutroom_job.json").write_text(
             json.dumps(cutroom_job, ensure_ascii=False, indent=2), encoding="utf-8")
         return jsonify(job=cutroom_job, executable=False,
-                       message="已准备方案；请先选择 Cutroom 素材库并进行创建前检查。此步未创建任务，也未触发付费服务或渲染。")
+                       message="已准备方案；请先选择 剪辑工作台 素材库并进行创建前检查。此步未创建任务，也未触发付费服务或渲染。")
     except Exception as exc:
         return jsonify(error=str(exc)), 400
 

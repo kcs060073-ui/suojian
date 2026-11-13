@@ -33,7 +33,7 @@ def installation_info(root: Path) -> dict:
             with closing(sqlite3.connect(database.as_uri() + "?mode=ro", uri=True)) as db:
                 value["schema_version"] = db.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
         except sqlite3.Error:
-            value["database_error"] = "无法读取 Cutroom 数据库版本；未初始化或修改任务库。"
+            value["database_error"] = "无法读取 剪辑工作台 数据库版本；未初始化或修改任务库。"
     value["database_ready"] = bool(value["schema_version"] is not None and value["expected_schema_version"] is not None
                                    and value["schema_version"] == value["expected_schema_version"])
     return value
@@ -42,9 +42,9 @@ def installation_info(root: Path) -> dict:
 def require_existing_database(root: Path) -> dict:
     info = installation_info(root)
     if not info["database_exists"]:
-        raise ValueError("Cutroom 尚未绑定已有任务库；请完成安装与数据恢复，不能用空库代替旧任务。")
+        raise ValueError("剪辑工作台 尚未绑定已有任务库；请完成安装与数据恢复，不能用空库代替旧任务。")
     if not info["database_ready"]:
-        raise ValueError(f"Cutroom 数据库版本 {info['schema_version']} 与程序版本 {info['expected_schema_version']} 不匹配；请先备份并完成官方迁移。状态查询不会自动迁移数据库。")
+        raise ValueError(f"剪辑工作台 数据库版本 {info['schema_version']} 与程序版本 {info['expected_schema_version']} 不匹配；请先备份并完成官方迁移。状态查询不会自动迁移数据库。")
     return info
 
 
@@ -56,12 +56,12 @@ def mcp_arguments(root: Path, origin: str | None = None) -> list[str]:
     parsed = urlsplit(origin)
     if (parsed.scheme != "http" or parsed.hostname not in {"127.0.0.1", "localhost"}
             or parsed.username or parsed.password or parsed.path not in {"", "/"} or parsed.query or parsed.fragment):
-        raise ValueError("Cutroom 工作台地址必须是本机 HTTP 来源。")
+        raise ValueError("剪辑工作台 工作台地址必须是本机 HTTP 来源。")
     arguments = [str(root / "scripts" / "cutroom_mcp.py"), "--client", "codex"]
     info = installation_info(root)
     if info["version"] == "0.9.0-beta.8" and info["distribution"] == "source":
         if origin.rstrip("/") != "http://127.0.0.1:8765":
-            raise ValueError("旧版 Cutroom 不支持自定义工作台地址绑定，请使用对应版本的默认地址。")
+            raise ValueError("旧版 剪辑工作台 不支持自定义工作台地址绑定，请使用对应版本的默认地址。")
         return arguments
     return arguments + [
             "--db", str(root / "runtime" / "workbench" / "catalog.sqlite"),

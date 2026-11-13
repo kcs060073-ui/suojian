@@ -3,9 +3,9 @@ name: park-vibe-producer
 description: Produce park Vibe videos from scripts and footage using a local MotionGit template library with authorized private originals, content-based motion and audio choices, and online illustration or animation sourcing. Use for park Vibe production or MotionGit local-library maintenance, preserving the user's selected style and versions.
 ---
 
-# 园区 Vibe 制作
+# 分镜工作台制作
 
-工作台准备任务；用户在有本机执行能力的对话明确启动后再制作。脚本、素材、画幅和指定模板是本次输入，不能用模板示例替代真实园区事实。
+工作台准备任务；用户在有本机执行能力的对话明确启动后再制作。脚本、素材、画幅和指定模板是本次输入，不能用模板示例替代真实项目事实。
 
 ## 已保存任务的对话交接
 
@@ -33,7 +33,7 @@ python scripts/sync_motiongit.py
 
 ## 自动搭配与联网补画面
 
-所有园区 Vibe 剪辑遵守[口播、对象与动画联动原则](references/content-linked-motion.md)：按完整句意设计可见主体及动作，用真实配音时间串联，避免通篇实景卡片、堆字或文字与画面各说各话。用户允许联网时主动搜索匹配角色、插图、UI与动画并实际融入叙事；选定模板是视觉资源，不能替代内容编排。
+所有分镜工作台剪辑遵守[口播、对象与动画联动原则](references/content-linked-motion.md)：按完整句意设计可见主体及动作，用真实配音时间串联，避免通篇实景卡片、堆字或文字与画面各说各话。用户允许联网时主动搜索匹配角色、插图、UI与动画并实际融入叙事；选定模板是视觉资源，不能替代内容编排。
 
 模板在制作前选择；不让用户逐项配置卡片、变体、音乐和音效。先按脚本识别需要证明的对象、关系和动作，再选当前模板实际支持的表达。一个版本保持主要视觉语言，允许不用卡片。
 
@@ -41,7 +41,7 @@ python scripts/sync_motiongit.py
 
 每条片按分镜联网检索补充插图、图标、UI示意或动画，参见 [视觉素材来源与绑定](references/visual-assets.md)。优先用开源/可用来源，下载后核对主体、动作、时长、透明通道与可读文字；记录来源与许可。素材缓存到任务，不批量囤积与视频无关的素材。
 
-真实园区展示使用用户素材；通用插图、角色、动画和界面示意用于解释，不伪装成实拍、实测或真实客户。优先既有免费资源与本机动画；个人包可按已授权的本地入口制作；保存 Key 的授权不代表授权付费生成或把素材发送给新的外部服务。模板许可为个人／非商业用途时，不用于园区商业成片；先选择许可适配的模板。
+真实项目展示使用用户素材；通用插图、角色、动画和界面示意用于解释，不伪装成实拍、实测或真实客户。优先既有免费资源与本机动画；个人包可按已授权的本地入口制作；保存 Key 的授权不代表授权付费生成或把素材发送给新的外部服务。模板许可为个人／非商业用途时，不用于项目商业成片；先选择许可适配的模板。
 
 ## 制作与交付
 

@@ -1,4 +1,4 @@
-# CUTROOM Three-Role Model Configuration Implementation Plan
+# 剪辑工作台 Three-Role Model Configuration Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -405,7 +405,7 @@ node --check web-ui/public/app.mjs
 git diff --check
 ```
 
-- [ ] **Step 3: Reload only the verified CUTROOM 8765 process tree**
+- [ ] **Step 3: Reload only the verified 剪辑工作台 8765 process tree**
 
 Resolve listener PID and command line, require the expected worktree path and `-m workbench.server --port 8765`, stop only matching PIDs, then start the existing `CutroomLocal` scheduled task. Verify one listener and HTTP 200.
 

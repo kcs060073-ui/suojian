@@ -1,4 +1,4 @@
-"""Probe the real CUTROOM MCP transport for one client identity."""
+"""Probe the real 剪辑工作台 MCP transport for one client identity."""
 
 from __future__ import annotations
 
@@ -84,7 +84,7 @@ async def probe_http(client_id: str, url: str) -> dict[str, object]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Probe CUTROOM MCP.")
+    parser = argparse.ArgumentParser(description="Probe 剪辑工作台 MCP.")
     parser.add_argument(
         "--client",
         choices=("codex", "workbuddy", "doubao_work"),

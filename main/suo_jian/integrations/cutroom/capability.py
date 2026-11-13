@@ -1,4 +1,4 @@
-"""Audit the installed Cutroom boundary without assuming a live connection."""
+"""Audit the installed 剪辑工作台 boundary without assuming a live connection."""
 
 from pathlib import Path
 import sqlite3
@@ -22,7 +22,7 @@ MCP_TOOLS = (
 
 
 def inspect_capabilities(tool_names: set[str], mapping: dict[str, str]) -> dict:
-    """Report actual bindings; never infer a Cutroom tool name from a label."""
+    """Report actual bindings; never infer a 剪辑工作台 tool name from a label."""
     return {
         name: {"available": bool(mapping.get(name) in tool_names), "tool": mapping.get(name)}
         for name in REQUIRED_CAPABILITIES
@@ -36,7 +36,7 @@ def inspect_local_workbench(root: str | Path | None = None) -> dict:
     mcp_file = project / "cutroom_mcp" / "server.py"
     if not route_file.is_file():
         return {"found": False, "transport": None, "capabilities": {},
-                "message": "未找到本机 Cutroom 项目；请指定项目路径。"}
+                "message": "未找到本机 剪辑工作台 项目；请指定项目路径。"}
     profile_status = {}
     db_path = project / "runtime" / "workbench" / "catalog.sqlite"
     if db_path.is_file():
@@ -59,7 +59,7 @@ def inspect_local_workbench(root: str | Path | None = None) -> dict:
                 "render_action": mcp_file.is_file(),
                 "native_jianying_draft": False,
             },
-            "message": ("已发现 Cutroom Agent MCP 入口，但尚未验证协议及后台执行器；它提供任务、分镜和渲染操作，"
+            "message": ("已发现 剪辑工作台 Agent MCP 入口，但尚未验证协议及后台执行器；它提供任务、分镜和渲染操作，"
                         "不提供独立的 TTS／字幕／音效工具，也不直接生成剪映草稿。"
                         if mcp_file.is_file() else
                         "当前安装是旧版 REST 工作台，未发现新包中的 Agent MCP。")}

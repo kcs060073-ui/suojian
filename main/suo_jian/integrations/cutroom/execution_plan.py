@@ -1,4 +1,4 @@
-"""Freeze Cutroom's actual render input for both preview lineage and draft export."""
+"""Freeze 剪辑工作台's actual render input for both preview lineage and draft export."""
 from __future__ import annotations
 
 import json
@@ -28,7 +28,7 @@ def candidate_render_path(root: Path, task_id: str, candidates: list[dict]) -> P
     candidate = max(candidates, key=lambda row: int(row["version_no"]))
     label = str(candidate.get("version_label") or "")
     if not label or label in {".", ".."} or any(char in label for char in "/\\:"):
-        raise ValueError("Cutroom 候选版本目录无效。")
+        raise ValueError("剪辑工作台 候选版本目录无效。")
     render = (Path(root) / "runtime/workbench/tasks" / task_id / "render").resolve()
     path = (render / label / "adrender.json").resolve()
     path.relative_to(render)
@@ -126,7 +126,7 @@ def normalize_render_plan(raw: dict, *, root: Path, task_id: str, preview_path: 
                             "参考模式使用直接切镜；其他模式的转场使用剪映原生近似效果。",
                             "重点花字在预览中使用独立透明素材和入场动画；草稿保留独立素材层，复杂花字不是原生可编辑文字模板。",
                             "独立人声、音乐和音效保留；预览中的侧链压低及整体响度处理未逐样本复刻。",
-                            "参考剪法用于选镜提示与目录字幕近似映射；本版执行以 Cutroom 实际包装方案为准。",
+                            "参考剪法用于选镜提示与目录字幕近似映射；本版执行以 剪辑工作台 实际包装方案为准。",
                             "参考视频的逐事件音效重建、精确花字和贴纸模板匹配尚未接入；当前使用实际包装素材。"]}
 
 

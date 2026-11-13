@@ -482,7 +482,7 @@ python scripts/media_catalog.py --db runtime/media-catalog/p2-digital-human-acce
 
 - [ ] **Step 6: 更新文档口径**
 
-P1 报告改为“软件核心能力完成，本机验收通过，移动硬盘/普通同事现场验收待完成”；P2 只写“数字人路线最小真实闭环通过”，园区路线仍未验收，P3 仍暂停。
+P1 报告改为“软件核心能力完成，本机验收通过，移动硬盘/普通同事现场验收待完成”；P2 只写“数字人路线最小真实闭环通过”，项目路线仍未验收，P3 仍暂停。
 
 - [ ] **Step 7: 提交验收与文档**
 
@@ -501,4 +501,4 @@ git commit -m "docs: record verified digital human vertical slice"
 - `assemble --render` 必须从真实 asset_id、scene_cards 和 confirmed packaging_plan 编译输入并调用 `render-mix`。
 - 没有 scene card、素材、画面锁、包装确认、QA 或人工完整观看记录时，任何一步都不能写“端到端验收通过”。
 - 发布包包含成片、3 张封面关键帧、发布文案、合规检查和 QA 报告。
-- 数字人真实样片通过后只能声明“数字人 P2 最小闭环通过”；园区 P2、移动硬盘现场 P1、普通同事实测和 P3 均保持待验收。
+- 数字人真实样片通过后只能声明“数字人 P2 最小闭环通过”；项目 P2、移动硬盘现场 P1、普通同事实测和 P3 均保持待验收。

@@ -205,7 +205,7 @@ class WorkbenchRouter:
                 data = self.runtime.diagnostics.export_zip()
                 handler.send_response(200)
                 handler.send_header("Content-Type", "application/zip")
-                handler.send_header("Content-Disposition", 'attachment; filename="CUTROOM-errors.zip"')
+                handler.send_header("Content-Disposition", 'attachment; filename="剪辑工作台-errors.zip"')
                 handler.send_header("Content-Length", str(len(data)))
                 handler.send_header("Cache-Control", "no-store")
                 handler.send_header("X-Content-Type-Options", "nosniff")

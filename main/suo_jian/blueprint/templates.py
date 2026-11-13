@@ -1,4 +1,4 @@
-"""Versioned editing recipes; deliberately separate from Cutroom packaging."""
+"""Versioned editing recipes; deliberately separate from 剪辑工作台 packaging."""
 from __future__ import annotations
 
 import hashlib
@@ -38,7 +38,7 @@ class TemplateStore:
                  "analysis_digest": digest(reference),
                  "cutroom_packaging_template_id": None,
                  "limitations": ["参考成片分析不是剪映原工程；字体、花字和音色可能只是候选。",
-                                  "Cutroom 包装模板只保存包装组合，不包含完整剪辑结构。"]}
+                                  "剪辑工作台 包装模板只保存包装组合，不包含完整剪辑结构。"]}
         value["template_id"] = "st-" + digest(value)[:20]
         path = self.root / (value["template_id"] + ".json")
         if path.exists():

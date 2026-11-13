@@ -1,8 +1,8 @@
-# CUTROOM UI Systemization Implementation Plan
+# 剪辑工作台 UI Systemization Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 在不改变既有业务流程、数据语义和已跑通豆包配音能力的前提下，按已确认的方案 A 统一 CUTROOM 七个页面的视觉系统、豆包凭据交互、状态反馈、响应式布局与无障碍体验，并发布 v0.9.0-beta.3。
+**Goal:** 在不改变既有业务流程、数据语义和已跑通豆包配音能力的前提下，按已确认的方案 A 统一剪辑工作台七个页面的视觉系统、豆包凭据交互、状态反馈、响应式布局与无障碍体验，并发布 v0.9.0-beta.3。
 
 **Architecture:** 保留原生 HTML/CSS/ES Module 和现有 Python API；前端通过语义化设计令牌、共享组件类和少量渲染辅助函数完成系统化，不引入新框架或外部依赖。豆包后端继续同时支持 API Key 与旧版 AppID/Access Token，前端只做渐进披露；保存检测按“保存凭据 → 检测一个默认配置 → 刷新音色目录”串行执行并持久显示结果。
 

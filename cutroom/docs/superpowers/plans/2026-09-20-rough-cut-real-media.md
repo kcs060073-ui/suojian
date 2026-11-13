@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace CUTROOM's rough-cut color placeholders with a secure, continuous real-media preview and wire every originally designed shot-level edit before picture lock.
+**Goal:** Replace 剪辑工作台's rough-cut color placeholders with a secure, continuous real-media preview and wire every originally designed shot-level edit before picture lock.
 
 **Architecture:** A new `media_catalog.rough_media` boundary resolves only task-authorized assets to cached previews or read-only source files. The authenticated workbench router streams those files, the task-detail API projects media descriptors without absolute paths, and a focused browser model drives a continuous scene sequencer, visual timeline, candidate previews, reorder, trim, and playhead split. Existing rough-cut transactions, undo/redo, and render semantics remain authoritative.
 
@@ -421,7 +421,7 @@ assert.equal(actual.timelineThumbnailCount, 2);
 assert.equal(actual.candidateThumbnailCount, 2);
 assert.equal(actual.selectCount, 0);
 assert.equal(actual.replacementCalls, 0);
-assert.equal(actual.activeCandidateLabel, "候选/园区全景.jpg");
+assert.equal(actual.activeCandidateLabel, "候选/项目全景.jpg");
 ```
 
 The fixture first clicks a candidate card and proves no replacement API call occurs, then clicks the explicit replace button and proves the impact request contains only the selected scene and candidate asset.

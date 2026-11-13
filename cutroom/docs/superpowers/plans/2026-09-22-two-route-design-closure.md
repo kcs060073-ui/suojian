@@ -550,9 +550,9 @@ feat: add cover selection and editable delivery
 ```javascript
 test("publish form keeps tags cover mode and delivery type", () => {
   const value = normalizePublishDraft({
-    tags: "招商, 产业，园区", coverChoice: "candidate-2", deliveryType: "editable",
+    tags: "招商, 产业，项目", coverChoice: "candidate-2", deliveryType: "editable",
   });
-  assert.deepEqual(value.tags, ["招商", "产业", "园区"]);
+  assert.deepEqual(value.tags, ["招商", "产业", "项目"]);
   assert.equal(value.coverChoice, "candidate-2");
   assert.equal(value.deliveryType, "editable");
 });
@@ -650,7 +650,7 @@ Create a temporary clean worktree from the feature HEAD, run database migration 
 
 - [ ] **Step 6: Write the validation report and README boundary**
 
-The report lists commands and counts from fresh output, completed digital/ad capabilities, and explicit remaining items: park route, human usability testing, colleague field acceptance, and real-site validation. README must not claim the whole CUTROOM design is complete.
+The report lists commands and counts from fresh output, completed digital/ad capabilities, and explicit remaining items: park route, human usability testing, colleague field acceptance, and real-site validation. README must not claim the whole 剪辑工作台 design is complete.
 
 - [ ] **Step 7: Commit Task 8**
 

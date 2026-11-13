@@ -1,4 +1,4 @@
-# CUTROOM v0.9.0-beta.6 发布验收
+# 剪辑工作台 v0.9.0-beta.6 发布验收
 
 日期：2026-09-20。Session：`20260920-131253-codex-7b6a`。
 
@@ -37,7 +37,7 @@
 
 ## 发布及回退
 
-发布位置：[CUTROOM v0.9.0-beta.6](https://github.com/qnwhageqlavs-jpg/cutroom/releases/tag/v0.9.0-beta.6)。产物为 `CUTROOM-v0.9.0-beta.6-windows-x64.zip` 与同名 `.sha256`，沿用私有 GitHub 仓库内部 prerelease 流程。此验收记录随发布标签提交；完整提交SHA由该标签与包内 `release-manifest.json` 共同标识，最终文件SHA-256见发布附件。
+发布位置：[剪辑工作台 v0.9.0-beta.6](https://github.com/qnwhageqlavs-jpg/cutroom/releases/tag/v0.9.0-beta.6)。产物为 `剪辑工作台-v0.9.0-beta.6-windows-x64.zip` 与同名 `.sha256`，沿用私有 GitHub 仓库内部 prerelease 流程。此验收记录随发布标签提交；完整提交SHA由该标签与包内 `release-manifest.json` 共同标识，最终文件SHA-256见发布附件。
 
 提交后必须重新构建正式包、验证独立安装环境中的正式业务源码、备份并核验本机服务、核对上传资产摘要，再发布并重新下载校验。执行收据保存在 `runtime/release-20260920/release-state.json`；未完成这些动作前不能仅凭本文宣称线上发布完成。
 
@@ -45,4 +45,4 @@
 
 ## 尚未验收的边界
 
-普通同事电脑、真实 Windows 登录重建、实际公司网络/权限/移动硬盘，以及由普通同事本人完成真实首片和四道人工作业门禁仍需现场验证；本次不调用付费供应商接口。园区路线仍未验收。开发机和合成媒体的自动验证不替代这些验收。
+普通同事电脑、真实 Windows 登录重建、实际公司网络/权限/移动硬盘，以及由普通同事本人完成真实首片和四道人工作业门禁仍需现场验证；本次不调用付费供应商接口。项目路线仍未验收。开发机和合成媒体的自动验证不替代这些验收。

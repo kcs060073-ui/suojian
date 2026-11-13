@@ -1,4 +1,4 @@
-# CUTROOM 私有仓库与 Beta Release 设计
+# 剪辑工作台私有仓库与 Beta Release 设计
 
 状态：已批准实施  
 日期：2026-09-11  
@@ -6,7 +6,7 @@
 
 ## 1. 目标与边界
 
-本轮把已经在 Peter 本机跑通的 CUTROOM 固化为可追溯的私有源码仓库，并交付一个供内部同事试用的 Windows Beta 分发包。源码、测试和内部开发文档只进入 GitHub 私有仓库；本轮不创建公开下载仓库，不对外公开产品。
+本轮把已经在 Peter 本机跑通的剪辑工作台固化为可追溯的私有源码仓库，并交付一个供内部同事试用的 Windows Beta 分发包。源码、测试和内部开发文档只进入 GitHub 私有仓库；本轮不创建公开下载仓库，不对外公开产品。
 
 以下内容不得进入 Git 或 Release：API Key、Windows 凭据、`.env`、运行数据库、缓存、任务产物、客户素材、数字人源视频、配音成品、最终视频、个人本地素材和调试日志。
 
@@ -22,8 +22,8 @@
 
 首版采用“Windows 在线安装型便携包”，而不是 MSI/EXE 安装器。Release 附件包含：
 
-- `CUTROOM-v0.9.0-beta.1-windows-x64.zip`：应用代码、Web UI、核心清单、授权素材、安装与启动入口。
-- `CUTROOM-v0.9.0-beta.1-SHA256SUMS.txt`：分发包哈希。
+- `剪辑工作台-v0.9.0-beta.1-windows-x64.zip`：应用代码、Web UI、核心清单、授权素材、安装与启动入口。
+- `剪辑工作台-v0.9.0-beta.1-SHA256SUMS.txt`：分发包哈希。
 - Release notes：能力范围、安装步骤、已知边界和回退方式。
 
 用户解压后双击 `安装CUTROOM.bat`。安装器在应用目录内创建 Python 虚拟环境，安装锁定的 Python/Node 依赖，检查 FFmpeg/ffprobe，并生成可双击启动入口。缺少 Python 3.11、Node.js LTS、FFmpeg 或 winget 时，安装器给出中文可执行提示并停止，不静默失败。Beta 安装允许联网，不承诺离线安装。

@@ -1,19 +1,19 @@
-# CUTROOM Agent MCP Integration Implementation Plan
+# 剪辑工作台 Agent MCP Integration Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add an optional local stdio MCP adapter that lets the current Codex model plan CUTROOM videos without a CUTROOM text-model API key, while preserving the standalone product, external production-service credentials, durable jobs, and four UI-only human gates.
+**Goal:** Add an optional local stdio MCP adapter that lets the current Codex model plan 剪辑工作台 videos without a 剪辑工作台 text-model API key, while preserving the standalone product, external production-service credentials, durable jobs, and four UI-only human gates.
 
 **Architecture:** Add an `agent` orchestration mode and immutable Agent artifact ledger to the existing SQLite domain. A focused `AgentGateway` exposes a strict allowlist over the same task, workflow, and job domains used by the web workbench; standalone planning still calls the existing provider scripts, while Agent planning submits validated JSON into shared canonical finalizers. A small MCP Python SDK v2 server maps typed stdio tools to this gateway without opening a port or exposing credentials.
 
-**Tech Stack:** Python 3.11, SQLite migrations, `unittest`, MCP Python SDK `mcp>=2,<3`, Node.js/TypeScript 5.7, vanilla ES modules, existing CUTROOM Workbench API and durable worker.
+**Tech Stack:** Python 3.11, SQLite migrations, `unittest`, MCP Python SDK `mcp>=2,<3`, Node.js/TypeScript 5.7, vanilla ES modules, existing 剪辑工作台 Workbench API and durable worker.
 
 **Spec:** `docs/superpowers/specs/2026-09-16-cutroom-agent-mcp-design.md`
 
 ## Global Constraints
 
 - Existing tasks default to `standalone`; no historical task is silently converted to `agent`.
-- `agent` tasks never fall back to CUTROOM text/storyboard models when Agent input is absent or invalid.
+- `agent` tasks never fall back to 剪辑工作台 text/storyboard models when Agent input is absent or invalid.
 - TTS, Seedance, and other external production capabilities keep their existing profile snapshots and credential flow.
 - MCP is local `stdio` only and must never write protocol-unrelated output to stdout.
 - MCP cannot approve brief lock, picture lock, packaging confirmation, or full review.
@@ -38,7 +38,7 @@
 - `cutroom_mcp/server.py`: typed MCP SDK v2 tool registration.
 - `scripts/cutroom_mcp.py`: stdio entry point with stderr-only diagnostics.
 - `requirements-mcp.txt`: optional MCP dependency, separate from standalone installation.
-- `scripts/install-codex-mcp.ps1`: explicit Codex registration helper; ordinary CUTROOM install does not call it.
+- `scripts/install-codex-mcp.ps1`: explicit Codex registration helper; ordinary 剪辑工作台 install does not call it.
 - `web-ui/public/task-create.mjs`, `web-ui/public/app.mjs`, `web-ui/public/task-workspace.mjs`: mode selection, source labeling, and Agent-waiting state.
 - `workbench/api.py`: mode projection and rejection of provider-paid storyboard action for Agent-mode tasks.
 - `README.md`, `web-ui/README.md`, `web-ui/public/help.html`, `docs/operations/media-catalog-agent-contract.md`, `docs/user-guide/cutroom-user-guide.md`: setup, operation, rollback, and user guidance.
@@ -132,7 +132,7 @@ Expected: PASS, including schema versions `1..31`, historical default preservati
 
 ```powershell
 git add media_catalog/migrations/031_agent_orchestration.sql media_catalog/tasks.py media_catalog/agent_artifacts.py tests/test_database.py tests/test_agent_artifacts.py
-git commit -m "feat: persist CUTROOM agent orchestration artifacts"
+git commit -m "feat: persist 剪辑工作台 agent orchestration artifacts"
 ```
 
 ### Task 2: Make task preflight and creation mode-aware without changing standalone behavior
@@ -495,7 +495,7 @@ Expected: PASS; all four gate APIs remain web-only, and gateway reads/actions re
 
 ```powershell
 git add media_catalog/agent_gateway.py workbench/api.py tests/test_agent_gateway.py tests/test_workbench_api.py
-git commit -m "feat: add gate-safe CUTROOM agent gateway"
+git commit -m "feat: add gate-safe 剪辑工作台 agent gateway"
 ```
 
 ### Task 7: Expose the gateway as an optional stdio MCP server
@@ -558,7 +558,7 @@ def create_mcp_server(gateway: AgentGateway) -> MCPServer:
 
     @server.tool()
     def cutroom_get_task(task_id: str) -> dict:
-        """Return one CUTROOM task without credentials or raw logs."""
+        """Return one 剪辑工作台 task without credentials or raw logs."""
         return gateway.get_task(task_id)
 
     @server.tool()
@@ -589,7 +589,7 @@ Expected: PASS, including exact tool names, structured content, invalid enum rej
 
 ```powershell
 git add requirements-mcp.txt cutroom_mcp scripts/cutroom_mcp.py tests/test_mcp_server.py
-git commit -m "feat: expose CUTROOM through local stdio MCP"
+git commit -m "feat: expose 剪辑工作台 through local stdio MCP"
 ```
 
 ### Task 8: Make Agent mode explicit in the existing workbench UI
@@ -645,7 +645,7 @@ if (route === "ad_mix") modelProfileIds.tts = String(values.tts_profile_id || ""
 return { ...shared, orchestration_mode: orchestrationMode, model_profile_ids: modelProfileIds };
 ```
 
-Add a creation choice with plain labels `CUTROOM 自己规划` and `当前 Agent 规划`. Keep standalone as the default. Hide only text-planning selectors in Agent mode; never hide external TTS/video-generation selectors. In the task workspace, show a persistent mode badge and artifact source. At an Agent planning wait, show the task ID plus instructions to return to Codex; do not render the paid text recommendation button. All four existing confirmation buttons remain unchanged.
+Add a creation choice with plain labels `剪辑工作台自己规划` and `当前 Agent 规划`. Keep standalone as the default. Hide only text-planning selectors in Agent mode; never hide external TTS/video-generation selectors. In the task workspace, show a persistent mode badge and artifact source. At an Agent planning wait, show the task ID plus instructions to return to Codex; do not render the paid text recommendation button. All four existing confirmation buttons remain unchanged.
 
 - [ ] **Step 4: Run UI and API tests green**
 
@@ -659,7 +659,7 @@ Expected: PASS for standalone and Agent creation, mode restoration from drafts, 
 
 ```powershell
 git add web-ui/public/task-create.mjs web-ui/public/index.html web-ui/public/app.mjs web-ui/public/task-workspace.mjs web-ui/public/styles.css tests/workbench-ui.test.mjs tests/workbench-layout.test.mjs
-git commit -m "feat: surface CUTROOM agent mode in workbench"
+git commit -m "feat: surface 剪辑工作台 agent mode in workbench"
 ```
 
 ### Task 9: Add explicit Codex registration, documentation, and rollback
@@ -703,15 +703,15 @@ Expected: FAIL because the optional install/uninstall scripts do not exist.
 
 - [ ] **Step 3: Implement dry-run-first configuration scripts and documentation**
 
-The install script must: verify `.venv\Scripts\python.exe`, verify `scripts\cutroom_mcp.py`, verify `import mcp`, parse the target config as JSON/TOML according to the repository's documented Codex Desktop format, preserve unrelated entries, and atomically replace the config only after `-DryRun` output is accepted. The uninstall script removes only server ID `cutroom`. Neither script starts CUTROOM, modifies model profiles, or reads credentials.
+The install script must: verify `.venv\Scripts\python.exe`, verify `scripts\cutroom_mcp.py`, verify `import mcp`, parse the target config as JSON/TOML according to the repository's documented Codex Desktop format, preserve unrelated entries, and atomically replace the config only after `-DryRun` output is accepted. The uninstall script removes only server ID `cutroom`. Neither script starts 剪辑工作台, modifies model profiles, or reads credentials.
 
 Document this exact operating contract:
 
 ```text
-独立模式：CUTROOM 自己调用已配置的文案/分镜模型。
-Agent 模式：当前 Codex 模型完成文案与分镜；CUTROOM 不调用文本模型。
-两种模式：豆包 TTS、Seedance 等生产服务仍使用 CUTROOM 各自凭据。
-关闭 MCP：只移除 Codex 中的 cutroom 服务项，现有 CUTROOM 和任务继续可用。
+独立模式：剪辑工作台自己调用已配置的文案/分镜模型。
+Agent 模式：当前 Codex 模型完成文案与分镜；剪辑工作台不调用文本模型。
+两种模式：豆包 TTS、Seedance 等生产服务仍使用剪辑工作台各自凭据。
+关闭 MCP：只移除 Codex 中的 cutroom 服务项，现有剪辑工作台和任务继续可用。
 ```
 
 Update the media catalog Agent contract from CLI-first to MCP-first for normal Agent control, while retaining CLI for diagnosis and batch use. Add the task URL form `http://127.0.0.1:8765/#/tasks/<task-id>` and state that an existing workbench session is required; never document a startup-key URL.
@@ -720,7 +720,7 @@ Update the media catalog Agent contract from CLI-first to MCP-first for normal A
 
 Run: `.venv\Scripts\python.exe -m unittest tests.test_mcp_install_scripts tests.test_release_packaging -v`
 
-Expected: PASS; normal installer remains standalone-only and MCP removal preserves all CUTROOM data.
+Expected: PASS; normal installer remains standalone-only and MCP removal preserves all 剪辑工作台 data.
 
 - [ ] **Step 5: Commit setup and user guidance**
 
@@ -785,7 +785,7 @@ The report must include separate verdicts for: MCP discovery, no-text-key Agent 
 
 ```powershell
 git add docs/validation/2026-09-16-cutroom-agent-mcp-acceptance.md package.json release/release-files.json
-git commit -m "test: validate CUTROOM Codex MCP workflow"
+git commit -m "test: validate 剪辑工作台 Codex MCP workflow"
 ```
 
 If `package.json` and `release/release-files.json` were intentionally unchanged, omit them from `git add`.

@@ -1,4 +1,4 @@
-"""Seedance adapter based on the existing Cutroom POC; no credentials are stored here."""
+"""Seedance adapter based on the existing 剪辑工作台 POC; no credentials are stored here."""
 import base64
 from contextlib import closing
 import hashlib
@@ -58,12 +58,12 @@ def credentials(expected_model=None):
         return os.environ['ARK_API_KEY']
     cutroom, row = selected_profile()
     if expected_model and row[0] != expected_model:
-        raise RuntimeError('Cutroom 模型配置不可用或与所选模型不一致；未提交任务')
+        raise RuntimeError('剪辑工作台 模型配置不可用或与所选模型不一致；未提交任务')
     sys.path.insert(0, str(cutroom))
     from media_catalog.credentials import read_provider_secret
     token = read_provider_secret(row[3])
     if not token:
-        raise RuntimeError('Cutroom 安全凭据不可用；未提交任务')
+        raise RuntimeError('剪辑工作台 安全凭据不可用；未提交任务')
     return token
 
 

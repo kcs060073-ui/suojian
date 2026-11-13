@@ -94,10 +94,10 @@ function Invoke-CutroomSupervisorTick {
     $verificationFailure = $null
     try {
         if ((& $VerifyService $true) -ne 0) {
-            $verificationFailure = 'CUTROOM startup identity/readiness verification did not succeed.'
+            $verificationFailure = 'SuoJian startup identity/readiness verification did not succeed.'
         }
     } catch {
-        $verificationFailure = 'CUTROOM startup identity/readiness verification could not finish.'
+        $verificationFailure = 'SuoJian startup identity/readiness verification could not finish.'
     }
     if ($null -ne $verificationFailure) {
         # Do not unwind into finally/Dispose while the owned process may be doing

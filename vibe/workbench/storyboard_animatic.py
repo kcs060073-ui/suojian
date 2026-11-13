@@ -1,7 +1,7 @@
 """Render a source-bound illustrative storyboard preview for a confirmed shot.
 
 The result is a silent animatic, never real footage or an accepted final clip.
-It does not call generative models, touch Cutroom, or assemble a final film.
+It does not call generative models, touch 剪辑工作台, or assemble a final film.
 """
 from __future__ import annotations
 import argparse, hashlib, json, math, subprocess, uuid
@@ -61,7 +61,7 @@ def render(root,task_id,shot_id):
  with output.open('rb') as f:sha=hashlib.file_digest(f,'sha256').hexdigest()
  receipt={'taskId':task_id,'shotId':shot_id,'revision':task['revision'],'inputHash':task['inputHash'],
   'boardVersion':board['version'],'boardSha256':board['sha256'],'planSha256':plan['sha256'],'executionMethod':'programmatic',
-  'actual':'静态分镜图程序化突出显示或轻微推近；不含人声、不含真实园区录像','command':cmd,
+  'actual':'静态分镜图程序化突出显示或轻微推近；不含人声、不含真实项目录像','command':cmd,
   'output':str(output),'sha256':sha,'duration':seconds,'visualAcceptance':'unverified'}
  with (out/'receipt.json').open('x',encoding='utf-8') as f:json.dump(receipt,f,ensure_ascii=False,indent=2)
  return receipt

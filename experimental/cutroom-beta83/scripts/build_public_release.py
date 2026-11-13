@@ -1,4 +1,4 @@
-"""Build a compiled CUTROOM Windows package; no private development sources.
+"""Build a compiled 剪辑工作台 Windows package; no private development sources.
 
 Python 3.11 is required. Small .py/.ts compatibility loaders remain public.
 Python bytecode and transpiled JavaScript are reversible, not source encryption.
@@ -18,12 +18,12 @@ import sys
 import tempfile
 import zipfile
 
-PY_LOADER = """# CUTROOM-COMPILED-LOADER-v1
+PY_LOADER = """# 剪辑工作台-COMPILED-LOADER-v1
 from importlib.machinery import SourcelessFileLoader as _CutroomLoader
 from pathlib import Path as _CutroomPath
 exec(_CutroomLoader(__name__, str(_CutroomPath(__file__).with_suffix('.pyc'))).get_code(__name__), globals())
 """
-TS_LOADER = """// CUTROOM-COMPILED-LOADER-v1
+TS_LOADER = """// 剪辑工作台-COMPILED-LOADER-v1
 require('module').prototype._compile.call(module, require('fs').readFileSync(require('path').join(__dirname, %s), 'utf8'), __filename);
 """
 RUNTIME_SCRIPTS = {
@@ -301,7 +301,7 @@ def build_public_release(root: Path, output: Path, version: str, *, node: Path, 
                 _source_selection(contract, _local_source_names(root, contract)).items()}
     # This digest describes the original dependency/schema contract, before compilation.
     compatibility=updater.compatibility_digest({name:path.read_bytes() for name,path in selected.items()})
-    package=f"CUTROOM-v{version}"
+    package=f"剪辑工作台-v{version}"
     output.mkdir(parents=True,exist_ok=True)
     archive=output/f"{package}-windows-x64.zip"
     with tempfile.TemporaryDirectory(prefix="cutroom-public-") as temporary:

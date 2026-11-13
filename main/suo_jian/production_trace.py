@@ -275,7 +275,7 @@ def trace_feed(root, job_id, state, plan, *, draft_observation=None):
             trace['delivery']['editability'].update(level='native-clips-text-audio-with-approximate-overlays',
                                                    report=draft_observation.get('report'),verifiedInEditor=False)
     for row in plan.get('clips',[]):
-        comp=component('source-clip','Cutroom ad_mix','native',output=row.get('source'),
+        comp=component('source-clip','剪辑工作台 ad_mix','native',output=row.get('source'),
             planned={'skills':['Cutroom'],'template':{'id':plan.get('template_id')},'card':None})
         current=comp['output'];expected=plan.get('source_signatures',{}).get(row.get('source'),{})
         if bound and current.get('sha256') and current['sha256']==expected.get('sha256'):
@@ -286,7 +286,7 @@ def trace_feed(root, job_id, state, plan, *, draft_observation=None):
         start=row['start'];end=start+row['duration']
         for index,overlay in enumerate(plan.get('overlays',[])):
             if overlay['start']>=end or overlay['start']+overlay['duration']<=start:continue
-            layer=component('overlay-'+str(index+1),'Cutroom packaging overlay','adapted',output=overlay.get('source'))
+            layer=component('overlay-'+str(index+1),'剪辑工作台 packaging overlay','adapted',output=overlay.get('source'))
             wanted=plan.get('source_signatures',{}).get(overlay.get('source'),{}).get('sha256')
             if bound and wanted and layer['output'].get('sha256')==wanted:
                 layer['capabilities']['final_referenced']=capability('verified','Overlay window and source hash in final render plan',[layer['output'],trace['finalPlan']])

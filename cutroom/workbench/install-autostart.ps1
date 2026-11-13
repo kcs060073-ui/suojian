@@ -38,9 +38,9 @@ if ($Remove) {
     if ($existingTask) {
         Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-        Write-Output "CUTROOM autostart task removed."
+        Write-Output "SuoJian autostart task removed."
     } else {
-        Write-Output "CUTROOM autostart task does not exist."
+        Write-Output "SuoJian autostart task does not exist."
     }
     exit 0
 }
@@ -49,10 +49,10 @@ if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
     throw "Python environment not found: $python"
 }
 if (-not (Test-Path -LiteralPath $supervisor -PathType Leaf)) {
-    throw "CUTROOM supervisor not found: $supervisor"
+    throw "SuoJian supervisor not found: $supervisor"
 }
 if (-not (Test-Path -LiteralPath (Join-Path $projectRoot "workbench\server.py") -PathType Leaf)) {
-    throw "Not a CUTROOM project root: $projectRoot"
+    throw "Not a SuoJian project root: $projectRoot"
 }
 
 if ($existingTask) {
@@ -78,7 +78,7 @@ if ($listener) {
             $response = Invoke-WebRequest -Uri $fixedUrl -UseBasicParsing -TimeoutSec 3
             $isCutroomPage = (
                 $response.StatusCode -eq 200 -and
-                $response.Content.IndexOf("<title>CUTROOM", [System.StringComparison]::Ordinal) -ge 0
+                $response.Content.IndexOf("<title>SuoJian", [System.StringComparison]::Ordinal) -ge 0
             )
         } catch {
             $isCutroomPage = $false
@@ -95,7 +95,7 @@ if ($listener) {
         $listener = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue
     } while ($listener -and (Get-Date) -lt $deadline)
     if ($listener) {
-        throw "Existing CUTROOM process did not release port $port."
+        throw "Existing SuoJian process did not release port $port."
     }
 }
 
@@ -106,7 +106,7 @@ $trigger = New-ScheduledTaskTrigger -AtLogOn -User $identity
 $principal = New-ScheduledTaskPrincipal -UserId $identity -LogonType Interactive -RunLevel Limited
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -RestartCount 99 -RestartInterval (New-TimeSpan -Minutes 1) -MultipleInstances IgnoreNew -ExecutionTimeLimit ([TimeSpan]::Zero)
 
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Start CUTROOM locally at 127.0.0.1:8765 after logon" -Force | Out-Null
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Start SuoJian locally at 127.0.0.1:8765 after logon" -Force | Out-Null
 Start-ScheduledTask -TaskName $taskName
 
 $deadline = (Get-Date).AddSeconds(30)
@@ -115,7 +115,7 @@ do {
     $listener = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue
 } while (-not $listener -and (Get-Date) -lt $deadline)
 if (-not $listener) {
-    throw "CUTROOM task was created, but the service did not start within 30 seconds."
+    throw "SuoJian task was created, but the service did not start within 30 seconds."
 }
 
-Write-Output "CUTROOM autostart installed. Fixed URL: $fixedUrl"
+Write-Output "SuoJian autostart installed. Fixed URL: $fixedUrl"

@@ -2,7 +2,7 @@ function Update-CutroomToml([string]$Text, [string]$Block = "") {
     $runtime = Join-Path $PSScriptRoot "..\.venv\Scripts\python.exe"
     $helper = Join-Path $PSScriptRoot "codex_toml.py"
     if (-not (Test-Path -LiteralPath $runtime -PathType Leaf)) {
-        throw "CUTROOM Python environment is required to safely edit TOML."
+        throw "SuoJian Python environment is required to safely edit TOML."
     }
     $payload = @{ text = $Text; block = $Block } | ConvertTo-Json -Compress
     $encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($payload))

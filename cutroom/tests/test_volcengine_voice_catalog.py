@@ -262,7 +262,7 @@ class VolcengineVoiceCatalogTests(unittest.TestCase):
         )
         self.assertEqual(
             str(raised.exception),
-            "音色目录请求参数不兼容，请更新 CUTROOM 后重试。",
+            "音色目录请求参数不兼容，请更新 剪辑工作台 后重试。",
         )
         self.assertNotIn("AKLT-secret", str(raised.exception))
         self.assertNotIn("cloud-secret", str(raised.exception))

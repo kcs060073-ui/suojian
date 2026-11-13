@@ -10,7 +10,7 @@ if ($RecordCode) {
 }
 $output=Join-Path $ProjectRoot 'out'
 $null=New-Item -ItemType Directory -Force -Path $output
-$target=Join-Path $output ('CUTROOM-errors-'+(Get-Date -Format 'yyyyMMdd-HHmmss')+'-'+[guid]::NewGuid().ToString('N').Substring(0,6)+'.zip')
+$target=Join-Path $output ('SuoJian-errors-'+(Get-Date -Format 'yyyyMMdd-HHmmss')+'-'+[guid]::NewGuid().ToString('N').Substring(0,6)+'.zip')
 $python=Join-Path $ProjectRoot '.venv\Scripts\python.exe'
 $exported=$false
 if (Test-Path -LiteralPath $python -PathType Leaf) {
@@ -21,7 +21,7 @@ if (Test-Path -LiteralPath $python -PathType Leaf) {
     } catch { $exported=$false } finally { Pop-Location }
 }
 if (-not $exported) {
-    if (Test-Path -LiteralPath $target) { $target=Join-Path $output ("CUTROOM-errors-fallback-"+[guid]::NewGuid().ToString("N")+".zip") }
+    if (Test-Path -LiteralPath $target) { $target=Join-Path $output ("SuoJian-errors-fallback-"+[guid]::NewGuid().ToString("N")+".zip") }
     # Python may not be installed yet. Export only validated installation/startup events.
     $events=@()
     $log=Join-Path $ProjectRoot 'runtime\diagnostics\lifecycle.jsonl'
@@ -54,7 +54,7 @@ if (-not $exported) {
     try {
         $zip=[IO.Compression.ZipArchive]::new($stream,[IO.Compression.ZipArchiveMode]::Create)
         try {
-            $contents=@{'environment.json'=([ordered]@{product='CUTROOM';version=$version;coverage='installation-startup-only';exportedAt=[DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")} | ConvertTo-Json);'errors.jsonl'=($events -join "`n");'说明.txt'='安装环境尚未就绪：此包只含安装/启动错误类别，不含服务端和浏览器日志。请补充出错时间及所点操作。日志不含密钥、文案或素材。'}
+            $contents=@{'environment.json'=([ordered]@{product='SuoJian';version=$version;coverage='installation-startup-only';exportedAt=[DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")} | ConvertTo-Json);'errors.jsonl'=($events -join "`n");'说明.txt'='安装环境尚未就绪：此包只含安装/启动错误类别，不含服务端和浏览器日志。请补充出错时间及所点操作。日志不含密钥、文案或素材。'}
             foreach($name in $contents.Keys) {
                 $entry=$zip.CreateEntry($name)
                 $writer=[IO.StreamWriter]::new($entry.Open(),[Text.UTF8Encoding]::new($false))

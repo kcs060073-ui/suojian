@@ -71,7 +71,7 @@ def create_mcp_server(
     bound_client_id = normalize_client_id(client_id)
     server = MCPServer(
         "cutroom",
-        description="Control CUTROOM Agent-mode video tasks without exposing credentials or gate approvals.",
+        description="Control 剪辑工作台 Agent-mode video tasks without exposing credentials or gate approvals.",
     )
 
     @server.tool(structured_output=True)
@@ -81,12 +81,12 @@ def create_mcp_server(
 
     @server.tool(structured_output=True)
     async def cutroom_list_tasks(limit: int = 50) -> dict[str, Any]:
-        """List up to 100 CUTROOM task summaries."""
+        """List up to 100 剪辑工作台 task summaries."""
         return gateway.list_tasks(limit=limit)
 
     @server.tool(structured_output=True)
     async def cutroom_get_task(task_id: str) -> dict[str, Any]:
-        """Return one CUTROOM task without credentials or raw logs."""
+        """Return one 剪辑工作台 task without credentials or raw logs."""
         return gateway.get_task(task_id)
 
     @server.tool()
@@ -166,7 +166,7 @@ def create_mcp_server(
 
     @server.tool(structured_output=True)
     async def cutroom_get_job(job_id: str) -> dict[str, Any]:
-        """Return bounded progress for one persistent CUTROOM job."""
+        """Return bounded progress for one persistent 剪辑工作台 job."""
         return gateway.get_job(job_id)
 
     @server.tool(structured_output=True)
@@ -176,12 +176,12 @@ def create_mcp_server(
 
     @server.tool(structured_output=True)
     async def cutroom_preflight_task(request: dict[str, Any]) -> dict[str, Any]:
-        """Run read-only creation checks for an Agent-mode CUTROOM task."""
+        """Run read-only creation checks for an Agent-mode 剪辑工作台 task."""
         return gateway.preflight_task(request)
 
     @server.tool(structured_output=True)
     async def cutroom_create_task(request: dict[str, Any]) -> dict[str, Any]:
-        """Create a preflighted Agent-mode CUTROOM task."""
+        """Create a preflighted Agent-mode 剪辑工作台 task."""
         return gateway.create_task(request)
 
     @server.tool(structured_output=True)

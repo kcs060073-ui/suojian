@@ -1,6 +1,6 @@
-# 园区 Vibe 本地渲染接口
+# 分镜工作台本地渲染接口
 
-当前用户选择为 `园区Vibe-写实设备与半身讲解员预览.mp4`，selectedBaseline=`realistic-halfbody`。默认6镜头 original-0..5、static/minimal，在时间线不变时复用Main完整原始画面；原HUD、字幕、设备、入口、半身人物与过渡一并还原。第90帧与指定成片解码帧SSIM=0.988145，已目视对照。编码视频与PNG不能要求逐字节相同。
+当前用户选择为 `分镜工作台-写实设备与半身讲解员预览.mp4`，selectedBaseline=`realistic-halfbody`。默认6镜头 original-0..5、static/minimal，在时间线不变时复用Main完整原始画面；原HUD、字幕、设备、入口、半身人物与过渡一并还原。第90帧与指定成片解码帧SSIM=0.988145，已目视对照。编码视频与PNG不能要求逐字节相同。
 
 默认音频最终为 `selected-reference`。`public/audio/selected-realistic-halfbody.m4a` 是所选MP4的AAC无转码提取；FFmpeg音频bitstream SHA256与原片相同：`ef0b3e7d1234bb5bfb94f0e5a4b213a659799d1c2282671ee27c597a8896f210`。直接播放此AAC保留原混音。Remotion重新导出MP4会再次编码AAC，不能称新输出AAC字节与原片一致。旧9分轨作为可编辑混音备选保存，默认静音。
 
@@ -39,8 +39,8 @@ player.getCurrentFrame(); player.destroy();
 
 - `shots` 顺序为输出顺序，`from` 自动顺排，`duration` 单位帧，至少15帧，`speed` 0.25–4。sourceOffset 同时映射现有旁白及其字幕。实拍卡片按源时长循环；原厂房片使用已知1050帧预算，自选视频通过媒体元数据读取时长。偏移大于源片长时按片长取模。
 - `source` 支持资源URL或本地绝对路径，`sourceType:'image'` 可放静图，默认视频。CLI 自动把 `/media/...` 映射 public，将本地绝对路径素材按SHA256复制到本任务 public/workbench-imports。
-- 23个可执行配方包含6个 `original-0..5` 原场景图形和17个园区适配动作。新配方继承三份skill的方法，并非逐像素复刻其全部独立原生demo。原场景主标题支持title换行、fontSize与textColor覆盖，默认值不覆盖原样；typography=kinetic提供逐字入场。原场景其余图形标签仍是既有内容。
-- `style` 为 fusion/night/fable/explainer/ink，`background` 为 footage/stars/dots/flat。样式预设可同时改背景、人声和人物，单项设置仍独立可选。`camera` 的 continuous/depth 是慢推/透视运动，原始场景也支持；只移动场景内容，不移动全局HUD/字幕。它不自动生成完整园区空间模型。
+- 23个可执行配方包含6个 `original-0..5` 原场景图形和17个项目适配动作。新配方继承三份skill的方法，并非逐像素复刻其全部独立原生demo。原场景主标题支持title换行、fontSize与textColor覆盖，默认值不覆盖原样；typography=kinetic提供逐字入场。原场景其余图形标签仍是既有内容。
+- `style` 为 fusion/night/fable/explainer/ink，`background` 为 footage/stars/dots/flat。样式预设可同时改背景、人声和人物，单项设置仍独立可选。`camera` 的 continuous/depth 是慢推/透视运动，原始场景也支持；只移动场景内容，不移动全局HUD/字幕。它不自动生成完整项目空间模型。
 - language:'zh'|'en' 为单语选择，不翻译，不生成双语；subtitleMode:'off' 关闭字幕。subtitleStyle:{fontSize,color,background}可改字幕字号、颜色和底色，不传时保持原Main字幕。transitionDuration为可选过渡帧数，默认原Main12帧。
 - `narrationMode:'existing'|'silent'|'custom'`，自带音频用 narrationFile；musicFile 可替换音乐，musicGain/voiceGain 为0–2。默认 audioProfile:'selected-reference' 播放从用户所选MP4无转码提取的完整AAC混音。manifest保留参考混音gain1与9个缓存分轨gain0/mutedAlternative，并记录alternativeGain供编辑；缓存分轨重混与历史成片不完全相同，不能冒称从原混音分离或逐样本保真。选selected-baseline才启用9分轨与Main曲线。修改音量、SFX或音频文件后自动离开reference；改时序则切workbench。不要同时启用参考混音和备用分轨。
 - `sfxEvents:[{source,from,duration,gain}]` 在默认转场音效之外插入音效，受sfxEnabled总开关控制。musicGain=0即可无BGM对照。

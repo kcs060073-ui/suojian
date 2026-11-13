@@ -90,7 +90,7 @@ export function buildStoryboardActionState(detail) {
   return {
     label: waitingForAgent ? "等待 Agent 提交规划" : "用 AI 推荐分镜候选",
     allowPaidTextRecommendation: !agentMode,
-    sourceLabel: agentMode ? "当前 Agent" : "CUTROOM 模型",
+    sourceLabel: agentMode ? "当前 Agent" : "剪辑工作台 模型",
     taskId: detail?.task?.task_id || null,
   };
 }
@@ -186,7 +186,7 @@ export function buildRecoveryWorkspace(detail) {
       mode: "offline-source",
       runStatus: "blocked",
       title: "任务已安全暂停",
-      description: "素材目录当前不可访问；已完成的决定和记录会保留，也不会静默替换成其他园区素材。",
+      description: "素材目录当前不可访问；已完成的决定和记录会保留，也不会静默替换成其他项目素材。",
       libraryId: offlineSource.library_id,
       libraryName: offlineSource.name,
       mountPath: offlineSource.mount_path,

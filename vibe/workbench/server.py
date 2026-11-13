@@ -47,7 +47,7 @@ def default_config():
     source = ROOT / 'engine/default-config.json'
     if source.exists():
         return json.loads(source.read_text(encoding='utf-8-sig'))
-    return {'version': 1, 'name': '园区 · 嘴鼻固定基线', 'format': 'portrait',
+    return {'version': 1, 'name': '项目 · 嘴鼻固定基线', 'format': 'portrait',
             'style': 'fusion', 'background': 'footage', 'narrationMode': 'existing',
             'musicGain': 1, 'voiceGain': 1, 'sfxEnabled': True,
             'camera': 'static', 'typography': 'minimal', 'seed': 42,

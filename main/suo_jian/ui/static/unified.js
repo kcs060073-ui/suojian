@@ -10,10 +10,10 @@
     panel.className = "unified-flow";
     panel.innerHTML = `<section class="sj-section sj-card unified-panel studio-chapter" id="studio-cutroom" data-chapter="04"><div class="studio-section-head"><span class="studio-step">04</span><div><h2>制作配置</h2></div></div>
 
-      <div class="unified-grid"><label>剪法模板<select data-field="template"></select></label><label>本次模板名称<input data-field="name" maxlength="80" placeholder="例如：园区快切 · 高对比字幕"></label></div>
+      <div class="unified-grid"><label>剪法模板<select data-field="template"></select></label><label>本次模板名称<input data-field="name" maxlength="80" placeholder="例如：项目快切 · 高对比字幕"></label></div>
       <div class="unified-actions"><button class="sj-cta secondary" data-action="save-template">将本次分析保存为剪法模板</button><button class="sj-cta secondary" data-action="save-packaging">保存当前包装为模板</button></div>
       <label class="unified-script-label">新视频完整脚本<textarea data-field="script" rows="6" placeholder="输入脚本"></textarea></label>
-      <div class="unified-grid"><label>园区素材库<select data-field="library"></select></label><label>配音配置<select data-field="tts"></select></label></div>
+      <div class="unified-grid"><label>项目素材库<select data-field="library"></select></label><label>配音配置<select data-field="tts"></select></label></div>
       <div class="unified-grid"><label>搜索配音音色<input data-field="voice-search" type="search" placeholder="搜索音色名称、性别、语言或风格" autocomplete="off"></label><label>本次配音音色<select data-field="voice" aria-describedby="voice-catalog-note"></select></label></div>
       <p class="unified-note" id="voice-catalog-note" data-view="voice-note" role="status"></p>
       <div class="unified-consents"><label><input type="checkbox" data-field="rights">我有权使用所选素材</label><label><input type="checkbox" data-field="delegate">委托自动选镜、锁定画面及选择包装；最后由我审看</label><label><input type="checkbox" data-field="cost">同意本次配音及必要的连接检测，可能产生费用</label></div>
@@ -107,7 +107,7 @@
       field("voice").value = matches.some(row => row.voiceId === selectedVoice) ? selectedVoice : "";
       field("voice").disabled = !matches.length;
       view("voice-note").textContent = !profile ? "请先选择配音配置。" : !voices.length ?
-        "当前服务暂无可用音色，请在 Cutroom 更新音色目录。" :
+        "当前服务暂无可用音色，请在 剪辑工作台 更新音色目录。" :
         query && !matches.length ? "没有匹配音色" : "";
     }
     function selectProfile() {
@@ -122,7 +122,7 @@
       const value = await api("/catalog");
       templates = value.editing_templates;
       options(field("template"), templates, "template_id", "name", "请先保存或选择剪法模板");
-      options(field("library"), value.libraries.filter(row => row.online && row.purpose === "task_specific"), "library_id", "name", "选择园区素材库");
+      options(field("library"), value.libraries.filter(row => row.online && row.purpose === "task_specific"), "library_id", "name", "选择项目素材库");
       ttsProfiles = value.tts_profiles.filter(row => row.enabled);
       options(field("tts"), ttsProfiles, "profileId", "displayName", "选择配音配置");
       selectProfile();
@@ -187,7 +187,7 @@
     button("save-template").onclick = () => action("save-template", async () => {
       const value = await api(`/templates/${job}`, {name:field("name").value.trim()});
       await loadCatalog(); field("template").value = value.template.template_id;
-      message("剪法模板已保存。首次生成后可把实际采用的包装组合同步到 Cutroom。");
+      message("剪法模板已保存。首次生成后可把实际采用的包装组合同步到 剪辑工作台。");
     });
     button("save-packaging").onclick = () => action("save-packaging", async () => {
       await api(`/save-packaging/${job}`, {template_id:field("template").value});

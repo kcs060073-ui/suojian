@@ -1,4 +1,4 @@
-# 园区 Vibe V2：第一批升级与现状
+# 分镜工作台 V2：第一批升级与现状
 
 本次是工作区和独立预览版本，不代表整套 V2 已完成，也没有切换现有共享服务。
 
@@ -6,8 +6,8 @@
 
 - 共用任务、输入修订及影片版本：`workbench/production.py`；分镜、图片、动效计划及片段验收：`workbench/vibe_storyboard.py`；网页：`workbench/static/studio*`。
 - 制作追踪：`workbench/production_trace.py`；实际记录范围见 `outputs/optimization-01/制作追踪与基线保护-交付说明.md`，不能推断覆盖所有新片段。
-- Shotcraft、MotionGit 和 Canvas 曾在隔离环境执行原生样片；Remotion 是渲染运行时，不是独立风格模板。来源与状态见 `outputs/native-skill-validation-02/原生Skill视觉能力验证报告.md`。Spotlight 与 RowEmbed 适配执行过，园区视觉验收未通过或未验证，见 `outputs/native-park-adaptation-03/`；P04 包装为隔离原型，未接入默认生产。
-- P0 审计中，普通信息流使用 Cutroom，真人口播使用本地匹配链路；Hypit 是独立实验，不能宣称已经接入本次双路线调度。剪映已有不同输出路径，但尚无根据本分镜工作台已验收片段组装的统一草稿。
+- Shotcraft、MotionGit 和 Canvas 曾在隔离环境执行原生样片；Remotion 是渲染运行时，不是独立风格模板。来源与状态见 `outputs/native-skill-validation-02/原生Skill视觉能力验证报告.md`。Spotlight 与 RowEmbed 适配执行过，项目视觉验收未通过或未验证，见 `outputs/native-park-adaptation-03/`；P04 包装为隔离原型，未接入默认生产。
+- P0 审计中，普通信息流使用剪辑工作台，真人口播使用本地匹配链路；Hypit 是独立实验，不能宣称已经接入本次双路线调度。剪映已有不同输出路径，但尚无根据本分镜工作台已验收片段组装的统一草稿。
 - 已有 Seedance 调用实验；最近六镜实际请求因账户欠费遭拒，无生成结果，见 `outputs/vibe-workflow-v11/factory-seedance-six-e676fc0d/执行报告.md`。本次未调用模型。
 
 ## 本批落地

@@ -1,6 +1,6 @@
-# CUTROOM 第三方软件与素材声明
+# 剪辑工作台 第三方软件与素材声明
 
-本文件随 CUTROOM Beta 一同分发。具体许可证副本位于
+本文件随剪辑工作台 Beta 一同分发。具体许可证副本位于
 `asset-packs/open-commercial-2026-09/licenses/` 及各依赖自身目录。
 
 ## Scott Buckley 音乐（CC BY 4.0）
@@ -27,5 +27,5 @@ Smiley Sans 与思源字体依据 SIL Open Font License 1.1 使用。Smiley Sans
 
 ## 开源软件依赖
 
-CUTROOM 使用 Python、Node.js、FFmpeg 以及 `requirements.txt`、`package-lock.json`
+剪辑工作台使用 Python、Node.js、FFmpeg 以及 `requirements.txt`、`package-lock.json`
 中列出的开源依赖。安装器从各自软件源下载依赖；其许可证和版权归各项目所有。

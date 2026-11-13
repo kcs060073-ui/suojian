@@ -1,4 +1,4 @@
-"""Validate task-local packaging selections against Cutroom's real catalog."""
+"""Validate task-local packaging selections against 剪辑工作台's real catalog."""
 
 PACKAGING_SLOTS = ("subtitle", "brand", "bgm", "sfx", "sticker", "title_card", "fancy_text")
 

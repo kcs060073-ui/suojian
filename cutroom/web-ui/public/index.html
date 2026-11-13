@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>CUTROOM · 同事视频工作台</title>
+  <title>剪辑工作台 · 同事视频工作台</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#workspace">跳到主要内容</a>
   <div id="cutroom-workbench">
-    <section class="app" aria-label="CUTROOM 同事视频工作台">
+    <section class="app" aria-label="剪辑工作台 同事视频工作台">
       <header class="top">
         <div class="brand">
           <span class="logo" aria-hidden="true">
@@ -22,7 +22,7 @@
               <path d="M14.8 14.8 20 20"></path>
             </svg>
           </span>
-          CUTROOM
+          剪辑工作台
         </div>
         <div class="crumb" id="crumb">任务中心</div>
         <div class="system" id="service-status"><span class="dot"></span><span>正在连接本机工作流</span></div>
@@ -171,7 +171,7 @@
                 <details class="task-meta"><summary>本任务设置</summary><p id="task-models">正在读取配置。</p></details>
               </div>
               <div class="task-header-badges">
-                <span class="mode-badge" id="task-orchestration-mode">CUTROOM 自己规划</span>
+                <span class="mode-badge" id="task-orchestration-mode">剪辑工作台 自己规划</span>
                 <span class="run-badge status-badge" id="task-run-status">读取中</span>
               </div>
             </div>
@@ -235,7 +235,7 @@
                 </label>
                 <label>规划方式
                   <select class="field" name="orchestration_mode" id="orchestration-mode">
-                    <option value="standalone">CUTROOM 自己规划</option>
+                    <option value="standalone">剪辑工作台 自己规划</option>
                     <option value="agent">当前 Agent 规划</option>
                   </select>
                 </label>
@@ -290,7 +290,7 @@
                   <input class="field" name="target_duration_seconds" type="number" min="1" step="1" placeholder="例如：90">
                 </label>
               </div>
-              <div class="notice">系统只会读取本次主素材目录，并按你的选择补充通用素材；不会自动混入其他园区专属素材。</div>
+              <div class="notice">系统只会读取本次主素材目录，并按你的选择补充通用素材；不会自动混入其他项目专属素材。</div>
               <div class="row-actions">
                 <button class="btn primary" type="submit" data-run-preflight>继续：检查环境 →</button>
               </div>
@@ -321,7 +321,7 @@
               <button class="btn" type="button" data-show-library-form>添加素材目录</button>
             </div>
             <form class="inline-panel" id="library-form" hidden>
-              <label>目录名称<input class="field" name="name" placeholder="例如：新疆园区实拍"></label>
+              <label>目录名称<input class="field" name="name" placeholder="例如：新疆项目实拍"></label>
               <label>用途<select class="field" name="purpose"><option value="task_specific">本次主素材目录</option><option value="generic">通用补充目录</option></select></label>
               <label class="wide-field">本机或移动硬盘目录<span class="picker-row"><input class="field" name="mountPath" readonly><button class="btn" type="button" data-pick-directory>选择目录</button></span></label>
               <label class="inline-check"><input type="checkbox" name="isDefaultGeneric"> 设为默认通用补充目录</label>

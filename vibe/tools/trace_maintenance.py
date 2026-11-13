@@ -1,4 +1,4 @@
-"""Task 01 scoped backups, guarded deployment and rollback. Never writes CUTROOM."""
+"""Task 01 scoped backups, guarded deployment and rollback. Never writes 剪辑工作台."""
 import argparse
 import hashlib
 import importlib.metadata

@@ -81,7 +81,7 @@ FunASR 与 RapidOCR 是可选组件，不会被基础安装器静默拉取大型
 .\.venv\Scripts\python.exe -m pip install "funasr>=1.4.9" "rapidocr>=3.0" "onnxruntime>=1.18"
 ```
 
-工作台现在默认使用已缓存的 FunASR SenseVoice 中文模型；也可设置 `SUOJIAN_ASR_BACKEND=whisper` 切换 Whisper，或设置 `auto` 先试 FunASR、失败后回退 Whisper。专有名词可设置 `SUOJIAN_ASR_HOTWORDS`，多个词以空格分隔，例如园区名、品牌名、地名。可用 `SUOJIAN_FUNASR_MODEL` 更换 FunASR 模型，或用 `SUOJIAN_WHISPER_MODEL` 选择 Whisper 模型尺寸。更换模型后首次运行仍需联网下载对应权重。
+工作台现在默认使用已缓存的 FunASR SenseVoice 中文模型；也可设置 `SUOJIAN_ASR_BACKEND=whisper` 切换 Whisper，或设置 `auto` 先试 FunASR、失败后回退 Whisper。专有名词可设置 `SUOJIAN_ASR_HOTWORDS`，多个词以空格分隔，例如项目名、品牌名、地名。可用 `SUOJIAN_FUNASR_MODEL` 更换 FunASR 模型，或用 `SUOJIAN_WHISPER_MODEL` 选择 Whisper 模型尺寸。更换模型后首次运行仍需联网下载对应权重。
 
 ## 两种 Blueprint
 
@@ -90,11 +90,11 @@ FunASR 与 RapidOCR 是可选组件，不会被基础安装器静默拉取大型
 
 二者不会混写。分析 Blueprint 当前为 `0.9`（语音稿、画面文字和字幕候选分字段保存），生成版本为 `draft-0.1`。
 
-## Cutroom 执行后端
+## 剪辑工作台执行后端
 
-溯剪将三类数据严格分开：`edit_blueprint.json` 是参考视频分析结果；`draft_blueprint.json` 是用户可修改的新视频方案；`cutroom_binding.json` 记录已创建的 Cutroom 任务。新包的 Agent MCP 已在本机探测通过。工作台可明确确认后创建 Cutroom 广告任务、查看任务状态，并在 Cutroom 完成人工确认和可编辑交付包后生成剪映草稿；不会自动跳过 Cutroom 的文案、画面、包装和审片门禁，也不会自动触发收费动作。
+溯剪将三类数据严格分开：`edit_blueprint.json` 是参考视频分析结果；`draft_blueprint.json` 是用户可修改的新视频方案；`cutroom_binding.json` 记录已创建的剪辑工作台任务。新包的 Agent MCP 已在本机探测通过。工作台可明确确认后创建剪辑工作台广告任务、查看任务状态，并在剪辑工作台完成人工确认和可编辑交付包后生成剪映草稿；不会自动跳过剪辑工作台的文案、画面、包装和审片门禁，也不会自动触发收费动作。
 
-Cutroom MCP 是任务级接口，不是独立的 TTS／字幕／音效接口。其可编辑交付包会尽可能导入为剪映的**一个视频片段**及独立交付的音频、字幕轨；Cutroom 镜头切点、贴纸和花字目前不会还原成剪映原生可编辑对象。没有独立交付的效果仍属于烘焙画面，不能声称在剪映中逐项可编辑。旧“只生成参考素材基础草稿”按钮不调用 Cutroom。尚未拿到真实 Cutroom 发布包进行剪映实机验收，当前已用小型模拟交付包验证转换器。
+剪辑工作台 MCP 是任务级接口，不是独立的 TTS／字幕／音效接口。其可编辑交付包会尽可能导入为剪映的**一个视频片段**及独立交付的音频、字幕轨；剪辑工作台镜头切点、贴纸和花字目前不会还原成剪映原生可编辑对象。没有独立交付的效果仍属于烘焙画面，不能声称在剪映中逐项可编辑。旧“只生成参考素材基础草稿”按钮不调用剪辑工作台。尚未拿到真实剪辑工作台发布包进行剪映实机验收，当前已用小型模拟交付包验证转换器。
 
 ## 草稿审批闸门
 
@@ -146,19 +146,19 @@ ui/         Flask API · 多轨工作台 · Inspector · 草稿向导 · Overlay
 ## 接入「源流」
 
 源流只需把下载或选取好的本地视频路径交给 `suo_jian.pipeline.analyze(video_path, output_dir)`。下游读取 `edit_blueprint.json` 后，可将 `shots` 中的节奏、运动和字幕时间戳映射回源素材的剪映时间线。推荐先以 `schema_version` 做契约，后续即使替换 TransNetV2 / Whisper 也不破坏调用方。
-## Cutroom Agent MCP 接入（本机）
+## 剪辑工作台 Agent MCP 接入（本机）
 
-设置 `SUOJIAN_CUTROOM_ROOT` 为 Cutroom 安装目录；未设置时默认检查
+设置 `SUOJIAN_CUTROOM_ROOT` 为剪辑工作台安装目录；未设置时默认检查
 `C:\Users\Tanikawa\CUTROOM`。溯剪的 `/api/cutroom/capabilities` 会通过
-Cutroom 自己的 Python 环境读取 MCP 服务状态；`/api/cutroom/preflight/<job>`
-只做广告任务创建前检查，需要已确认的 DraftBlueprint 和 Cutroom 的
+剪辑工作台自己的 Python 环境读取 MCP 服务状态；`/api/cutroom/preflight/<job>`
+只做广告任务创建前检查，需要已确认的 DraftBlueprint 和剪辑工作台的
 `primary_library_id`。`/api/cutroom/create/<job>` 需要用户明确确认才创建任务；
 `/api/cutroom/task/<job>` 读取状态；`/api/cutroom/import/<job>` 只在已有
-Cutroom 可编辑发布包且用户确认预览后写入剪映草稿。这些接口不直接启动收费模型。
+剪辑工作台可编辑发布包且用户确认预览后写入剪映草稿。这些接口不直接启动收费模型。
 
 新包的 MCP 是任务级接口（12 个工具），不是单独的 TTS／字幕／音效接口。
-本机已登记嘉兴园区素材库 `suojian-jiaxing-park`（123 个视频），默认用于
-新 Cutroom 广告任务；可通过 `SUOJIAN_CUTROOM_LIBRARY_ID` 更换。正式执行
-仍需在 Cutroom 完成脚本锁定、素材同步、费用许可和各阶段人工确认。
-Cutroom 目前不通过 MCP 输出剪映原生草稿；草稿转换由溯剪完成。
+本机已登记嘉兴项目素材库 `suojian-jiaxing-park`（123 个视频），默认用于
+新剪辑工作台广告任务；可通过 `SUOJIAN_CUTROOM_LIBRARY_ID` 更换。正式执行
+仍需在剪辑工作台完成脚本锁定、素材同步、费用许可和各阶段人工确认。
+剪辑工作台目前不通过 MCP 输出剪映原生草稿；草稿转换由溯剪完成。
 不要把 API 密钥或 MCP 访问令牌写入 DraftBlueprint 或网页前端。

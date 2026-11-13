@@ -141,7 +141,7 @@ def build_release(
     contract = json.loads(contract_file.read_text(encoding="utf-8"))
     validate_contract(contract)
 
-    package_name = f"CUTROOM-v{version}"
+    package_name = f"剪辑工作台-v{version}"
     zip_path = output / f"{package_name}-windows-x64.zip"
     checksum_path = zip_path.with_suffix(zip_path.suffix + ".sha256")
     legacy_checksum_path = output / f"{package_name}-SHA256SUMS.txt"
@@ -206,7 +206,7 @@ def build_release(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build the CUTROOM Windows Beta release package.")
+    parser = argparse.ArgumentParser(description="Build the 剪辑工作台 Windows Beta release package.")
     parser.add_argument("--version", required=True)
     parser.add_argument("--output", type=Path, default=Path("release/dist"))
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])

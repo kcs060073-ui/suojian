@@ -1,12 +1,12 @@
-# CUTROOM WorkBuddy and Doubao Work MCP Implementation Plan
+# 剪辑工作台 WorkBuddy and Doubao Work MCP Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Extend the accepted CUTROOM Agent MCP to WorkBuddy and Doubao Work while preserving one 12-tool business surface, injecting a non-spoofable client identity, and retaining every existing human and paid-action gate.
+**Goal:** Extend the accepted 剪辑工作台 Agent MCP to WorkBuddy and Doubao Work while preserving one 12-tool business surface, injecting a non-spoofable client identity, and retaining every existing human and paid-action gate.
 
 **Architecture:** Keep `AgentGateway` and the 12 tools shared. Bind `codex`, `workbuddy`, or `doubao_work` once when the MCP process starts, close over that identity in the tool handlers, and remove `source_agent` from the model-visible schema. WorkBuddy receives an atomic JSON installer. The current Doubao Work public connector accepts HTTP only, so Doubao Work receives an authenticated Streamable HTTP endpoint bound exclusively to `127.0.0.1:8766`.
 
-**Tech Stack:** Python 3.11, MCP Python SDK `mcp>=2,<3`, `unittest`, Windows PowerShell 5.1, JSON, SQLite, existing CUTROOM Agent Gateway and release builder.
+**Tech Stack:** Python 3.11, MCP Python SDK `mcp>=2,<3`, `unittest`, Windows PowerShell 5.1, JSON, SQLite, existing 剪辑工作台 Agent Gateway and release builder.
 
 **Spec:** `docs/superpowers/specs/2026-09-18-cutroom-workbuddy-doubao-work-mcp-design.md`
 
@@ -22,7 +22,7 @@
 - Doubao Work loopback HTTP requires a random Bearer token and never listens on a LAN or public address.
 - MCP never approves brief lock, picture lock, packaging confirmation, or full review.
 - Paid TTS and Seedance actions still require explicit cost confirmation; acceptance uses no paid provider call.
-- Ordinary CUTROOM installation does not register Codex, WorkBuddy, or Doubao Work automatically.
+- Ordinary 剪辑工作台 installation does not register Codex, WorkBuddy, or Doubao Work automatically.
 - Release archives contain scripts and docs but no user MCP config, runtime database, logs, tokens, cookies, or credentials.
 
 ---
@@ -188,7 +188,7 @@ Expected: PASS; each server identity reaches the gateway as `source_agent`, tool
 
 ```powershell
 git add cutroom_mcp/server.py tests/test_mcp_server.py
-git commit -m "feat: bind CUTROOM MCP client identity"
+git commit -m "feat: bind 剪辑工作台 MCP client identity"
 ```
 
 ### Task 2: Add client-aware stdio startup and a reusable transport probe
@@ -280,7 +280,7 @@ from collections.abc import Sequence
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run CUTROOM MCP over stdio.")
+    parser = argparse.ArgumentParser(description="Run 剪辑工作台 MCP over stdio.")
     parser.add_argument(
         "--client",
         choices=("codex", "workbuddy", "doubao_work"),
@@ -405,7 +405,7 @@ Expected: tests PASS; each probe prints one JSON object with its requested `clie
 
 ```powershell
 git add scripts/cutroom_mcp.py scripts/probe-cutroom-mcp.py scripts/install-codex-mcp.ps1 tests/test_mcp_entrypoint.py tests/test_mcp_install_scripts.py
-git commit -m "feat: add CUTROOM MCP client startup identities"
+git commit -m "feat: add 剪辑工作台 MCP client startup identities"
 ```
 
 ### Task 3: Install and uninstall WorkBuddy without exposing other configuration
@@ -542,7 +542,7 @@ In `scripts/uninstall-workbuddy-mcp.ps1`, parse existing JSON before any write, 
 
 ```powershell
 if (-not (Test-Path -LiteralPath $targetPath -PathType Leaf)) {
-    Write-Output "[CUTROOM] WorkBuddy MCP config does not exist; nothing to remove."
+    Write-Output "[剪辑工作台] WorkBuddy MCP config does not exist; nothing to remove."
     exit 0
 }
 $raw = [System.IO.File]::ReadAllText($targetPath)
@@ -552,7 +552,7 @@ if (
     -not $document.PSObject.Properties["mcpServers"] -or
     -not $document.mcpServers.PSObject.Properties["cutroom"]
 ) {
-    Write-Output "[CUTROOM] WorkBuddy MCP server 'cutroom' is not registered."
+    Write-Output "[剪辑工作台] WorkBuddy MCP server 'cutroom' is not registered."
     exit 0
 }
 $document.mcpServers.PSObject.Properties.Remove("cutroom")
@@ -565,7 +565,7 @@ For `-DryRun`, print only that `mcpServers.cutroom` will be removed; do not seri
 
 Run: `.venv\Scripts\python.exe -m unittest tests.test_mcp_install_scripts -v`
 
-Expected: PASS under Windows PowerShell 5.1; the bridge config and unknown fields survive, dry runs omit the secret marker, reinstall is idempotent, invalid JSON is byte-preserved, and uninstall touches no CUTROOM data.
+Expected: PASS under Windows PowerShell 5.1; the bridge config and unknown fields survive, dry runs omit the secret marker, reinstall is idempotent, invalid JSON is byte-preserved, and uninstall touches no 剪辑工作台 data.
 
 - [ ] **Step 6: Commit the WorkBuddy adapter**
 
@@ -672,10 +672,10 @@ $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $pythonPath = [System.IO.Path]::GetFullPath((Join-Path $projectRoot ".venv\Scripts\python.exe"))
 $serverPath = [System.IO.Path]::GetFullPath((Join-Path $projectRoot "scripts\cutroom_mcp.py"))
 if (-not (Test-Path -LiteralPath $pythonPath -PathType Leaf)) {
-    throw "CUTROOM Python environment was not found: $pythonPath"
+    throw "剪辑工作台 Python environment was not found: $pythonPath"
 }
 if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
-    throw "CUTROOM MCP entry point was not found: $serverPath"
+    throw "剪辑工作台 MCP entry point was not found: $serverPath"
 }
 $descriptor = [ordered]@{
     name = "cutroom"
@@ -800,7 +800,7 @@ Expected: PASS; the built archive contains the new scripts and guide, contains n
 
 ```powershell
 git add README.md docs/operations/cutroom-agent-mcp-clients.md docs/user-guide/cutroom-user-guide.md tests/test_mcp_install_scripts.py tests/test_release_packaging.py
-git commit -m "docs: add CUTROOM MCP client operations"
+git commit -m "docs: add 剪辑工作台 MCP client operations"
 ```
 
 ### Task 6: Run security regression and real-client acceptance without paid calls
@@ -810,7 +810,7 @@ git commit -m "docs: add CUTROOM MCP client operations"
 - Modify only if a discovered product defect requires it: files from Tasks 1-5 plus their focused tests.
 
 **Interfaces:**
-- Consumes: the three stdio identities, WorkBuddy installer/uninstaller, Doubao descriptor, the existing isolated Agent task fixtures, and CUTROOM UI human gates.
+- Consumes: the three stdio identities, WorkBuddy installer/uninstaller, Doubao descriptor, the existing isolated Agent task fixtures, and 剪辑工作台 UI human gates.
 - Produces: evidence for tool count, `clientId`, artifact `source_agent`, config preservation, no-paid-call behavior, restart recovery, and Codex regression.
 - Decision result: `doubao_stdio_supported` or `doubao_stdio_unsupported_with_evidence`. The latter ends this phase and triggers a separate authenticated-loopback spec/plan; it does not authorize private-state modification.
 
@@ -868,7 +868,7 @@ If the UI rejects local stdio, first re-check path existence, argument quoting, 
 
 - [ ] **Step 6: Regress Codex and verify source separation**
 
-Run the Codex stdio probe and one no-cost status/context call. Query the isolated artifact ledger through existing CUTROOM code and record that the three artifact records retain their actual source values and that no tool schema contains `source_agent`. Confirm the historical Codex acceptance path still reports 12 tools and `clientId = codex`.
+Run the Codex stdio probe and one no-cost status/context call. Query the isolated artifact ledger through existing 剪辑工作台 code and record that the three artifact records retain their actual source values and that no tool schema contains `source_agent`. Confirm the historical Codex acceptance path still reports 12 tools and `clientId = codex`.
 
 - [ ] **Step 7: Prove WorkBuddy rollback is scoped**
 
@@ -879,7 +879,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-workbu
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-workbuddy-mcp.ps1
 ```
 
-Verify only `mcpServers.cutroom` disappears, the existing bridge and unknown keys remain, and CUTROOM tasks/artifacts still exist. Reinstall after the rollback proof only if Peter wants WorkBuddy left enabled.
+Verify only `mcpServers.cutroom` disappears, the existing bridge and unknown keys remain, and 剪辑工作台 tasks/artifacts still exist. Reinstall after the rollback proof only if Peter wants WorkBuddy left enabled.
 
 - [ ] **Step 8: Write the acceptance document with an explicit outcome**
 

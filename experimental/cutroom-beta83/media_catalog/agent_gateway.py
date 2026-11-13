@@ -1,4 +1,4 @@
-"""Strict, credential-free façade used by the optional CUTROOM MCP server."""
+"""Strict, credential-free façade used by the optional 剪辑工作台 MCP server."""
 
 from __future__ import annotations
 from .script_segments import storyboard_digest
@@ -195,7 +195,7 @@ class AgentGateway:
         except Exception:
             return _failure(
                 "INTERNAL_ERROR",
-                "CUTROOM 处理失败，请在工作台查看诊断信息。",
+                "剪辑工作台 处理失败，请在工作台查看诊断信息。",
                 retryable=True,
             )
 

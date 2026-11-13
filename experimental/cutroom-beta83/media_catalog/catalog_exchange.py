@@ -162,7 +162,7 @@ def _write_sheet(workbook: Workbook, name: str, columns: tuple[str, ...], rows: 
                  metadata: str, first_editable: int) -> None:
     sheet = workbook.create_sheet(name)
     sheet.sheet_view.showGridLines = False
-    sheet["A2"] = "CUTROOM 素材交换台账"
+    sheet["A2"] = "剪辑工作台 素材交换台账"
     sheet["A2"].font = Font(name="Arial", size=14, bold=True, color="27342B")
     sheet["A3"] = "浅黄色可编辑；灰色身份与源信息不可修改。删除行不会删除素材或片段。"
     sheet["A4"] = metadata

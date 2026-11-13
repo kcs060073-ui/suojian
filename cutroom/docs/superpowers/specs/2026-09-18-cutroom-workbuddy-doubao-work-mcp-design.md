@@ -1,4 +1,4 @@
-# CUTROOM WorkBuddy 与豆包工作 Agent MCP 适配设计
+# 剪辑工作台 WorkBuddy 与豆包工作 Agent MCP 适配设计
 
 日期：2026-09-18
 
@@ -6,23 +6,23 @@
 
 前置设计：`docs/superpowers/specs/2026-09-16-cutroom-agent-mcp-design.md`
 
-适用范围：CUTROOM 已验收的 Agent 模式向 WorkBuddy 5.5.6 和豆包工作 2.30.1 扩展。Codex、WorkBuddy、豆包工作分别使用各自当前会话模型完成文本规划，共用同一套 CUTROOM 业务层、任务账本和安全门禁。
+适用范围：剪辑工作台已验收的 Agent 模式向 WorkBuddy 5.5.6 和豆包工作 2.30.1 扩展。Codex、WorkBuddy、豆包工作分别使用各自当前会话模型完成文本规划，共用同一套剪辑工作台业务层、任务账本和安全门禁。
 
 ## 1. 背景与目标
 
-CUTROOM 已具备一个本地 `stdio` MCP Server、12 个受控工具、Agent Gateway、不可变规划产物和双模式任务。Codex 真实验收已证明：当前 Agent 模型可以完成文案分析、重点词和分镜规划，CUTROOM 无需为这些文本步骤调用自己的大模型；CUTROOM 继续负责素材、任务、队列、豆包 TTS、Seedance、FFmpeg、质检、发布包和四道人工作门禁。
+剪辑工作台已具备一个本地 `stdio` MCP Server、12 个受控工具、Agent Gateway、不可变规划产物和双模式任务。Codex 真实验收已证明：当前 Agent 模型可以完成文案分析、重点词和分镜规划，剪辑工作台无需为这些文本步骤调用自己的大模型；剪辑工作台继续负责素材、任务、队列、豆包 TTS、Seedance、FFmpeg、质检、发布包和四道人工作门禁。
 
 本设计不新建两套视频业务，也不让 Agent 相互转发任务。目标是让 WorkBuddy 和豆包工作成为与 Codex 并列的 MCP 客户端：
 
-1. Peter 在任一客户端中直接下达 CUTROOM 视频任务。
-2. 该客户端的当前模型读取 CUTROOM 提供的有界上下文并生成结构化规划产物。
+1. Peter 在任一客户端中直接下达剪辑工作台视频任务。
+2. 该客户端的当前模型读取剪辑工作台提供的有界上下文并生成结构化规划产物。
 3. 同一 Agent Gateway 校验、持久化并推进现有工作流。
-4. CUTROOM UI 继续承担人工门禁、预览、质检和成片查看。
+4. 剪辑工作台 UI 继续承担人工门禁、预览、质检和成片查看。
 5. 产物准确记录来源客户端，不能由模型伪造来源身份。
 
 ## 2. 已核实基线
 
-- CUTROOM `main` 已包含 12 个本地 `stdio` MCP 工具，当前入口为项目虚拟环境 Python 加 `scripts/cutroom_mcp.py`。
+- 剪辑工作台 `main` 已包含 12 个本地 `stdio` MCP 工具，当前入口为项目虚拟环境 Python 加 `scripts/cutroom_mcp.py`。
 - WorkBuddy 5.5.6 已安装，用户级 MCP 配置位于 `%USERPROFILE%\.workbuddy\mcp.json`；现有 `zhaoshang_wechat_bridge` 配置必须保留。
 - WorkBuddy 官方连接器格式支持本地 `stdio`，包含 `command`、`args`、`env` 和可选 `cwd`。
 - 豆包工作 2.30.1 已安装于 `D:\DoubaoWork`，安装包包含 `mcp_helper.dll`；本机历史任务已有 MCP 工具结果，证明该客户端具备 MCP 调用能力。
@@ -61,13 +61,13 @@ CDP、内部消息格式和私有数据库都不是稳定公共接口。版本�
 1. **客户端配置层**：Codex、WorkBuddy 保存 MCP 启动配置；豆包工作保存回环 URL 和 Authorization Header。
 2. **MCP 传输与工具层**：同一个 `cutroom_mcp` 包；Codex、WorkBuddy 使用 `stdio`，豆包工作使用受限回环 Streamable HTTP。
 3. **Agent Gateway**：继续负责白名单、模式、阶段、指纹、幂等、付费确认、错误裁剪和门禁保护。
-4. **CUTROOM 核心**：SQLite 主账本、素材库、任务队列、外部生产服务、渲染、QA、发布包和 UI。
+4. **剪辑工作台核心**：SQLite 主账本、素材库、任务队列、外部生产服务、渲染、QA、发布包和 UI。
 
 数据流：
 
-`用户指令 → 当前客户端模型 → CUTROOM MCP → Agent Gateway → CUTROOM 核心 → 有界状态/结果 → 当前客户端模型`
+`用户指令 → 当前客户端模型 → 剪辑工作台 MCP → Agent Gateway → 剪辑工作台核心 → 有界状态/结果 → 当前客户端模型`
 
-客户端之间不通信，不共享聊天记录，也不通过 MCP 调用彼此。它们只共享 CUTROOM 中已经持久化的任务状态和规划产物。
+客户端之间不通信，不共享聊天记录，也不通过 MCP 调用彼此。它们只共享剪辑工作台中已经持久化的任务状态和规划产物。
 
 ## 5. 客户端身份与工具契约
 
@@ -119,9 +119,9 @@ CDP、内部消息格式和私有数据库都不是稳定公共接口。版本�
 
 - 服务名：`cutroom`
 - 类型：`stdio`
-- 命令：CUTROOM 项目 `.venv\Scripts\python.exe`
+- 命令：剪辑工作台项目 `.venv\Scripts\python.exe`
 - 参数：`scripts\cutroom_mcp.py --client workbuddy`
-- 工作目录：CUTROOM 项目根目录
+- 工作目录：剪辑工作台项目根目录
 
 ### 6.2 安全写入
 
@@ -129,8 +129,8 @@ CDP、内部消息格式和私有数据库都不是稳定公共接口。版本�
 - 只新增或替换 `mcpServers.cutroom`。
 - 保留 `zhaoshang_wechat_bridge` 和其他未知字段。
 - 使用同目录临时文件和原子替换。
-- Dry Run 只显示 CUTROOM 项，不回显其他服务的命令、环境变量或凭据。
-- 卸载只移除 `mcpServers.cutroom`，不删除 CUTROOM、任务或凭据。
+- Dry Run 只显示剪辑工作台项，不回显其他服务的命令、环境变量或凭据。
+- 卸载只移除 `mcpServers.cutroom`，不删除剪辑工作台、任务或凭据。
 
 ### 6.3 使用提示
 
@@ -171,9 +171,9 @@ HTTP 入口满足以下约束：
 - 首次启动生成高熵本机令牌；连接器通过自定义 Header 注入。
 - 校验授权头；拒绝无令牌或错误令牌请求。
 - 不把令牌写入项目仓库、日志、共享记忆或 MCP 返回。
-- 提供显式启动、状态检查和停止方式，不随普通 CUTROOM 安装静默常驻。
+- 提供显式启动、状态检查和停止方式，不随普通剪辑工作台安装静默常驻。
 
-豆包工作连接器固定使用 `http://127.0.0.1:8766/mcp`，避开 CUTROOM 工作台的 `8765` 端口。
+豆包工作连接器固定使用 `http://127.0.0.1:8766/mcp`，避开剪辑工作台工作台的 `8765` 端口。
 
 ### 7.4 使用提示
 
@@ -186,15 +186,15 @@ HTTP 入口满足以下约束：
 1. 调用 `cutroom_get_system_status` 检查服务与客户端身份。
 2. 调用 `cutroom_preflight_task` 做只读预检。
 3. 创建 `agent` 模式任务，或读取已有 Agent 任务。
-4. 在文案锁定门禁等待用户在 CUTROOM UI 确认。
+4. 在文案锁定门禁等待用户在剪辑工作台 UI 确认。
 5. 调用 `cutroom_get_agent_context` 获取锁定文案、素材摘要、Schema 和 `inputDigest`。
 6. 当前客户端模型生成结构化规划。
 7. 调用 `cutroom_submit_planning_artifact`；Gateway 校验后保存不可变版本。
 8. 只从动作白名单启动后续作业。
-9. 到画面锁定、包装确认和完整审片时停止，提示用户进入 CUTROOM UI。
+9. 到画面锁定、包装确认和完整审片时停止，提示用户进入剪辑工作台 UI。
 10. 查询作业与结果链接；中断后依靠 SQLite 和持久队列恢复。
 
-客户端关闭或切换不会把未完成任务改成 `standalone`，也不会自动触发 CUTROOM 自身文本模型。
+客户端关闭或切换不会把未完成任务改成 `standalone`，也不会自动触发剪辑工作台自身文本模型。
 
 ## 9. 安全与权限边界
 
@@ -228,7 +228,7 @@ HTTP 入口满足以下约束：
 - 豆包工作连接器配置生成脚本、回环 HTTP 前台启动脚本与操作文档。
 - README、同事操作手册和发布清单。
 
-普通 CUTROOM 安装仍不自动注册任何 Agent 客户端。三个客户端的启用与卸载相互独立；卸载某一客户端配置不影响其他客户端和 CUTROOM 独立模式。
+普通剪辑工作台安装仍不自动注册任何 Agent 客户端。三个客户端的启用与卸载相互独立；卸载某一客户端配置不影响其他客户端和剪辑工作台独立模式。
 
 ## 12. 测试与验收
 
@@ -253,15 +253,15 @@ WorkBuddy：
 
 1. 保留现有 `zhaoshang_wechat_bridge`，发现 `cutroom` 及 12 个工具。
 2. 系统状态返回 `clientId = workbuddy`。
-3. 使用隔离任务完成一次上下文读取和规划提交，不调用 CUTROOM 文本模型。
+3. 使用隔离任务完成一次上下文读取和规划提交，不调用剪辑工作台文本模型。
 4. 在人工门禁处正确停止；未确认费用时不创建付费作业。
-5. 卸载后仅 `cutroom` 配置消失，其他服务和 CUTROOM 数据不变。
+5. 卸载后仅 `cutroom` 配置消失，其他服务和剪辑工作台数据不变。
 
 豆包工作：
 
 1. 通过公开自定义连接器入口完成连接，不修改内部数据库。
 2. 发现 12 个工具，系统状态返回 `clientId = doubao_work`。
-3. 使用隔离任务完成一次上下文读取和规划提交，不调用 CUTROOM 文本模型。
+3. 使用隔离任务完成一次上下文读取和规划提交，不调用剪辑工作台文本模型。
 4. 在人工门禁处正确停止；未确认费用时不创建付费作业。
 5. 客户端重启后可以重新读取同一任务和 Artifact。
 
@@ -276,8 +276,8 @@ Codex 回归：
 
 只有同时满足以下条件才可宣布完成：
 
-- WorkBuddy 与豆包工作各自真实发现并调用 CUTROOM MCP。
-- 两端当前模型都能完成一次无付费规划链路，CUTROOM 不调用自身文本模型。
+- WorkBuddy 与豆包工作各自真实发现并调用剪辑工作台 MCP。
+- 两端当前模型都能完成一次无付费规划链路，剪辑工作台不调用自身文本模型。
 - 三端产物来源身份准确且不能由模型伪造。
 - WorkBuddy 既有 MCP 配置未被覆盖；豆包工作未使用内部数据库或 CDP 逆向写入。
 - 四道人工作业门禁、费用确认、凭据隔离和独立模式无回归。

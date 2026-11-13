@@ -1,4 +1,4 @@
-# CUTROOM 20 项审查问题修复验收
+# 剪辑工作台 20 项审查问题修复验收
 
 基线：`92d1434` / `0.9.0-beta.5`。原始发现保留在 [产品代码审查](./2026-09-20-product-code-review.md)，本文件记录后续修复，不能用原报告的修前结论描述当前工作区。
 
@@ -21,7 +21,7 @@ Session：`20260920-121245-codex-09ef`。以下记录原修复轮次的本地验
 | F11 | 广告计划冻结并应用完整确认字幕预设，包括背板与阴影 | Python 适配测试；TS 检查三套实际 ASS 样式 |
 | F12 | PNG 花字持续提供帧与时间戳，淡入后可见 | TS 对实际 FFmpeg 输出中段采样像素 |
 | F13 | 发布清单包含 `src`，解压产物可解析业务依赖并生成字幕 | `tests/test_release_packaging.py`：真实清单打包、解压、make-ass、FFmpeg 烧录 |
-| F14 | 解析 TOML 并核对编辑前后非目标语义，仅修改 CUTROOM；无法安全处理时原文件不变 | `tests/test_codex_toml.py`、`tests/test_mcp_install_scripts.py`：真实 PowerShell 5.1 安装/卸载 |
+| F14 | 解析 TOML 并核对编辑前后非目标语义，仅修改剪辑工作台；无法安全处理时原文件不变 | `tests/test_codex_toml.py`、`tests/test_mcp_install_scripts.py`：真实 PowerShell 5.1 安装/卸载 |
 | F15 | 旧生成入口在付费前检查整批查询和路径冲突，核验缓存；持久化提交记录，失败返回非零状态 | `tests/render-review-regressions.test.ts`：外部网络替身、创建次数、重试日志及真实 CLI 退出码 |
 | F16 | 重扫按检测身份更新隐私项，保留相同项的人工决定；库扫描单片失败继续并返回失败摘要 | `tests/test_catalog_review_fixes.py`：新增隐私项与单片异常 |
 | F17 | 明确音色拒绝禁用该音色；鉴权、资源授权和网络故障不误禁，返回与落库一致的错误码 | `tests/test_delivery_model_regressions.py`：真实试听入口到任务音色绑定 |

@@ -18,7 +18,7 @@ test("创建页和任务页提供清晰的 Agent 规划模式标识", () => {
     "utf8",
   );
   assert.match(html, /id="orchestration-mode"/);
-  assert.match(html, />CUTROOM 自己规划</);
+  assert.match(html, />剪辑工作台 自己规划</);
   assert.match(html, />当前 Agent 规划</);
   assert.match(html, /data-planning-profile/);
   assert.match(html, /id="task-orchestration-mode"/);

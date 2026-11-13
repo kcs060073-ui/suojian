@@ -1,4 +1,4 @@
-"""Start the optional CUTROOM MCP server over stdio or loopback HTTP."""
+"""Start the optional 剪辑工作台 MCP server over stdio or loopback HTTP."""
 
 from __future__ import annotations
 
@@ -44,7 +44,7 @@ class BearerAuthApp:
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run CUTROOM MCP over stdio or loopback Streamable HTTP."
+        description="Run 剪辑工作台 MCP over stdio or loopback Streamable HTTP."
     )
     parser.add_argument(
         "--client",

@@ -362,7 +362,7 @@ def export_reshoot_list(db, task_id, report_id, expected_revision, *, format='te
             raise RuntimeError('RESHOOT_INPUTS_CHANGED: 素材或分析已变化，请先重检缺口')
         if format == 'json':
             return json.dumps(report, ensure_ascii=False, indent=2)
-        lines = ['CUTROOM 本地补拍与缺口处理清单（草稿）', f'任务：{task_id}', f'修订：{revision}', f'报告：{report_id}', '']
+        lines = ['剪辑工作台 本地补拍与缺口处理清单（草稿）', f'任务：{task_id}', f'修订：{revision}', f'报告：{report_id}', '']
         for i in report['items']:
             lines.extend([f"{i['gapId']} · {i['status']}", f"文案：{i['text']}", f"画面需求：{i['visualIntent']}", f"方向：{i['orientation']}；实测成片覆盖：{i['durationUs'] / 1000000.0:g}秒", f"时间依据：{i['timingNote']}", f"原因：{i['reasonText']}", f"先做：{i['nextAction']}", f"解除条件：{i['closureCondition']}"])
             if i['shootingSuggestion']:

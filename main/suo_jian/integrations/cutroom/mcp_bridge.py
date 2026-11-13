@@ -1,4 +1,4 @@
-"""Small stdio bridge, executed with Cutroom's Python (which owns `mcp`).
+"""Small stdio bridge, executed with 剪辑工作台's Python (which owns `mcp`).
 
 Task creation and explicitly confirmed actions are exposed; no gate approval is.
 """
@@ -30,7 +30,7 @@ ALLOWED = {
 
 async def run(root: Path, tool: str, arguments: dict) -> dict:
     if tool not in ALLOWED:
-        raise ValueError("Cutroom tool is not enabled by SuoJian")
+        raise ValueError("剪辑工作台 tool is not enabled by SuoJian")
     params = StdioServerParameters(
         command=sys.executable,
         args=mcp_arguments(root, os.environ.get("SUOJIAN_CUTROOM_ORIGIN")),
@@ -42,12 +42,12 @@ async def run(root: Path, tool: str, arguments: dict) -> dict:
             tools = await session.list_tools()
             names = {entry.name for entry in tools.tools}
             if tool not in names:
-                raise ValueError("当前 Cutroom 版本没有提供请求的 MCP 工具：" + tool)
+                raise ValueError("当前 剪辑工作台 版本没有提供请求的 MCP 工具：" + tool)
             result = await session.call_tool(tool, arguments)
             if result.is_error:
-                raise RuntimeError("Cutroom MCP 拒绝执行请求；请在工作台检查任务状态和门禁。")
+                raise RuntimeError("剪辑工作台 MCP 拒绝执行请求；请在工作台检查任务状态和门禁。")
             if not isinstance(result.structured_content, dict):
-                raise RuntimeError("Cutroom did not return a structured result")
+                raise RuntimeError("剪辑工作台 did not return a structured result")
             payload = result.structured_content
             if tool == "cutroom_get_system_status":
                 payload = {**payload, "suojian_protocol": {"verified": True, "tool_count": len(names), "tools": sorted(names)}}

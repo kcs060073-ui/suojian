@@ -11,7 +11,7 @@
   <div class="director-intro"><p>给一句修改意见，或贴进一份剧本。先看改动，也可以选择理解后直接应用。</p><span id="directorReady" class="pill">读取接口状态…</span></div>
   <div class="director-grid"><div class="tool-card director-command"><div class="two"><label>这次做什么<select id="directorRole"><option value="edit">修改当前影片</option><option value="script">剧本 → 分镜工作稿</option><option value="review">审查文案与结构</option></select></label><label>使用哪个接口<select id="directorProfile"><option value="">按任务调度</option></select></label></div>
   <label>一句话，或一份剧本<textarea id="directorPrompt" rows="7" placeholder="例如：第二镜缩短到5秒，主标题改为「设备先进来」，颜色改成青绿色，保留其他镜头。"></textarea></label>
-  <div class="director-examples"><button data-example="把第二镜的主标题改成「先量入口，再选厂房」，字号改为86，颜色改为青绿色，保留其他内容。">改一镜</button><button data-example="为全片加入轻微连续推近和动态花字，其他内容不改。">调风格</button><button data-example="做一条30秒的园区介绍，围绕设备能否进场、现场核对和预约到访展开。不要编造实测参数，沿用现有画面风格。" data-role="script">写新剧本</button></div>
+  <div class="director-examples"><button data-example="把第二镜的主标题改成「先量入口，再选厂房」，字号改为86，颜色改为青绿色，保留其他内容。">改一镜</button><button data-example="为全片加入轻微连续推近和动态花字，其他内容不改。">调风格</button><button data-example="做一条30秒的项目介绍，围绕设备能否进场、现场核对和预约到访展开。不要编造实测参数，沿用现有画面风格。" data-role="script">写新剧本</button></div>
   <div class="actions"><label class="director-file">导入 TXT / Markdown<input id="directorFile" type="file" accept=".txt,.md,.markdown"></label><label class="check"><input id="directorAuto" type="checkbox">理解后直接应用，可撤销</label></div>
   <div class="actions"><button id="directorRun" class="primary">理解并生成改动</button><button id="directorFromScript" class="quiet">带入“脚本与分镜”文字</button></div><p id="directorMessage" class="hint" role="status">未配置 API 时，也可以在当前聊天里让我操作；两种入口共用修改与撤销记录。</p>
   <p class="hint">发给模型的是本次文字、镜头配置和字幕；不会自动上传视频。新剧本先生成可编辑工作稿，配音、素材制作和成片导出仍使用现有制作工具。</p></div>

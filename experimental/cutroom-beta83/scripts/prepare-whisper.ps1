@@ -62,8 +62,8 @@ try {
     if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
         throw '未找到本安装目录的 Python。请先双击安装CUTROOM.bat。'
     }
-    Write-Host '[CUTROOM] 准备本地语音识别 small 模型（首次约 500 MB）；已有完整缓存时不重新下载。'
-    Write-Host '[CUTROOM] 使用当前 Windows 用户的 Hugging Face 缓存；实际目录将在下方显示。'
+    Write-Host '[SuoJian] 准备本地语音识别 small 模型（首次约 500 MB）；已有完整缓存时不重新下载。'
+    Write-Host '[SuoJian] 使用当前 Windows 用户的 Hugging Face 缓存；实际目录将在下方显示。'
     $info = [System.Diagnostics.ProcessStartInfo]::new()
     $info.FileName = $python
     $info.Arguments = '-u -'
@@ -99,10 +99,10 @@ try {
     if ($outputText) { Write-Host $outputText.TrimEnd() }
     if ($timedOut) { throw "模型准备超过 $TimeoutSeconds 秒，已停止本次进程；没有自动重试。" }
     if ($process.ExitCode -ne 0) { throw 'small 模型下载或离线加载未通过。' }
-    Write-Host '[CUTROOM] 本地 small 模型已离线加载验证，数字人转写和首个广告的成片听审可以使用。' -ForegroundColor Green
+    Write-Host '[SuoJian] 本地 small 模型已离线加载验证，数字人转写和首个广告的成片听审可以使用。' -ForegroundColor Green
     exit 0
 } catch {
-    Write-Host "[CUTROOM] 模型准备未完成：$($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "[SuoJian] 模型准备未完成：$($_.Exception.Message)" -ForegroundColor Red
     Write-Host '请检查网络能否访问 Hugging Face、磁盘空间和可用内存；不要删除任务或素材。' -ForegroundColor Yellow
     Write-Host '恢复后在本安装目录运行：powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\prepare-whisper.ps1' -ForegroundColor Yellow
     Write-Host '模型准备通过后，重新运行安装CUTROOM.bat完成安装自检。缓存损坏或持续失败时，保留诊断结果交维护人员处理。' -ForegroundColor Yellow

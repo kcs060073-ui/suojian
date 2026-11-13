@@ -1,4 +1,4 @@
-# Shared, read-only runtime binding for all CUTROOM MCP launchers.
+# Shared, read-only runtime binding for all SuoJian MCP launchers.
 function Resolve-CutroomMcpRuntime {
     param(
         [Parameter(Mandatory=$true)][string]$ProjectRoot,

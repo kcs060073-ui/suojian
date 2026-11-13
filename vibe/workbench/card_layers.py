@@ -23,7 +23,7 @@ def migrate(config,root):
             if effect not in EFFECTS:continue  # Unknown native clips remain explicit media until a source adapter exists.
             shot.update(referencePreview=source,source='/media/'+base['footage'],sourceType='video',sourceOffset=base['from'],footageOffset=0,
                 audioScene=base['index'],recipe=f'jiading-{base["index"]}',cardEffect=effect,cardMotion=False,
-                asset='嘉定园区实拍 · '+base['label'],layerVersion=2)
+                asset='嘉定项目实拍 · '+base['label'],layerVersion=2)
         elif recipe in EFFECTS[1:] or recipe in ALIASES:
             shot.setdefault('cardEffect',ALIASES.get(recipe,recipe))
             shot['recipe']=shot.get('beforeCardRecipe') if str(shot.get('beforeCardRecipe','')).startswith('jiading-') else f'jiading-{base["index"]}'

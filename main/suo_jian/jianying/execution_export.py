@@ -152,7 +152,7 @@ def build_execution_draft(plan: dict, draft_root: Path, name: str) -> tuple[Path
             if available <= .00001:
                 raise ValueError("镜头源起点超出素材范围。")
             length = min(left, available)
-            # Center-crop to canvas just like Cutroom's scale+crop renderer.
+            # Center-crop to canvas just like 剪辑工作台's scale+crop renderer.
             fit = max(canvas["width"] / material.width, canvas["height"] / material.height)
             scale = fit / min(canvas["width"] / material.width, canvas["height"] / material.height)
             last = d.VideoSegment(material, span(cursor, length), source_timerange=span(offset, length),

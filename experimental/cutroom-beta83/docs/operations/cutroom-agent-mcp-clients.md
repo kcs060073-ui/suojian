@@ -1,4 +1,4 @@
-# CUTROOM Agent MCP 客户端操作手册
+# 剪辑工作台 Agent MCP 客户端操作手册
 
 适用客户端：Codex、WorkBuddy、豆包工作 Agent  
 适用系统：Windows 64 位  
@@ -6,11 +6,11 @@
 
 普通使用者先看[操作手册中的 WorkBuddy / 豆包接入步骤](../user-guide/cutroom-user-guide.md#agent-mode)。本页供维护人员检查协议、任务库绑定、权限和回滚。
 
-**从实际使用的 CUTROOM 安装目录运行脚本。安装器与豆包启动器支持 `-DatabasePath` 和 `-WorkbenchOrigin`，并把任务库及工作台地址显式传给服务；省略时使用该安装目录的默认库和端口 8765。独立库或自定义端口必须提供这两个参数，避免重装后连到另一份任务库。工具 26 个且任务正确时无需重装。**
+**从实际使用的剪辑工作台安装目录运行脚本。安装器与豆包启动器支持 `-DatabasePath` 和 `-WorkbenchOrigin`，并把任务库及工作台地址显式传给服务；省略时使用该安装目录的默认库和端口 8765。独立库或自定义端口必须提供这两个参数，避免重装后连到另一份任务库。工具 26 个且任务正确时无需重装。**
 
 ## 1. 能力边界
 
-三个客户端共用同一个 CUTROOM MCP Server 和同一组 26 个工具。当前客户端的模型负责文案分析、重点词和分镜等文本规划；CUTROOM 继续负责素材、任务账本、队列、豆包 TTS、Seedance、FFmpeg、质检和发布包。
+三个客户端共用同一个剪辑工作台 MCP Server 和同一组 26 个工具。当前客户端的模型负责文案分析、重点词和分镜等文本规划；剪辑工作台继续负责素材、任务账本、队列、豆包 TTS、Seedance、FFmpeg、质检和发布包。
 
 客户端身份由 MCP 服务端启动参数固定注入：
 
@@ -20,7 +20,7 @@
 
 模型看不到也不能提交 `source_agent`。该字段只由服务端写入规划产物，用于审计来源，不增加任何业务权限。
 
-以下四道人工作业门禁只能在 CUTROOM 页面中确认：
+以下四道人工作业门禁只能在剪辑工作台页面中确认：
 
 1. 文案锁定；
 2. 画面顺序锁定；
@@ -31,7 +31,7 @@ TTS、Seedance 等付费动作仍要求显式费用确认。状态查询、重�
 
 ## 2. 前置检查
 
-在 CUTROOM 项目根目录运行：
+在剪辑工作台项目根目录运行：
 
 ```powershell
 .venv\Scripts\python.exe -m pip install -r requirements-mcp.txt
@@ -70,7 +70,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-codex-
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-codex-mcp.ps1
 ```
 
-卸载只移除 Codex 中的 `cutroom` 服务项，不删除 CUTROOM、SQLite、任务、素材或凭据。
+卸载只移除 Codex 中的 `cutroom` 服务项，不删除剪辑工作台、SQLite、任务、素材或凭据。
 
 ## 4. WorkBuddy
 
@@ -85,7 +85,7 @@ WorkBuddy 只修改 `mcpServers.cutroom`：
 
 - 保留 `zhaoshang_wechat_bridge`；
 - 保留其他 MCP 服务和未知顶层字段；
-- Dry Run 只显示 CUTROOM 项，不显示其他服务的命令、环境变量或凭据；
+- Dry Run 只显示剪辑工作台项，不显示其他服务的命令、环境变量或凭据；
 - 原文件不是有效 JSON 时停止，不覆盖；
 - 重复安装只更新同一个 `cutroom` 项。
 
@@ -107,7 +107,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-workbu
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\uninstall-workbuddy-mcp.ps1
 ```
 
-卸载只删除 `mcpServers.cutroom`。完成后检查 `zhaoshang_wechat_bridge` 和其他字段仍存在；CUTROOM 任务与规划产物不受影响。
+卸载只删除 `mcpServers.cutroom`。完成后检查 `zhaoshang_wechat_bridge` 和其他字段仍存在；剪辑工作台任务与规划产物不受影响。
 
 ## 5. 豆包工作 Agent
 
@@ -156,7 +156,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\show-doubao-work
 
 1. 发现 26 个工具；
 2. `cutroom_get_system_status` 返回 `clientId = doubao_work`、`mcpToolCount = 26`、`allowedTaskActionCount = 4`；
-3. 客户端重启后仍能读取同一 CUTROOM 任务。
+3. 客户端重启后仍能读取同一剪辑工作台任务。
 
 如果豆包工作连接失败：
 
@@ -165,7 +165,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\show-doubao-work
 3. 保留客户端版本和可见错误证据；
 4. 停止配置，不修改豆包内部数据，也不要把监听地址改成 `0.0.0.0`。
 
-关闭启动服务的 PowerShell 窗口即可停用豆包连接。豆包工作中的连接器记录可从公开管理页面禁用或删除；这不会删除 CUTROOM 任务和规划产物。
+关闭启动服务的 PowerShell 窗口即可停用豆包连接。豆包工作中的连接器记录可从公开管理页面禁用或删除；这不会删除剪辑工作台任务和规划产物。
 
 若 Authorization 曾出现在截图、聊天、日志或共享文档中，应关闭豆包 MCP 服务，删除 `runtime\mcp\doubao-work.token`，重新运行启动脚本生成新令牌，并更新连接器。令牌文件不承载任务数据，可以安全重建。
 
@@ -184,12 +184,12 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\show-doubao-work
 1. 调用 `cutroom_get_system_status`，确认服务和 `clientId`。
 2. 调用 `cutroom_preflight_task` 做只读预检。
 3. 创建 `agent` 模式任务，或读取已有 Agent 任务。
-4. 在文案锁定门禁等待用户到 CUTROOM 页面确认。
+4. 在文案锁定门禁等待用户到剪辑工作台页面确认。
 5. 调用 `cutroom_get_agent_context` 取得锁定文案、素材摘要、Schema 和 `inputDigest`。
 6. 当前客户端模型按返回的 `planningSchema.contentSchema` 生成结构化规划，并遵守 `semanticRules`。广告包含 `plan.ratio/segments`，每段有 `text/query/prompt/type`；数字人包含 `brief.broll` 和 `plan`，可用 `brief.scriptSegments` 提供逐字覆盖的分句。原文覆盖、真实时码、素材范围和旧输入仍由提交端核验，Schema 合法不等于业务验收。
 7. 调用 `cutroom_submit_planning_artifact`；来源身份由服务端固定注入。
 8. 只从动作白名单启动后续作业。
-9. 遇到画面锁定、包装确认和完整审片时停止，提示用户进入 CUTROOM 页面。
+9. 遇到画面锁定、包装确认和完整审片时停止，提示用户进入剪辑工作台页面。
 10. 使用作业与结果查询工具恢复进度；关闭客户端不会把任务切换成独立模式。
 
 `render_and_qa` 只有在页面完成包装确认后才能入队；`build_publish_package` 只有在页面批准当前候选的完整审片后才能入队。发布作业入队时绑定该候选版本，执行时若候选已变化则拒绝。MCP 不提供代替用户确认这四道门禁的工具。

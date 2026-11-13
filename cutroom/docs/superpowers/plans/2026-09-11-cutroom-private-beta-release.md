@@ -1,8 +1,8 @@
-# CUTROOM Private Beta Release Implementation Plan
+# 剪辑工作台 Private Beta Release Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Publish the verified CUTROOM code to a private GitHub repository and ship a reproducible Windows online-install Beta ZIP as prerelease `v0.9.0-beta.1`.
+**Goal:** Publish the verified 剪辑工作台 code to a private GitHub repository and ship a reproducible Windows online-install Beta ZIP as prerelease `v0.9.0-beta.1`.
 
 **Architecture:** A strict allowlist builder creates a release staging tree, adds generated runtime directories and a cryptographic manifest, then emits a ZIP and checksum. A double-click Windows installer provisions Python/Node/FFmpeg dependencies without bundling secrets or user data. GitHub stores source privately and serves the Beta ZIP as a private Release asset.
 
@@ -108,7 +108,7 @@ Create JSON with exact top-level files and runtime directories:
 
 ```powershell
 git add tests/test_release_packaging.py release/release-files.json
-git commit -m "test: define CUTROOM release package contract"
+git commit -m "test: define 剪辑工作台 release package contract"
 ```
 
 ---
@@ -140,10 +140,10 @@ The exception is `create_directories`, which creates empty runtime/output/input 
 
 - [ ] **Step 2: Implement manifest, ZIP and checksum**
 
-For each staged file, record POSIX relative path, byte size and lowercase SHA-256. Sort paths lexicographically and write UTF-8 JSON with `ensure_ascii=False`. ZIP entries must be rooted at `CUTROOM-v{version}/`. Write an external checksum line:
+For each staged file, record POSIX relative path, byte size and lowercase SHA-256. Sort paths lexicographically and write UTF-8 JSON with `ensure_ascii=False`. ZIP entries must be rooted at `剪辑工作台-v{version}/`. Write an external checksum line:
 
 ```text
-<lowercase sha256>  CUTROOM-v0.9.0-beta.1-windows-x64.zip
+<lowercase sha256>  剪辑工作台-v0.9.0-beta.1-windows-x64.zip
 ```
 
 - [ ] **Step 3: Keep build output outside Git**
@@ -273,10 +273,10 @@ Describe exactly:
 
 - Extract ZIP into a user-writable local directory.
 - Run installer once, then use the launcher.
-- Configure model credentials through CUTROOM only; do not edit `.env`.
+- Configure model credentials through 剪辑工作台 only; do not edit `.env`.
 - Upgrade by keeping `assets-local/` and runtime database backup, then installing the new version in a new directory.
 - Roll back by reopening the previous version directory and restoring its database backup.
-- Uninstall by closing CUTROOM and deleting its extracted directory; user media libraries remain untouched.
+- Uninstall by closing 剪辑工作台 and deleting its extracted directory; user media libraries remain untouched.
 - Scott Buckley music requires publication credit; public distribution is not part of this Beta.
 
 - [ ] **Step 4: Run targeted tests and commit**
@@ -284,7 +284,7 @@ Describe exactly:
 ```powershell
 .venv\Scripts\python.exe -m unittest -v tests.test_release_packaging
 git add package.json package-lock.json README.md docs/user-guide/cutroom-user-guide.md release/RELEASE_NOTES_v0.9.0-beta.1.md tests/test_release_packaging.py
-git commit -m "docs: prepare CUTROOM v0.9 beta release"
+git commit -m "docs: prepare 剪辑工作台 v0.9 beta release"
 ```
 
 ---
@@ -333,7 +333,7 @@ Record command counts, exit codes, archive size/hash, included/excluded categori
 
 ```powershell
 git add docs/validation/2026-09-11-cutroom-v0.9.0-beta.1-release.md
-git commit -m "test: record CUTROOM v0.9 beta release validation"
+git commit -m "test: record 剪辑工作台 v0.9 beta release validation"
 ```
 
 ---
@@ -350,7 +350,7 @@ git commit -m "test: record CUTROOM v0.9 beta release validation"
 - [ ] **Step 1: Create the private repository**
 
 ```powershell
-gh repo create qnwhageqlavs-jpg/cutroom-private --private --description "CUTROOM 本地视频制作工作台" --disable-issues --disable-wiki
+gh repo create qnwhageqlavs-jpg/cutroom-private --private --description "剪辑工作台本地视频制作工作台" --disable-issues --disable-wiki
 git remote add origin https://github.com/qnwhageqlavs-jpg/cutroom-private.git
 ```
 
@@ -362,7 +362,7 @@ Fast-forward when possible; otherwise create a normal merge commit without disca
 
 ```powershell
 git push -u origin main
-git tag -a v0.9.0-beta.1 -m "CUTROOM v0.9.0-beta.1"
+git tag -a v0.9.0-beta.1 -m "剪辑工作台 v0.9.0-beta.1"
 git push origin v0.9.0-beta.1
 ```
 
@@ -373,7 +373,7 @@ gh release create v0.9.0-beta.1 `
   release/dist/CUTROOM-v0.9.0-beta.1-windows-x64.zip `
   release/dist/CUTROOM-v0.9.0-beta.1-SHA256SUMS.txt `
   --repo qnwhageqlavs-jpg/cutroom-private `
-  --title "CUTROOM v0.9.0-beta.1" `
+  --title "剪辑工作台 v0.9.0-beta.1" `
   --notes-file release/RELEASE_NOTES_v0.9.0-beta.1.md `
   --prerelease
 ```

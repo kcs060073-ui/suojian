@@ -53,15 +53,15 @@ def load_editor(root,identifier):
     if not film:raise ValueError('影片不存在')
     saved=read_json(editor_path(root,identifier))
     if isinstance(saved,dict) and saved.get('shots'):return copy.deepcopy(saved)
-    if '嘉定园区-这栋楼只有一个业主' in film['video']['name']:
+    if '嘉定项目-这栋楼只有一个业主' in film['video']['name']:
         data=read_json(root/'work/park-fusion/src/script07-data.json')
         if not isinstance(data,dict):raise ValueError('嘉定影片编辑源文件缺失')
         shots=[]
         for s in data['scenes']:
             shots.append({'id':f'jiading-{s["index"]+1}','from':s['from'],'duration':s['duration'],'label':s['label'],
                 'title':'\n'.join(s['title']),'recipe':f'jiading-{s["index"]}','source':'/media/'+s['footage'],'sourceType':'video',
-                'sourceOffset':s['from'],'footageOffset':0,'speed':1,'enabled':True,'asset':'嘉定园区实拍 · '+s['label']})
-        return {'version':1,'editFilmId':identifier,'scenePack':'jiading-script07','name':'嘉定园区 · 这栋楼，只有一个业主',
+                'sourceOffset':s['from'],'footageOffset':0,'speed':1,'enabled':True,'asset':'嘉定项目实拍 · '+s['label']})
+        return {'version':1,'editFilmId':identifier,'scenePack':'jiading-script07','name':'嘉定项目 · 这栋楼，只有一个业主',
             'format':'portrait','style':'fusion','background':'footage','language':'zh','showSelectedVideo':False,
             'audioProfile':'jiading-script07','narrationMode':'existing','narrationFile':'/media/'+data['voice'],
             'musicGain':1,'voiceGain':1,'sfxEnabled':True,'camera':'static','typography':'minimal','seed':17,
@@ -74,7 +74,7 @@ def load_editor(root,identifier):
     if '最终选定' in film['video']['name']:
         base=read_json(root/'engine/default-config.json')
         if base:
-            return {**base,'editFilmId':identifier,'name':'园区 · 写实设备与半身讲解员','showSelectedVideo':False}
+            return {**base,'editFilmId':identifier,'name':'项目 · 写实设备与半身讲解员','showSelectedVideo':False}
     raise ValueError('此成片尚无可编辑工程，请下载制作工程')
 
 def read_json(path,default=None):
@@ -130,7 +130,7 @@ def catalog(root):
             a=artifact(root,video.with_name(video.stem+suffix),label)
             if a:assets.append(a)
         identifier=film_id(root,video)
-        editable=editor_path(root,identifier).exists() or ('嘉定园区-这栋楼只有一个业主' in video.name and (root/'work/park-fusion/src/script07-data.json').exists()) or ('最终选定' in video.name and (root/'engine/default-config.json').exists())
+        editable=editor_path(root,identifier).exists() or ('嘉定项目-这栋楼只有一个业主' in video.name and (root/'work/park-fusion/src/script07-data.json').exists()) or ('最终选定' in video.name and (root/'engine/default-config.json').exists())
         records.append({'id':identifier,'title':metadata.get('title') or video.stem,'created':video.stat().st_mtime,
             'durationSeconds':metadata.get('durationSeconds'),'fps':metadata.get('fps',30),
             'resolution':metadata.get('resolution') or ([meta['width'],meta['height']] if meta.get('width') else None),

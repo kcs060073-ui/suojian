@@ -17,7 +17,7 @@ export const BOARD_LANES = Object.freeze([
 
 export const ROUTE_LABELS = Object.freeze({
   digital_human: "数字人混剪",
-  park_video: "园区宣传片",
+  park_video: "项目宣传片",
   ad_mix: "信息流广告混剪",
 });
 

@@ -52,9 +52,9 @@ if ($Remove) {
     if ($existingTask) {
         Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-        Write-Output "CUTROOM autostart task removed."
+        Write-Output "SuoJian autostart task removed."
     } else {
-        Write-Output "CUTROOM autostart task does not exist."
+        Write-Output "SuoJian autostart task does not exist."
     }
     exit 0
 }
@@ -63,13 +63,13 @@ if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
     throw "Python environment not found: $python"
 }
 if (-not (Test-Path -LiteralPath $supervisor -PathType Leaf)) {
-    throw "CUTROOM supervisor not found: $supervisor"
+    throw "SuoJian supervisor not found: $supervisor"
 }
 if (-not (Test-Path -LiteralPath (Join-Path $projectRoot "workbench\server.py") -PathType Leaf)) {
-    throw "Not a CUTROOM project root: $projectRoot"
+    throw "Not a SuoJian project root: $projectRoot"
 }
 
-# Existing listeners are never killed by this installer, even when their page says CUTROOM.
+# Existing listeners are never killed by this installer, even when their page says SuoJian.
 $listener = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
 if ($listener) {
     Push-Location $projectRoot
@@ -90,15 +90,15 @@ $trigger = New-ScheduledTaskTrigger -AtLogOn -User $identity
 $principal = New-ScheduledTaskPrincipal -UserId $identity -LogonType Interactive -RunLevel Limited
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -RestartCount 99 -RestartInterval (New-TimeSpan -Minutes 1) -MultipleInstances IgnoreNew -ExecutionTimeLimit ([TimeSpan]::Zero)
 
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Start CUTROOM locally at 127.0.0.1:8765 after logon" -Force | Out-Null
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Start SuoJian locally at 127.0.0.1:8765 after logon" -Force | Out-Null
 Start-ScheduledTask -TaskName $taskName
 
 Push-Location $projectRoot
 try {
     & $python -m workbench.local_entrypoint --db $database --port $port --wait 30 | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        throw "CUTROOM task was created, but the correct service did not become ready within 30 seconds."
+        throw "SuoJian task was created, but the correct service did not become ready within 30 seconds."
     }
 } finally { Pop-Location }
 
-Write-Output "CUTROOM autostart installed. Double-click 启动CUTROOM.bat to open the authorized workbench."
+Write-Output "SuoJian autostart installed. Double-click 启动CUTROOM.bat to open the authorized workbench."

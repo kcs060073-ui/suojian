@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CUTROOM 使用手册</title>
+  <title>剪辑工作台 使用手册</title>
   <style>
     :root { color-scheme: light dark; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
     * { box-sizing: border-box; }
@@ -32,7 +32,7 @@
 </head>
 <body>
   <header>
-    <strong>CUTROOM</strong>
+    <strong>剪辑工作台</strong>
     <span>同事视频工作台使用手册</span>
     <a href="/">返回工作台</a>
   </header>
@@ -52,14 +52,14 @@
     </nav>
     <article>
       <section id="status">
-        <h1>CUTROOM 使用手册</h1>
+        <h1>剪辑工作台 使用手册</h1>
         <p>固定入口：<code>http://127.0.0.1:8765/</code>。关闭浏览器不会取消后台任务；重新打开后从 SQLite 任务账本恢复。</p>
         <table>
           <thead><tr><th>路线</th><th>当前状态</th><th>说明</th></tr></thead>
           <tbody>
             <tr><td>数字人混剪</td><td class="ok">已开放</td><td>底层曾完成真实样片闭环；新版工作台仍需完成一次从创建到发布包的实操复验。</td></tr>
             <tr><td>信息流广告混剪</td><td class="pending">已开放，待真实首片</td><td>必须先配置文案策划和配音模型，并为每句准备真实画面。</td></tr>
-            <tr><td>园区宣传片</td><td class="pending">后续开放</td><td>当前不要创建或承诺该路线。</td></tr>
+            <tr><td>项目宣传片</td><td class="pending">后续开放</td><td>当前不要创建或承诺该路线。</td></tr>
           </tbody>
         </table>
       </section>
@@ -79,19 +79,19 @@
       <section id="agent-mode">
         <h2>独立模式与 Agent 模式</h2>
         <ul>
-          <li>独立模式：CUTROOM 自己调用已配置的文案/分镜模型。</li>
-          <li>Agent 模式：当前 Codex、WorkBuddy 或豆包工作模型完成文案与分镜；CUTROOM 不调用文本模型。</li>
-          <li>两种模式：豆包 TTS、Seedance 等生产服务仍使用 CUTROOM 各自凭据。</li>
+          <li>独立模式：剪辑工作台 自己调用已配置的文案/分镜模型。</li>
+          <li>Agent 模式：当前 Codex、WorkBuddy 或豆包工作模型完成文案与分镜；剪辑工作台 不调用文本模型。</li>
+          <li>两种模式：豆包 TTS、Seedance 等生产服务仍使用 剪辑工作台 各自凭据。</li>
         </ul>
-        <p>新建任务时选择规划方式。Agent 模式进入分镜阶段后会显示“等待 Agent 提交规划”，请回到当前使用的 Agent 继续；四个人工门禁仍只能在 CUTROOM 页面确认。</p>
+        <p>新建任务时选择规划方式。Agent 模式进入分镜阶段后会显示“等待 Agent 提交规划”，请回到当前使用的 Agent 继续；四个人工门禁仍只能在 剪辑工作台 页面确认。</p>
         <h3>WorkBuddy</h3>
-        <p>WorkBuddy 使用本地 stdio，不填写 URL 或 Authorization。安装 CUTROOM MCP 后，还要在连接器管理页找到 <code>cutroom</code>，点击“信任”并启用，再重启 WorkBuddy 或新建会话；只写入配置不会让旧会话自动获得工具。</p>
+        <p>WorkBuddy 使用本地 stdio，不填写 URL 或 Authorization。安装 剪辑工作台 MCP 后，还要在连接器管理页找到 <code>cutroom</code>，点击“信任”并启用，再重启 WorkBuddy 或新建会话；只写入配置不会让旧会话自动获得工具。</p>
         <h3>豆包工作</h3>
-        <p>豆包工作使用本机 HTTP。先在 CUTROOM 目录运行 <code>scripts\start-doubao-work-mcp.ps1</code> 并保持窗口开启，再在第二个 PowerShell 窗口运行 <code>scripts\show-doubao-work-mcp-config.ps1</code>。在“插件 · 技能 · 伙伴 → 新建自定义连接器”中选择 HTTP，填写 <code>http://127.0.0.1:8766/mcp</code>，并添加名称为 <code>Authorization</code> 的 Header。</p>
+        <p>豆包工作使用本机 HTTP。先在 剪辑工作台 目录运行 <code>scripts\start-doubao-work-mcp.ps1</code> 并保持窗口开启，再在第二个 PowerShell 窗口运行 <code>scripts\show-doubao-work-mcp-config.ps1</code>。在“插件 · 技能 · 伙伴 → 新建自定义连接器”中选择 HTTP，填写 <code>http://127.0.0.1:8766/mcp</code>，并添加名称为 <code>Authorization</code> 的 Header。</p>
         <div class="notice">Authorization 的完整值以 <code>Bearer </code> 开头，相当于本机连接密码。不要截图、分享或写入文档；若已经泄露，应删除 <code>runtime\mcp\doubao-work.token</code>、重启服务并更新连接器。</div>
         <h3>怎样验证</h3>
         <p>调用 <code>cutroom_get_system_status</code>。Codex、WorkBuddy、豆包工作应分别返回对应的 <code>clientId</code>；<code>mcpToolCount = 12</code> 是完整 MCP 工具数，<code>allowedTaskActionCount = 4</code> 只是一个动作工具允许启动的四种动作。旧字段 <code>agentActions</code> 也表示动作，不是工具总数。</p>
-        <p>Agent 返回的任务地址形如 <code>http://127.0.0.1:8765/#/tasks/&lt;task-id&gt;</code>，需要先保持当前工作台会话可用。关闭某个客户端的 MCP 不会删除 CUTROOM 和现有任务。</p>
+        <p>Agent 返回的任务地址形如 <code>http://127.0.0.1:8765/#/tasks/&lt;task-id&gt;</code>，需要先保持当前工作台会话可用。关闭某个客户端的 MCP 不会删除 剪辑工作台 和现有任务。</p>
       </section>
 
       <section id="models" data-manual-section="model-settings">
@@ -117,10 +117,10 @@
           <li><b>通用补充素材：</b>跨项目可复用的城市空镜、办公、交通、科技等画面。</li>
         </ul>
         <h3>使用前先做最小归类</h3>
-        <p>素材根目录和盘符都由同事自行选择，CUTROOM 不要求固定路径。先由人工把园区专属素材按“一个园区一个目录”分开，并把可跨项目复用的素材放入独立的通用目录；暂时分不清的素材可放入 <code>99_待整理</code>。不需要逐个重命名视频，也不必一次整理完全部旧素材。</p>
-        <p>系统负责扫描、建立索引、搜索和候选匹配，但不会自动移动、重命名或重新整理原片，也不应只依赖 AI 判断素材属于哪个园区。有版权、授权或隐私疑问的素材不要放进可用于正式任务的目录。</p>
+        <p>素材根目录和盘符都由同事自行选择，剪辑工作台 不要求固定路径。先由人工把项目专属素材按“一个项目一个目录”分开，并把可跨项目复用的素材放入独立的通用目录；暂时分不清的素材可放入 <code>99_待整理</code>。不需要逐个重命名视频，也不必一次整理完全部旧素材。</p>
+        <p>系统负责扫描、建立索引、搜索和候选匹配，但不会自动移动、重命名或重新整理原片，也不应只依赖 AI 判断素材属于哪个项目。有版权、授权或隐私疑问的素材不要放进可用于正式任务的目录。</p>
         <h3>登记和更新</h3>
-        <p>每个园区目录分别登记为本次主素材，通用目录登记为通用补充素材。新增视频放入正确目录后点击“检查更新”；移动硬盘盘符变化时使用“重新连接”，不要删除后重新建库。原片不会被复制进数据库，系统只保存索引、指纹、代理和时间码。</p>
+        <p>每个项目目录分别登记为本次主素材，通用目录登记为通用补充素材。新增视频放入正确目录后点击“检查更新”；移动硬盘盘符变化时使用“重新连接”，不要删除后重新建库。原片不会被复制进数据库，系统只保存索引、指纹、代理和时间码。</p>
       </section>
 
       <section id="packaging" data-manual-section="packaging-assets">

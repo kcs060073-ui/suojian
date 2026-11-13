@@ -1,6 +1,6 @@
-# CUTROOM 多模型与供应商配置
+# 剪辑工作台多模型与供应商配置
 
-CUTROOM 先保存供应商账号，再建立“文案策划、B-roll、配音”三类配置。文案策划统一复用到文案分析、分镜规划和包装推荐；普通使用不需要安装 New API，也不需要填写渠道 ID。豆包配音使用“服务配置 + 音色目录 + 本条视频选择”：普通同事只看中文音色名称，不填写模型 ID 或音色 ID。
+剪辑工作台先保存供应商账号，再建立“文案策划、B-roll、配音”三类配置。文案策划统一复用到文案分析、分镜规划和包装推荐；普通使用不需要安装 New API，也不需要填写渠道 ID。豆包配音使用“服务配置 + 音色目录 + 本条视频选择”：普通同事只看中文音色名称，不填写模型 ID 或音色 ID。
 
 > 当前规则：豆包 API Key用于合成、试听和连接检测，AK/SK用于自动刷新音色目录，AppID + Access Token是旧版兼容项，可以留空。保存并检测会生成极短的测试语音。
 
@@ -28,19 +28,19 @@ CUTROOM 先保存供应商账号，再建立“文案策划、B-roll、配音”
 
 ## 豆包配音首次配置
 
-“管理员”指拥有火山引擎主账号或相应 IAM 权限、能够创建访问密钥并查看豆包应用凭据的人；不一定是 CUTROOM 的开发人员。如果你本人管理火山账号，你就是这里的管理员。
+“管理员”指拥有火山引擎主账号或相应 IAM 权限、能够创建访问密钥并查看豆包应用凭据的人；不一定是剪辑工作台的开发人员。如果你本人管理火山账号，你就是这里的管理员。
 
 每台同事电脑首次使用都要由管理员在该电脑录入一次，不能从 GitHub、安装 ZIP 或另一台电脑的 SQLite 自动带过来：
 
 1. 在豆包控制台“API Key 管理”中创建或取得 **豆包 API Key**。它用于新版合成、试听和连接检测。
 2. 在火山引擎“API访问密钥”页面创建或取得 **Access Key ID** 与 **Secret Access Key**。AK/SK 用于签名调用官方 `ListSpeakers` 音色目录接口。
 3. 只有历史账号仍走旧版 V1 合成时，才展开“旧版兼容设置”填写 **AppID** 与 **Access Token**；新版账号留空。
-4. 在 CUTROOM“设置 → AI 服务连接”添加“豆包 TTS”，填写豆包 API Key、AK/SK 并选择账号已开通的语音合成 1.0 或 2.0，然后点击“保存并检测”。
+4. 在剪辑工作台“设置 → AI 服务连接”添加“豆包 TTS”，填写豆包 API Key、AK/SK 并选择账号已开通的语音合成 1.0 或 2.0，然后点击“保存并检测”。
 5. 检测通过并刷新目录后，新建配音配置，从中文名称中选择常用音色。这个常用项只负责以后新广告的预选，不会强制所有视频使用同一个声音。
 
 参考：[火山引擎 Access Key 管理](https://www.volcengine.com/docs/6291/65568?lang=zh)、[ListSpeakers OpenAPI](https://api.volcengine.com/api-docs/view?action=ListSpeakers&serviceCode=speech_saas_prod&version=2025-05-20)、[豆包语音控制台快速入门](https://www.volcengine.com/docs/6561/163043?lang=zh)。
 
-豆包 API Key、Secret Access Key 与旧版 Access Token 只保存在当前 Windows 用户的凭据管理器中。Access Key ID、旧版 AppID、服务版本和已缓存音色元数据保存在本机 SQLite；GitHub、发布 ZIP、任务快照和复制出的 SQLite 都不含密钥。换电脑后，管理员必须在新电脑重新录入所需凭据；配置完成后，同事在该电脑的 CUTROOM 中可以直接选音色和制作视频。
+豆包 API Key、Secret Access Key 与旧版 Access Token 只保存在当前 Windows 用户的凭据管理器中。Access Key ID、旧版 AppID、服务版本和已缓存音色元数据保存在本机 SQLite；GitHub、发布 ZIP、任务快照和复制出的 SQLite 都不含密钥。换电脑后，管理员必须在新电脑重新录入所需凭据；配置完成后，同事在该电脑的剪辑工作台中可以直接选音色和制作视频。
 
 ## 添加三类模型配置
 

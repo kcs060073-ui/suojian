@@ -186,7 +186,7 @@ def normalize(root, payload, previous=None):
         raise ValueError('素材列表无效')
     materials = list(dict.fromkeys(text(m, '素材位置', 2000) for m in materials if isinstance(m, str) and m.strip()))
     if not materials and workflow_mode != 'stick-narrative' and route != 'storyboard':
-        raise ValueError('请填写园区素材位置或导入素材')
+        raise ValueError('请填写项目素材位置或导入素材')
     duration = payload.get('durationSeconds')
     if duration not in (None, ''):
         if type(duration) not in (int, float) or not 5 <= duration <= 600:
@@ -265,7 +265,7 @@ class Store:
             effective = 'interrupted'
         task['effectiveStatus'] = effective
         task['statusLabel'] = STATUSES[effective]
-        task['handoff'] = f'启动园区 Vibe 任务 {identifier}，读取第 {task["revision"]} 版输入；按任务要求制作并回写结果。'
+        task['handoff'] = f'启动分镜工作台 任务 {identifier}，读取第 {task["revision"]} 版输入；按任务要求制作并回写结果。'
         task['inputFile'] = str(folder/f'input-{task["revision"]:03d}.json')
         return task
 
@@ -412,7 +412,7 @@ class Store:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='园区 Vibe 对话制作交接；不会自行启动模型或渲染')
+    parser = argparse.ArgumentParser(description='分镜工作台 对话制作交接；不会自行启动模型或渲染')
     parser.add_argument('action', choices=['list', 'show', 'progress', 'deliver'])
     parser.add_argument('id', nargs='?')
     parser.add_argument('--url', default='http://127.0.0.1:8796')

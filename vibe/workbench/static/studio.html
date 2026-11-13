@@ -9,10 +9,10 @@
  <div class="page-head"><div><h1>视频制作工作台</h1></div></div>
  <div class="task-layout"><form id="taskForm" class="form-panel">
   <div class="section-heading"><h2 id="formTitle">准备一条新视频</h2><button type="button" id="resetForm" class="text-button">新建任务</button></div>
-  <label>任务名称<input id="taskTitle" name="title" maxlength="80" required placeholder="例如：嘉定园区 · 设备搬完，多久恢复交付"></label>
+  <label>任务名称<input id="taskTitle" name="title" maxlength="80" required placeholder="例如：嘉定项目 · 设备搬完，多久恢复交付"></label>
   <label>脚本或创作意图<textarea id="taskScript" name="script" rows="7" maxlength="30000" required placeholder="输入脚本或创作想法"></textarea></label><select id="creativeRoute" hidden aria-label="当前工作台路线"><option value="native">原生视觉模板</option><option value="storyboard">AI 分镜叙事</option></select>
 
-  <details class="task-routing"><summary>制作方向与参考用途 <span>可选设置</span></summary><label>业务预设<select id="businessPreset"><option value="park">园区招商</option><option value="general">通用创作</option></select></label>
+  <details class="task-routing"><summary>制作方向与参考用途 <span>可选设置</span></summary><label>业务预设<select id="businessPreset"><option value="park">项目招商</option><option value="general">通用创作</option></select></label>
   <label>参考素材用途<select id="referenceRole"><option value="style">美术风格参考</option><option value="scene">场景构图参考</option><option value="evidence">真实业务证据</option></select></label>
   <p class="hint">可在下方导入参考图片并在特殊要求中说明；画面与业务事实需要人工核实。</p>
   <label>画面表达<select id="workflowMode"><option value="standard">按内容选择</option><option value="stick-narrative">简笔画叙事</option><option value="live-action">实景招商</option><option value="mixed">混合表达</option></select></label>

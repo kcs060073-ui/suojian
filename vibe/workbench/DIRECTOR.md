@@ -6,7 +6,7 @@
 
 首页 `/` 是“准备任务 → 对话明确启动 → 影片与版本”；原工具保留在 `/advanced#edit`。这里的任务与旧“一句话导演”的配置修改计划是两种对象。保存任务不会自动运行模型、配音或渲染。不要把两种入口重复执行。
 
-用户明确说“启动园区 Vibe 任务 V…”后：
+用户明确说“启动分镜工作台任务 V…”后：
 
 1. `python -B -m workbench.production show V实际编号` 读取当前输入、`revision`、`inputHash`、`inputFile` 和历史版本；任务根目录以 API 返回为准，不能假设当前 checkout 就是运行目录。
 2. 将 `executor: dialogue`、`expectedRevision`、`inputHash`、`status`、`note` 写到本机临时 JSON，然后 `python -B -m workbench.production progress V实际编号 --file work/进度.json`。状态可用 `checking`、`planning`、`previewing`、`rendering`、`needs_user`、`failed`、`interrupted`；不能用网页保存代表启动，也不能提前写完成。

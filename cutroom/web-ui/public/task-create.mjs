@@ -25,8 +25,8 @@ export const ROUTE_OPTIONS = Object.freeze([
   },
   {
     key: "park_video",
-    label: "园区宣传片",
-    description: "从园区实拍素材中选镜头并组织解说。",
+    label: "项目宣传片",
+    description: "从项目实拍素材中选镜头并组织解说。",
     available: false,
   },
 ]);

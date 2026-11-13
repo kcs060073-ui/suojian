@@ -10,10 +10,10 @@ $pythonPath = [System.IO.Path]::GetFullPath((Join-Path $projectRoot ".venv\Scrip
 $serverPath = [System.IO.Path]::GetFullPath((Join-Path $projectRoot "scripts\cutroom_mcp.py"))
 
 if (-not (Test-Path -LiteralPath $pythonPath -PathType Leaf)) {
-    throw "CUTROOM Python environment was not found: $pythonPath"
+    throw "SuoJian Python environment was not found: $pythonPath"
 }
 if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
-    throw "CUTROOM MCP entry point was not found: $serverPath"
+    throw "SuoJian MCP entry point was not found: $serverPath"
 }
 
 $tokenDirectory = Join-Path $projectRoot "runtime\mcp"
@@ -48,8 +48,8 @@ $arguments = @(
     "--port", "8766"
 )
 
-Write-Host "[CUTROOM] Doubao Work MCP: http://127.0.0.1:8766/mcp"
+Write-Host "[SuoJian] Doubao Work MCP: http://127.0.0.1:8766/mcp"
 Write-Host "Run scripts\show-doubao-work-mcp-config.ps1 in another window to view the connector fields."
-Write-Host "Keep this window open while Doubao Work uses CUTROOM. Press Ctrl+C to stop."
+Write-Host "Keep this window open while Doubao Work uses SuoJian. Press Ctrl+C to stop."
 & $pythonPath @arguments
 exit $LASTEXITCODE

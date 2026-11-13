@@ -169,7 +169,7 @@ class DiagnosticLog:
         return result.getvalue()
 
 def main():
-    parser=argparse.ArgumentParser(description='导出 CUTROOM 报错日志（无业务内容）')
+    parser=argparse.ArgumentParser(description='导出 剪辑工作台 报错日志（无业务内容）')
     parser.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1])
     parser.add_argument('--export',type=Path)
     args=parser.parse_args();log=DiagnosticLog(args.root)

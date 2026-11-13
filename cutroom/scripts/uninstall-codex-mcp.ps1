@@ -35,7 +35,7 @@ function Write-AtomicUtf8([string]$Path, [string]$Text) {
 }
 
 if (-not (Test-Path -LiteralPath $targetPath -PathType Leaf)) {
-    Write-Output "[CUTROOM] Codex config was not found; nothing to remove: $targetPath"
+    Write-Output "[SuoJian] Codex config was not found; nothing to remove: $targetPath"
     exit 0
 }
 
@@ -57,15 +57,15 @@ if ($extension -eq ".json") {
 }
 
 if (-not $changed) {
-    Write-Output "[CUTROOM] No 'cutroom' MCP server entry was found."
+    Write-Output "[SuoJian] No 'cutroom' MCP server entry was found."
     exit 0
 }
 if ($DryRun) {
-    Write-Output "[CUTROOM] DryRun: only the 'cutroom' MCP entry would be removed; CUTROOM data and credentials stay untouched."
+    Write-Output "[SuoJian] DryRun: only the 'cutroom' MCP entry would be removed; SuoJian data and credentials stay untouched."
     Write-Output "Target config: $targetPath"
     exit 0
 }
 
 Write-AtomicUtf8 $targetPath $proposed
-Write-Output "[CUTROOM] Removed only the Codex MCP server entry 'cutroom'."
-Write-Output "CUTROOM, tasks, model profiles, and credentials were not changed."
+Write-Output "[SuoJian] Removed only the Codex MCP server entry 'cutroom'."
+Write-Output "SuoJian, tasks, model profiles, and credentials were not changed."

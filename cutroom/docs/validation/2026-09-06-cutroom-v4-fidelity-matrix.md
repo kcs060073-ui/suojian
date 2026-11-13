@@ -1,4 +1,4 @@
-# CUTROOM V4 原型一致性矩阵
+# 剪辑工作台 V4 原型一致性矩阵
 
 状态：Task 11–13 的适用页面与状态已完成实际视觉检查；Task 15 已接入并实际播放真实候选，完整观看后的批准状态和新任务完整纵切仍待 Checkpoint B。更新日期：2026-09-08。
 
@@ -7,7 +7,7 @@
 | 页面/状态 | Task | 检查重点 | 原型截图 | 产品截图 | 实现版本/观察/差异 | 结论 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 外壳＋任务看板/列表，明亮/暗色/跟随系统 | 11，先验代表页 | 三栏、尺寸、导航、卡片、主题、折叠 | runtime/workbench/acceptance/fidelity/task11-v4-board-light-1536x864.png；task11-v4-list-light-1536x864.png；task11-v4-board-dark-collapsed-1536x864.png | runtime/workbench/acceptance/fidelity/task11-product-board-light-1536x864.png；task11-product-list-light-1536x864.png；task11-product-board-dark-collapsed-1536x864.png | 1536×864、100% 实际查看。V4 的 app/top/shell/rail/taskboard/kanban/listview/theme 结构迁入 index.html＋styles.css，app.mjs/state.mjs 只替换真实任务投影和偏好。1480px 外壳、82/242/主区、五列、任务快速列表及明暗令牌一致；正式版按计划增加真实重任务状态并移除反馈投票。发现 V4 折叠写法会令主区落入 242px 列，已修为 242px＋主区并补回归测试；此项属于可用性缺陷修复。 | 通过 |
-| 创建与预检，齐全/缺输入 | 4/12 | 字段顺序、主通用目录、预检及主动作 | runtime/workbench/acceptance/fidelity/task12-v4-create-light-1536x864.png；task12-v4-preflight-light-1536x864.png | runtime/workbench/acceptance/fidelity/task12-create-real-light-1536x864.png；task12-preflight-pending-real-light-1536x864.png；task12-preflight-missing-real-light-1536x864.png | 1536×864、100% 实际查看。路线→子类型→禅镜 MP4→最终文案→主目录→通用目录→用途/时长→预检顺序保留；园区/信息流诚实禁用。真实工具探测约需数十秒，首轮发现无等待反馈及步骤条仍停在第 1 步；已补“正在检查本机环境”、禁止重复提交与第 3 步高亮。缺输入返回 11 项实际检查，创建按钮禁用。 | 通过 |
+| 创建与预检，齐全/缺输入 | 4/12 | 字段顺序、主通用目录、预检及主动作 | runtime/workbench/acceptance/fidelity/task12-v4-create-light-1536x864.png；task12-v4-preflight-light-1536x864.png | runtime/workbench/acceptance/fidelity/task12-create-real-light-1536x864.png；task12-preflight-pending-real-light-1536x864.png；task12-preflight-missing-real-light-1536x864.png | 1536×864、100% 实际查看。路线→子类型→禅镜 MP4→最终文案→主目录→通用目录→用途/时长→预检顺序保留；项目/信息流诚实禁用。真实工具探测约需数十秒，首轮发现无等待反馈及步骤条仍停在第 1 步；已补“正在检查本机环境”、禁止重复提交与第 3 步高亮。缺输入返回 11 项实际检查，创建按钮禁用。 | 通过 |
 | 文案与分镜，未锁定/锁定/候选 | 2/13 | 十二步、下一动作、候选采用与拒绝 | runtime/workbench/acceptance/fidelity/task12-v4-preflight-light-1536x864.png；task13-v4-rough-light-1536x864.png | runtime/workbench/acceptance/fidelity/task13-storyboard-light-1536x864.png | V4 没有独立的 AI 分镜页，而是在预检后模拟跳到粗剪；正式版按已确认十二步合同补出真实 AI 分镜阶段。实际查看显示当前动作、已完成门禁、下一步、主/通用范围，以及通用文本模型的输入、影响和费用；按钮只入持久队列，不伪造候选。候选产出由 Task 14 handler 接入；逐镜头采用、替换或删除在粗剪工作区完成。 | Task 13 交互通过；真实候选待 Task 14 |
 | 粗剪及右侧面板，真实素材预览/选择/拆分/撤销/重做 | 5/13 | 时间线、对象信息、真实图片/视频、候选预览、连续播放、锁定门禁、真实状态恢复 | 原 V4 色块截图仅作布局参考，不再作为功能验收证据 | [真实主预览与时间线](./evidence/rough-cut-real-media/actual-task-after-edit.png)；[91 个真实候选素材](./evidence/rough-cut-real-media/actual-candidate-gallery.png)；[离线素材与锁定阻断](./evidence/rough-cut-real-media/offline-lock-button.png)；[专项验收报告](./2026-09-20-rough-cut-real-media-acceptance.md) | 2026-09-20 撤回旧色块实现的“通过”结论。当前页面已显示任务实际素材；候选点选仅预览，确认后才写入；替换、排序、5 秒播放头拆分和画面锁定已在隔离的 9 镜头/91 候选真实任务上落账。图片不显示无效裁剪；视频片段裁剪由浏览器及后端回归覆盖。离线副本明确指出第 1 镜头并同时由前后端拒绝锁定，恢复后解除。 | 粗剪真实素材与锁定门禁通过；该遗留任务缺包装方案和配音资产，未计入最终成片端到端验收 |
 | 镜头素材库，正常/空/离线 | 3/12 | 目录分类、来源、更新及恢复入口 | runtime/workbench/acceptance/fidelity/task12-v4-library-light-1536x864.png | runtime/workbench/acceptance/fidelity/task12-library-real-light-1536x864.png；task12-library-normal-offline-real-light-1536x864.png；task12-library-empty-real-light-1536x864.png | 使用隔离 SQLite 实际查看主素材、通用补充、在线、离线及空账本。目录、素材数、最后同步、用途、登记目录和检查更新均来自真实 API；离线目录仍保留，不显示为已删除。 | 通过 |
@@ -17,7 +17,7 @@
 | 完整审片与发布包，未看完/看完/新版本 | 8/13/15 | 播放布局、审批状态与发布入口 | runtime/workbench/acceptance/fidelity/task13-v4-review-light-1536x864.png；task13-v4-publish-light-1536x864.png | runtime/workbench/acceptance/fidelity/task13-review-light-1536x864.png；task13-publish-light-1536x864.png；task15-review-pending-real-1536x864.png；task15-review-check-1536x864.png | 1536×864 实际查看候选、QA、观看与发布状态。Task 15 已用受控媒体接口加载真实 69.88 秒成片，浏览器 `readyState=4` 且无媒体错误；Range、当前 QA 候选签名和客户端断开均由服务端处理。任务详情只恢复与当前 QA 快照匹配的观看会话，确认按钮服从服务端 `can_approve`，新候选不会沿用旧观看。当前尚无人工完整观看会话，旧审批和旧发布记录不会放行当前阶段。 | 真实播放接入通过；完整观看后状态与新发布包待 Checkpoint B |
 | 窄屏与键盘焦点 | 11–13 | 无遮挡/横向溢出，焦点和操作可达 | runtime/workbench/acceptance/fidelity/task13-v4-rough-narrow-760x1000.png | runtime/workbench/acceptance/fidelity/task13-rough-narrow-760x1000.png | 760×1000、100% 实际查看。一级导航改为顶部四项，十二步变为两列，工作区与右栏纵向排列，时间线局部横向滚动且页面无整体横向溢出；按钮保持语义元素并有 focus-visible 样式。 | 通过 |
 
-允许差异：真实数据替换示例数据；原型模拟提示替换真实 API 反馈；园区/信息流、付费视频生成按 Phase 1 已定范围诚实禁用。其他布局、文案、交互或功能删减需记录具体依据。
+允许差异：真实数据替换示例数据；原型模拟提示替换真实 API 反馈；项目/信息流、付费视频生成按 Phase 1 已定范围诚实禁用。其他布局、文案、交互或功能删减需记录具体依据。
 
 ## 代表页面门禁
 

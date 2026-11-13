@@ -1,4 +1,4 @@
-"""Map a reviewed DraftBlueprint into a path-based Cutroom execution job."""
+"""Map a reviewed DraftBlueprint into a path-based 剪辑工作台 execution job."""
 
 from __future__ import annotations
 
@@ -56,13 +56,13 @@ def make_cutroom_job(reference: dict, draft: dict, video_path: str | Path, *, jo
 def make_ad_task_request(draft: dict, *, title: str, purpose: str,
                          primary_library_id: str, aspect_ratio: str = "9:16",
                          selected_generic_ids: list[str] | None = None) -> dict:
-    """Build Cutroom's actual Agent ad-task input, never a guessed TTS call.
+    """Build 剪辑工作台's actual Agent ad-task input, never a guessed TTS call.
 
-    The library ID must be chosen from Cutroom's own catalog. Preflight is
+    The library ID must be chosen from 剪辑工作台's own catalog. Preflight is
     required before creation, and all paid actions remain user-gated there.
     """
     if aspect_ratio not in {"9:16", "16:9"}:
-        raise ValueError("Cutroom 广告路线只支持 9:16 或 16:9。")
+        raise ValueError("剪辑工作台 广告路线只支持 9:16 或 16:9。")
     timeline = draft.get("timeline") or []
     script = draft.get("script", {}).get("text", "").strip()
     if not script:
@@ -70,7 +70,7 @@ def make_ad_task_request(draft: dict, *, title: str, purpose: str,
     if not script or not timeline:
         raise ValueError("需要先确认有文字脚本和时间线的 DraftBlueprint。")
     if not primary_library_id:
-        raise ValueError("需要选择 Cutroom 中有效的任务素材库 ID。")
+        raise ValueError("需要选择 剪辑工作台 中有效的任务素材库 ID。")
     duration = max(float((item.get("time") or {}).get("start", 0)) +
                    float((item.get("time") or {}).get("duration", 0)) for item in timeline)
     return {
@@ -85,9 +85,9 @@ def make_ad_task_request(draft: dict, *, title: str, purpose: str,
 
 def make_ad_storyboard(draft: dict, locked_script: str, aspect_ratio: str,
                        visual_guidance: list[dict] | None = None) -> dict:
-    """Map reviewed slots to Cutroom's ad_storyboard content schema.
+    """Map reviewed slots to 剪辑工作台's ad_storyboard content schema.
 
-    Cutroom requires exact coverage of its *locked* script. If the two scripts
+    剪辑工作台 requires exact coverage of its *locked* script. If the two scripts
     differ, stop instead of silently losing words or changing the user's copy.
     """
     timeline = draft.get("timeline") or []
@@ -103,5 +103,5 @@ def make_ad_storyboard(draft: dict, locked_script: str, aspect_ratio: str,
                              "prompt": guidance.get("prompt", text)})
     compact = lambda value: "".join(str(value).split())
     if not segments or compact("".join(s["text"] for s in segments)) != compact(locked_script):
-        raise ValueError("溯剪字幕与 Cutroom 已锁定脚本不一致；请先在两边确认同一版文案。")
+        raise ValueError("溯剪字幕与 剪辑工作台 已锁定脚本不一致；请先在两边确认同一版文案。")
     return {"plan": {"ratio": aspect_ratio, "segments": segments}}

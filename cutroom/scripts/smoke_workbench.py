@@ -1,4 +1,4 @@
-"""Black-box smoke checks for the local CUTROOM workbench."""
+"""Black-box smoke checks for the local 剪辑工作台 workbench."""
 
 from __future__ import annotations
 
@@ -196,7 +196,7 @@ class SmokeClient:
         except HTTPError as error:
             return error.code, dict(error.headers.items()), error.read()
         except URLError as error:
-            raise SmokeFailure(f"无法连接 CUTROOM：{error.reason}") from error
+            raise SmokeFailure(f"无法连接 剪辑工作台：{error.reason}") from error
         with response:
             return response.status, dict(response.headers.items()), response.read()
 
@@ -237,8 +237,8 @@ def run_smoke(base_url: str, task_id: str, startup_key: str | None = None) -> di
     observed_payloads: list[dict] = []
 
     status, _headers, page = client.request("GET", "/")
-    if status != 200 or b"<title>CUTROOM" not in page:
-        raise SmokeFailure("固定入口没有返回 CUTROOM 正式页面")
+    if status != 200 or b'<title>\xe5\x89\xaa\xe8\xbe\x91\xe5\xb7\xa5\xe4\xbd\x9c\xe5\x8f\xb0' not in page:
+        raise SmokeFailure("固定入口没有返回 剪辑工作台 正式页面")
 
     if startup_key:
         login_path = "/auth/bootstrap?" + urlencode({"key": startup_key})
@@ -345,7 +345,7 @@ def run_smoke(base_url: str, task_id: str, startup_key: str | None = None) -> di
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="验证 CUTROOM 真实纵切")
+    parser = argparse.ArgumentParser(description="验证 剪辑工作台 真实纵切")
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--task", required=True)
     parser.add_argument(

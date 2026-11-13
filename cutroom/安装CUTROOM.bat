@@ -10,5 +10,5 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
-echo CUTROOM 已安装完成。
+echo 剪辑工作台 已安装完成。
 pause

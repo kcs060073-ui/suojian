@@ -338,7 +338,7 @@ class WorkbenchServerTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertTrue(headers["Content-Type"].startswith("text/html"))
         page = body.decode("utf-8")
-        self.assertIn("<title>CUTROOM 使用手册</title>", page)
+        self.assertIn("<title>剪辑工作台 使用手册</title>", page)
         self.assertIn('data-manual-section="model-settings"', page)
         self.assertIn('data-manual-section="packaging-assets"', page)
         self.assertIn('data-manual-section="video-workflows"', page)

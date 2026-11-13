@@ -917,7 +917,7 @@ function renderBriefStoryboard(detail, primary, inspector, view) {
     waiting.append(
       element("b", null, storyboardAction.label),
       element("p", null, "任务 ID：" + (storyboardAction.taskId || "读取中")),
-      element("p", null, "请回到 Codex，让当前 Agent 提交文案与分镜规划；CUTROOM 不会调用自己的文案模型。"),
+      element("p", null, "请回到 Codex，让当前 Agent 提交文案与分镜规划；剪辑工作台 不会调用自己的文案模型。"),
     );
     actionRow.append(waiting);
   }
@@ -926,8 +926,8 @@ function renderBriefStoryboard(detail, primary, inspector, view) {
     "规划来源",
     storyboardAction.sourceLabel,
     storyboardAction.allowPaidTextRecommendation
-      ? "CUTROOM 使用本任务冻结的规划模型生成候选。"
-      : "文案与分镜由当前 Agent 提交，CUTROOM 只校验和执行。",
+      ? "剪辑工作台 使用本任务冻结的规划模型生成候选。"
+      : "文案与分镜由当前 Agent 提交，剪辑工作台 只校验和执行。",
   ));
   if (storyboardAction.allowPaidTextRecommendation) {
     inspector.append(renderAiDisclosure(stage === "ai_storyboard" ? "recommend_storyboard" : "transcribe"));
@@ -2445,7 +2445,7 @@ function renderPublish(detail, primary, inspector, view) {
     const tags = document.createElement("input");
     tags.className = "field";
     tags.name = "tags";
-    tags.placeholder = "招商，产业，园区";
+    tags.placeholder = "招商，产业，项目";
     const tagField = labeledField("发布标签", tags, "wide");
     tagField.append(element("small", "field-help", "使用逗号或中文逗号分隔，重复标签会自动合并。"));
     fields.append(
@@ -2796,7 +2796,7 @@ async function openTask(taskId) {
     const orchestrationBadge = root.querySelector("#task-orchestration-mode");
     orchestrationBadge.textContent = orchestrationMode === "agent"
       ? "当前 Agent 规划"
-      : "CUTROOM 自己规划";
+      : "剪辑工作台 自己规划";
     orchestrationBadge.classList.toggle("agent", orchestrationMode === "agent");
     const frozenModels = (detail.modelBindings || [])
       .map((item) => item.displayName + "（" + item.model + "）")
@@ -2998,7 +2998,7 @@ function renderCreateLibraries() {
   const primary = root.querySelector("#primary-library");
   const placeholder = document.createElement("option");
   placeholder.value = "";
-  placeholder.textContent = groups.primary.length ? "请选择本次园区/项目素材目录" : "请先到镜头素材库登记主素材目录";
+  placeholder.textContent = groups.primary.length ? "请选择本次项目/项目素材目录" : "请先到镜头素材库登记主素材目录";
   primary.replaceChildren(placeholder, ...groups.primary.map((library) => {
     const option = document.createElement("option");
     option.value = library.libraryId;
@@ -3242,7 +3242,7 @@ function renderLibraries() {
   const groups = groupShotLibraries(visible);
   const container = root.querySelector("#library-groups");
   const sections = [
-    ["本次主素材目录", "每条任务必须明确选择一个园区或项目专属目录。", groups.primary],
+    ["本次主素材目录", "每条任务必须明确选择一个项目专属目录。", groups.primary],
     ["通用补充目录", "主目录素材不足时可自动补充，也可在创建任务时指定。", groups.generic],
   ];
   container.replaceChildren(...sections.map(([title, description, items]) => {

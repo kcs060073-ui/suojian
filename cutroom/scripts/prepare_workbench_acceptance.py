@@ -121,7 +121,7 @@ def backup_acceptance_database(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="从只读真实验收库创建 CUTROOM 工作台验收副本"
+        description="从只读真实验收库创建 剪辑工作台 工作台验收副本"
     )
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--destination", type=Path, default=DEFAULT_DESTINATION)

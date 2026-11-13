@@ -111,10 +111,10 @@ assets-local/                        # 每位用户自行扩充，Git忽略
 ```json
 {
   "asset_id": "voice_park_female_01",
-  "display_name": "园区专业女声",
+  "display_name": "项目专业女声",
   "provider": "volcengine",
   "provider_voice_id": "xxx",
-  "suitable_for": ["园区介绍", "招商政策"],
+  "suitable_for": ["项目介绍", "招商政策"],
   "styles": ["稳重", "专业"],
   "speed": 1.0,
   "sample": "voice-profiles/samples/park_female_01.mp3",
@@ -158,7 +158,7 @@ npm run assets:catalog
 
 - 播放AI音色、BGM和音效试听。
 - 查看字幕动画、文字卡、贴纸、花字、LOGO、水印和CTA预览。
-- 按园区、城市、财税、稳重、科技、节奏和资产来源筛选。
+- 按项目、城市、财税、稳重、科技、节奏和资产来源筛选。
 - 查看授权、适用范围、本机可用状态和备用资产。
 - 复制资产ID，并区分团队核心、团队扩展和本地资产。
 

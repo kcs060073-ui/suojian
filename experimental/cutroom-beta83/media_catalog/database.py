@@ -17,7 +17,7 @@ class UnsupportedSchemaVersionError(RuntimeError):
         super().__init__(
             f"数据库版本 {', '.join(map(str, self.unsupported_versions))} "
             f"当前程序不支持（本程序最高支持版本 {self.supported_max_version}）。"
-            "请使用相应新版 CUTROOM，或联系维护人员从匹配备份恢复；请勿重置数据库。"
+            "请使用相应新版 剪辑工作台，或联系维护人员从匹配备份恢复；请勿重置数据库。"
         )
 
 

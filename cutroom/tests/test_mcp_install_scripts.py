@@ -320,9 +320,9 @@ command = "other.exe"
             "docs/operations/media-catalog-agent-contract.md",
         ))
         for phrase in (
-            "独立模式：CUTROOM 自己调用已配置的文案/分镜模型",
+            "独立模式：剪辑工作台 自己调用已配置的文案/分镜模型",
             "Agent 模式：当前 Codex 模型完成文案与分镜",
-            "豆包 TTS、Seedance 等生产服务仍使用 CUTROOM 各自凭据",
+            "豆包 TTS、Seedance 等生产服务仍使用 剪辑工作台 各自凭据",
             "只移除 Codex 中的 cutroom 服务项",
             "http://127.0.0.1:8765/#/tasks/<task-id>",
             "四个人工门禁",

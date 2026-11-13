@@ -198,7 +198,7 @@ def _safe_upstream_error(error: BaseException) -> VoiceCatalogError:
     if error_code(payload) == "InvalidParameter":
         return VoiceCatalogError(
             "VOICE_CATALOG_INVALID_PARAMETER",
-            "音色目录请求参数不兼容，请更新 CUTROOM 后重试。",
+            "音色目录请求参数不兼容，请更新 剪辑工作台 后重试。",
         )
     if status in {401, 403} or "unauthorized" in name or "forbidden" in name:
         return VoiceCatalogError(

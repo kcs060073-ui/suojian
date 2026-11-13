@@ -1,1 +1,1 @@
-"""Optional local MCP adapter for CUTROOM."""
+"""Optional local MCP adapter for 剪辑工作台."""

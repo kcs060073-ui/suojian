@@ -1,6 +1,6 @@
-"""Local compatibility adapter for domain operations not exposed by Cutroom MCP.
+"""Local compatibility adapter for domain operations not exposed by 剪辑工作台 MCP.
 
-Executed with Cutroom's interpreter. No source copying, SQL writes, credentials,
+Executed with 剪辑工作台's interpreter. No source copying, SQL writes, credentials,
 provider reconfiguration or manufactured watch/review evidence.
 """
 from __future__ import annotations
@@ -138,7 +138,7 @@ def dispatch(root, db, op, args):
         return {k: tested.get(k) for k in ("profileId", "availabilityStatus", "lastCheckedAt", "verificationLevel")}
     task_id = str(args.get("task_id", ""))
     if not re.fullmatch(r"task_[0-9a-f]{32}", task_id):
-        raise ValueError("无效 Cutroom 任务编号。")
+        raise ValueError("无效 剪辑工作台 任务编号。")
     unwrap(gateway.get_task(task_id))
     if op == "packaging_options":
         return {"catalog": packaging_catalog(root, packaging), "current": current_packaging(db, task_id, packaging)}
@@ -167,7 +167,7 @@ def dispatch(root, db, op, args):
         if current["choices"] == choices and args.get("refresh_preview") is not True:
             return {**current, "reused": True}
         if args.get("expected_plan_id") != current["plan_id"]:
-            raise ValueError("Cutroom 包装刚被其他操作更新，请重新读取后再修改。")
+            raise ValueError("剪辑工作台 包装刚被其他操作更新，请重新读取后再修改。")
         plan_id = packaging.clone_plan(db, current["plan_id"], task_id=task_id, plan_name="溯剪 · 自选包装")
         for slot, value in choices.items():
             if value is None:

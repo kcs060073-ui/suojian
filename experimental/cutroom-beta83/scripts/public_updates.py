@@ -1,4 +1,4 @@
-"""Anonymous reader for the one public CUTROOM release repository."""
+"""Anonymous reader for the one public 剪辑工作台 release repository."""
 import hashlib,json,re,time,uuid
 from pathlib import Path
 from urllib.parse import urlsplit,urljoin

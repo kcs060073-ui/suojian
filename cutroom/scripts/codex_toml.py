@@ -1,4 +1,4 @@
-"""Conservative CUTROOM-only TOML edits with semantic preservation checks.
+"""Conservative 剪辑工作台-only TOML edits with semantic preservation checks.
 
 The stdlib parser validates both documents. A small lexer identifies table
 boundaries without interpreting quoted keys or strings as configuration. Inline

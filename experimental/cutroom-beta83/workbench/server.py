@@ -327,7 +327,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as error:
         from .diagnostics import DiagnosticLog
         DiagnosticLog(Path(__file__).resolve().parents[1], enabled=not args.maintenance_read_only).record("startup", error=error, code="SERVER_START_FAILED")
-        print(f"CUTROOM 未启动：{error}")
+        print(f"剪辑工作台 未启动：{error}")
         return 1
     # The shipped Windows launcher reopens the existing service without a plaintext key file.
     import os

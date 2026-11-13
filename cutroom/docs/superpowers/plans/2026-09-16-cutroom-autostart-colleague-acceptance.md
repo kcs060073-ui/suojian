@@ -1,4 +1,4 @@
-# CUTROOM 自启与普通同事真实任务验收实施计划
+# 剪辑工作台自启与普通同事真实任务验收实施计划
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -15,7 +15,7 @@
 - 不执行真实 Windows 注销；以计划任务停止、服务停止、计划任务启动复现登录触发的同一 Action。
 - 不修改生产 SQLite 内容，不读取或输出任何密钥。
 - 普通同事验收必须由真实同事本人操作，不得由维护人员代填“通过”。
-- 首次验收只跑一条真实数字人混剪；园区宣传片仍不开放。
+- 首次验收只跑一条真实数字人混剪；项目宣传片仍不开放。
 
 ---
 

@@ -1,8 +1,8 @@
-# CUTROOM MCP Status Clarity Implementation Plan
+# 剪辑工作台 MCP Status Clarity Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 让 CUTROOM MCP 状态明确区分 12 个 MCP 工具与 4 个允许任务动作，并把三端连接方法写入用户可见手册。
+**Goal:** 让剪辑工作台 MCP 状态明确区分 12 个 MCP 工具与 4 个允许任务动作，并把三端连接方法写入用户可见手册。
 
 **Architecture:** MCP 服务端维护唯一工具名常量，并在成功的系统状态 payload 中注入工具清单、工具数量、允许动作清单和允许动作数量；保留旧字段兼容既有调用。普通同事手册和内置帮助承担首次连接与日常使用，维护手册保留探针、回滚和安全细节，README 提供正确入口顺序。
 

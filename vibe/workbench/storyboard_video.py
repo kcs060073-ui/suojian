@@ -1,4 +1,4 @@
-"""Optional Seedance per-shot execution using the previously verified Cutroom POC."""
+"""Optional Seedance per-shot execution using the previously verified 剪辑工作台 POC."""
 from __future__ import annotations
 import json
 import shutil

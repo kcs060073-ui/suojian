@@ -6,7 +6,7 @@ if (-not $ProjectRoot) { $ProjectRoot=[IO.Path]::GetFullPath((Join-Path $PSScrip
 function Select-InstallFolder {
     Add-Type -AssemblyName System.Windows.Forms
     $dialog=New-Object System.Windows.Forms.FolderBrowserDialog
-    $dialog.Description='选择原来安装 CUTROOM 的文件夹（包含启动CUTROOM.bat）'
+    $dialog.Description='选择原来安装 SuoJian 的文件夹（包含启动CUTROOM.bat）'
     $dialog.ShowNewFolderButton=$false
     try { if ($dialog.ShowDialog() -eq 'OK') { return $dialog.SelectedPath }; return $null } finally { $dialog.Dispose() }
 }
@@ -21,7 +21,7 @@ try {
     if (-not (Test-Path -LiteralPath $engine)) { $engine=Join-Path $PSScriptRoot 'product_update.pyc' }
     if (-not (Test-Path -LiteralPath $engine)) { throw '升级组件不完整，请重新下载。' }
     if (-not $PackagePath -and -not $Recover) {
-        Write-Host 'CUTROOM 产品更新升级' -ForegroundColor Cyan
+        Write-Host 'SuoJian 产品更新升级' -ForegroundColor Cyan
         Write-Host '1. 联网检查并下载新版（无需 GitHub 账号）'
         Write-Host '2. 选择已下载的安装 ZIP'
         Write-Host '3. 恢复上次未完成的升级'
@@ -30,8 +30,8 @@ try {
         if ($choice -eq '2') {
             Add-Type -AssemblyName System.Windows.Forms
             $dialog=New-Object System.Windows.Forms.OpenFileDialog
-            $dialog.Title='选择 CUTROOM Windows 安装 ZIP（不用解压）'
-            $dialog.Filter='CUTROOM 安装包 (*.zip)|*.zip'
+            $dialog.Title='选择 SuoJian Windows 安装 ZIP（不用解压）'
+            $dialog.Filter='SuoJian 安装包 (*.zip)|*.zip'
             try {
                 if ($dialog.ShowDialog() -ne 'OK') { Write-Host '已取消。';exit 0 }
                 $PackagePath=$dialog.FileName

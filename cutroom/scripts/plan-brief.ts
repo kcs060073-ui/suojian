@@ -165,7 +165,7 @@ interface Profile {
 
 const PROFILES: Record<string, Profile> = {
   zhaoshang: {
-    label: "招商/园区/产业",
+    label: "内容创作",
     anchorRules: `keywords 高亮目标：地点、园区/机构名、专有项目名、龙头企业名。
 
 【锚点(anchorText/query)选取要求】

@@ -256,7 +256,7 @@ STAGE_LABELS = (
 )
 ROUTES = (
     {"key": "digital_human", "label": "数字人混剪", "availability": "available"},
-    {"key": "park_video", "label": "园区宣传片", "availability": "coming_later"},
+    {"key": "park_video", "label": "项目宣传片", "availability": "coming_later"},
     {"key": "ad_mix", "label": "信息流广告混剪", "availability": "available"},
 )
 @dataclass(frozen=True)
@@ -1907,7 +1907,7 @@ class WorkbenchAPI:
                 raise ApiError(
                     409,
                     "AGENT_PLANNING_REQUIRED",
-                    "Agent 模式必须由当前 Agent 提交规划，不能调用 CUTROOM 文案模型。",
+                    "Agent 模式必须由当前 Agent 提交规划，不能调用 剪辑工作台 文案模型。",
                 )
             if body.get("confirmPaidCall") is not True:
                 raise ApiError(409, "PAID_CONFIRMATION_REQUIRED", "本次 AI 推荐可能产生费用，请确认后继续。")

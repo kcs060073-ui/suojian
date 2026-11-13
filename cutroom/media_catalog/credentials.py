@@ -176,7 +176,7 @@ class WindowsCredentialBackend:
             0,
             self.CRED_TYPE_GENERIC,
             reference,
-            "CUTROOM 本机模型服务密钥",
+            "剪辑工作台 本机模型服务密钥",
             wintypes.FILETIME(),
             len(blob),
             ctypes.cast(buffer, ctypes.POINTER(ctypes.c_ubyte)),

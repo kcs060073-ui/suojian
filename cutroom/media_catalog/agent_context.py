@@ -198,7 +198,7 @@ def build_agent_context(db, task_id: str, project_root: Path | str) -> dict:
 
     workflow = project_workflow(db, task_id)
     if not workflow["gates"]["brief_locked"]:
-        raise RuntimeError("AGENT_BRIEF_LOCK_REQUIRED: 请先在 CUTROOM 锁定文案")
+        raise RuntimeError("AGENT_BRIEF_LOCK_REQUIRED: 请先在 剪辑工作台 锁定文案")
     material_stage = next(
         (
             item

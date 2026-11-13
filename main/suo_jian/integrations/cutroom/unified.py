@@ -104,11 +104,11 @@ class UnifiedExecution:
         template = self.store.get(config["template_id"])
         catalog = self.call("catalog")
         if catalog.get("adapter", {}).get("automatic_pipeline_supported") is False:
-            raise ValueError("当前 Cutroom 新版需要在其工作台确认文案、画面和包装；旧自动制作流程尚未适配完成，不会创建任务或发起配音费用。")
+            raise ValueError("当前 剪辑工作台 新版需要在其工作台确认文案、画面和包装；旧自动制作流程尚未适配完成，不会创建任务或发起配音费用。")
         if config.get("library_id") not in {m["library_id"] for m in catalog["libraries"] if m.get("online")}:
-            raise ValueError("请从已连接的 Cutroom 素材库中选择园区。")
+            raise ValueError("请从已连接的 剪辑工作台 素材库中选择园区。")
         if config.get("tts_profile_id") not in {p["profileId"] for p in catalog["tts_profiles"] if p.get("enabled")}:
-            raise ValueError("请选择可用的 Cutroom 配音配置。")
+            raise ValueError("请选择可用的 剪辑工作台 配音配置。")
         profile = next(p for p in catalog["tts_profiles"] if p["profileId"] == config["tts_profile_id"])
         voice = str(config.get("tts_voice_id") or "").strip()
         if not voice or voice not in {v["voiceId"] for v in profile.get("voices", []) if v.get("selectable")}:
@@ -166,7 +166,7 @@ class UnifiedExecution:
             if self.state.get("status") not in {"failed", "running", "waiting_worker"}:
                 raise ValueError("该任务无需恢复，或供应商结果不明确，需要先核对。")
             if not self.state.get("task_id"):
-                raise ValueError("任务创建结果不明确，请先核对 Cutroom 任务列表，避免重复创建或付费。")
+                raise ValueError("任务创建结果不明确，请先核对 剪辑工作台 任务列表，避免重复创建或付费。")
             ACTIVE.add(key)
             self.save(status="running", error=None)
         threading.Thread(target=self._run_guarded, daemon=True).start()
@@ -273,11 +273,11 @@ class UnifiedExecution:
                 return
             if job.get("needsManualCheck") or job["status"] in {"failed", "cancelled", "interrupted", "paused"}:
                 self.save(status="needs_check" if job.get("needsManualCheck") else "failed")
-                raise RuntimeError("Cutroom 执行未完成；请核对任务。不会自动重复收费。")
+                raise RuntimeError("剪辑工作台 执行未完成；请核对任务。不会自动重复收费。")
             if job["status"] == "queued":
-                self.save(status="waiting_worker", phase="已排队，等待 Cutroom 工作进程")
+                self.save(status="waiting_worker", phase="已排队，等待 剪辑工作台 工作进程")
             time.sleep(2)
-        raise TimeoutError("等待 Cutroom 超时。任务记录已保留，可恢复；请检查 Cutroom 工作进程。")
+        raise TimeoutError("等待 剪辑工作台 超时。任务记录已保留，可恢复；请检查 剪辑工作台 工作进程。")
 
     def _run_guarded(self):
         try:
@@ -318,7 +318,7 @@ class UnifiedExecution:
                 preflight = self.call("preflight", request=request)
             if preflight.get("blocking"):
                 raise ValueError("创建前检查未通过：" + "；".join(str(item.get("message", item)) for item in preflight["blocking"]))
-            self.save(phase="创建 Cutroom 任务", creation_pending=True, preflight=preflight)
+            self.save(phase="创建 剪辑工作台 任务", creation_pending=True, preflight=preflight)
             result = self.call("create", request=request)
             self.save(task_id=result["taskId"], creation_pending=False)
         snapshot = self.call("inspect")
@@ -332,7 +332,7 @@ class UnifiedExecution:
             if preview.get("impact_token"):
                 self._wait_job("同步素材", "sync_sources", payload={"impact_token": preview["impact_token"]})
             else:
-                raise RuntimeError("素材同步未完成且没有可用同步令牌，请检查 Cutroom。")
+                raise RuntimeError("素材同步未完成且没有可用同步令牌，请检查 剪辑工作台。")
         if self.state.get("配音与分镜_job"):
             self._wait_job("配音与分镜", "recommend_storyboard", confirm_cost=True)
             snapshot = self.call("inspect")
@@ -349,7 +349,7 @@ class UnifiedExecution:
             self._wait_job("配音与分镜", "recommend_storyboard", confirm_cost=True)
             snapshot = self.call("inspect")
             if not snapshot["cards"]:
-                raise RuntimeError("Cutroom 未生成可用分镜，已停止后续操作。")
+                raise RuntimeError("剪辑工作台 未生成可用分镜，已停止后续操作。")
         if not snapshot["workflow"]["gates"].get("picture_lock"):
             self.save(phase="核验镜头并自动锁定画面")
             self.call("lock_picture", owns_materials=config["owns_materials"])
@@ -358,8 +358,8 @@ class UnifiedExecution:
             match = match_subtitle_preset(recipe, self.call("catalog").get("subtitle_presets", []))
             self.call("packaging", template_id=config.get("packaging_template_id"), subtitle_id=match["id"] if match else None,
                       choices=config.get("packaging_choices"))
-            self.save(style_mapping="复用已保存的 Cutroom 包装组合" if config.get("packaging_template_id") else
-                      ("参考字幕颜色近似映射：" + match["name"] if match else "采用 Cutroom 默认字幕组合"))
+            self.save(style_mapping="复用已保存的 剪辑工作台 包装组合" if config.get("packaging_template_id") else
+                      ("参考字幕颜色近似映射：" + match["name"] if match else "采用 剪辑工作台 默认字幕组合"))
         if not self.call("inspect").get("candidates"):
             if config.get("reference_policy"):
                 bound = self.call("reference_bind", policy=config["reference_policy"], auto_bgm=config.get("auto_bgm") is True)
@@ -378,7 +378,7 @@ class UnifiedExecution:
         preview = Path(candidate["output_path"]).resolve()
         preview.relative_to((self.root / "out" / self.state["task_id"]).resolve())
         if not preview.is_file():
-            raise FileNotFoundError("Cutroom 预览文件缺失。")
+            raise FileNotFoundError("剪辑工作台 预览文件缺失。")
         if file_signature(preview) != candidate.get("output_signature"):
             raise ValueError("候选预览文件已变化或损坏，不能当作已生成的版本复用。")
         plan = load_bound_plan(Path(snapshot["render_plan_path"]), self.root, self.state["task_id"], candidate,

@@ -1,4 +1,4 @@
-"""Local motion measurements and source-window selection, independent of Cutroom."""
+"""Local motion measurements and source-window selection, independent of 剪辑工作台."""
 import hashlib
 import json
 import math

@@ -34,7 +34,7 @@ def data_placeholder(name, entry):
 
 def manifest_files(value):
     if not isinstance(value, dict) or not isinstance(value.get('files'), list) or not 1 <= len(value['files']) <= 10000:
-        fail('MANIFEST', '不是完整的 CUTROOM 发行包，请下载 Windows ZIP，勿选 Source code。')
+        fail('MANIFEST', '不是完整的 剪辑工作台 发行包，请下载 Windows ZIP，勿选 Source code。')
     result = {}; aliases = set()
     for e in value['files']:
         if not isinstance(e, dict): fail('MANIFEST','发行清单无效。')
@@ -85,7 +85,7 @@ def update_lock(root):
 
 def dependency_contract(payload):
     package=json.loads(payload['package.json'])
-    if package.get('name') != 'digital-human-mix': fail('PRODUCT','安装包不属于 CUTROOM。')
+    if package.get('name') != 'digital-human-mix': fail('PRODUCT','安装包不属于 剪辑工作台。')
     lock=json.loads(payload['package-lock.json'])
     lock.pop('version',None)
     if isinstance(lock.get('packages',{}).get(''),dict):lock['packages'][''].pop('version',None)
@@ -102,7 +102,7 @@ def prepare_update(root, archive):
     root=Path(root).absolute();archive=Path(archive).absolute()
     if pending_path(root).exists(): fail('INTERRUPTED','发现未完成的升级，请先选择“恢复上次升级”再重试。')
     manifest_path=safe_path(root,'release-manifest.json')
-    if not manifest_path.is_file(): fail('INSTALL','请选择已安装 CUTROOM 的文件夹，不要选择源码或新解压目录。')
+    if not manifest_path.is_file(): fail('INSTALL','请选择已安装 剪辑工作台 的文件夹，不要选择源码或新解压目录。')
     old=read_json(manifest_path);old_files=manifest_files(old)
     with zipfile.ZipFile(archive) as z:
         infos=z.infolist()
@@ -203,7 +203,7 @@ def check_process_snapshot(root, processes, current_pid=None):
         elif not service:
             # Only claim a detached renderer when its absolute input is inside this install.
             if not any(Path(a).is_absolute() and Path(a).resolve(strict=False).is_relative_to(Path(root).resolve(strict=False)) for a in args):continue
-        fail('RUNNING','CUTROOM 后台或 MCP 仍在运行。保存工作、等待任务完成后重启电脑；先运行升级入口，不要先打开 CUTROOM 或 WorkBuddy。关闭网页不会停止后台。')
+        fail('RUNNING','剪辑工作台 后台或 MCP 仍在运行。保存工作、等待任务完成后重启电脑；先运行升级入口，不要先打开 剪辑工作台 或 WorkBuddy。关闭网页不会停止后台。')
 
 def assert_idle(root):
     if os.name!='nt':fail('PLATFORM','快捷升级仅支持 Windows。')
@@ -212,7 +212,7 @@ def assert_idle(root):
         r=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',script],capture_output=True,timeout=25,creationflags=0x08000000)
         if r.returncode:raise ValueError()
         processes=json.loads(r.stdout.decode('utf-8-sig',errors='strict'))
-    except (OSError,ValueError,subprocess.TimeoutExpired):fail('PROCESS_CHECK','无法核实 CUTROOM 是否停止，请重试或联系维护人员；未更新程序。')
+    except (OSError,ValueError,subprocess.TimeoutExpired):fail('PROCESS_CHECK','无法核实 剪辑工作台 是否停止，请重试或联系维护人员；未更新程序。')
     check_process_snapshot(root,processes)
 
 def validate_current(plan):
@@ -298,7 +298,7 @@ def apply_update(plan, *, check_idle=None):
     return {'status':'completed','version':plan['to'],'backup':str(backup)}
 
 def main(argv=None):
-    p=argparse.ArgumentParser(description='CUTROOM 产品更新升级')
+    p=argparse.ArgumentParser(description='剪辑工作台 产品更新升级')
     p.add_argument('--root',type=Path,required=True);p.add_argument('--zip',type=Path)
     p.add_argument('--check',action='store_true');p.add_argument('--recover',action='store_true')
     p.add_argument('--online',action='store_true')

@@ -1,10 +1,10 @@
-# CUTROOM MCP 状态口径与操作手册优化设计
+# 剪辑工作台 MCP 状态口径与操作手册优化设计
 
 日期：2026-09-20
 
 ## 问题
 
-Codex、WorkBuddy 和豆包工作共用 12 个 CUTROOM MCP 工具，但 `cutroom_get_system_status` 当前只返回四个 `agentActions`。客户端模型在回答“工具数量”时会把这四个任务动作误报成 MCP 工具总数。
+Codex、WorkBuddy 和豆包工作共用 12 个剪辑工作台 MCP 工具，但 `cutroom_get_system_status` 当前只返回四个 `agentActions`。客户端模型在回答“工具数量”时会把这四个任务动作误报成 MCP 工具总数。
 
 同时，普通同事手册没有完整说明 WorkBuddy 的“信任”步骤、豆包工作的 HTTP 启动与请求头配置，也没有解释“12 个 MCP 工具”和“4 个任务动作”的区别。
 

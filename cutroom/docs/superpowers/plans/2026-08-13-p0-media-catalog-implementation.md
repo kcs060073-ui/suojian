@@ -286,7 +286,7 @@ class LibraryTests(unittest.TestCase):
     def test_mount_can_change_without_changing_library_id(self):
         with tempfile.TemporaryDirectory() as tmp:
             db = CatalogDatabase.open(Path(tmp)/"c.sqlite"); db.migrate()
-            register_library(db, "park-01", "园区库", "local", r"D:\素材")
+            register_library(db, "park-01", "项目库", "local", r"D:\素材")
             update_mount(db, "park-01", r"E:\素材")
             row = db.connection.execute("SELECT * FROM libraries WHERE library_id='park-01'").fetchone()
             self.assertEqual(row["mount_path"], r"E:\素材")
@@ -326,7 +326,7 @@ def update_mount(db, library_id: str, mount_path: str):
 ```json
 {
   "libraries": [
-    {"library_id": "park-local-01", "name": "园区本地素材库", "kind": "local", "mount_path": "D:\\园区素材"}
+    {"library_id": "park-local-01", "name": "项目本地素材库", "kind": "local", "mount_path": "D:\\园区素材"}
   ]
 }
 ```
@@ -616,8 +616,8 @@ class ProbeTests(unittest.TestCase):
         def runner(args, **kwargs):
             calls.append(args)
             return SimpleNamespace(returncode=0, stdout=json.dumps({"streams": []}), stderr="")
-        self.assertEqual(probe_media(Path("园区/厂房.mp4"), Path("ffprobe.exe"), runner), {"streams": []})
-        self.assertEqual(calls[0][-1], "园区\\厂房.mp4")
+        self.assertEqual(probe_media(Path("项目/厂房.mp4"), Path("ffprobe.exe"), runner), {"streams": []})
+        self.assertEqual(calls[0][-1], "项目\\厂房.mp4")
 
     def test_failure_summary_is_bounded(self):
         def runner(args, **kwargs):
@@ -712,7 +712,7 @@ class JobTests(unittest.TestCase):
     def test_only_one_heavy_job_and_stale_running_becomes_interrupted(self):
         with tempfile.TemporaryDirectory() as tmp:
             db = CatalogDatabase.open(Path(tmp)/"c.sqlite"); db.migrate()
-            register_library(db, "park-01", "园区库", "local", tmp)
+            register_library(db, "park-01", "项目库", "local", tmp)
             first = JobManager(db, "scan-1", "scan", "park-01"); first.start()
             with self.assertRaises(HeavyJobBusy):
                 JobManager(db, "scan-2", "scan", "park-01").start()
@@ -798,7 +798,7 @@ class JobManager:
 def test_resume_returns_last_completed_cursor(self):
     with tempfile.TemporaryDirectory() as tmp:
         db = CatalogDatabase.open(Path(tmp)/"c.sqlite"); db.migrate()
-        register_library(db, "park-01", "园区库", "local", tmp)
+        register_library(db, "park-01", "项目库", "local", tmp)
         job = JobManager(db, "scan-1", "scan", "park-01")
         job.start(); job.heartbeat("厂房/a.mp4")
         resumed = JobManager(db, "scan-1", "scan", "park-01")
@@ -964,7 +964,7 @@ Expected: exit 0。
 
 ```powershell
 .venv\Scripts\python.exe scripts/media_catalog.py init
-.venv\Scripts\python.exe scripts/media_catalog.py library add --id park-real-01 --name "真实园区素材" --kind local --mount "D:\实际素材目录"
+.venv\Scripts\python.exe scripts/media_catalog.py library add --id park-real-01 --name "真实项目素材" --kind local --mount "D:\实际素材目录"
 .venv\Scripts\python.exe scripts/media_catalog.py doctor
 .venv\Scripts\python.exe scripts/media_catalog.py scan --library park-real-01
 .venv\Scripts\python.exe scripts/media_catalog.py status --json

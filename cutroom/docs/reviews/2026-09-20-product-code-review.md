@@ -1,4 +1,4 @@
-# CUTROOM 产品代码审查（2026-09-20）
+# 剪辑工作台产品代码审查（2026-09-20）
 
 > 本文保留修前审查事实。F01–F20 后续已在本地修复，当前结果与验证边界见 [20 项修复验收](./2026-09-20-product-review-fixes.md)；尚未发布更新下载包。
 
@@ -142,12 +142,12 @@ P1：应在稳定版推广前修复的数据完整性/关键生产流程问题�
 - 修复方向：补齐 src，并从解压后的发布包运行离线字幕生成、模块解析及最小渲染冒烟；测试应使用真实发布清单，而非仅验证合成目录。
 - 证据：`runtime/review-20260920/repro-delivery-release.py`、`delivery-repro/release-result.json`。置信度高。仅替换临时目录分配以避开沙箱 ACL，未替换复制、ZIP 或依赖核验逻辑；未运行真实安装器。
 
-### F14 · P2 · 注册或卸载 CUTROOM MCP 会误删其他合法 TOML 设置
+### F14 · P2 · 注册或卸载剪辑工作台 MCP 会误删其他合法 TOML 设置
 
 - 精确位置：`scripts/install-codex-mcp.ps1:31–39`；相同代码在 `scripts/uninstall-codex-mcp.ps1:24–32`。最小评论范围为安装器 31–33 行。
 - 触发：已有 `[mcp_servers.cutroom]` 后跟合法 `[[skills.config]]` 等数组表；或者另有 `[mcp_servers."cutroom.extra"]` 这样的独立服务名。
-- 原因：删除函数只把单层 `[table]` 当段落边界，无法识别 `[[array-of-tables]]`，因此删除状态持续到下一张普通表；还先剥除所有引号再按 `mcp_servers.cutroom.` 前缀判断，使独立的带点号服务名被错误当成 CUTROOM 子表。
-- 影响：用户执行正常重注册或卸载，其他技能设置和其他 MCP 服务被静默删除；原子文件替换无法补救语义上的误删。脚本成功提示仍声称只修改 cutroom，且临时备份随后被删除。
+- 原因：删除函数只把单层 `[table]` 当段落边界，无法识别 `[[array-of-tables]]`，因此删除状态持续到下一张普通表；还先剥除所有引号再按 `mcp_servers.cutroom.` 前缀判断，使独立的带点号服务名被错误当成剪辑工作台子表。
+- 影响：用户执行正常重注册或卸载，其他技能设置和其他 MCP 服务被静默删除；原子文件替换无法补救语义上的误删。脚本成功提示仍声称只修改剪辑工作台，且临时备份随后被删除。
 - 隔离复现：`repro-delivery-toml.ps1` 从真实脚本 AST 取出原 `Remove-CutroomTomlSection` 函数执行，只向 `runtime/review-20260920/delivery-repro/` 写合成输入/输出；没有执行安装器主体，也没有访问用户配置。Python `tomllib` 确認输入中的 `skills.config` 和 `mcp_servers['cutroom.extra']` 均为合法独立字段。
 - 结果：两份脚本均 `removedSkills=true`、`removedUnrelatedQuotedServer=true`、`preservedOther=true`。输出仅余 `model` 和普通 `mcp_servers.other`。
 - 证据：`delivery-repro/before.toml`、两份 `*.after.toml`、`delivery-repro/toml-result.json`。置信度：高，实际 PowerShell 原函数执行。

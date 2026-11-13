@@ -41,14 +41,14 @@ function Write-AtomicUtf8([string]$Path, [string]$Text) {
 }
 
 if (-not (Test-Path -LiteralPath $pythonPath -PathType Leaf)) {
-    throw "CUTROOM Python environment was not found: $pythonPath"
+    throw "SuoJian Python environment was not found: $pythonPath"
 }
 if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
-    throw "CUTROOM MCP entry point was not found: $serverPath"
+    throw "SuoJian MCP entry point was not found: $serverPath"
 }
 & $pythonPath -c "import mcp"
 if ($LASTEXITCODE -ne 0) {
-    throw "CUTROOM MCP dependencies are missing. Run: .venv\Scripts\python.exe -m pip install -r requirements-mcp.txt"
+    throw "SuoJian MCP dependencies are missing. Run: .venv\Scripts\python.exe -m pip install -r requirements-mcp.txt"
 }
 
 $entry = [ordered]@{
@@ -76,11 +76,11 @@ $proposed = ($document | ConvertTo-Json -Depth 32) + [Environment]::NewLine
 $preview = ([ordered]@{ mcpServers = [ordered]@{ cutroom = $entry } } | ConvertTo-Json -Depth 8)
 
 if ($DryRun) {
-    Write-Output "[CUTROOM] DryRun: no changes will be written to $targetPath"
+    Write-Output "[SuoJian] DryRun: no changes will be written to $targetPath"
     Write-Output $preview
     exit 0
 }
 
 Write-AtomicUtf8 $targetPath $proposed
-Write-Output "[CUTROOM] Registered WorkBuddy MCP server 'cutroom' in $targetPath"
+Write-Output "[SuoJian] Registered WorkBuddy MCP server 'cutroom' in $targetPath"
 Write-Output "Reload WorkBuddy connector discovery before use."

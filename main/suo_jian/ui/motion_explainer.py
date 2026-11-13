@@ -1,4 +1,4 @@
-"""Local, experimental Remotion explainer; existing Cutroom exports stay independent."""
+"""Local, experimental Remotion explainer; existing 剪辑工作台 exports stay independent."""
 import json
 import math
 import re
@@ -36,7 +36,7 @@ def folder(job):
         raise ValueError("无效任务编号")
     path = RESULTS / job / "motion_explainer"
     if not (engine() / "public" / job / "provenance.json").exists():
-        raise FileNotFoundError("这个任务尚未准备动画素材；首轮请使用嘉兴园区示例。")
+        raise FileNotFoundError("这个任务尚未准备动画素材；首轮请使用嘉兴项目示例。")
     return path
 
 
@@ -205,7 +205,7 @@ def music(job):
             data = request.get_json(silent=True) or {}
             identity = data.get("id")
             if identity not in NAMES:
-                raise ValueError("请选择 Cutroom 音乐或上传 BGM")
+                raise ValueError("请选择 剪辑工作台 音乐或上传 BGM")
             source, name, offset = LIBRARY / (identity + ".mp3"), NAMES[identity], 164 if identity == "machina" else 0
         value = prepare_music(source, name, path / "music-work", engine() / "public" / job, offset, identity)
         value["visualStyle"] = read_music(path).get("visualStyle", "gold")

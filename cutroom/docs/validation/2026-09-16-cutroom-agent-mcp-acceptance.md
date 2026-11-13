@@ -1,4 +1,4 @@
-# CUTROOM Agent MCP 验收报告
+# 剪辑工作台 Agent MCP 验收报告
 
 验收日期：2026-09-17
 
@@ -12,20 +12,20 @@
 
 验收通过。
 
-CUTROOM 现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex 当前会话模型负责文案分析、重点词和分镜规划，CUTROOM 不需要为这些文本规划步骤配置大模型 API Key；CUTROOM 继续负责素材主账本、任务状态、四个人工门禁、持久队列、TTS、Seedance、FFmpeg 渲染、质检和发布包。独立模式、现有模型配置和既有任务执行入口保持不变。
+剪辑工作台现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex 当前会话模型负责文案分析、重点词和分镜规划，剪辑工作台不需要为这些文本规划步骤配置大模型 API Key；剪辑工作台继续负责素材主账本、任务状态、四个人工门禁、持久队列、TTS、Seedance、FFmpeg 渲染、质检和发布包。独立模式、现有模型配置和既有任务执行入口保持不变。
 
 本次真实验收没有调用 TTS、Seedance 或其他付费生产服务。
 
 ## 验收环境
 
 - Windows，本地 Codex Desktop 配置目录：`%USERPROFILE%\.codex`
-- CUTROOM 工作台地址：`http://127.0.0.1:8765/`
+- 剪辑工作台工作台地址：`http://127.0.0.1:8765/`
 - MCP 传输：标准输入输出（stdio）
 - 数据库迁移版本：31
 - MCP 注册状态：`cutroom` 已启用
 - MCP 入口：项目虚拟环境 Python + `scripts/cutroom_mcp.py`
 
-注册脚本会优先使用 `CODEX_HOME`，未设置时使用 `%USERPROFILE%\.codex\config.toml`；写入采用原子替换，并保留其他 MCP 服务配置。Dry Run 只显示 CUTROOM 自身配置，不回显无关配置或其中的凭据。
+注册脚本会优先使用 `CODEX_HOME`，未设置时使用 `%USERPROFILE%\.codex\config.toml`；写入采用原子替换，并保留其他 MCP 服务配置。Dry Run 只显示剪辑工作台自身配置，不回显无关配置或其中的凭据。
 
 ## 工具发现与真实连接
 
@@ -51,7 +51,7 @@ CUTROOM 现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex �
 11. `cutroom_cancel_job`
 12. `cutroom_resume_job`
 
-真实连接阶段发现并修复了一个 SQLite 线程归属问题：MCP SDK 会把同步工具放到工作线程执行，而 CUTROOM 的 SQLite 连接属于服务主线程。所有 MCP 工具改为异步入口后在服务事件循环线程执行，并增加真实数据库回归测试，避免 stdio 连接成功但工具调用返回 `INTERNAL_ERROR`。
+真实连接阶段发现并修复了一个 SQLite 线程归属问题：MCP SDK 会把同步工具放到工作线程执行，而剪辑工作台的 SQLite 连接属于服务主线程。所有 MCP 工具改为异步入口后在服务事件循环线程执行，并增加真实数据库回归测试，避免 stdio 连接成功但工具调用返回 `INTERNAL_ERROR`。
 
 ## Agent 模式链路
 
@@ -65,7 +65,7 @@ CUTROOM 现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex �
 - 任务推进到 `rough_cut`，没有执行 `plan-brief.ts`、`plan-ad.ts` 或文本模型 Provider；受控命令记录为空。
 - 返回任务页：`http://127.0.0.1:8765/#/tasks/accept-agent-digital-20260917`。
 
-这证明文本规划由 Agent 当前模型完成，CUTROOM 不会静默调用自身文案/分镜模型，也不会在 Agent 失败时自动回退到独立模式文本模型。
+这证明文本规划由 Agent 当前模型完成，剪辑工作台不会静默调用自身文案/分镜模型，也不会在 Agent 失败时自动回退到独立模式文本模型。
 
 ## 人工门禁
 
@@ -84,7 +84,7 @@ CUTROOM 现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex �
 
 因此：
 
-- TTS、Seedance 等生产服务继续使用 CUTROOM 各自的配置和凭据。
+- TTS、Seedance 等生产服务继续使用剪辑工作台各自的配置和凭据。
 - Agent 规划不需要这些凭据，也无法通过 MCP 读取或写入凭据。
 - 未经明确费用确认，不创建付费作业。
 
@@ -93,7 +93,7 @@ CUTROOM 现在具备可选的本地 stdio MCP 接口。Agent 模式下，Codex �
 - 关闭数据库连接并重新打开后，任务仍可读取，Artifact ID 保持一致，证明任务和 Agent 产物不依赖 MCP 进程内存。
 - 实际运行卸载脚本后，`codex mcp get cutroom` 返回未注册；此时独立模式的分镜推荐测试和独立任务保护测试仍通过。
 - 随后重新运行安装脚本，`codex mcp get cutroom` 显示 `enabled: true`。
-- 卸载只移除 Codex 配置中的 `cutroom` MCP 项，不删除 CUTROOM 数据、模型配置、凭据或任务。
+- 卸载只移除 Codex 配置中的 `cutroom` MCP 项，不删除剪辑工作台数据、模型配置、凭据或任务。
 
 ## 独立产品兼容
 

@@ -219,7 +219,7 @@ def native_tools(vendor, root) -> dict:
          'notes':['共享已有Remotion依赖，声明版本与本机版本不同，须以编译及渲染检查为准。',
                   '配音与批量生成只通过工具台明确操作触发，不在准备阶段运行。']}
     ]
-    tools.append({'id':'inkpress','name':'Ink Press 完整宣传片模板','status':'ready','available':True,'cwd':str(shot/'template'),'url':'http://127.0.0.1:18994/','argv':['node',str(cli),'studio','src/index.ts','--port=18994','--no-open'],'notes':['完整36.2秒模板，含字幕/音效/字卡/原生可调镜头；独立示例，不替换已选园区影片。']})
+    tools.append({'id':'inkpress','name':'Ink Press 完整宣传片模板','status':'ready','available':True,'cwd':str(shot/'template'),'url':'http://127.0.0.1:18994/','argv':['node',str(cli),'studio','src/index.ts','--port=18994','--no-open'],'notes':['完整36.2秒模板，含字幕/音效/字卡/原生可调镜头；独立示例，不替换已选项目影片。']})
     scripts=[]
     for f in sorted((explainer/'scripts').iterdir()):
         if f.is_file():
@@ -286,7 +286,7 @@ def run_native(tool_id, action, payload, vendor, root, output=None) -> dict:
             project.mkdir()
             shutil.copy2(native/'canvas/engine/index.html',project/'index.html')
             _junction(project/'engine',native/'canvas/engine')
-            default="""(function(){const {W}=VK;const K=VKit;VK.film({dur:8,theme:'gilt',meta:{title:'园区知识短片'},draw(fr,t){fr.text('从一个问题开始',W/2,420,{font:'serif',size:86,color:'#F1D694'});K.subs(fr,t,[{a:0,b:8,zh:'用画面演出原因，再让结论出现。'}],'gilt');}});})();\n"""
+            default="""(function(){const {W}=VK;const K=VKit;VK.film({dur:8,theme:'gilt',meta:{title:'项目知识短片'},draw(fr,t){fr.text('从一个问题开始',W/2,420,{font:'serif',size:86,color:'#F1D694'});K.subs(fr,t,[{a:0,b:8,zh:'用画面演出原因，再让结论出现。'}],'gilt');}});})();\n"""
             default=default.replace("theme:'gilt'","theme:'flat'" if payload.get('world')=='B' else "theme:'night'").replace("],'gilt')","],'flat')" if payload.get('world')=='B' else "],'night')")
             (project/'film.js').write_text(default,encoding='utf-8')
         (project/'vibe-policy.json').write_text(json.dumps({'singleLanguage':True,'presenterPolicy':'latest-user-selected-version'},ensure_ascii=False),encoding='utf-8')

@@ -27,7 +27,7 @@ function Write-AtomicUtf8([string]$Path, [string]$Text) {
 }
 
 if (-not (Test-Path -LiteralPath $targetPath -PathType Leaf)) {
-    Write-Output "[CUTROOM] WorkBuddy MCP config does not exist; nothing to remove."
+    Write-Output "[SuoJian] WorkBuddy MCP config does not exist; nothing to remove."
     exit 0
 }
 $raw = [System.IO.File]::ReadAllText($targetPath)
@@ -40,16 +40,16 @@ if (
     -not $document.PSObject.Properties["mcpServers"] -or
     -not $document.mcpServers.PSObject.Properties["cutroom"]
 ) {
-    Write-Output "[CUTROOM] WorkBuddy MCP server 'cutroom' is not registered."
+    Write-Output "[SuoJian] WorkBuddy MCP server 'cutroom' is not registered."
     exit 0
 }
 
 if ($DryRun) {
-    Write-Output "[CUTROOM] DryRun: mcpServers.cutroom would be removed from $targetPath"
+    Write-Output "[SuoJian] DryRun: mcpServers.cutroom would be removed from $targetPath"
     exit 0
 }
 
 $document.mcpServers.PSObject.Properties.Remove("cutroom")
 $proposed = ($document | ConvertTo-Json -Depth 32) + [Environment]::NewLine
 Write-AtomicUtf8 $targetPath $proposed
-Write-Output "[CUTROOM] Removed WorkBuddy MCP server 'cutroom' from $targetPath"
+Write-Output "[SuoJian] Removed WorkBuddy MCP server 'cutroom' from $targetPath"

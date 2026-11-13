@@ -2,7 +2,7 @@
 
 从「口播 MP4 + 文案」自动产出带样式字幕、B-roll、标题卡的 **9:16 / 16:9 短视频**。两条主流水线，一条龙脚本，目标日产 10 条、多账号铺量。
 
-普通同事请先阅读：[CUTROOM 同事操作手册](./docs/user-guide/cutroom-user-guide.md)。工作台右上角也可直接打开网页版“使用手册”；旧的[视频生产目标流程手册](./docs/user-guide/video-production-user-guide.md)仅保留设计追溯。
+普通同事请先阅读：[剪辑工作台同事操作手册](./docs/user-guide/cutroom-user-guide.md)。工作台右上角也可直接打开网页版“使用手册”；旧的[视频生产目标流程手册](./docs/user-guide/video-production-user-guide.md)仅保留设计追溯。
 
 首次真实试运行请使用：[普通同事首条真实任务验收单](./docs/validation/cutroom-colleague-first-real-task-acceptance.md)。验收必须由普通同事本人操作，自动测试不能代替人工签收。
 
@@ -10,14 +10,14 @@
 
 ## Windows Beta 安装
 
-CUTROOM v0.9.0-beta.8 采用在线安装 ZIP，仅面向获得私有 GitHub 仓库访问权限的内部同事：
+剪辑工作台 v0.9.0-beta.8 采用在线安装 ZIP，仅面向获得私有 GitHub 仓库访问权限的内部同事：
 
 当前开发目录包含尚未打包发布的 QA 修正：可将锁定镜头中的团队自摄素材按文件指纹登记并在后续任务复用；静态照片不再误报为画面卡顿；非阻断警告不再暗中挡住审片；信息流成片音频输出固定为 48 kHz。已发布的 beta.8 ZIP 不包含这些后续改动。
 
-1. 从 [CUTROOM v0.9.0-beta.8 下载页](https://github.com/qnwhageqlavs-jpg/cutroom/releases/tag/v0.9.0-beta.8) 下载 `CUTROOM-v0.9.0-beta.8-windows-x64.zip`，并完整解压到自己可写的短路径，例如 `D:\CUTROOM-v0.9.0-beta.8`；不要直接在压缩包内运行，也不要放进层级很深的目录。
+1. 从 [剪辑工作台 v0.9.0-beta.8 下载页](https://github.com/qnwhageqlavs-jpg/cutroom/releases/tag/v0.9.0-beta.8) 下载 `剪辑工作台-v0.9.0-beta.8-windows-x64.zip`，并完整解压到自己可写的短路径，例如 `D:\CUTROOM-v0.9.0-beta.8`；不要直接在压缩包内运行，也不要放进层级很深的目录。
 2. 首次双击 `安装CUTROOM.bat`。安装器会检查并安装 Python 3.11、Node.js LTS、FFmpeg，再建立项目专用环境；首次安装文件较多，看到“安装完成”前不要关闭窗口。
 3. 安装完成后双击 `启动CUTROOM.bat`，浏览器打开 <http://127.0.0.1:8765/>。
-4. 在 CUTROOM“设置 → AI 服务连接”中配置供应商与模型；豆包 API Key用于合成、试听和连接检测，AK/SK用于自动刷新音色目录，AppID + Access Token是旧版兼容项，可以留空。保存并检测会生成极短的测试语音。每台电脑需由火山账号/IAM 管理员录入一次；不要修改 `.env`，密钥由 Windows 凭据管理器保存。
+4. 在剪辑工作台“设置 → AI 服务连接”中配置供应商与模型；豆包 API Key用于合成、试听和连接检测，AK/SK用于自动刷新音色目录，AppID + Access Token是旧版兼容项，可以留空。保存并检测会生成极短的测试语音。每台电脑需由火山账号/IAM 管理员录入一次；不要修改 `.env`，密钥由 Windows 凭据管理器保存。
 5. 如不想把个人包装素材放在安装目录，打开“设置 → 存储与缓存”选择自己的本地文件夹。系统会自动建立八类子目录；切换路径不会搬迁或删除旧文件。
 
 Beta 安装需要 Windows 64 位、联网和可用的 Windows 程序包管理器 `winget`。普通同事电脑的独立安装验收仍是发布后的现场门禁，不把本机验证等同于全环境兼容。
@@ -80,9 +80,9 @@ python scripts/media_catalog.py --db <库> cache clean --dry-run
 
 ## P2 剪辑组装与交付（门禁链）
 
-在 P1 选材之上，把「场景卡片 → 画面锁定 → 包装方案 → 自动质检 → 人工完整审片 → 发布合规」串成可追溯的门禁链。四道人工门禁：文案锁定 → 画面顺序锁定(picture-lock) → 包装确认(packaging_plan) → 完整观看(reviewed)。验收要求：园区 + 数字人各 1 条真实端到端样片、BGM 不压人声、门禁全程可追溯、qa 0 阻断。
+在 P1 选材之上，把「场景卡片 → 画面锁定 → 包装方案 → 自动质检 → 人工完整审片 → 发布合规」串成可追溯的门禁链。四道人工门禁：文案锁定 → 画面顺序锁定(picture-lock) → 包装确认(packaging_plan) → 完整观看(reviewed)。验收要求：项目 + 数字人各 1 条真实端到端样片、BGM 不压人声、门禁全程可追溯、qa 0 阻断。
 
-当前状态：**数字人路线已端到端验收**——v2 样片（新疆算力口播）已通过四道人工门禁（文案/画面锁/包装/人工完整审片）、自动 QA 0 阻断，并生成合规发布包（抖音，`deliverables/publish/p2-xinjiang-v2/`）。v1 的三个返工问题（字幕漂移、数字误识别、样式未生效）已在 v2 修复并核验。完整结论见 [P2 数字人 v2 样片验收报告](./docs/validation/2026-08-24-xinjiang-v2-acceptance.md)。**园区样片路线仍未验收**，P2 的"园区 + 数字人各 1 条"验收要求尚差园区一条。
+当前状态：**数字人路线已端到端验收**——v2 样片（新疆算力口播）已通过四道人工门禁（文案/画面锁/包装/人工完整审片）、自动 QA 0 阻断，并生成合规发布包（抖音，`deliverables/publish/p2-xinjiang-v2/`）。v1 的三个返工问题（字幕漂移、数字误识别、样式未生效）已在 v2 修复并核验。完整结论见 [P2 数字人 v2 样片验收报告](./docs/validation/2026-08-24-xinjiang-v2-acceptance.md)。**项目样片路线仍未验收**，P2 的"项目 + 数字人各 1 条"验收要求尚差项目一条。
 
 常用命令（库默认 `runtime/media-catalog/catalog.sqlite`）：
 
@@ -120,28 +120,28 @@ python scripts/media_catalog.py --db <库> assemble --task t1 --video out/<外�
 
 > 资产清单在 `assets/manifests/*.json`：BGM 3 首 + 火山 TTS 音色（env 引用，不落明文密钥）+ **字幕模板 6 套 + 花字 6 套 + 音效 8 个（ffmpeg 合成，CC0 级）+ 贴纸 12 个（PIL 透明 PNG）** 均已填真实数据；`assets recommend` 自动纳入方案（B/C 方案含贴纸+花字，全方案含 sfx）。
 
-## CUTROOM 同事视频工作台
+## 剪辑工作台同事视频工作台
 
 面向普通同事的正式入口已经从旧“一键出片页”升级为本地工作台：任务看板/列表、数字人创建向导、主素材与通用补充目录、十二步主链、四个人工门禁、镜头级调整、本片包装组合、后台恢复、受控成片预览和七文件发布包均读取同一 SQLite 账本。
 
-固定入口：**http://127.0.0.1:8765/**。首次安装登录自启、页面打不开时的恢复方法和完整同事操作流程见 [CUTROOM 使用说明](./web-ui/README.md)。
+固定入口：**http://127.0.0.1:8765/**。首次安装登录自启、页面打不开时的恢复方法和完整同事操作流程见 [剪辑工作台使用说明](./web-ui/README.md)。
 
 AI 服务收敛为“文案策划、B-roll、配音”三类：文案策划统一复用到文案分析、分镜与包装推荐，本地素材匹配无需模型。豆包配音会使用 AK/SK 读取官方音色目录，设置页选择常用音色，信息流广告再单独选择“本条视频音色”；普通同事不填写模型 ID 或音色 ID。连接检测、24 小时有效期和任务快照共同阻止静默回退；任务创建后冻结精确声音，后来刷新目录或修改常用项不会影响旧任务。密钥只在当前 Windows 用户的凭据管理器中，GitHub、ZIP 和 SQLite 不会把密钥带到同事电脑。具体配置见 [多模型与供应商配置](./docs/operations/model-profiles-new-api.md)。
 
-CUTROOM 当前开放“数字人混剪”和“信息流广告混剪”，园区宣传片仍显示为后续开放。数字人路线复用 `faster-whisper → AI 分镜 → 本地素材匹配 → render-mix`；广告路线使用 `锁定广告文案 → AI 逐句分镜 → TTS → 已绑定素材库逐句配片 → render-ad`。两条路线共用素材同步、人工画面锁、包装确认、QA、完整审片和发布包门禁；广告每句没有真实素材时禁止锁画面，付费视频生成仍不自动调用。
+剪辑工作台当前开放“数字人混剪”和“信息流广告混剪”，项目宣传片仍显示为后续开放。数字人路线复用 `faster-whisper → AI 分镜 → 本地素材匹配 → render-mix`；广告路线使用 `锁定广告文案 → AI 逐句分镜 → TTS → 已绑定素材库逐句配片 → render-ad`。两条路线共用素材同步、人工画面锁、包装确认、QA、完整审片和发布包门禁；广告每句没有真实素材时禁止锁画面，付费视频生成仍不自动调用。
 
 ### 2026-09-22 双路线设计收口
 
 数字人混剪和信息流广告混剪的本轮**软件实现与自动化验证**已按统一设计收口：任务搜索与完整预检、任务范围素材索引、AI 推荐拒绝/纠正/重荐、后台安全暂停与 ETA、字幕/响度/素材指纹/来源/授权 QA、候选或外部或待补封面、发布标签，以及标准/可编辑交付均接入同一十二步工作流。两条路线共用一份发布级 QA 完整性契约，发布包只能绑定当前、QA 通过且已完整审片的候选；可编辑组成项缺失时记录 `not_available`，不生成伪文件。
 
-本轮没有完成真人可用性测试、普通同事现场验收、真实现场素材验收，也没有开放园区宣传路线；因此不能据此宣称整个 CUTROOM 已按最初设计全部验收。自动化范围、命令与剩余边界见[双路线设计收口验证报告](./docs/validation/2026-09-22-two-route-design-closure.md)。
+本轮没有完成真人可用性测试、普通同事现场验收、真实现场素材验收，也没有开放项目宣传路线；因此不能据此宣称整个剪辑工作台已按最初设计全部验收。自动化范围、命令与剩余边界见[双路线设计收口验证报告](./docs/validation/2026-09-22-two-route-design-closure.md)。
 
 ### Agent 模式（Codex / WorkBuddy / 豆包工作，可选 MCP）
 
-- 独立模式：CUTROOM 自己调用已配置的文案/分镜模型。
-- Agent 模式：当前客户端模型完成文案与分镜；CUTROOM 不调用文本模型。
-- 两种模式：豆包 TTS、Seedance 等生产服务仍使用 CUTROOM 各自凭据。
-- 四个人工门禁仍只能在 CUTROOM 页面确认，Agent 不能代替人工放行。
+- 独立模式：剪辑工作台自己调用已配置的文案/分镜模型。
+- Agent 模式：当前客户端模型完成文案与分镜；剪辑工作台不调用文本模型。
+- 两种模式：豆包 TTS、Seedance 等生产服务仍使用剪辑工作台各自凭据。
+- 四个人工门禁仍只能在剪辑工作台页面确认，Agent 不能代替人工放行。
 
 Codex、WorkBuddy 和豆包工作共用同一个 MCP Server 和同一组 12 个工具。Codex、WorkBuddy 使用本地 `stdio`；豆包工作的公开自定义连接器只接受 HTTP，因此使用只监听 `127.0.0.1` 的 Streamable HTTP。来源身份分别由 `--client codex`、`--client workbuddy`、`--client doubao_work` 固定注入。普通安装不会自动注册任何客户端。完整安装、卸载和验收步骤见 [Agent MCP 客户端操作手册](./docs/operations/cutroom-agent-mcp-clients.md)。
 
@@ -157,7 +157,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\start-doubao-work-mc
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\show-doubao-work-mcp-config.ps1
 ```
 
-在已打开并登录的工作台会话中，Agent 返回的任务地址形如 `http://127.0.0.1:8765/#/tasks/<task-id>`；不要把任何启动密钥拼进地址。关闭某个客户端的 MCP 不会删除 CUTROOM 和任务。WorkBuddy 安装器只修改 `mcpServers.cutroom`；豆包工作只通过公开的自定义连接器入口配置，不修改内部数据库。
+在已打开并登录的工作台会话中，Agent 返回的任务地址形如 `http://127.0.0.1:8765/#/tasks/<task-id>`；不要把任何启动密钥拼进地址。关闭某个客户端的 MCP 不会删除剪辑工作台和任务。WorkBuddy 安装器只修改 `mcpServers.cutroom`；豆包工作只通过公开的自定义连接器入口配置，不修改内部数据库。
 
 ## P3 智能深化（规则版本化 / 重复检测 / 语义匹配 / 脚本适配器）
 
@@ -177,11 +177,11 @@ python scripts/media_catalog.py --db <库> dedup scan --videos v1.mp4,v2.mp4 --t
 python scripts/media_catalog.py --db <库> dedup list --task t1
 
 # 脚本 ↔ 候选镜头语义匹配（词法/二元组 + IDF 打分，阈值/权重可迭代）
-python scripts/media_catalog.py --db <库> match shots --task t1 --script "园区 厂房 招商 政策"
-python scripts/media_catalog.py --db <库> match list --script "园区 厂房" --items "a.mp4,b.mp4"
+python scripts/media_catalog.py --db <库> match shots --task t1 --script "项目 厂房 招商 政策"
+python scripts/media_catalog.py --db <库> match list --script "项目 厂房" --items "a.mp4,b.mp4"
 
 # 脚本写作适配器（无文案入口草稿 + 人工确认回退门禁）
-python scripts/media_catalog.py --db <库> script draft --task t1 --route 园区宣传
+python scripts/media_catalog.py --db <库> script draft --task t1 --route 项目宣传
 python scripts/media_catalog.py --db <库> script confirm --draft <draft_id>
 ```
 
@@ -257,19 +257,19 @@ npx ts-node scripts/generate-broll.ts --requests <三条请求.json> --run-id <�
 
 显式模式只接受 3 条 key 唯一的请求；每条只创建一次任务，强制要求 `9:16 / 1080p / 5s / watermark false`，输出名为 `seed_<run-id>_<01..03>_<slug>.mp4`，并写入带 SHA-256、模型、任务 ID 的 schema v1 provenance。首个任务创建前会独占预留 manifest；每成功一条即原子写入该条完整 provenance，因此后续失败仍可审计已付费成功项。它不会更新 `public/library/manifest.json`，失败即停止，不能用旧素材替代。
 
-### 流水线 A2：园区样片（真实园区素材，复用 render-mix 链路）
+### 流水线 A2：项目样片（真实项目素材，复用 render-mix 链路）
 
-园区 route 无独立渲染适配，复用已验证的 render-mix 链路：横版园区空镜 center-crop 成 9:16 竖屏素体并 mux TTS 配音（render-mix 强制素体 9:16），B-roll 全屏覆盖由 scene_cards 按旁白时间驱动。
+项目 route 无独立渲染适配，复用已验证的 render-mix 链路：横版项目空镜 center-crop 成 9:16 竖屏素体并 mux TTS 配音（render-mix 强制素体 9:16），B-roll 全屏覆盖由 scene_cards 按旁白时间驱动。
 
 `
-园区空镜(横版) + 文案
+项目空镜(横版) + 文案
   ① tts             adplan 逐句合成配音 → voice.mp3 + adtiming.json（句级精确时长）
   ② ffmpeg          横版素材 center-crop 1080x1920 + mux 配音 → 竖屏素体 public/digital_human/<name>-v.mp4
   ③ make-ass        script.txt + words.json(用 adtiming 构造逐字时间) + semantics.json → ass（coverage=1.0）
   ④ media_catalog   建任务 → 挂素材(digital_human+ broll) → scene_cards(时间=adtiming/1.25) → picture_lock → packaging → assemble --render → QA → review approve → 发布包
 `
 
-要点：Whisper 对 TTS 中文识别错字多（对齐覆盖率 <0.8），改用 dtiming 句级时间 + 文案原文字均分构造 words.json（make-ass coverage=1.0）。园区样片实拍：park-zhouwangmiao（周王庙真实空镜 11 段 + 11 句招商文案），发布包 deliverables/publish/park-zhouwangmiao/。
+要点：Whisper 对 TTS 中文识别错字多（对齐覆盖率 <0.8），改用 dtiming 句级时间 + 文案原文字均分构造 words.json（make-ass coverage=1.0）。项目样片实拍：park-zhouwangmiao（周王庙真实空镜 11 段 + 11 句招商文案），发布包 deliverables/publish/park-zhouwangmiao/。
 
 ---
 ---
@@ -295,7 +295,7 @@ npm run render-ad  <name> [bgm路径]
 
 > render-ad 已做健壮性兜底：**短素材自动循环铺满**（不冻结）、**图片 `-loop 1` 无限帧**、**缺素材用品牌色占位屏不阻断整片**。
 
-以上兜底适用于旧命令行计划。CUTROOM 工作台生成的广告计划使用人工锁定的素材起止位置和已确认字幕预设；源窗无效会停止渲染，转场补帧只延长选段最后一帧，不取选段以外内容。工作台仍要求每句有真实素材才能锁定画面。
+以上兜底适用于旧命令行计划。剪辑工作台工作台生成的广告计划使用人工锁定的素材起止位置和已确认字幕预设；源窗无效会停止渲染，转场补帧只延长选段最后一帧，不取选段以外内容。工作台仍要求每句有真实素材才能锁定画面。
 
 ---
 
@@ -352,7 +352,7 @@ npm run promo      <name> [bgm路径]          # ③ 出片
 |------|----------|
 | 拆短句·单行不换行·绝不切数字/关键词 | make-ass.ts |
 | 思源粗宋 93号 / 金句 100号 | make-ass.ts `FONT_SIZE`/`PUNCH_SIZE` |
-| 普通白·重点橘黄 #FD9437（数字+量词/地点/园区名） | make-ass.ts 数字正则 + brief 关键词 |
+| 普通白·重点橘黄 #FD9437（数字+量词/地点/项目名） | make-ass.ts 数字正则 + brief 关键词 |
 | 金句整屏 / 标题卡 / 1.25 倍速 / 字幕距底 560px / 提前 0.08s | make-ass.ts + render-mix.ts |
 | 水印 / BGM / 全屏 B-roll / 画中画 | render-mix.ts（plan.json 驱动） |
 
