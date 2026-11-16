@@ -23,16 +23,20 @@ def continuity_bonus(candidate,previous,primary,profiles):
     return bonus
 
 def merge_uninterrupted(cuts,transcripts,max_gap=1.):
+    """Join forward source ranges without omitted speech; None retains any pause."""
     merged=[]
     for original in cuts:
         cut=dict(original)
+        if cut.get('captions'):
+            cut['captions']=[dict(caption) for caption in cut['captions']]
         if merged:
             previous=merged[-1]
             gap=cut['source_start']-previous['source_end']
             words=transcripts[cut['asset_id']]['words']
             omitted=words[previous['word_last']+1:cut['word_first']] if cut['asset_id']==previous['asset_id'] else []
             safe_gap=not any(re.search(r'[\w\u4e00-\u9fff]',w['text']) for w in omitted)
-            if cut['asset_id']==previous['asset_id'] and 0<=gap<=max_gap and safe_gap:
+            if (cut['asset_id']==previous['asset_id'] and cut['word_first']>previous['word_last']
+                    and gap>=0 and (max_gap is None or gap<=max_gap) and safe_gap):
                 offset=cut['source_start']-previous['source_start']
                 for caption in cut.get('captions') or [{'text':cut['text'],'local_start':0.,'local_end':cut['source_end']-cut['source_start']}]:
                     previous['captions'].append({**caption,'local_start':caption['local_start']+offset,

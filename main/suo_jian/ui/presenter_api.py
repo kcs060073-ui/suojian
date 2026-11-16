@@ -143,7 +143,8 @@ def register_presenter_routes(app,workspace,reference_for):
             requests.append({'asset_id':asset_id,'first':first,'last':last,
                              'captions':caption_ranges(transcript['words'],first,last)})
         plan=reviewed_plan(library,work,group,requests,'')
-        plan['selected']=merge_uninterrupted(plan['selected'],transcripts)
+        plan['selected']=merge_uninterrupted(plan['selected'],transcripts,max_gap=None)
+        plan['duration']=round(sum(cut['duration'] for cut in plan['selected']),3)
         plan.update(adapted=False,selection_mode='sentences',adaptation_policy='选择实际口播句子，保留原声',
                     warnings=['语音识别和断句可能有误，请试听并核对切点、人物与场景。'])
         history=work/'selection-history'
