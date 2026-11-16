@@ -129,7 +129,7 @@ class PresenterTests(unittest.TestCase):
             result=install_draft({'folder':str(source)},native)
             saved=json.loads((Path(result['folder'])/'draft_content.json').read_text(encoding='utf-8'))
             path=Path(saved['materials']['videos'][0]['path'])
-            self.assertTrue(path.is_relative_to(native));self.assertTrue(path.is_file())
+            self.assertTrue(path.resolve().is_relative_to(native.resolve()));self.assertTrue(path.is_file())
             first_id=saved['id']
             # A second export made from the library's fixed template must still
             # become a separately addressable native project.
@@ -150,6 +150,23 @@ class PresenterTests(unittest.TestCase):
             root=Path(t);source=root/'溯剪-真人复刻-test';source.mkdir();native=root/'native';native.mkdir()
             with self.assertRaisesRegex(ValueError,'退出剪映'):install_draft({'folder':str(source)},native)
             self.assertFalse((native/source.name).exists())
+
+    def test_install_relocates_validated_media_when_json_path_is_not_canonical(self):
+        with tempfile.TemporaryDirectory() as t, \
+                patch('suo_jian.jianying.execution_export.register_native_draft',return_value={'registered':True}), \
+                patch('suo_jian.presenter.delivery.subprocess.run',return_value=SimpleNamespace(returncode=0,stdout='')):
+            root=Path(t);source=root/'export'/'溯剪-真人复刻-path';(source/'media').mkdir(parents=True)
+            (source/'media/a.mp4').write_bytes(b'fixture')
+            alias=source.parent/'alias';alias.mkdir()
+            original=str(alias/'..'/source.name/'media/a.mp4')
+            save(source/'draft_content.json',{'materials':{'videos':[{'path':original}]},'tracks':[]})
+            save(source/'draft_meta_info.json',{})
+            native=root/'native';native.mkdir()
+            result=install_draft({'folder':str(source)},native)
+            content=json.loads((Path(result['folder'])/'draft_content.json').read_text(encoding='utf-8'))
+            installed=Path(content['materials']['videos'][0]['path'])
+            self.assertEqual(installed.resolve(),(Path(result['folder'])/'media/a.mp4').resolve())
+            self.assertTrue(installed.is_file())
 
     def test_registration_rejects_id_owned_by_a_different_project(self):
         from suo_jian.jianying.execution_export import register_native_draft

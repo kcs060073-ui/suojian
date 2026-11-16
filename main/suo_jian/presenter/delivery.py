@@ -27,9 +27,13 @@ def install_draft(exported,draft_root):
         if check.returncode:raise ValueError('无法确认剪映运行状态，尚未登记草稿')
         if 'RUNNING' in check.stdout:raise ValueError('请先正常退出剪映，再点击“保存到剪映草稿列表”，避免与自动保存冲突')
     content=json.loads((source/'draft_content.json').read_text(encoding='utf-8'))
+    material_paths={}
     for material in content.get('materials',{}).get('videos',[]):
         path=Path(material['path']).resolve(strict=True)
         if not path.is_relative_to(source):raise ValueError('草稿素材必须完整保存在当前导出目录内')
+        # JSON can retain a Windows short path while resolve() returns its long
+        # form. Relocate using the validated file identity rather than a prefix.
+        material_paths[material['path'].replace('\\','/')]=str(destination/path.relative_to(source)).replace('\\','/')
     shutil.copytree(source,destination)
     # Independently identify every installed project, including older exports
     # created before the fixed template UUID was discovered.
@@ -40,6 +44,7 @@ def install_draft(exported,draft_root):
         if isinstance(value,list):return [relocate(v) for v in value]
         if isinstance(value,str):
             candidate=value.replace('\\','/')
+            if candidate in material_paths:return material_paths[candidate]
             if candidate==old or candidate.startswith(old+'/'):return new+candidate[len(old):]
         return value
     for filename in ('draft_content.json','draft_meta_info.json'):
