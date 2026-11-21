@@ -24,11 +24,29 @@ jobs:
         run: python -m pip install -r main/requirements.txt
       - name: Install FFmpeg for real video fixtures
         shell: pwsh
+        env:
+          FFMPEG_VERSION: '8.1.2'
+          # SHA-256 from the Gyan.FFmpeg 8.1.2 winget installer manifest.
+          FFMPEG_SHA256: B8CDEFAB5F50590A076C27C2B56B0294A0E6154FADED28BA1BA05EBC4F801F57
         run: |
-          choco install ffmpeg --yes --no-progress
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          ffmpeg -version
-          ffprobe -version
+          $build = "ffmpeg-$env:FFMPEG_VERSION-full_build"
+          $archive = Join-Path $env:RUNNER_TEMP "$build.zip"
+          $url = "https://github.com/GyanD/codexffmpeg/releases/download/$env:FFMPEG_VERSION/$build.zip"
+          Invoke-WebRequest -Uri $url -OutFile $archive
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash -ne $env:FFMPEG_SHA256) {
+            throw "FFmpeg archive SHA-256 verification failed."
+          }
+
+          Expand-Archive -LiteralPath $archive -DestinationPath $env:RUNNER_TEMP
+          $ffmpegBin = Join-Path $env:RUNNER_TEMP "$build/bin"
+          $ffmpegBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Verify FFmpeg on PATH
+        shell: pwsh
+        run: |
+          foreach ($tool in @('ffmpeg', 'ffprobe')) {
+            & $tool -version
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
       - name: Test offline analysis adapters
         working-directory: main
         env:
