@@ -109,6 +109,7 @@ def register_presenter_routes(app,workspace,reference_for):
     @app.get('/api/presenter/<job>/sentences')
     @guarded
     def presenter_sentences(job):
+        from suo_jian.presenter.assembly import SENTENCE_LEAD_IN, source_start_for_word
         from suo_jian.presenter.sentences import split_sentences
         _,_,work=context(job);library=read(work/'library.json')
         if not library:raise ValueError('请先扫描素材文件夹')
@@ -116,8 +117,11 @@ def register_presenter_routes(app,workspace,reference_for):
         for asset in library['assets']:
             transcript=read(work/'asr'/(asset['id']+'-timed-v1.json'))
             if transcript:
+                sentences = split_sentences(transcript)
+                for sentence in sentences:
+                    sentence['preview_start'] = source_start_for_word(transcript['words'], sentence['first'], SENTENCE_LEAD_IN)
                 rows.append({'asset_id':asset['id'],'name':asset['name'],'person_group':asset.get('person_group'),
-                             'sentences':split_sentences(transcript)})
+                             'sentences':sentences})
         return jsonify(assets=rows)
 
     @app.post('/api/presenter/<job>/sentence-plan')
@@ -142,7 +146,7 @@ def register_presenter_routes(app,workspace,reference_for):
                 raise ValueError('句子已变化，请刷新并重新选择')
             requests.append({'asset_id':asset_id,'first':first,'last':last,
                              'captions':caption_ranges(transcript['words'],first,last)})
-        plan=reviewed_plan(library,work,group,requests,'')
+        plan=reviewed_plan(library,work,group,requests,'',sentence_selection=True)
         plan['selected']=merge_uninterrupted(plan['selected'],transcripts,max_gap=None)
         plan['duration']=round(sum(cut['duration'] for cut in plan['selected']),3)
         plan.update(adapted=False,selection_mode='sentences',adaptation_policy='选择实际口播句子，保留原声',

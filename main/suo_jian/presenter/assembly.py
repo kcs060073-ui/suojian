@@ -5,8 +5,19 @@ from pathlib import Path
 from .matching import normalized, numeric_facts
 
 PUNCTUATION=re.compile(r'^[\s，,。！？!?；;：:、]+$')
+SENTENCE_LEAD_IN = .30
 
-def reviewed_plan(library,work,group_id,selections,reference_script,reference_gaps=(),changes=()):
+
+def source_start_for_word(words, first, lead_in):
+    speech_start = words[first]['start']
+    begin = max(0, speech_start - lead_in)
+    if first:
+        boundary = (words[first - 1]['end'] + speech_start) / 2
+        begin = max(begin, min(speech_start, boundary))
+    return round(begin, 3)
+
+
+def reviewed_plan(library,work,group_id,selections,reference_script,reference_gaps=(),changes=(),*,sentence_selection=False):
     assets={a['id']:a for a in library['assets']}
     selected=[];rows=[];clock=0
     for i,request in enumerate(selections):
@@ -16,10 +27,9 @@ def reviewed_plan(library,work,group_id,selections,reference_script,reference_ga
         transcript=json.loads(path.read_text(encoding='utf-8'));words=transcript['words']
         first,last=int(request['first']),int(request['last'])
         if not 0<=first<=last<len(words):raise ValueError('口播词序号超出范围')
-        begin=max(0,words[first]['start']-.15)
+        begin=source_start_for_word(words, first, SENTENCE_LEAD_IN if sentence_selection else .15)
         tail=.10 if PUNCTUATION.fullmatch(words[last]['text']) else .25
         end=min(asset['duration'],words[last]['end']+tail)
-        if first:begin=max(begin,(words[first-1]['end']+words[first]['start'])/2)
         if last+1<len(words):end=min(end,(words[last]['end']+words[last+1]['start'])/2)
         if end<=begin:raise ValueError('口播切片时长无效')
         if any(c['asset_id']==asset['id'] and min(end,c['source_end'])-max(begin,c['source_start'])>.025 for c in selected):
@@ -46,7 +56,8 @@ def reviewed_plan(library,work,group_id,selections,reference_script,reference_ga
         visible_indices={j for j in range(first,last+1) if not PUNCTUATION.fullmatch(words[j]['text'])}
         if not visible_indices<=set(covered):raise ValueError('字幕漏掉了片段中的实际口播词')
         for j,caption in enumerate(captions):
-            caption['local_start']=0 if j==0 else caption['local_start']
+            if j == 0:
+                caption['local_start'] = max(0, words[first]['start'] - begin) if sentence_selection else 0
             caption['local_end']=captions[j+1]['local_start'] if j+1<len(captions) else end-begin
         cut={'index':i,'asset_id':asset['id'],'name':asset['name'],'person_group':group_id,
             'source_start':round(begin,3),'source_end':round(end,3),'word_first':first,'word_last':last,

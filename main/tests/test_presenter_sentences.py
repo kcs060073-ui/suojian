@@ -36,6 +36,10 @@ class SentenceWorkflowTests(unittest.TestCase):
             plan=response.json['plan']
             self.assertEqual([r['text'] for r in plan['rows']],['客户在外地','研发在这里'])
             self.assertEqual([(c['word_first'],c['word_last']) for c in plan['selected']],[(5,9),(0,4)])
+            first_cut=plan['selected'][0]
+            self.assertAlmostEqual(sentences[1]['preview_start'],.725)
+            self.assertAlmostEqual(first_cut['source_start'],sentences[1]['preview_start'])
+            self.assertAlmostEqual(first_cut['captions'][0]['local_start'],.025)
             self.assertEqual(c.get(f'/api/presenter/{job}/state').json['plan']['selection_mode'],'sentences')
             payload['person_group']='wrong'
             self.assertEqual(c.post(f'/api/presenter/{job}/sentence-plan',json=payload).status_code,400)
@@ -72,14 +76,15 @@ class SentenceWorkflowTests(unittest.TestCase):
             self.assertEqual(response.status_code,200,response.json)
             plan=response.json['plan'];self.assertEqual(len(plan['selected']),1)
             cut=plan['selected'][0]
-            self.assertEqual((cut['source_start'],cut['source_end']),(.85,12.25))
-            self.assertAlmostEqual(plan['duration'],11.4)
+            self.assertEqual((cut['source_start'],cut['source_end']),(.7,12.25))
+            self.assertAlmostEqual(plan['duration'],11.55)
             self.assertEqual((cut['word_first'],cut['word_last']),(0,2))
             self.assertEqual([caption['text'] for caption in cut['captions']],
                              ['第一句','第二句','第三句'])
             captions=caption_timeline(plan['selected'])
-            self.assertAlmostEqual(captions[1]['target_start'],5.)
-            self.assertAlmostEqual(captions[2]['target_start'],10.)
+            self.assertAlmostEqual(captions[0]['target_start'],.3)
+            self.assertAlmostEqual(captions[1]['target_start'],5.3)
+            self.assertAlmostEqual(captions[2]['target_start'],10.3)
             self.assertLess(captions[0]['target_start']+captions[0]['duration'],
                             captions[1]['target_start'])
             self.assertEqual([row['selected']['word_first'] for row in plan['rows']],[0,1,2])
@@ -115,42 +120,45 @@ class SentenceWorkflowTests(unittest.TestCase):
             root=Path(folder);source=root/'source.mp4'
             subprocess.run(['ffmpeg','-v','error','-y','-f','lavfi','-i',
                 'color=c=blue:s=160x284:r=30:d=4.2','-f','lavfi','-i',
-                r'aevalsrc=if(between(t\,0.1\,0.6)+between(t\,3.1\,3.6)\,0.2*sin(2*PI*440*t)\,0):s=48000:d=4.2',
+                r'aevalsrc=if(between(t\,0.4\,0.8)+between(t\,3.1\,3.6)\,0.2*sin(2*PI*440*t)\,0):s=48000:d=4.2',
                 '-c:v','libx264','-threads','2','-c:a','aac',str(source)],
                 capture_output=True,check=True,timeout=30)
             save(root/'asr/a-timed-v1.json',{'words':[
-                {'text':'第一句','start':.1,'end':.6},
+                {'text':'第一句','start':.4,'end':.8},
                 {'text':'第二句','start':3.1,'end':3.6}]})
             library={'assets':[{'id':'a','name':'source.mp4','path':str(source),
                 'person_group':'one','duration':4.2,'width':160,'height':284}]}
             plan=reviewed_plan(library,root,'one',[
-                {'asset_id':'a','first':i,'last':i,'captions':[{'first':i,'last':i}]} for i in range(2)],'')
+                {'asset_id':'a','first':i,'last':i,'captions':[{'first':i,'last':i}]} for i in range(2)],'',sentence_selection=True)
             words={'a':{'words':[{'text':'第一句'},{'text':'第二句'}]}}
             plan['selected']=merge_uninterrupted(plan['selected'],words,max_gap=None)
             # Identity detection is outside this timing test; media operations are real.
             with patch('suo_jian.presenter.rendering.checked_cuts',return_value=[]):
                 manifest=render(plan,library,{},root)
             self.assertEqual(len(manifest['cuts']),1)
-            self.assertGreaterEqual(manifest['duration'],3.85)
+            self.assertGreaterEqual(manifest['duration'],3.75)
             self.assertEqual(len(manifest['captions']),2)
-            self.assertAlmostEqual(manifest['captions'][1]['target_start'],2.95)
+            self.assertAlmostEqual(manifest['captions'][0]['target_start'],.3)
+            self.assertAlmostEqual(manifest['captions'][1]['target_start'],3.)
             media=Path(manifest['cuts'][0]['media'])
-            def rms(start):
+            def rms(start,duration=.3):
                 raw=subprocess.check_output(['ffmpeg','-v','error','-ss',str(start),'-i',str(media),
-                    '-t','0.3','-vn','-ac','1','-ar','48000','-f','f32le','pipe:1'],timeout=30)
+                    '-t',str(duration),'-vn','-ac','1','-ar','48000','-f','f32le','pipe:1'],timeout=30)
                 samples=np.frombuffer(raw,dtype='<f4')
                 self.assertGreater(len(samples),1000)
                 return float(np.sqrt(np.mean(samples**2)))
+            self.assertLess(rms(.03,.2),.001)
             self.assertLess(rms(1.5),.001)
-            self.assertGreater(rms(.2),.01)
+            self.assertGreater(rms(.35),.01)
             draft=export_draft(manifest,root)
             content=json.loads((Path(draft['folder'])/'draft_content.json').read_text(encoding='utf-8'))
             video=next(track for track in content['tracks'] if track['type']=='video')
             text=next(track for track in content['tracks'] if track['type']=='text')
             self.assertEqual(len(video['segments']),1)
-            self.assertGreaterEqual(video['segments'][0]['target_timerange']['duration'],3_850_000)
+            self.assertGreaterEqual(video['segments'][0]['target_timerange']['duration'],3_750_000)
             self.assertEqual(len(text['segments']),2)
-            self.assertEqual(text['segments'][1]['target_timerange']['start'],2_950_000)
+            self.assertEqual(text['segments'][0]['target_timerange']['start'],300_000)
+            self.assertEqual(text['segments'][1]['target_timerange']['start'],3_000_000)
 
 
 if __name__=='__main__':unittest.main()
