@@ -60,6 +60,16 @@ jobs:
             node --check "main/suo_jian/ui/static/$name"
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+      - name: Test storyboard script and video inputs
+        working-directory: vibe
+        env:
+          PYTHONUTF8: '1'
+        run: |
+          python -m unittest tests.test_script_import
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --check workbench/static/storyboard-studio.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/test_video_frames.js
       - name: Test Windows setup detection without installation
         shell: powershell
         run: .\tests\test-setup-tools.ps1

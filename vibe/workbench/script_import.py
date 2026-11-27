@@ -48,6 +48,8 @@ def _validate_url(url):
     if parts.scheme not in ('http', 'https') or not parts.hostname or parts.username or parts.password:
         raise ValueError('请使用公开的 HTTP 或 HTTPS 链接')
     addresses = socket.getaddrinfo(parts.hostname, parts.port or (443 if parts.scheme == 'https' else 80), type=socket.SOCK_STREAM)
+    if any(ipaddress.ip_address(item[4][0]) in ipaddress.ip_network('198.18.0.0/15') for item in addresses):
+        raise ValueError('当前网络返回了代理地址，暂时无法安全读取链接；请下载网页后选择 HTML 文件导入')
     if not addresses or any(not ipaddress.ip_address(item[4][0]).is_global for item in addresses):
         raise ValueError('只支持公网链接；本机文件请使用 HTML 文件导入')
     return url

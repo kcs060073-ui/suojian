@@ -24,3 +24,8 @@ class ScriptImportTests(unittest.TestCase):
             extract_html('<script>only()</script>')
         with self.assertRaises(ValueError):
             extract_html('<p>' + '字' * 30001 + '</p>')
+
+    def test_fake_ip_explains_html_fallback(self):
+        with patch('workbench.script_import.socket.getaddrinfo', return_value=[(2, 1, 6, '', ('198.18.0.1', 443))]):
+            with self.assertRaisesRegex(ValueError, 'HTML 文件导入'):
+                _validate_url('https://example.com')
