@@ -439,7 +439,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json_response(importlib.import_module('workbench.library').native_tools(VENDOR, ROOT))
             if path == '/baseline.mp4':
                 return self.serve_file(BASELINE, head)
-            for prefix, root in [('/engine/', ROOT/'engine'), ('/media/', PROJECT/'public'), ('/vendor/', VENDOR), ('/native/canvas/', ROOT/'work/native/canvas'), ('/native/shotcraft/', ROOT/'work/native/shotcraft'), ('/files/', ROOT), ('/outputs/', OUTPUTS), ('/static/', ROOT/'workbench/static')]:
+            for prefix, root in [('/engine/', ROOT/'engine'), ('/media/', PROJECT/'public'), ('/vendor/', VENDOR), ('/native/canvas/', ROOT/'work/native/canvas'), ('/native/shotcraft/', VENDOR/'video-shotcraft-main'), ('/files/', ROOT), ('/outputs/', OUTPUTS), ('/static/', ROOT/'workbench/static')]:
                 if path.startswith(prefix):
                     if prefix == '/files/' and not path[len(prefix):].startswith(('outputs/', 'work/')):
                         return self.send_error(403)

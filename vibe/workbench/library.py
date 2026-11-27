@@ -55,14 +55,9 @@ def _imports(files):
 def discover(vendor) -> dict:
     vendor = Path(vendor).resolve()
     repo = vendor / REPOS[0]
-    bundled = Path(__file__).resolve().parents[1] / 'work/native/shotcraft'
     if not (repo / 'gallery/api/library.json').is_file():
-        repo = bundled.resolve()
-    if not (repo / 'gallery/api/library.json').is_file():
-        raise FileNotFoundError('Shotcraft 模板目录缺失：请检查 work/native/shotcraft/gallery/api/library.json')
+        raise FileNotFoundError(f'Shotcraft 模板目录缺失：请检查 {repo / "gallery/api/library.json"}')
     def shot_uri(file):
-        if repo == bundled.resolve():
-            return '/native/shotcraft/' + quote(file.relative_to(repo).as_posix(), safe='/')
         return uri(file.relative_to(vendor))
     library = json.loads((repo / 'gallery/api/library.json').read_text(encoding='utf-8-sig'))
     packages = _packages(SHARED)
@@ -140,7 +135,18 @@ def discover(vendor) -> dict:
 
 def _copy(source, target):
     if target.exists(): return
-    shutil.copytree(source, target, ignore=shutil.ignore_patterns('node_modules','.git','exports','.vite','dist'), symlinks=False)
+    shutil.copytree(source, target, ignore=shutil.ignore_patterns(
+        'node_modules', '.git', 'exports', '.vite', 'dist', '.render-public', '.render-public-*'),
+        copy_function=_copy_native_file, symlinks=False)
+
+def _copy_native_file(source, target):
+    if Path(source).name in ('NotoSansSC.ttf', 'NotoSansSC-VF.ttf'):
+        try:
+            os.link(source, target)
+            return target
+        except OSError:
+            pass
+    return shutil.copy2(source, target)
 
 def _junction(target, source):
     if target.exists():

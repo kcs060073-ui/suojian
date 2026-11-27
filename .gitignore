@@ -31,3 +31,12 @@
 **/*.wav
 **/*.mp3
 **/*.m4a
+
+# Generated Shotcraft render and local workbench copies.
+**/.render-public/
+**/.render-public-*/
+/vibe/work/native/shotcraft/
+/vibe/work/native/shotcraft-*/
+# Links to the bundled font, prepared by the Windows launcher.
+/vibe/work/vendor/anything2explainer-main/template/public/fonts/NotoSansSC.ttf
+/vibe/work/vendor/vibe-knowledge-film-main/engine/fonts/NotoSansSC-VF.ttf

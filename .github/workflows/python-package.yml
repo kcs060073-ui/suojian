@@ -65,7 +65,7 @@ jobs:
         env:
           PYTHONUTF8: '1'
         run: |
-          python -m unittest tests.test_script_import
+          python -m unittest tests.test_script_import tests.test_library
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check workbench/static/storyboard-studio.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

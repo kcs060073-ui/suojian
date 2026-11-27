@@ -36,3 +36,19 @@ function Get-Command { param($Name, $CommandType, $ErrorAction) return $null }
 try { Install-SuoJianTool 'Python.Python.3.11' 'Python'; throw 'Missing winget should be reported.' }
 catch { if ($_.Exception.Message -notmatch 'winget') { throw } }
 Write-Host 'System component detection tests passed.'
+
+$fixture = Join-Path ([IO.Path]::GetTempPath()) ('suojian-font-' + [guid]::NewGuid().ToString('N'))
+$font = Join-Path $fixture 'vibe/work/park-fusion/public/fonts/NotoSansSC.ttf'
+New-Item -ItemType Directory -Path (Split-Path -Parent $font) -Force | Out-Null
+[IO.File]::WriteAllBytes($font, [byte[]](0,1,2,3))
+Initialize-SuoJianSharedFonts $fixture
+Initialize-SuoJianSharedFonts $fixture
+foreach ($alias in @('vendor/anything2explainer-main/template/public/fonts/NotoSansSC.ttf','vendor/vibe-knowledge-film-main/engine/fonts/NotoSansSC-VF.ttf')) {
+    $destination = Join-Path $fixture "vibe/work/$alias"
+    if ((Get-FileHash -LiteralPath $destination).Hash -ne (Get-FileHash -LiteralPath $font).Hash) {
+        throw 'A renderer did not receive the bundled font.'
+    }
+    Remove-Item -LiteralPath $destination
+}
+Remove-Item -LiteralPath $font
+Write-Host 'Shared font compatibility paths passed.'

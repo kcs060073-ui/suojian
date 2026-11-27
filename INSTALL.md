@@ -23,7 +23,8 @@ rea-video 引擎不混入主环境。需要镜头制作方法初判时，在完�
 ## 需要单独准备的内容
 
 - VibeCraft 分镜工作台支持读取公开网页链接或本地 HTML 剧本，保存后仍需在对话中启动分镜制作。需要登录的网页可能无法读取。Shotcraft 模板优先使用仓库内的 vendor 目录，缺失时使用随仓库提供的备用目录；动态预览素材和渲染依赖仍需检查。
-- `experimental/cutroom-beta83` 为未完成的内部适配源码，尚未替换默认出片流程。正式安装仍使用仓库内 `cutroom` 的 beta.8；不要将 beta.83 实验目录视为完整可运行版本。
+- 正式安装使用仓库内 `cutroom` 的 beta.8。未完成的 beta.83 适配保存在 [归档分支](https://github.com/kcs060073-ui/suojian/tree/archive/cutroom-beta83/experimental/cutroom-beta83)。
+- Shotcraft 模板和音效统一从 `vibe/work/vendor/video-shotcraft-main` 读取。启动脚本会给需要中文字体的模板准备本地链接。
 
 - 用户视频、个人风格模板图片、历史任务和剪映草稿不会从仓库恢复；请在新机器重新导入。草稿输出还需要本机已安装剪映并核对其实际可编辑程度。
 - 本地 Whisper/FunASR 等模型及 FFmpeg 所需资源可能在首次使用时联网下载。OCR 若使用 Tesseract 还需要单独安装程序和中文语言包。

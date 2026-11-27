@@ -9,6 +9,7 @@ function Run-Step([string]$program, [string[]]$arguments) {
 }
 
 try {
+    Initialize-SuoJianSharedFonts $root
     $bootstrapPython = Ensure-SuoJianSystemTools $root
 
     foreach ($part in @('main','cutroom')) {

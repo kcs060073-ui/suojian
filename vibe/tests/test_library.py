@@ -5,6 +5,8 @@ import json
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.request import urlopen
+from http.server import ThreadingHTTPServer
 from workbench.library import discover, resolve_file, run_demo
 from workbench.paths import VENDOR
 
@@ -22,6 +24,20 @@ class LibraryTests(unittest.TestCase):
             self.assertTrue(card['sourceText'])
             self.assertTrue(card['reference'].startswith('/vendor/'))
             self.assertTrue(card['demo'])
+
+    def test_old_shotcraft_url_serves_the_canonical_library(self):
+        from workbench.server import Handler
+        with ThreadingHTTPServer(('127.0.0.1', 0), Handler) as server:
+            worker = threading.Thread(target=server.serve_forever, daemon=True)
+            worker.start()
+            try:
+                prefix = f'http://127.0.0.1:{server.server_port}'
+                with urlopen(prefix + '/native/shotcraft/gallery/api/library.json', timeout=5) as reply:
+                    library = reply.read()
+                self.assertEqual(library, (VENDOR / 'video-shotcraft-main/gallery/api/library.json').read_bytes())
+            finally:
+                server.shutdown()
+                worker.join()
 
     def test_missing_media_is_not_claimed_local(self):
         actual=sum(s['available'] for c in self.data['recipes'] for s in c['styles'])

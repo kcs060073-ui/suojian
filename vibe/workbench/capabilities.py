@@ -45,11 +45,9 @@ CONFLICTS = [
 def build_catalog(vendor):
     vendor = Path(vendor)
     base = vendor / 'video-shotcraft-main'
-    if not (base / 'gallery/api/library.json').is_file():
-        base = Path(__file__).resolve().parents[1] / 'work/native/shotcraft'
     library = base / 'gallery/api/library.json'
     if not library.is_file():
-        raise FileNotFoundError('Shotcraft 模板目录缺失：请检查 work/native/shotcraft/gallery/api/library.json')
+        raise FileNotFoundError(f'Shotcraft 模板目录缺失：请检查 {library}')
     data = json.loads(library.read_text(encoding='utf-8-sig'))
     cards = data.get('cards', [])
     for card in cards:

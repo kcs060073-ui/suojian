@@ -1,6 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 . (Join-Path $root 'setup-tools.ps1')
+Initialize-SuoJianSharedFonts $root
 if (-not (Test-SuoJianProjectReady $root)) {
     Write-Host '正在检查并安装缺少的运行环境，首次使用可能需要较长时间。' -ForegroundColor Cyan
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'install.ps1')

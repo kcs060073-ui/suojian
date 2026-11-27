@@ -94,6 +94,27 @@ function Ensure-SuoJianSystemTools([string]$Root) {
     return $python
 }
 
+function Initialize-SuoJianSharedFonts([string]$Root) {
+    $font = Join-Path $Root 'vibe/work/park-fusion/public/fonts/NotoSansSC.ttf'
+    if (-not (Test-Path -LiteralPath $font -PathType Leaf)) {
+        throw '找不到随溯剪附带的中文字体，请检查安装目录。'
+    }
+    $aliases = @(
+        'vibe/work/vendor/anything2explainer-main/template/public/fonts/NotoSansSC.ttf',
+        'vibe/work/vendor/vibe-knowledge-film-main/engine/fonts/NotoSansSC-VF.ttf'
+    )
+    foreach ($relative in $aliases) {
+        $alias = Join-Path $Root $relative
+        if (Test-Path -LiteralPath $alias -PathType Leaf) { continue }
+        New-Item -ItemType Directory -Path (Split-Path -Parent $alias) -Force | Out-Null
+        try {
+            New-Item -ItemType HardLink -Path $alias -Target $font -ErrorAction Stop | Out-Null
+        } catch {
+            Copy-Item -LiteralPath $font -Destination $alias -ErrorAction Stop
+        }
+    }
+}
+
 function Test-SuoJianProjectReady([string]$Root) {
     Refresh-SuoJianPath
     if (-not (Get-SuoJianPython $Root) -or -not (Test-SuoJianNode) -or -not (Test-SuoJianFfmpeg)) { return $false }
